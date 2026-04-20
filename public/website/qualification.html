@@ -13,6 +13,18 @@
 <link rel="stylesheet" href="/assets/design-system.css">
 <link rel="stylesheet" href="/website/qualification.css">
 <script>if(document.body){document.body.classList.add("bg-dark")}else{document.addEventListener("DOMContentLoaded",function(){document.body.classList.add("bg-dark")})}</script>
+<style>
+  /* Match marketing website background — same 2-layer gradient as home/pricing/portfolio. */
+  html{background:#000001 !important}
+  body.bg-dark{
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.045) 22%,rgba(255,255,255,.055) 40%,rgba(255,255,255,.07) 60%,rgba(255,255,255,.09) 75%,rgba(255,255,255,.11) 88%,rgba(255,255,255,.14) 100%),
+      linear-gradient(180deg,#032a4b 0%,#032848 10%,#022240 20%,#021c36 30%,#02172e 40%,#011226 50%,#010d1e 60%,#010916 70%,#00050e 80%,#000308 90%,#000001 100%) !important;
+    background-attachment:fixed,fixed !important;
+    background-repeat:no-repeat,no-repeat !important;
+    background-size:100% 100vh,100% 100vh !important;
+  }
+</style>
 </head>
 <body class="ws-page bg-dark cb-grid">
 <script src="/assets/icons/animated-lottie/lottie-icons.js"></script>
