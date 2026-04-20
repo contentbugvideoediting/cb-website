@@ -1,0 +1,625 @@
+<style>html,body{background:transparent !important;min-height:100vh;margin:0;padding:0}</style>
+<link rel="stylesheet" href="/portal/assets/design-system.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preload" as="font" type="font/woff2" href="/portal/fonts/sf-pro-text_regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/portal/fonts/sf-pro-text_semibold.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/portal/fonts/sf-pro-display_regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/portal/fonts/sf-pro-display_medium.woff2" crossorigin>
+<meta name="robots" content="noindex,nofollow">
+<title>Checkout — Content Bug</title>
+<script src="https://js.stripe.com/v3/"></script>
+<style>
+/* ── SF Pro, locally hosted (same files portal uses) ── */
+@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:400;font-display:swap;src:url("/portal/website/fonts/sf-pro-display_regular.woff2") format("woff2")}
+@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:500;font-display:swap;src:url("/portal/website/fonts/sf-pro-display_medium.woff2") format("woff2")}
+@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:600;font-display:swap;src:url("/portal/website/fonts/sf-pro-display_semibold.woff2") format("woff2")}
+@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:700;font-display:swap;src:url("/portal/website/fonts/sf-pro-display_bold.woff2") format("woff2")}
+@font-face{font-family:"SF Pro Text";font-style:normal;font-weight:400;font-display:swap;src:url("/portal/website/fonts/sf-pro-text_regular.woff2") format("woff2")}
+@font-face{font-family:"SF Pro Text";font-style:normal;font-weight:600;font-display:swap;src:url("/portal/website/fonts/sf-pro-text_semibold.woff2") format("woff2")}
+
+:root{
+  --bg:transparent;--blue:#1a9eff;--blue-hv:var(--blue-hv);
+  --green:var(--green);--red:#ff453a;--purple:var(--purple);--orange:var(--orange);--gold:var(--gold);
+  --tier-basic:var(--blue-hv);--tier-silver:#cf9af7;--tier-gold:#ffb84d;
+  --bb:linear-gradient(180deg,var(--blue-brand) 0%,#005bb5 100%);
+  --g:linear-gradient(160deg,rgba(255,255,255,.07) 0%,rgba(20,50,140,.1) 40%,rgba(10,25,80,.08) 70%,rgba(5,12,45,.05) 100%);
+  --gb:1px solid rgba(255,255,255,.1);--gt:rgba(255,255,255,.18);
+  --sh:0 2px 4px rgba(0,0,0,.3),0 8px 32px rgba(0,0,0,.4),inset 0 .5px 0 rgba(255,255,255,.1);
+  --fd:'SF Pro Display',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+  --ft:'SF Pro Text','SF Pro Display',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:var(--ft);color:var(--txt);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+/* TRANSPARENT body by default — wizard gets overlaid on the Content Studio
+   dark gradient when embedded. For direct-view, a fixed pseudo-element
+   behind everything paints the same gradient so a raw visit still looks
+   like the studio. Add ?embed=1 or body.embedded to strip the fallback. */
+body{background:transparent;display:flex;align-items:center;justify-content:center;padding:var(--s4) 16px;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:transparent;transition:opacity 200ms ease}
+body.embedded::before{opacity:0}
+/* 60fps — GPU-only transforms, promote the key surfaces */
+.ck,.ck-plan,.bnpl-opt,.bill-opt,.ck-plan-cta,.btn{}
+
+.ck{width:100%;max-width:960px;background:transparent;border:var(--gb);border-top-color:var(--gt);border-radius:28px;box-shadow:var(--sh),0 40px 80px -20px rgba(0,0,0,.6),0 0 120px -40px rgba(41,151,255,.25);overflow:hidden;position:relative;display:flex;flex-direction:column}
+.ck::before{content:'';position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent 10%,rgba(255,255,255,.22) 50%,transparent 90%);pointer-events:none;z-index:2}
+.ck-hd{padding:28px 28px 0;text-align:center;flex-shrink:0}
+.ck-logo{width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(41,151,255,.2),rgba(41,151,255,.08));border:1px solid rgba(41,151,255,.2);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:22px}
+.ck-brand{font:600 9px/1 var(--ft);letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:var(--s2)}
+
+.ck-prog{display:flex;align-items:center;gap:0;padding:0 28px;margin-bottom:22px;flex-shrink:0}
+.ck-stp{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px}
+.ck-num{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font:700 11px/1 var(--fd);color:rgba(255,255,255,.3);transition:all .25s;position:relative;z-index:2;background:rgba(3,8,15,.6)}
+.ck-stp.active .ck-num{border-color:var(--blue);color:var(--txt);background:var(--bb);box-shadow:0 0 12px rgba(41,151,255,.4)}
+.ck-stp.done .ck-num{border-color:var(--green);background:var(--green);color:var(--txt)}
+.ck-stp.done .ck-num::after{content:'';display:block;width:10px;height:6px;border-left:2px solid var(--txt);border-bottom:2px solid var(--txt);transform:rotate(-45deg);margin-top:-1px}
+.ck-stp.done .ck-num span{display:none}
+.ck-lbl{font:500 10px/1 var(--ft);color:rgba(255,255,255,.2);letter-spacing:.3px}
+.ck-stp.active .ck-lbl{color:rgba(255,255,255,.65)}
+.ck-stp.done .ck-lbl{color:rgba(255,255,255,.35)}
+.ck-line{flex:1;height:2px;background:rgba(255,255,255,.06);margin:0 -4px;margin-top:-16px;z-index:1}
+.ck-line.done{background:var(--green)}
+
+.ck-body{padding:0 28px 28px;flex:1}
+.ck-step{display:none}.ck-step.active{display:block;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ck-title{font:700 22px/1.2 var(--fd);letter-spacing:-.02em;margin-bottom:var(--s0)}
+.ck-sub{font:400 12.5px/1.5 var(--ft);color:rgba(255,255,255,.4);margin-bottom:20px}
+
+/* ═══ PLAN CARD GRID — mirrors pricing.html for embedded checkout ═══ */
+.ck-plans{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:720px){.ck-plans{grid-template-columns:1fr}}
+.ck-plan{padding:22px 18px 18px;border-radius:var(--r-island);border:var(--gb);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));cursor:pointer;transition:all .18s;display:flex;flex-direction:column;position:relative;overflow:visible}
+.ck-plan:hover{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border-color:rgba(255,255,255,.18);transform:translateY(-1px)}
+.ck-plan.sel{border-color:var(--blue);background:linear-gradient(180deg,rgba(41,151,255,.08),rgba(41,151,255,.02));box-shadow:0 0 0 2px rgba(41,151,255,.25),0 10px 30px rgba(41,151,255,.15)}
+.ck-plan.featured{border-color:rgba(255,159,10,.35);box-shadow:0 0 0 2px rgba(255,159,10,.18),0 10px 30px rgba(255,159,10,.12)}
+.ck-plan.featured.sel{border-color:var(--gold);box-shadow:0 0 0 2px rgba(255,159,10,.45),0 10px 30px rgba(255,159,10,.25)}
+.ck-plan-tier{font:700 9px/1 var(--ft);letter-spacing:1.2px;text-transform:uppercase;padding:var(--s0) 8px;border-radius:var(--r-sm);display:inline-block;margin-bottom:10px;width:fit-content}
+.ck-plan-tier.basic{background:rgba(41,151,255,.14);color:var(--blue-hv);border:1px solid rgba(41,151,255,.3)}
+.ck-plan-tier.silver{background:rgba(191,90,242,.14);color:#cf9af7;border:1px solid rgba(191,90,242,.3)}
+.ck-plan-tier.gold{background:rgba(255,159,10,.16);color:#ffb84d;border:1px solid rgba(255,159,10,.4)}
+.ck-plan-name{font:700 18px/1.2 var(--fd);color:var(--txt);margin-bottom:var(--s1);letter-spacing:-.01em}
+.ck-plan-price{font:800 28px/1 var(--fd);color:var(--txt);letter-spacing:-.02em;display:flex;align-items:baseline;gap:var(--s0)}
+.ck-plan-price small{font:500 13px/1 var(--ft);color:rgba(255,255,255,.4)}
+.ck-plan-annual{font:500 11px/1.3 var(--ft);color:var(--green);margin-top:var(--s0)}
+.ck-plan-line{height:1px;background:rgba(255,255,255,.07);margin:14px 0 12px}
+.ck-plan-feat{list-style:none;padding:0;margin:0 0 14px;flex:1}
+.ck-plan-feat li{font:400 12px/1.5 var(--ft);color:rgba(255,255,255,.8);padding:var(--s0) 0 4px 20px;position:relative}
+.ck-plan-feat li::before{content:'';position:absolute;left:0;top:7px;width:12px;height:12px;background:radial-gradient(circle,rgba(126,203,161,.25) 30%,transparent 60%);border-radius:50%}
+.ck-plan-feat li::after{content:'';position:absolute;left:3px;top:9px;width:7px;height:4px;border-left:1.5px solid var(--green);border-bottom:1.5px solid var(--green);transform:rotate(-45deg)}
+.ck-plan-feat li strong{color:var(--txt);font-weight:600}
+.ck-plan-feat li.off{color:rgba(255,255,255,.22);text-decoration:line-through}
+.ck-plan-feat li.off::before,.ck-plan-feat li.off::after{opacity:.25}
+.ck-plan-cta{width:100%;padding:11px;border-radius:11px;border:none;font:700 13px/1 var(--ft);cursor:pointer;transition:all .15s;background:rgba(255,255,255,.06);color:var(--txt);letter-spacing:.2px}
+.ck-plan-cta:hover{background:rgba(255,255,255,.1)}
+.ck-plan-cta.basic:hover{background:linear-gradient(180deg,var(--blue),var(--blue-dk))}
+.ck-plan-cta.silver:hover{background:linear-gradient(180deg,var(--purple),#8d3dbf)}
+.ck-plan-cta.gold{background:linear-gradient(180deg,var(--orange),#cc7c00);box-shadow:0 4px 12px rgba(255,159,10,.25)}
+.ck-plan-cta.gold:hover{box-shadow:0 6px 16px rgba(255,159,10,.4)}
+.ck-plan.sel .ck-plan-cta{background:var(--bb)}
+.ck-plan.sel .ck-plan-cta.gold{background:linear-gradient(180deg,var(--orange),#cc7c00)}
+.ck-plan-tag{position:absolute;top:-10px;left:50%;transform:translateX(-50%);padding:var(--s0) 11px;border-radius:7px;font:800 9px/1 var(--ft);letter-spacing:.8px;text-transform:uppercase;background:linear-gradient(180deg,var(--orange),#cc7c00);color:var(--txt);box-shadow:0 4px 12px rgba(255,159,10,.35);white-space:nowrap}
+
+/* ═══ STEP 3 PAY-GRID — left col summary+BNPL, right col Stripe Element ═══ */
+.ck-pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+@media(max-width:820px){.ck-pay-grid{grid-template-columns:1fr}}
+
+/* ═══ Plan hero on step 3 — big logo in tier color + plan name ═══ */
+.plan-hero{position:relative;padding:22px 20px;border-radius:var(--r-island);border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015));margin-bottom:14px;overflow:hidden;display:flex;align-items:center;gap:var(--s2)}
+.plan-hero::before{content:'';position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent)}
+.plan-hero::after{content:'';position:absolute;top:-40%;right:-30%;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,var(--tier-color,var(--blue-hv)) 0%,transparent 65%);opacity:.18;pointer-events:none}
+.plan-hero-mark{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);flex-shrink:0;position:relative;z-index:1;box-shadow:0 8px 22px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.12)}
+.plan-hero-mark img{width:36px;height:36px;object-fit:contain}
+.plan-hero-info{flex:1;min-width:0;position:relative;z-index:1}
+.plan-hero-tier{font:800 9.5px/1 var(--ft);letter-spacing:1.6px;text-transform:uppercase;color:var(--tier-color,var(--blue-hv));margin-bottom:6px}
+.plan-hero-name{font:700 22px/1.1 var(--fd);color:var(--txt);letter-spacing:-.02em;margin-bottom:var(--s0)}
+.plan-hero-desc{font:400 12px/1.45 var(--ft);color:rgba(255,255,255,.55)}
+.plan-hero.basic{--tier-color:var(--tier-basic)}
+.plan-hero.silver{--tier-color:var(--tier-silver)}
+.plan-hero.gold{--tier-color:var(--tier-gold)}
+/* Tint the bug logo per tier via filter */
+.plan-hero.basic .plan-hero-mark img{filter:brightness(0) saturate(100%) invert(52%) sepia(88%) saturate(1815%) hue-rotate(185deg) brightness(104%) contrast(101%)}
+.plan-hero.silver .plan-hero-mark img{filter:brightness(0) saturate(100%) invert(75%) sepia(45%) saturate(538%) hue-rotate(235deg) brightness(102%) contrast(95%)}
+.plan-hero.gold .plan-hero-mark img{filter:brightness(0) saturate(100%) invert(78%) sepia(58%) saturate(754%) hue-rotate(336deg) brightness(102%) contrast(101%)}
+
+/* ═══ Offer banner — swappable promo strip (2/3/4 free months, discount codes, etc.) ═══ */
+.ck-offer{position:relative;padding:11px 14px;border-radius:var(--r-xl);background:linear-gradient(90deg,rgba(126,203,161,.14),rgba(126,203,161,.05));border:1px solid rgba(126,203,161,.3);margin-bottom:12px;display:flex;align-items:center;gap:10px;overflow:hidden}
+.ck-offer::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(126,203,161,.12) 50%,transparent 100%);animation:offerShine 3.2s linear infinite;pointer-events:none}
+@keyframes offerShine{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.ck-offer-icon{font-size:16px;flex-shrink:0;position:relative;z-index:1}
+.ck-offer-body{position:relative;z-index:1;flex:1;min-width:0}
+.ck-offer-title{font:700 11.5px/1.2 var(--fd);color:var(--green);letter-spacing:.2px}
+.ck-offer-sub{font:400 10.5px/1.3 var(--ft);color:rgba(255,255,255,.55);margin-top:1px}
+
+/* ═══ Content Perks — interchangeable add-ons section ═══ */
+.ck-perks{padding:12px 14px;border-radius:var(--r-xl);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.008));border:1px solid rgba(255,255,255,.06);margin-bottom:12px}
+.ck-perks-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--s1)}
+.ck-perks-title{font:700 10px/1 var(--ft);letter-spacing:.8px;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.ck-perks-pill{font:600 9px/1.4 var(--ft);padding:2px 7px;border-radius:5px;background:rgba(41,151,255,.12);border:1px solid rgba(41,151,255,.25);color:var(--blue-hv);letter-spacing:.3px}
+.ck-perks-list{display:flex;flex-direction:column;gap:6px}
+.ck-perk{display:flex;align-items:center;gap:var(--s1);padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);opacity:.6}
+.ck-perk-name{font:600 11px/1.2 var(--fd);color:rgba(255,255,255,.7);flex:1}
+.ck-perk-price{font:500 10.5px/1 var(--ft);color:rgba(255,255,255,.35)}
+.ck-perk-check{width:14px;height:14px;border-radius:var(--r-xs);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.02);flex-shrink:0}
+
+/* ═══ BNPL preview — premium brand pills ═══ */
+.bnpl-msg{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:14px 16px 16px;margin-bottom:14px;position:relative;overflow:hidden}
+.bnpl-msg::before{content:'';position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent)}
+.bnpl-msg-hdr{font:700 10px/1 var(--ft);letter-spacing:.8px;text-transform:uppercase;color:rgba(126,203,161,.9);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.bnpl-msg-hdr::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(126,203,161,.6)}
+.bnpl-opts{display:grid;grid-template-columns:1fr 1fr;gap:var(--s1)}
+.bnpl-opt{padding:11px 13px;border-radius:var(--r-xl);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column;gap:3px;transition:all .18s}
+.bnpl-opt:hover{border-color:rgba(255,255,255,.15);transform:translateY(-1px)}
+.bnpl-opt-brand{display:flex;align-items:center;height:16px;margin-bottom:var(--s0)}
+.bnpl-opt-brand img,.bnpl-opt-brand svg{height:14px;width:auto;display:block}
+.bnpl-opt-brand-pill{padding:2px 7px;border-radius:5px;font:800 9px/14px -apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;letter-spacing:.2px}
+.bnpl-opt-brand-pill.klarna{background:#FFA8CD;color:#0A0A0A}
+.bnpl-opt-brand-pill.afterpay{background:#B2FCE4;color:#0A0A0A}
+.bnpl-opt-brand-pill.affirm{background:#4A4AF4;color:var(--txt)}
+.bnpl-opt-brand-pill.stripe{background:#635BFF;color:var(--txt)}
+.bnpl-opt-terms{font:700 16px/1.1 var(--fd);color:var(--txt);letter-spacing:-.01em}
+.bnpl-opt-terms small{font:500 11px/1 var(--ft);color:rgba(255,255,255,.45);margin-left:var(--s0)}
+.bnpl-opt-sub{font:400 10.5px/1.3 var(--ft);color:rgba(255,255,255,.45)}
+
+.f-field{margin-bottom:12px}
+.f-label{display:block;font:600 10.5px/1 var(--ft);letter-spacing:.4px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:5px}
+.f-input{width:100%;padding:11px 13px;border-radius:11px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:var(--txt);font:400 14px/1.4 var(--ft);outline:none;transition:all .15s}
+.f-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(41,151,255,.1)}
+.f-input::placeholder{color:rgba(255,255,255,.18)}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.f-err{color:#ff453a;font:500 11px/1 var(--ft);margin-top:6px;min-height:14px}
+
+.bill-toggle{display:flex;padding:3px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:var(--r-lg);margin-bottom:var(--s2)}
+.bill-opt{flex:1;padding:10px;border-radius:var(--r-md);text-align:center;cursor:pointer;transition:all .15s;position:relative}
+.bill-opt.sel{background:rgba(255,255,255,.08)}
+.bill-opt-name{font:600 13px/1 var(--fd);color:rgba(255,255,255,.5)}
+.bill-opt.sel .bill-opt-name{color:var(--txt)}
+.bill-opt-price{font:400 10px/1 var(--ft);color:rgba(255,255,255,.3);margin-top:3px}
+.bill-opt.sel .bill-opt-price{color:rgba(255,255,255,.5)}
+.bill-save{position:absolute;top:-8px;right:8px;padding:2px 6px;border-radius:var(--r-sm);font:700 7px/1 var(--ft);background:rgba(126,203,161,.15);border:1px solid rgba(126,203,161,.3);color:var(--green);letter-spacing:.3px;text-transform:uppercase}
+
+#payment-element{margin-bottom:var(--s2);min-height:100px}
+.pe-loading{text-align:center;padding:30px 0;color:rgba(255,255,255,.3);font:400 12px/1 var(--ft)}
+.pe-spin{display:inline-block;width:18px;height:18px;border:2px solid rgba(255,255,255,.1);border-top-color:var(--blue);border-radius:50%;animation:spin .6s linear infinite;margin-right:var(--s1);vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.sum{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px;margin-bottom:14px}
+.sum-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font:400 12px/1 var(--ft)}
+.sum-row+.sum-row{border-top:1px solid rgba(255,255,255,.04)}
+.sum-k{color:rgba(255,255,255,.45)}.sum-v{font-weight:600;color:var(--txt)}
+.sum-total{font:700 18px/1 var(--fd);color:var(--blue)}
+
+.btn{width:100%;padding:13px 20px;border-radius:13px;border:none;font:600 14px/1 var(--ft);cursor:pointer;transition:all .15s}
+.btn-p{background:var(--bb);color:var(--txt);box-shadow:0 4px 12px rgba(0,113,227,.3)}
+.btn-p:hover{box-shadow:0 6px 20px rgba(0,113,227,.4)}
+.btn-p:disabled{opacity:.35;cursor:default;box-shadow:none}
+.btn-g{background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.08)}
+.btn-g:hover{color:var(--txt);border-color:rgba(255,255,255,.2)}
+.btn-row{display:flex;gap:var(--s1);padding-top:12px}
+.secure{display:flex;align-items:center;justify-content:center;gap:5px;font:400 10px/1 var(--ft);color:rgba(255,255,255,.18);margin-top:10px}
+.secure svg{width:10px;height:10px;stroke:rgba(255,255,255,.18)}
+
+.done-wrap{text-align:center;padding:var(--s3) 0}
+.done-ring{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,rgba(126,203,161,.2),rgba(126,203,161,.08));border:2px solid rgba(126,203,161,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:32px;animation:fadeUp .5s ease}
+
+@media(max-width:560px){body{padding:var(--s1);align-items:flex-start}.ck{border-radius:20px;max-height:96vh}.ck-hd{padding:20px 20px 0}.ck-prog{padding:0 16px}.ck-body{padding:0 20px 20px}.f-row{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="ck">
+  <div class="ck-hd">
+    <div class="ck-logo">⚡</div>
+    <div class="ck-brand">Content Bug Video Editing</div>
+  </div>
+  <div class="ck-prog" id="prog"></div>
+  <div class="ck-body" id="body"></div></div>
+
+<script>
+/* Plans mirror /portal/website/pricing.html exactly — feat/off arrays
+   match the public pricing page so this wizard can be embedded on pricing
+   and the copy is identical. */
+var PLANS={
+  basic:{name:'Basic',icon:'🎬',iconCls:'basic',monthly:750,annual:625,annualTotal:7500,desc:'5 short-form edits/mo, dedicated editor',tag:null,
+    feat:['Unlimited short-form edits','<strong>5 long-form edits/month</strong>','Unlimited revisions','Dedicated editors','Project Manager','Creative Director','Personal cloud storage','FrameLab'],
+    off:['Priority Turnarounds','High CTR Thumbnails','Creative strategy sessions','Virtual Film Studio']},
+  silver:{name:'Silver',icon:'⚡',iconCls:'silver',monthly:1300,annual:1083,annualTotal:13000,desc:'Unlimited short-form, 10 long-form/mo',tag:null,
+    feat:['Unlimited short-form edits','<strong>10 long-form edits/month</strong>','Unlimited revisions','Dedicated editors','Project Manager','Creative Director','Personal cloud storage','FrameLab'],
+    off:['Priority Turnarounds','High CTR Thumbnails','Creative strategy sessions','Virtual Film Studio']},
+  gold:{name:'Gold Unlimited',icon:'👑',iconCls:'gold',monthly:1950,annual:1625,annualTotal:19500,desc:'Unlimited everything, Creative Director',tag:'Best Value',
+    feat:['Unlimited short-form edits','<strong>15 long-form edits/month</strong>','Unlimited revisions','Dedicated editors','Project Manager','Creative Director','Personal cloud storage','FrameLab','<strong>Priority Turnarounds</strong>','<strong>High CTR Thumbnails</strong>','<strong>Creative strategy sessions</strong>','<strong>Virtual Film Studio</strong>'],
+    off:[]}
+};
+var STEPS=['Choose Plan','Your Details','Payment'];
+var S={step:0,plan:new URLSearchParams(location.search).get('plan')||'',billing:'annual',first:'',last:'',email:'',phone:''};
+
+/* Stripe globals */
+var stripeInstance=null, stripeElements=null, paymentElement=null, clientSecret=null, paymentType=null;
+
+function $(id){return document.getElementById(id)}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function fmt(n){return '$'+n.toLocaleString()}
+
+/* ═══ Check URL for Stripe return ═══ */
+(function checkReturn(){
+  var params=new URLSearchParams(location.search);
+  if(params.get('redirect_status')==='succeeded'||params.get('success')==='true'){
+    S.step=2;S.plan=params.get('plan')||'gold';
+    /* clean URL */
+    history.replaceState(null,'',location.pathname+'?plan='+S.plan);
+  }
+})();
+
+function renderProg(){
+  var h='';STEPS.forEach(function(n,i){
+    var cls=i<S.step?'done':i===S.step?'active':'';
+    h+='<div class="ck-stp '+cls+'"><div class="ck-num"><span>'+(i+1)+'</span></div><div class="ck-lbl">'+n+'</div></div>';
+    if(i<STEPS.length-1)h+='<div class="ck-line'+(i<S.step?' done':'')+'"></div>';
+  });$('prog').innerHTML=h;
+}
+
+/* ═══ STEP 1 — Full pricing cards (feature parity with pricing.html) ═══ */
+function renderS0(){
+  var h='<div class="ck-step active"><div class="ck-title">Choose Your Plan</div><div class="ck-sub">Full-service team handling every edit. Cancel or upgrade anytime.</div><div class="ck-plans">';
+  ['basic','silver','gold'].forEach(function(id){
+    var p=PLANS[id];
+    var isGold=id==='gold';
+    h+='<div class="ck-plan'+(isGold?' featured':'')+(S.plan===id?' sel':'')+'" onclick="S.plan=\''+id+'\';render()">';
+    if(p.tag)h+='<div class="ck-plan-tag">'+p.tag+'</div>';
+    h+='<div class="ck-plan-tier '+id+'">'+id.toUpperCase()+'</div>';
+    h+='<div class="ck-plan-name">'+p.name+'</div>';
+    h+='<div class="ck-plan-price">'+fmt(p.monthly)+'<small>/mo</small></div>';
+    h+='<div class="ck-plan-annual">or '+fmt(p.annual)+'/mo billed annually · save '+fmt(p.monthly*12-p.annualTotal)+'</div>';
+    h+='<div class="ck-plan-line"></div>';
+    h+='<ul class="ck-plan-feat">';
+    p.feat.forEach(function(f){h+='<li>'+f+'</li>'});
+    p.off.forEach(function(f){h+='<li class="off">'+f+'</li>'});
+    h+='</ul>';
+    h+='<button class="ck-plan-cta '+id+'" onclick="event.stopPropagation();S.plan=\''+id+'\';next()">Select '+p.name+'</button>';
+    h+='</div>';
+  });
+  h+='</div><div style="font:400 11px/1.5 var(--ft);color:rgba(255,255,255,.3);text-align:center;margin-top:14px">All plans include unlimited revisions and dedicated editors. Annual plans unlock pay-over-time via <strong style="color:rgba(255,255,255,.55)">Klarna</strong>, <strong style="color:rgba(255,255,255,.55)">Afterpay</strong>, and <strong style="color:rgba(255,255,255,.55)">Zip</strong>.</div></div>';
+  return h;
+}
+
+/* ═══ STEP 2 — Your Details ═══ */
+function renderS1(){
+  var p=PLANS[S.plan];
+  var h='<div class="ck-step active"><div class="ck-title">Your Details</div><div class="ck-sub">We\'ll set up your '+p.name+' account with this info.</div>';
+  h+='<div class="ck-pay-grid">';
+
+  /* Left: form */
+  h+='<div>';
+  h+='<div class="f-row"><div class="f-field"><label class="f-label">First Name *</label><input class="f-input" id="iF" placeholder="First" value="'+esc(S.first)+'"></div>';
+  h+='<div class="f-field"><label class="f-label">Last Name *</label><input class="f-input" id="iL" placeholder="Last" value="'+esc(S.last)+'"></div></div>';
+  h+='<div class="f-field"><label class="f-label">Work Email *</label><input class="f-input" id="iE" type="email" placeholder="you@company.com" value="'+esc(S.email)+'"></div>';
+  h+='<div class="f-field"><label class="f-label">Phone</label><input class="f-input" id="iP" type="tel" placeholder="+1 (555) 000-0000" value="'+esc(S.phone)+'"></div>';
+  h+='<div class="f-err" id="err"></div>';
+  h+='<div class="btn-row"><button class="btn btn-g" onclick="prev()">Back</button><button class="btn btn-p" onclick="next()">Continue to Payment</button></div>';
+  h+='</div>';
+
+  /* Right: plan summary card + switch link */
+  h+='<div>';
+  h+='<div style="background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:18px;position:relative;overflow:hidden">';
+  h+='<div style="position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent)"></div>';
+  h+='<div style="font:700 9px/1 var(--ft);letter-spacing:1.2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px">Your Plan</div>';
+  h+='<div class="ck-plan-tier '+S.plan+'" style="margin-bottom:6px">'+S.plan.toUpperCase()+'</div>';
+  h+='<div style="font:700 22px/1.2 var(--fd);color:var(--txt);letter-spacing:-.02em;margin-bottom:4px">'+p.name+'</div>';
+  h+='<div style="font:800 32px/1 var(--fd);color:var(--txt);letter-spacing:-.02em;margin-bottom:2px">'+fmt(p.monthly)+'<small style="font:500 14px/1 var(--ft);color:rgba(255,255,255,.4);margin-left:4px">/mo</small></div>';
+  h+='<div style="font:500 11px/1.3 var(--ft);color:var(--green);margin-bottom:14px">or '+fmt(p.annual)+'/mo billed annually — save '+fmt(p.monthly*12-p.annualTotal)+'</div>';
+  h+='<ul style="list-style:none;padding:0;margin:0 0 14px;border-top:1px solid rgba(255,255,255,.06);padding-top:12px">';
+  p.feat.slice(0,5).forEach(function(f){
+    h+='<li style="font:400 12px/1.5 var(--ft);color:rgba(255,255,255,.72);padding:3px 0 3px 18px;position:relative"><span style="position:absolute;left:0;top:8px;width:10px;height:5px;border-left:1.5px solid var(--green);border-bottom:1.5px solid var(--green);transform:rotate(-45deg)"></span>'+f+'</li>';
+  });
+  if(p.feat.length>5) h+='<li style="font:400 11px/1.3 var(--ft);color:rgba(255,255,255,.35);padding:var(--s0) 0 0 18px">+ '+(p.feat.length-5)+' more included</li>';
+  h+='</ul>';
+  h+='<button onclick="S.step=0;render()" style="background:none;border:none;color:var(--blue);font:600 11px/1 var(--ft);cursor:pointer;padding:0;text-decoration:underline;text-decoration-color:rgba(41,151,255,.3)">Change plan</button>';
+  h+='</div>';
+  h+='</div>';
+
+  h+='</div></div>';
+  return h;
+}
+
+/* ═══ STEP 3 ═══ */
+function renderS2(){
+  /* Check if returning from Stripe redirect with success */
+  var params=new URLSearchParams(location.search);
+  if(params.get('redirect_status')==='succeeded'){return renderDone()}
+
+  var p=PLANS[S.plan];
+  var isAn=S.billing==='annual';
+  var base=isAn?p.annualTotal:p.monthly;
+
+  var h='<div class="ck-step active"><div class="ck-title">Complete Your Order</div><div class="ck-sub">Secure checkout · encrypted · PCI compliant</div>';
+
+  h+='<div class="ck-pay-grid">';
+
+  /* ── LEFT COLUMN — Plan hero + offer + billing + BNPL + Content Perks + Summary ── */
+  h+='<div>';
+
+  /* Plan hero — big tier-tinted CB bug + plan name (fills the gap on
+     monthly plans where BNPL preview doesn't render) */
+  h+='<div class="plan-hero '+S.plan+'">';
+  h+='<div class="plan-hero-mark"><img src="/portal/website/assets/logo-bug-icon.png" alt=""></div>';
+  h+='<div class="plan-hero-info">';
+  h+='<div class="plan-hero-tier">'+S.plan.toUpperCase()+' TIER</div>';
+  h+='<div class="plan-hero-name">'+p.name+'</div>';
+  h+='<div class="plan-hero-desc">'+p.desc+'</div>';
+  h+='</div></div>';
+
+  /* Swappable offer banner — currently '2 free months on Annual', but the
+     data-offer attribute lets you swap in 3/4/discount/anything else */
+  var offer = (typeof window.CK_OFFER==='object' && window.CK_OFFER) || {
+    show:true, icon:'🎁', title:'2 free months included',
+    sub:'Switch to Annual and save '+fmt(p.monthly*12-p.annualTotal)+' vs monthly'
+  };
+  if(offer.show){
+    h+='<div class="ck-offer" data-offer="default">';
+    h+='<div class="ck-offer-icon">'+offer.icon+'</div>';
+    h+='<div class="ck-offer-body">';
+    h+='<div class="ck-offer-title">'+esc(offer.title)+'</div>';
+    h+='<div class="ck-offer-sub">'+offer.sub+'</div>';
+    h+='</div></div>';
+  }
+
+  h+='<div class="bill-toggle">';
+  h+='<div class="bill-opt'+(S.billing==='monthly'?' sel':'')+'" onclick="switchBilling(\'monthly\')"><div class="bill-opt-name">Monthly</div><div class="bill-opt-price">'+fmt(p.monthly)+'/mo</div></div>';
+  h+='<div class="bill-opt'+(S.billing==='annual'?' sel':'')+'" onclick="switchBilling(\'annual\')"><div class="bill-save">SAVE '+Math.round((1-p.annual/p.monthly)*100)+'%</div><div class="bill-opt-name">Annual</div><div class="bill-opt-price">'+fmt(p.annual)+'/mo</div></div>';
+  h+='</div>';
+
+  if(isAn){
+    var klarna4 = (base/4).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+    var affirmMo = (base/12).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+    h+='<div class="bnpl-msg">';
+    h+='<div class="bnpl-msg-hdr">Split It Up — Interest-Free Available</div>';
+    h+='<div class="bnpl-opts">';
+    /* Pay in full — Stripe brand pill */
+    h+='<div class="bnpl-opt"><div class="bnpl-opt-brand"><span class="bnpl-opt-brand-pill stripe">Stripe</span></div><div class="bnpl-opt-terms">'+fmt(base)+'</div><div class="bnpl-opt-sub">Pay once, today</div></div>';
+    /* Klarna */
+    h+='<div class="bnpl-opt"><div class="bnpl-opt-brand"><span class="bnpl-opt-brand-pill klarna">Klarna.</span></div><div class="bnpl-opt-terms">$'+klarna4+'<small>× 4</small></div><div class="bnpl-opt-sub">Every 2 weeks · 0% interest</div></div>';
+    /* Afterpay */
+    h+='<div class="bnpl-opt"><div class="bnpl-opt-brand"><span class="bnpl-opt-brand-pill afterpay">afterpay</span></div><div class="bnpl-opt-terms">$'+klarna4+'<small>× 4</small></div><div class="bnpl-opt-sub">Every 2 weeks · 0% interest</div></div>';
+    /* Affirm */
+    h+='<div class="bnpl-opt"><div class="bnpl-opt-brand"><span class="bnpl-opt-brand-pill affirm">affirm</span></div><div class="bnpl-opt-terms">$'+affirmMo+'<small>/mo</small></div><div class="bnpl-opt-sub">3/6/12 months · 0% APR available</div></div>';
+    h+='</div>';
+    h+='</div>';
+  }
+
+  /* Content Perks — interchangeable add-on section (placeholder for future).
+     Populate window.CK_PERKS = [{name, price, enabled}] to surface options. */
+  var perks = (Array.isArray(window.CK_PERKS) && window.CK_PERKS) || [
+    {name:'Priority Turnarounds', price:'+$200/mo', soon:true},
+    {name:'High-CTR Thumbnails',  price:'+$150/mo', soon:true},
+    {name:'Weekly Strategy Call', price:'+$250/mo', soon:true}
+  ];
+  h+='<div class="ck-perks">';
+  h+='<div class="ck-perks-hdr"><span class="ck-perks-title">Content Perks — Optional Add-Ons</span><span class="ck-perks-pill">Coming soon</span></div>';
+  h+='<div class="ck-perks-list">';
+  perks.slice(0,3).forEach(function(pk){
+    h+='<div class="ck-perk"><div class="ck-perk-check"></div><div class="ck-perk-name">'+esc(pk.name)+'</div><div class="ck-perk-price">'+esc(pk.price||'')+'</div></div>';
+  });
+  h+='</div></div>';
+
+  /* Summary */
+  h+='<div class="sum">';
+  h+='<div class="sum-row"><span class="sum-k">Plan</span><span class="sum-v">'+p.name+'</span></div>';
+  h+='<div class="sum-row"><span class="sum-k">Billing</span><span class="sum-v">'+(isAn?'Annual · 2 free months':'Monthly')+'</span></div>';
+  h+='<div class="sum-row"><span class="sum-k">Customer</span><span class="sum-v">'+esc(S.email||'—')+'</span></div>';
+  h+='<div class="sum-row" style="padding-top:10px;border-top:1px solid rgba(255,255,255,.1);margin-top:4px"><span class="sum-k" style="font-weight:600;color:rgba(255,255,255,.72)">Total due</span><span class="sum-total">'+fmt(base)+(isAn?'':'/mo')+'</span></div>';
+  h+='</div>';
+
+  h+='</div>';  /* end left column */
+
+  /* ── RIGHT COLUMN — Stripe Payment Method Messaging + Payment Element + CTA ── */
+  h+='<div>';
+  h+='<div id="stripe-bnpl-messaging" style="margin-bottom:10px"></div>';
+  h+='<div id="payment-element"><div class="pe-loading"><span class="pe-spin"></span>Loading payment methods...</div></div>';
+  h+='<div class="f-err" id="err"></div>';
+  h+='<div class="btn-row"><button class="btn btn-g" onclick="prev()">Back</button><button class="btn btn-p" id="payBtn" onclick="pay()" disabled>Pay '+fmt(base)+'</button></div>';
+  h+='<div class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>256-bit encryption · PCI compliant · Powered by Stripe</div>';
+  h+='</div>';  /* end right column */
+
+  h+='</div>';  /* end ck-pay-grid */
+  h+='</div>';  /* end ck-step */
+  return h;
+}
+
+function renderDone(){
+  return '<div class="ck-step active"><div class="done-wrap"><div class="done-ring">✅</div>'+
+    '<div style="font:700 22px/1.2 var(--fd);margin-bottom:6px">Payment Successful!</div>'+
+    '<div style="font:400 13px/1.5 var(--ft);color:rgba(255,255,255,.45);max-width:380px;margin:0 auto">Welcome to Content Bug! Your <strong style="color:var(--txt)">'+(PLANS[S.plan]?.name||'')+'</strong> plan is now active.<br><br>Check your email for login details and next steps. Your dedicated editor will be assigned within 24 hours.</div>'+
+    '</div></div>';
+}
+
+/* ═══ STRIPE INIT ═══ */
+async function initStripe(){
+  if(!stripeInstance){
+    try{
+      var r=await fetch('/api/stripe/config');
+      var d=await r.json();
+      if(!d.publishableKey){console.error('No PK');return}
+      stripeInstance=Stripe(d.publishableKey);
+    }catch(e){console.error('Stripe config fetch failed:',e);return}
+  }
+}
+
+async function mountPaymentElement(){
+  await initStripe();
+  if(!stripeInstance)return;
+
+  /* Destroy existing element */
+  if(paymentElement){try{paymentElement.unmount()}catch(e){}}
+  paymentElement=null;stripeElements=null;
+
+  var p=PLANS[S.plan];
+  var isAn=S.billing==='annual';
+
+  /* Create PaymentIntent or Subscription */
+  try{
+    var r=await fetch('/api/stripe/create-payment-intent',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({plan:S.plan,billing:S.billing,customer_email:S.email,customer_name:S.first+' '+S.last,phone:S.phone})
+    });
+    var d=await r.json();
+    if(d.error){$('err').textContent=d.error;return}
+    clientSecret=d.clientSecret;
+    paymentType=d.type;
+  }catch(e){$('err').textContent='Failed to initialize payment. Please try again.';return}
+
+  /* Mount Payment Element */
+  var appearance={
+    theme:'night',
+    variables:{
+      colorPrimary:'#1a9eff',
+      colorBackground:'rgba(6,10,18,0.9)',
+      colorText:'var(--txt)',
+      colorDanger:'#ff453a',
+      fontFamily:"'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
+      borderRadius:'11px',
+      spacingUnit:'4px'
+    },
+    rules:{
+      '.Input':{border:'1px solid rgba(255,255,255,.1)',backgroundColor:'rgba(255,255,255,.04)',color:'var(--txt)',padding:'11px 13px'},
+      '.Input:focus':{border:'1px solid #1a9eff',boxShadow:'0 0 0 3px rgba(41,151,255,.1)'},
+      '.Tab':{border:'1px solid rgba(255,255,255,.08)',backgroundColor:'rgba(255,255,255,.03)'},
+      '.Tab--selected':{border:'1px solid #1a9eff',backgroundColor:'rgba(41,151,255,.06)'},
+      '.Label':{color:'rgba(255,255,255,.4)',fontSize:'10.5px',fontWeight:'600',textTransform:'uppercase',letterSpacing:'0.4px'}
+    }
+  };
+
+  stripeElements=stripeInstance.elements({clientSecret:clientSecret,appearance:appearance});
+  paymentElement=stripeElements.create('payment',{layout:'tabs'});
+
+  /* Stripe Payment Method Messaging — shows compliant BNPL installment
+     calculator natively above the Element (annual only — BNPL is
+     one-time-only so monthly subs can't use it). */
+  if(S.billing==='annual'){
+    try {
+      var pmmeAmount=(PLANS[S.plan]?.annualTotal||0)*100;  /* cents */
+      var pmmeElements=stripeInstance.elements();
+      var pmme=pmmeElements.create('paymentMethodMessaging',{
+        amount:pmmeAmount,
+        currency:'USD',
+        paymentMethodTypes:['klarna','afterpay_clearpay','affirm'],
+        countryCode:'US'
+      });
+      var msgEl=$('stripe-bnpl-messaging');
+      if(msgEl){ msgEl.innerHTML=''; pmme.mount(msgEl); }
+    } catch(e) { console.warn('[stripe] PMM messaging element failed (non-fatal):', e.message); }
+  }
+
+  var container=$('payment-element');
+  if(container){
+    container.innerHTML='';
+    paymentElement.mount(container);
+    paymentElement.on('ready',function(){var btn=$('payBtn');if(btn)btn.disabled=false});
+    paymentElement.on('change',function(ev){
+      var btn=$('payBtn');
+      if(btn)btn.disabled=!ev.complete;
+      if(ev.error)$('err').textContent=ev.error.message;
+      else if($('err'))$('err').textContent='';
+    });
+  }
+}
+
+/* ═══ BILLING SWITCH ═══ */
+function switchBilling(b){
+  if(S.billing===b)return;
+  S.billing=b;
+  render();
+  /* Re-mount with new PaymentIntent (different amount/mode) */
+  setTimeout(mountPaymentElement,100);
+}
+
+/* ═══ PAY ═══ */
+async function pay(){
+  var btn=$('payBtn');
+  btn.disabled=true;btn.textContent='Processing...';
+  if($('err'))$('err').textContent='';
+
+  try{
+    var result=await stripeInstance.confirmPayment({
+      elements:stripeElements,
+      confirmParams:{
+        return_url:window.location.origin+'/portal/website/checkout-v2.html?plan='+S.plan+'&billing='+S.billing,
+        receipt_email:S.email,
+        payment_method_data:{
+          billing_details:{
+            name:S.first+' '+S.last,
+            email:S.email,
+            phone:S.phone
+          }
+        }
+      },
+      redirect:'if_required'
+    });
+
+    if(result.error){
+      $('err').textContent=result.error.message;
+      btn.disabled=false;btn.textContent='Try Again';
+    }else if(result.paymentIntent&&result.paymentIntent.status==='succeeded'){
+      /* Payment succeeded without redirect (card payment) */
+      $('body').innerHTML=renderDone();
+      renderProg();
+    }else if(result.paymentIntent&&result.paymentIntent.status==='processing'){
+      $('body').innerHTML='<div class="ck-step active"><div class="done-wrap"><div class="done-ring">⏳</div><div style="font:700 22px/1.2 var(--fd);margin-bottom:6px">Processing...</div><div style="font:400 13px/1.5 var(--ft);color:rgba(255,255,255,.45)">Your payment is being processed. You\'ll receive a confirmation email shortly.</div></div></div>';
+    }
+  }catch(e){
+    $('err').textContent='Payment failed: '+e.message;
+    btn.disabled=false;btn.textContent='Try Again';
+  }
+}
+
+/* ═══ NAV ═══ */
+function next(){
+  if(S.step===0&&!S.plan)return;
+  if(S.step===1){
+    S.first=($('iF')||{}).value?.trim()||'';S.last=($('iL')||{}).value?.trim()||'';
+    S.email=($('iE')||{}).value?.trim()||'';S.phone=($('iP')||{}).value?.trim()||'';
+    if(!S.first||!S.email){$('err').textContent='First name and email are required.';return}
+    /* Fire GHL contact webhook */
+    fetch('/api/website/checkout-webhook',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'step2_contact',first_name:S.first,last_name:S.last,email:S.email,phone:S.phone,plan:S.plan})}).catch(function(){});
+  }
+  S.step++;
+  render();
+  if(S.step===2)setTimeout(mountPaymentElement,100);
+}
+function prev(){
+  if(S.step>0){
+    if(paymentElement){try{paymentElement.unmount()}catch(e){}}
+    paymentElement=null;stripeElements=null;
+    S.step--;render();
+  }
+}
+
+function render(){
+  renderProg();
+  $('body').innerHTML=[renderS0,renderS1,renderS2][S.step]();
+  $('body').scrollTop=0;
+  /* mountPaymentElement is invoked by next()/switchBilling — not here, to avoid double-mounts. */
+}
+
+/* When embedded in an iframe (?embed=1 OR inside any iframe context),
+   strip the page's own fallback dark gradient so the parent page's bg
+   shows through instead of stacking two gradients. */
+(function(){
+  try{
+    var q=new URLSearchParams(location.search);
+    var isEmbedded = q.get('embed')==='1' || window.self !== window.top;
+    if(isEmbedded){
+      var apply=function(){ if(document.body) document.body.classList.add('embedded'); };
+      if(document.body){ apply(); } else { document.addEventListener('DOMContentLoaded',apply); }
+      document.documentElement.style.setProperty('background','transparent','important');
+    }
+  }catch(e){}
+})();
+
+render();
+</script>
+</body>
+</html>

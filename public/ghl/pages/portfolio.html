@@ -1,0 +1,281 @@
+<link rel="stylesheet" href="../../assets/design-system.css">
+<script>
+  if (window.self === window.top) {
+    document.documentElement.classList.add('bg-dark');
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.classList.add('bg-dark');
+      document.body.classList.add('cb-grid');
+      var s = document.querySelector('.ws-page');
+      if (s) {
+        s.classList.add('shell-body-glass');
+        s.style.margin = '8px 16px';
+        s.style.minHeight = 'calc(100vh - 16px)';
+      }
+    });
+  } else {
+    if (document.body) { document.body.classList.add('bg-dark'); }
+    else { document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('bg-dark'); }); }
+  }
+</script>
+<div class="ws-page">
+<script>
+/* GHL canonical URL → Railway path remap (only runs off-GHL, e.g. api.contentbug.io direct test) */
+(function(){
+  var h=location.hostname;
+  if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com')) return;
+  var map={
+    'https://contentbug.io/home':'/home',
+    'https://contentbug.io/pricing':'/pricing',
+    'https://contentbug.io/portfolio':'/portfolio',
+    'https://contentbug.io/free-trial':'/booking',
+    'https://contentbug.io/privacy-policy':'/privacy',
+    'https://contentbug.io/terms':'/terms'
+  };
+  document.querySelectorAll('a[href]').forEach(function(a){
+    var k=a.getAttribute('href');
+    if(map[k]) a.setAttribute('href', map[k]);
+  });
+})();
+</script>
+
+<div class="cb-header-bar" id="cb-header">
+  <a href="https://contentbug.io/home" class="cb-logo">
+    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
+  </a>
+  <nav class="cb-header" id="cbNav">
+    <a href="https://contentbug.io/home" class="cb-nav-link active">Home</a>
+    <a href="https://contentbug.io/pricing" class="cb-nav-link">Pricing</a>
+    <a href="https://contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
+    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
+    <a href="https://contentbug.io/free-trial" class="cb-nav-cta">Free Trial</a>
+  </nav>
+</div>
+<script>
+document.body.classList.add('ws-page');
+(function(){
+  var bar=document.querySelector('.cb-header-bar');
+  if(!bar)return;
+  var sentinel=document.createElement('div');
+  sentinel.style.cssText='height:0;width:0;visibility:hidden';
+  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
+      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
+    });
+  },{threshold:0});
+  io.observe(bar);
+})();
+</script>
+<main id="cb-portfolio">
+
+<!-- SECTION 1 &mdash; HERO -->
+<section class="section"><div class="section-card">
+<div class="container">
+  <!-- Bug icon &mdash; premium depth backdrop -->
+  <div style="display:flex;justify-content:center;margin-top:-20px;margin-bottom:-200px;position:relative;pointer-events:none;z-index:1">
+    <div style="position:relative;display:inline-flex;align-items:center;justify-content:center">
+      <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(26,100,255,.04) 0%,rgba(26,100,255,.01) 35%,transparent 60%);pointer-events:none"></div>
+      <div style="position:relative;width:400px;height:400px;-webkit-mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%);mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%)">
+        <img loading="lazy" decoding="async" src="https://api.contentbug.io/website/assets/logo-bug-icon.png" alt="Content Bug" style="width:400px;height:400px;opacity:.06;display:block;object-fit:contain">
+      </div>
+    </div>
+  </div>
+<p class="section-label" style="position:relative;z-index:1;text-align:center">VIDEO GALLERY</p>
+<h1 class="hero-title" style="text-align:center">Real Edits. Real Creators. Real Results.</h1>
+<div class="trust-inline">
+  <div class="stars">
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+  </div>
+  <span class="trust-text">Trusted by 500+ Creators &amp; Brands</span>
+</div>
+<div id="brandsRow" style="display:flex;flex-direction:column;align-items:center;gap:var(--s3);max-width:1100px;width:100%;margin:0 auto 32px;padding:0 24px">
+  <div style="display:flex;justify-content:space-between;align-items:center;width:100%"><div class="brand-slot" style="width:150px;height:60px"></div><div class="brand-slot" style="width:150px;height:60px"></div><div class="brand-slot" style="width:150px;height:60px"></div><div class="brand-slot" style="width:150px;height:60px"></div><div class="brand-slot" style="width:150px;height:60px"></div></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;width:100%"><div class="brand-slot" style="width:150px;height:60px"></div><div class="brand-slot" style="width:150px;height:60px"></div><div class="brand-slot" style="width:150px;height:60px"></div><div class="brand-slot" style="width:150px;height:60px"></div><div class="brand-slot" style="width:150px;height:60px"></div></div>
+</div>
+<div class="hero-ctas">
+  <a href="#long-form" class="btn btn-primary">Long-Form Edits</a>
+  <a href="#short-form" class="btn btn-primary">Short-Form Edits</a>
+</div>
+</div>
+</div></section>
+
+<!-- SECTION 2 &mdash; BEFORE & AFTER -->
+<section class="section" id="before-after"><div class="section-card">
+<div class="container">
+<div class="section-header">
+  <span class="section-label">Before &amp; After</span>
+  <h2 class="section-title">Raw In. Scroll-Stopping Out.</h2>
+  <p class="section-sub">Same footage. Professional execution. RAW comparison baked in.</p>
+</div>
+<div class="transform-grid">
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/65ea68b949278d1bd2a7a392.mp4" type="video/mp4"></video></div>
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/654d5e157b3caa7a0d933b82.mp4" type="video/mp4"></video></div>
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/65a80f182aaf1b8536103650.mp4" type="video/mp4"></video></div>
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/6568aeb93d381e4e680aac45.mp4" type="video/mp4"></video></div>
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/693f7b1c96e7531c39af6cd2.mp4" type="video/mp4"></video></div>
+</div>
+</div>
+</div></section>
+
+<!-- SECTION 3 &mdash; PREMIUM SHORTS -->
+<section class="section" id="short-form"><div class="section-card">
+<div class="container">
+<div class="section-header">
+  <span class="section-label">Premium Shorts</span>
+  <h2 class="section-title">Published by Real Creators</h2>
+  <p class="section-sub">Live edits from creators with real audiences.</p>
+</div>
+<div class="video-grid">
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/693f7c3cb4f4201ef735d1ef.mp4" type="video/mp4"></video><div class="video-overlay"><p class="video-overlay-label">Takkumi</p><p class="video-overlay-meta">176K Instagram</p></div></div>
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/65823d055567c0488ef27aee.mp4" type="video/mp4"></video><div class="video-overlay"><p class="video-overlay-label">Takkumi</p><p class="video-overlay-meta">176K Instagram</p></div></div>
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/693f7bebb4f420693535c281.mp4" type="video/mp4"></video><div class="video-overlay"><p class="video-overlay-label">Realsimgear</p><p class="video-overlay-meta">82K Instagram</p></div></div>
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/65b96c084ea33d5e980bbd33.mp4" type="video/mp4"></video><div class="video-overlay"><p class="video-overlay-label">Realsimgear</p><p class="video-overlay-meta">82K Instagram</p></div></div>
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/6765d0d6a540f5bc268fdff6.mp4" type="video/mp4"></video><div class="video-overlay"><p class="video-overlay-label">CourseCreatorPro</p><p class="video-overlay-meta">Premium</p></div></div>
+<div class="video-card"><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67e44fc68f002be23050d070.mp4" type="video/mp4"></video><div class="video-overlay"><p class="video-overlay-label">CourseCreatorPro</p><p class="video-overlay-meta">Premium</p></div></div>
+</div>
+</div>
+</div></section>
+
+<!-- SECTION 4 &mdash; TESTIMONIALS (removed &mdash; reviews section covers this) -->
+
+<!-- SECTION 5 &mdash; LONG-FORM -->
+<section class="section" id="long-form"><div class="section-card">
+<div class="container">
+<div class="section-header">
+  <span class="section-label">Long-Form Work</span>
+  <h2 class="section-title">Premium Long-Form Edits</h2>
+  <p class="section-sub">YouTube videos, podcasts, and educational content &mdash; edited for retention, clarity, and impact.</p>
+</div>
+
+<!-- Dr. Tracey Marks -->
+<div class="longform-creator">
+<div class="longform-header">
+  <div class="longform-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/t48740gfrxCwt_Qf2UR-WqV0XSs483J8xHzs4knEb016QI6x6GWChjWSkKfgSxXhj9hGjCPh_g=s160-c-k-c0x00ffffff-no-rj" alt="Dr. Tracey Marks"></div>
+  <div><h3 class="longform-name">Dr. Tracey Marks</h3><p class="longform-subs">2.3M subscribers</p><a href="https://www.youtube.com/drtraceymarks" target="_blank" class="longform-link"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>youtube.com/drtraceymarks</a></div>
+</div>
+<div class="longform-videos">
+  <a href="https://www.youtube.com/watch?v=zWzjdl2dLjM" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/zWzjdl2dLjM/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a>
+  <a href="https://www.youtube.com/watch?v=3mfgoijFWgk" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/3mfgoijFWgk/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a>
+  <a href="https://www.youtube.com/watch?v=JIrQXSAWeUE" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/JIrQXSAWeUE/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a>
+</div>
+</div>
+
+<!-- Landon Bullock -->
+<div class="longform-creator">
+<div class="longform-header">
+  <div class="longform-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/rzxzaz_Pb2gko4pRg2o7uvMfqdMl2GEAvF1HGJ-s28ZMaBV13mLyd2fsXNl5d1uZF20alfTocf8=s160-c-k-c0x00ffffff-no-rj" alt="Landon Bullock"></div>
+  <div><h3 class="longform-name">Landon Bullock</h3><p class="longform-subs">1.8M subscribers</p><a href="https://youtube.com/@landokalriz" target="_blank" class="longform-link"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>youtube.com/@landokalriz</a></div>
+</div>
+<div class="longform-videos">
+  <a href="https://www.youtube.com/watch?v=JjO11LB1U48" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/JjO11LB1U48/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a>
+  <a href="https://www.youtube.com/watch?v=_cgPkqWsGWo" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/_cgPkqWsGWo/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a>
+  <a href="https://www.youtube.com/watch?v=luBxLl0j_wA" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/luBxLl0j_wA/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a>
+</div>
+</div>
+
+<!-- Avery Smith -->
+<div class="longform-creator">
+<div class="longform-header">
+  <div class="longform-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/zDdzbACpAgKHbyTton-rpmY0J3EYbnfZYhtoGMo9y69SaOnP2aq6qS0OKzxs4ofhri_cTbtg0g=s160-c-k-c0x00ffffff-no-rj" alt="Avery Smith"></div>
+  <div><h3 class="longform-name">Avery Smith</h3><p class="longform-subs">60.5K subscribers</p><a href="https://www.youtube.com/@averysmith" target="_blank" class="longform-link"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>youtube.com/@averysmith</a></div>
+</div>
+<div class="longform-videos">
+  <a href="https://www.youtube.com/watch?v=mSWtnjq4LRE" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/mSWtnjq4LRE/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a>
+  <a href="https://www.youtube.com/watch?v=lo3VU1srV1E" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/lo3VU1srV1E/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a>
+  <a href="https://www.youtube.com/watch?v=79SINWkIJDQ" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/79SINWkIJDQ/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a>
+</div>
+</div>
+<!-- Stockton Walbeck &mdash; CourseCreator360 -->
+<div class="longform-creator"><div class="longform-header"><div class="longform-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/8PvAumA45qVuLDvpSQZ5PL2b3mQAxJ0TrS_2nkagQ1zl7_NcD-jUc1U25-8A2HpuOH3KySGmyA=s160-c-k-c0x00ffffff-no-rj" alt="Stockton Walbeck"></div><div><h3 class="longform-name">Stockton Walbeck</h3><p class="longform-subs">CourseCreator360</p><a href="https://www.youtube.com/@coursecreator360" target="_blank" class="longform-link"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>youtube.com/@coursecreator360</a></div></div><div class="longform-videos"><a href="https://www.youtube.com/watch?v=xo6ZFQ-iN_0" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/xo6ZFQ-iN_0/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a><a href="https://www.youtube.com/watch?v=aqzJCc7q7aE" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/aqzJCc7q7aE/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a><a href="https://www.youtube.com/watch?v=yN0jqQQbxnM" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/yN0jqQQbxnM/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a></div></div>
+<!-- Austin Uhl &mdash; The Heart Leader Podcast -->
+<div class="longform-creator"><div class="longform-header"><div class="longform-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/JbK9voh1_-fWQt7yxtRHOmzDBlBVKuKaBN3WYhVg8lVViNCkUuGcRVPTUlzOewEBRUBNQfJcbQ=s160-c-k-c0x00ffffff-no-rj" alt="Austin Uhl"></div><div><h3 class="longform-name">Austin Uhl</h3><p class="longform-subs">198K subscribers</p><a href="https://www.youtube.com/@theheartleaderpodcast" target="_blank" class="longform-link"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>youtube.com/@theheartleaderpodcast</a></div></div><div class="longform-videos"><a href="https://www.youtube.com/watch?v=-qCYdpPZVUM" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/-qCYdpPZVUM/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a><a href="https://www.youtube.com/watch?v=zA888dfpAKI" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/zA888dfpAKI/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a><a href="https://www.youtube.com/watch?v=2NDNK4HQkp4" target="_blank" class="longform-video"><img loading="lazy" decoding="async" src="https://img.youtube.com/vi/2NDNK4HQkp4/maxresdefault.jpg" alt="Video"><div class="longform-play"><svg viewBox="0 0 68 48" width="60"><path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"/><path d="M 45,24 27,14 27,34" fill="var(--txt)"/></svg></div></a></div></div>
+
+</div>
+</div></section>
+
+<script>
+(function(){
+  var cards=document.querySelectorAll('.portfolio-card, .video-card');
+  cards.forEach(function(card){
+    var v=card.querySelector('video');
+    if(!v)return;
+    card.addEventListener('mouseenter',function(){v.play().catch(function(){});});
+    card.addEventListener('mouseleave',function(){v.pause();v.currentTime=0;});
+    /* Mobile: play on tap, pause on second tap */
+    var playing=false;
+    card.addEventListener('touchstart',function(e){
+      e.preventDefault();
+      if(playing){v.pause();v.currentTime=0;playing=false;}
+      else{v.play().catch(function(){});playing=true;}
+    },{passive:false});
+  });
+})();
+</script>
+
+</main>
+
+<script>
+(function(){
+  var logos = ['https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/6717d7d9666eda65ef4ac782.svg','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/679aec512ee4850a04c3caea.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67b6300b070d19c06a522966.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67b6300c7088f3cd4de57569.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67b6300b83fcbc658f555a99.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67b6300b2aa0e929cdfb7fc4.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67b6300b11cf9d3a98230606.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67b6300b5f4d69643c058d49.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67b6300c6b7cd2a67524abf7.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67b6300b145bb7eefd2cf50e.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/6963d955c7683b6307a4f44f.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/6963d955f13bc371e39a1cc0.png','https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/c1730f68-1a7d-4d53-ba83-337a58cf3bdd.png','https://api.contentbug.io/website/assets/anatomy-of-success.svg'];
+
+  function initBrandRow(id){
+    var c = document.getElementById(id);
+    if (!c) return;
+    var s = c.querySelectorAll('.brand-slot');
+    if (!s.length) return;
+    var h = [];
+    var sh = [].concat(logos).sort(function(){ return Math.random() - .5; });
+    sh.slice(0,10).forEach(function(src,i){
+      var img = document.createElement('img');
+      img.src = src; img.alt = 'Brand'; img.className = 'active'; img.dataset.src = src;
+      s[i].appendChild(img);
+    });
+    sh.slice(10).forEach(function(src){ h.push(src); });
+    function swap(){
+      if (!h.length) return;
+      var si = Math.floor(Math.random() * s.length);
+      var slot = s[si];
+      var cur = slot.querySelector('img.active');
+      if (!cur) return;
+      var hi = Math.floor(Math.random() * h.length);
+      var ns = h[hi];
+      var ni = document.createElement('img');
+      ni.src = ns; ni.alt = 'Brand'; ni.dataset.src = ns;
+      slot.appendChild(ni);
+      setTimeout(function(){ cur.classList.remove('active'); ni.classList.add('active'); }, 500);
+      h.splice(hi,1); h.push(cur.dataset.src);
+      setTimeout(function(){ cur.remove(); }, 8000);
+      setTimeout(swap, 10000);
+    }
+    setTimeout(swap, 5000);
+  }
+  initBrandRow('brandsRow');
+  /* brandsRowTestimonials removed */
+})();
+</script>
+
+<script>
+(function(){
+  var f = document.getElementById('cb-footer');
+  if (!f) return;
+  var p = f.parentElement;
+  while (p && p !== document.documentElement) {
+    if (p !== document.body) {
+      p.style.setProperty('background', 'none', 'important');
+      p.style.setProperty('background-color', 'transparent', 'important');
+      p.style.setProperty('background-image', 'none', 'important');
+      p.style.setProperty('color', 'var(--txt3)', 'important');
+      p.style.setProperty('border', 'none', 'important');
+      p.style.setProperty('box-shadow', 'none', 'important');
+      p.style.setProperty('border-radius', '0', 'important');
+    }
+    p = p.parentElement;
+  }
+})();
+</script>
+</div>

@@ -1,40 +1,19 @@
-# cb-ghl-website
+# cb-website
 
-GHL (GoHighLevel) website page templates — copy-paste HTML for website pages hosted on contentbug.io.
+All ContentBug public-facing marketing website pages — one repo, one source of truth.
 
-## Pages
+## Contents
+- `public/website/` — Railway-hosted funnel pages: qualification, booking, checkout, confirmation (+ their CSS, fonts, assets, styles JS)
+- `public/ghl/pages/` — Copy-paste HTML destined for GHL: home, pricing, portfolio, privacy-policy, terms, contact-details
+- `public/ghl/website-library.html` — Library index page
 
-| Template | Path | Route |
-|----------|------|-------|
-| home.html | `/home` | Landing page |
-| pricing.html | `/pricing` | 3-tier pricing + checkout modal |
-| portfolio.html | `/portfolio` | Creator portfolio + rotating brand carousel |
-| contact-details.html | `/free-trial` | Free trial Step 1/4 + GHL form embed |
-| privacy-policy.html | `/privacy` | Legal — 14 sections |
-| terms.html | `/terms` | Legal — 17 sections + warning boxes |
+## Live preview
+All files are served live by `cb-portal-shell` at **https://api.contentbug.io**:
+- `/website/qualification.html` · `/website/booking.html` · `/website/checkout.html` · `/website/confirmation.html`
+- `/home.html` · `/pricing.html` · `/portfolio.html` · `/privacy-policy.html` · `/terms.html` · `/contact-details.html`
+- `/website-library.html`
 
-## Design system
+Design system (CSS + fonts) is loaded from `api.contentbug.io/assets/design-system.css` — shared with the portal.
 
-Every template references the single-source portal design system:
-
-```html
-<link rel="stylesheet" href="https://api.contentbug.io/assets/design-system.css">
-```
-
-No local CSS. No overrides. All tokens (`--s*`, `--text-*`, `--r-*`, `--blue*`, `--txt*`) come from `cb-portal-shell/public/assets/design-system.css`.
-
-## Deploy
-
-Paste into GHL builder. The CSS URL is absolute, so GHL's domain doesn't matter. The inline scripts handle:
-- `ws-page` + `bg-dark` + `cb-grid` body classes
-- Canonical-URL → Railway-path rewrite (only active off-GHL)
-- Sticky-nav IntersectionObserver
-
-## Updating
-
-Edit here, then re-paste into GHL. Do **not** edit in GHL first — the source lives in git.
-
-## Parent
-
-- Portal: [cb-portal-shell](https://github.com/contentbugvideoediting/cb-portal-shell)
-- Design tokens: `public/assets/design-system.css` in portal
+## How it's wired
+`cb-portal-shell`'s Dockerfile clones this repo at build time into `public/` so all pages ship with the shell container. Edit here → push → shell redeploys → pages update live.

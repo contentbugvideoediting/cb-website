@@ -1,0 +1,595 @@
+<script>document.addEventListener("DOMContentLoaded",function(){document.body.classList.add("bg-dark")})</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preload" as="font" type="font/woff2" href="/portal/fonts/sf-pro-text_regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/portal/fonts/sf-pro-text_semibold.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/portal/fonts/sf-pro-display_regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/portal/fonts/sf-pro-display_medium.woff2" crossorigin>
+<title>Free Trial — Content Bug</title>
+<meta name="description" content="Qualify for a free trial edit with Content Bug Video Editing.">
+<link rel="stylesheet" href="../assets/design-system.css">
+<script>if(document.body){document.body.classList.add("bg-dark")}else{document.addEventListener("DOMContentLoaded",function(){document.body.classList.add("bg-dark")})}</script>
+</head>
+<body class="bg-dark cb-grid">
+<script src="../assets/icons/animated-lottie/lottie-icons.js"></script>
+
+<div class="wiz-overlay open" id="qShell">
+<div class="wiz-shell">
+
+  <!-- Brand Header -->
+  <div class="wiz-brand" style="padding:20px 24px 0">
+    <div class="login-logo-ring" style="width:56px;height:56px;margin-bottom:10px">
+      <img src="https://api.contentbug.io/portal/assets/logo-bug-white.svg" alt="Content Bug" style="width:30px;height:30px">
+    </div>
+    <div class="wiz-brand-eyebrow">Content Bug Video Editing</div>
+    <div class="wiz-brand-title" style="font-size:24px;margin-bottom:10px">Free Trial</div>
+    <div class="wiz-brand-divider"></div>
+  </div>
+
+  <!-- Step Rail -->
+  <div class="wiz-step-rail" id="qRail"></div>
+
+  <!-- Scrollable Content -->
+  <div class="wiz-content" id="qBody" style="padding:24px">
+
+    <!-- Step 0: Contact Details -->
+    <div class="qw-step active" data-step="0">
+      <div class="qw-title">Let's get started.</div>
+      <div class="qw-sub">Tell us a bit about yourself.</div>
+      <div style="width:100%;max-width:420px;text-align:left">
+        <div class="q-row">
+          <div class="q-field"><label>First Name *</label><input id="qFirstName" placeholder="First name" autocomplete="given-name"></div>
+          <div class="q-field"><label>Last Name *</label><input id="qLastName" placeholder="Last name" autocomplete="family-name"></div>
+        </div>
+        <div class="q-field"><label>Email *</label><input id="qEmail" type="email" placeholder="you@example.com" autocomplete="email"><div class="q-error" id="qEmailErr">Please enter a valid email address.</div></div>
+        <div class="q-field"><label>Phone <span class="q-optional">(optional)</span></label><input id="qPhone" type="tel" placeholder="(555) 123-4567" autocomplete="tel"></div>
+      </div>
+    </div>
+
+    <!-- Step 1: Qualification Questions -->
+    <div class="qw-step" data-step="1">
+      <div class="qw-title">Quick questions.</div>
+      <div class="qw-sub">We want to make sure we're a good fit before we edit anything.</div>
+      <div style="width:100%;max-width:480px;text-align:left">
+
+        <div class="q-question">
+          <div class="q-question-label">What type of content do you create?</div>
+          <div class="q-chips" id="qContentTypes" data-multi="true">
+            <div class="q-chip" data-val="YouTube Long-form">YouTube Long-form</div>
+            <div class="q-chip" data-val="YouTube Shorts">YouTube Shorts</div>
+            <div class="q-chip" data-val="TikTok">TikTok</div>
+            <div class="q-chip" data-val="Instagram Reels">Instagram Reels</div>
+            <div class="q-chip" data-val="Podcast">Podcast</div>
+            <div class="q-chip" data-val="Course Content">Course Content</div>
+            <div class="q-chip" data-val="Other">Other</div>
+          </div>
+        </div>
+
+        <div class="q-question">
+          <div class="q-question-label">How often do you post?</div>
+          <div class="q-chips" id="qPostFreq">
+            <div class="q-chip" data-val="Daily">Daily</div>
+            <div class="q-chip" data-val="3-5x per week">3-5x per week</div>
+            <div class="q-chip" data-val="1-2x per week">1-2x per week</div>
+            <div class="q-chip" data-val="A few times a month">A few times a month</div>
+            <div class="q-chip" data-val="Just starting out">Just starting out</div>
+          </div>
+        </div>
+
+        <div class="q-question">
+          <div class="q-question-label">What's your main goal with video editing?</div>
+          <div class="q-chips" id="qGoal">
+            <div class="q-chip" data-val="Grow my audience">Grow my audience</div>
+            <div class="q-chip" data-val="Save time">Save time</div>
+            <div class="q-chip" data-val="Look more professional">Look more professional</div>
+            <div class="q-chip" data-val="Increase revenue">Increase revenue</div>
+            <div class="q-chip" data-val="All of the above">All of the above</div>
+          </div>
+        </div>
+
+        <div class="q-question">
+          <div class="q-question-label">Do you have footage ready to edit right now?</div>
+          <div class="q-chips" id="qFootage">
+            <div class="q-chip q-chip-lg" data-val="Yes I'm ready to go">Yes I'm ready to go</div>
+            <div class="q-chip q-chip-lg" data-val="I have footage but not edited yet">I have footage but not edited yet</div>
+            <div class="q-chip q-chip-lg" data-val="I'm still filming">I'm still filming</div>
+            <div class="q-chip q-chip-lg" data-val="Not yet">Not yet</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Step 2: Result -->
+    <div class="qw-step" data-step="2" id="qResultStep"></div>
+
+    <!-- Step 3: Calendar -->
+    <div class="qw-step" data-step="3">
+      <div class="qw-title">Pick a time.</div>
+      <div class="qw-sub">A 30-min call with our creative director to kick off your free edit.</div>
+      <div style="width:100%;max-width:440px;text-align:left">
+        <div class="q-day-cards" id="qDayCards"></div>
+        <div id="qSlotsWrap"></div>
+        <div class="q-tz" id="qTzLabel"></div>
+      </div>
+    </div>
+
+    <!-- Step 4: Confirm + Activate + Submit Footage -->
+    <div class="qw-step" data-step="4">
+      <!-- Section A: Summary -->
+      <div id="q4Summary" class="q-section">
+        <div class="qw-title">Confirm &amp; Activate</div>
+        <div class="qw-sub">Review your details and start your free trial.</div>
+        <div class="q-summary" id="qSummary"></div>
+      </div>
+
+      <!-- Section B: Activate button (inside footer for this step) -->
+
+      <!-- Section C: Post-activation (hidden until activated) -->
+      <div id="q4PostActivate" style="display:none;width:100%">
+
+        <!-- Part 1: Submit footage iframe -->
+        <div id="q4Footage" class="q-section">
+          <div class="q-section-title">Submit your raw footage</div>
+          <div class="q-section-sub">Upload your footage so we can start on your free edit.</div>
+          <iframe id="q4FootageFrame" src="/portal/request.html?trial=1&presetOnly=1" style="width:100%;height:550px;border:none;border-radius:var(--r-xl)" loading="lazy"></iframe>
+        </div>
+
+        <!-- Part 2: Choose editing style -->
+        <div id="q4Style" style="display:none" class="q-section">
+          <div class="q-section-title">Choose your editing style</div>
+          <div class="q-section-sub">Pick a preset or build your own custom style.</div>
+
+          <div class="q-style-row">
+            <div class="q-style-card">
+              <div class="q-style-card-title">Use a preset style</div>
+              <div class="q-style-card-sub">Quick-start with a proven look</div>
+              <div class="q-preset-chips" id="qPresetChips">
+                <div class="q-preset-chip" data-preset="Hormozi Dark Authority">Hormozi Dark Authority</div>
+                <div class="q-preset-chip" data-preset="MrBeast Energy">MrBeast Energy</div>
+                <div class="q-preset-chip" data-preset="Clean & Minimal">Clean &amp; Minimal</div>
+                <div class="q-preset-chip" data-preset="Podcast Pro">Podcast Pro</div>
+              </div>
+            </div>
+            <div class="q-style-card">
+              <div class="q-style-card-title">Build my own</div>
+              <div class="q-style-card-sub">Customize every detail</div>
+              <button class="btn btn-g5 btn-sm" onclick="window.open('/portal/blueprints.html','_blank')" style="margin-top:8px">Open Blueprint Builder</button>
+            </div>
+          </div>
+
+          <div class="q-bottom-links">
+            <a href="/portal/trial.html" class="q-link-muted">Skip &mdash; just edit it &rarr;</a>
+            <a href="/portal/trial-wizard.html" class="btn btn-g5" style="text-decoration:none">Done &mdash; Take Me to My Edit &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="wiz-footer" id="qFoot">
+    <button class="btn btn-ghost" id="qBack" onclick="qPrev()" hidden>Back</button>
+    <button class="btn btn-g5" id="qNext" onclick="qNext()">Continue &rarr;</button>
+  </div>
+
+</div>
+</div>
+
+<script>
+/* =====================================================================
+   Content Bug — Qualification Wizard v2
+   5-step public funnel: Contact > Qualify > Result > Calendar > Activate
+   ===================================================================== */
+var $=function(id){return document.getElementById(id)};
+var E=function(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')};
+var API=location.origin;
+
+/* ── State ── */
+var step=0;
+var firstName='',lastName='',email='',phone='';
+var contentTypes=[];
+var postFreq='',primaryGoal='',hasFootage='';
+var qualified=false,score=0;
+var selectedDay='',selectedSlot='';
+var activated=false;
+var selectedPreset='';
+
+/* ── Step Rail Icons ── */
+var RAIL_ICONS=['person','edit','star','calendar','check'];
+
+function renderRail(){
+  var base='/portal/assets/icons/animated-lottie/white/',h='';
+  for(var i=0;i<5;i++){
+    var done=i<step,active=i===step;
+    var cls='wiz-step-dot'+(done?' done':active?' active':'');
+    var icon=done?'check':RAIL_ICONS[i];
+    var ap=done?' autoplay':'';
+    h+='<div class="'+cls+'"><lottie-icon src="'+base+icon+'.json" size="20"'+ap+' key="'+i+'-'+icon+'"></lottie-icon></div>';
+    if(i<4)h+='<div class="wiz-step-wire'+(done?' done':'')+'"></div>';
+  }
+  $('qRail').innerHTML=h;
+}
+
+/* ── Chip Interaction ── */
+document.addEventListener('click',function(e){
+  var chip=e.target.closest('.q-chip');
+  if(!chip)return;
+  var group=chip.parentElement;
+  var multi=group.dataset.multi==='true';
+  if(multi){
+    chip.classList.toggle('selected');
+  }else{
+    group.querySelectorAll('.q-chip').forEach(function(c){c.classList.remove('selected')});
+    chip.classList.add('selected');
+  }
+  readChips();
+  $('qNext').disabled=!qValid();
+});
+
+/* Preset chip clicks */
+document.addEventListener('click',function(e){
+  var pc=e.target.closest('.q-preset-chip');
+  if(!pc)return;
+  var parent=pc.parentElement;
+  parent.querySelectorAll('.q-preset-chip').forEach(function(c){c.classList.remove('selected')});
+  pc.classList.add('selected');
+  selectedPreset=pc.dataset.preset||'';
+});
+
+function readChips(){
+  contentTypes=[];
+  $('qContentTypes').querySelectorAll('.q-chip.selected').forEach(function(c){contentTypes.push(c.dataset.val)});
+  var pf=$('qPostFreq').querySelector('.q-chip.selected');postFreq=pf?pf.dataset.val:'';
+  var g=$('qGoal').querySelector('.q-chip.selected');primaryGoal=g?g.dataset.val:'';
+  var f=$('qFootage').querySelector('.q-chip.selected');hasFootage=f?f.dataset.val:'';
+}
+
+/* ── Validation ── */
+function qValid(){
+  if(step===0){
+    return $('qFirstName').value.trim()&&$('qLastName').value.trim()&&isEmailValid($('qEmail').value.trim());
+  }
+  if(step===1){
+    return contentTypes.length>0&&postFreq&&primaryGoal&&hasFootage;
+  }
+  if(step===2){
+    return qualified;
+  }
+  if(step===3){
+    return selectedDay&&selectedSlot;
+  }
+  return true;
+}
+
+function isEmailValid(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
+
+/* ── Input listeners ── */
+['qFirstName','qLastName','qEmail','qPhone'].forEach(function(id){
+  $(id).addEventListener('input',function(){$('qNext').disabled=!qValid()});
+});
+$('qEmail').addEventListener('blur',function(){
+  var v=$('qEmail').value.trim();
+  $('qEmailErr').style.display=(v&&!isEmailValid(v))?'block':'none';
+});
+
+/* ── Navigation ── */
+function qShow(n){
+  step=n;
+  /* Read contact fields */
+  firstName=$('qFirstName').value.trim();
+  lastName=$('qLastName').value.trim();
+  email=$('qEmail').value.trim();
+  phone=$('qPhone').value.trim();
+
+  document.querySelectorAll('.qw-step').forEach(function(s){s.classList.remove('active')});
+  var el=document.querySelector('.qw-step[data-step="'+n+'"]');
+  if(el){el.classList.remove('active');void el.offsetWidth;el.classList.add('active')}
+  renderRail();
+
+  /* Back button */
+  $('qBack').hidden=(n===0);
+
+  /* Footer visibility */
+  var foot=$('qFoot');
+  foot.hidden=false;
+
+  /* Next button text + class */
+  var btn=$('qNext');
+  btn.disabled=!qValid();
+  btn.className='btn btn-g5';
+  btn.style.display='';
+
+  if(n===0){
+    btn.textContent='Continue \u2192';
+  }else if(n===1){
+    btn.textContent='See My Results \u2192';
+  }else if(n===2){
+    if(qualified){
+      btn.textContent='Book My Free Alignment Call \u2192';
+    }else{
+      btn.style.display='none';
+      $('qBack').hidden=false;
+    }
+  }else if(n===3){
+    btn.textContent='Confirm & Activate \u2192';
+  }else if(n===4){
+    if(!activated){
+      btn.textContent='Activate Free Trial \u2192';
+      btn.className='btn btn-g5 btn-activate';
+    }else{
+      foot.hidden=true;
+    }
+  }
+
+  /* Build dynamic content */
+  if(n===2)buildResult();
+  if(n===3)buildCalendar();
+  if(n===4)buildSummary();
+}
+
+function qNext(){
+  if(step===0){
+    if(!isEmailValid($('qEmail').value.trim())){$('qEmailErr').style.display='block';return}
+  }
+  if(step===1){readChips();computeScore()}
+  if(step===2&&!qualified)return;
+  if(step===4){qActivate();return}
+  if(step>=4)return;
+  qShow(step+1);
+}
+function qPrev(){if(step>0)qShow(step-1)}
+
+/* ── Scoring ── */
+function computeScore(){
+  score=0;
+  if(contentTypes.some(function(t){return t.indexOf('YouTube')>=0||t==='Podcast'}))score+=2;
+  if(postFreq==='Daily'||postFreq==='3-5x per week')score+=2;
+  else if(postFreq==='1-2x per week')score+=1;
+  if(primaryGoal==='Grow my audience'||primaryGoal==='Increase revenue'||primaryGoal==='All of the above')score+=2;
+  if(hasFootage.indexOf('Yes')===0||hasFootage.indexOf('I have footage')===0)score+=2;
+  qualified=score>=4;
+}
+
+/* ── Step 2: Result ── */
+function buildResult(){
+  var el=$('qResultStep');
+  if(qualified){
+    el.innerHTML=
+      '<div class="q-result-icon qualified">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>'+
+      '</div>'+
+      '<div class="qw-title">You\'re in.</div>'+
+      '<div class="qw-sub">You\'re exactly who we built Content Bug for.</div>'+
+      '<div class="q-benefits">'+
+        qBenefit('A dedicated editor matched to your content style')+
+        qBenefit('48-hour turnaround on your first edit')+
+        qBenefit('Unlimited revisions until you love it')+
+      '</div>';
+  }else{
+    var tip='Keep building your content library and come back when you have footage ready to edit.';
+    if(postFreq==='Just starting out')tip='Start posting consistently and come back when you have a few videos under your belt.';
+    else if(hasFootage==='Not yet')tip='Get some footage filmed first, then come back \u2014 we\'ll be here.';
+    el.innerHTML=
+      '<div class="q-result-icon not-qualified">'+
+        '<svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="32" height="32"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'+
+      '</div>'+
+      '<div class="qw-title">Not quite the right fit \u2014 yet.</div>'+
+      '<div class="qw-sub">'+E(tip)+'</div>'+
+      '<div style="font:400 13px/1.5 var(--font);color:rgba(255,255,255,.5);margin-bottom:12px">Want us to let you know when you might be a good fit?</div>'+
+      '<div class="q-remind">'+
+        '<input class="q-field" id="qRemindEmail" type="email" value="'+E(email)+'" placeholder="your@email.com" style="padding:10px 12px;border-radius:var(--r-lg);font:400 13px/1 var(--font);color:var(--txt);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);outline:none">'+
+        '<button class="btn btn-g5 btn-sm" onclick="qRemind()">Remind Me</button>'+
+      '</div>';
+  }
+}
+
+function qBenefit(text){
+  return '<div class="q-benefit">'+
+    '<div class="q-benefit-check"><svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg></div>'+
+    '<div style="font:400 13px/1.5 var(--font);color:rgba(255,255,255,.7)">'+E(text)+'</div></div>';
+}
+
+async function qRemind(){
+  var remindEmail=($('qRemindEmail')||{}).value||(email||'');
+  if(!remindEmail||!isEmailValid(remindEmail))return;
+  try{
+    await fetch(API+'/api/trial/submit',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({firstName:firstName,lastName:lastName,email:remindEmail,phone:phone,
+        contentTypes:contentTypes,postFreq:postFreq,primaryGoal:primaryGoal,hasFootage:hasFootage,
+        qualified:false,score:score,source:'Qualification Wizard'})
+    });
+    var btn=event.target;btn.textContent='Sent!';btn.disabled=true;
+  }catch(e){alert('Something went wrong. Please try again.')}
+}
+
+/* ── Step 3: Calendar (real API slots) ── */
+var slotsCache={};
+
+function getNextBusinessDays(count){
+  var days=[],d=new Date();
+  d.setDate(d.getDate()+1);
+  while(days.length<count){
+    var dow=d.getDay();
+    if(dow!==0&&dow!==6)days.push(new Date(d));
+    d.setDate(d.getDate()+1);
+  }
+  return days;
+}
+
+function formatDateISO(d){
+  var y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+day;
+}
+
+function formatDateLabel(d){
+  var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return days[d.getDay()]+', '+months[d.getMonth()]+' '+d.getDate();
+}
+
+function buildCalendar(){
+  var bizDays=getNextBusinessDays(2);
+  if(!selectedDay)selectedDay=formatDateISO(bizDays[0]);
+
+  var dh='';
+  bizDays.forEach(function(d){
+    var iso=formatDateISO(d);
+    var sel=iso===selectedDay?' selected':'';
+    dh+='<div class="q-day-card'+sel+'" onclick="qSelectDay(\''+iso+'\')">'+
+      '<div class="q-day-label">'+formatDateLabel(d)+'</div>'+
+      '<div class="q-day-date">'+iso+'</div></div>';
+  });
+  $('qDayCards').innerHTML=dh;
+
+  /* Timezone */
+  try{$('qTzLabel').textContent='All times in '+Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
+
+  /* Fetch real slots */
+  fetchSlots(selectedDay);
+}
+
+function qSelectDay(iso){
+  selectedDay=iso;selectedSlot='';
+  document.querySelectorAll('.q-day-card').forEach(function(c){c.classList.remove('selected')});
+  document.querySelectorAll('.q-day-card').forEach(function(c){
+    if(c.querySelector('.q-day-date').textContent===iso)c.classList.add('selected');
+  });
+  fetchSlots(iso);
+  $('qNext').disabled=!qValid();
+}
+
+async function fetchSlots(dateStr){
+  var wrap=$('qSlotsWrap');
+  /* Show loading */
+  wrap.innerHTML='<div class="q-slots-loading"><span class="spinner-sm"></span>Loading available times...</div>';
+
+  if(slotsCache[dateStr]){
+    renderSlots(slotsCache[dateStr]);
+    return;
+  }
+
+  try{
+    var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
+    var res=await fetch(API+'/api/calendar/slots?date='+encodeURIComponent(dateStr)+'&timezone='+encodeURIComponent(tz));
+    if(!res.ok)throw new Error('Failed to load slots');
+    var data=await res.json();
+    var slots=data.slots||data||[];
+    slotsCache[dateStr]=slots;
+    renderSlots(slots);
+  }catch(e){
+    wrap.innerHTML='<div class="q-slots-loading" style="color:rgba(255,255,255,.4)">No availability \u2014 pick another day.</div>';
+  }
+}
+
+function renderSlots(slots){
+  var wrap=$('qSlotsWrap');
+  if(!slots.length){
+    wrap.innerHTML='<div class="q-slots-loading" style="color:rgba(255,255,255,.4)">No availability \u2014 pick another day.</div>';
+    return;
+  }
+  var h='<div class="q-slots">';
+  slots.forEach(function(s){
+    var label=typeof s==='string'?s:(s.label||s.time||s.startTime||'');
+    var val=typeof s==='string'?s:(s.value||s.slot||s.startTime||label);
+    var sel=val===selectedSlot?' selected':'';
+    h+='<div class="q-slot'+sel+'" onclick="qSelectSlot(\''+E(val)+'\')">'+E(label)+'</div>';
+  });
+  h+='</div>';
+  wrap.innerHTML=h;
+}
+
+function qSelectSlot(slot){
+  selectedSlot=slot;
+  /* Re-render just the slot selection state */
+  document.querySelectorAll('.q-slot').forEach(function(c){
+    c.classList.toggle('selected',c.textContent===slot||c.getAttribute('onclick').indexOf("'"+slot+"'")>=0);
+  });
+  $('qNext').disabled=!qValid();
+}
+
+/* ── Step 4: Summary ── */
+function buildSummary(){
+  if(activated){
+    $('q4Summary').style.display='none';
+    $('q4PostActivate').style.display='';
+    $('qFoot').hidden=true;
+    return;
+  }
+  $('q4Summary').style.display='';
+  $('q4PostActivate').style.display='none';
+
+  var rows=[
+    {l:'Name',v:E(firstName+' '+lastName)},
+    {l:'Email',v:E(email)},
+    {l:'Phone',v:E(phone||'\u2014')},
+    {l:'Content',v:E(contentTypes.join(', '))},
+    {l:'Frequency',v:E(postFreq)},
+    {l:'Goal',v:E(primaryGoal)},
+    {l:'Footage',v:E(hasFootage)},
+    {l:'Appointment',v:E(selectedDay+' at '+selectedSlot)},
+    {l:'Duration',v:'30 min with Creative Director'}
+  ];
+  $('qSummary').innerHTML=rows.map(function(r){
+    return '<div class="q-summary-row"><span class="q-summary-lbl">'+r.l+'</span><span class="q-summary-val">'+r.v+'</span></div>';
+  }).join('');
+}
+
+/* ── Activate ── */
+async function qActivate(){
+  var btn=$('qNext');
+  btn.disabled=true;
+  btn.classList.add('loading');
+  btn.innerHTML='<span class="spinner-sm"></span>Activating...';
+
+  try{
+    var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
+    var payload={
+      firstName:firstName,lastName:lastName,email:email,phone:phone,
+      contentTypes:contentTypes,postFreq:postFreq,primaryGoal:primaryGoal,hasFootage:hasFootage,
+      qualified:true,score:score,
+      appointmentDate:selectedDay,appointmentTime:selectedSlot,
+      appointmentTitle:'Content Bug Free Trial \u2014 Alignment Call',
+      timezone:tz,source:'Qualification Wizard'
+    };
+
+    var res=await fetch(API+'/api/trial/submit',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    if(!res.ok){var d=await res.json();throw new Error(d.error||'Submission failed')}
+
+    /* Success — show post-activation sections */
+    activated=true;
+    $('q4Summary').style.display='none';
+    $('q4PostActivate').style.display='';
+    $('qFoot').hidden=true;
+    renderRail();
+
+  }catch(e){
+    btn.disabled=false;btn.classList.remove('loading');
+    btn.innerHTML='Activate Free Trial \u2192';
+    alert(e.message||'Something went wrong. Please try again.');
+  }
+}
+
+/* ── Listen for footage iframe postMessage ── */
+window.addEventListener('message',function(e){
+  if(e.data&&e.data.type==='trialProjectSubmitted'){
+    $('q4Footage').style.display='none';
+    $('q4Style').style.display='';
+  }
+});
+
+/* ── Init ── */
+renderRail();
+$('qNext').disabled=!qValid();
+</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<link rel="stylesheet" href="../assets/design-system.css">
+<script>
+  if (window.self === window.top) {
+    document.documentElement.classList.add('bg-dark');
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.classList.add('bg-dark');
+      document.body.classList.add('cb-grid');
+      var s = document.querySelector('.ws-page');
+      if (s) {
+        s.classList.add('shell-body-glass');
+        s.style.margin = '8px 16px';
+        s.style.minHeight = 'calc(100vh - 16px)';
+      }
+    });
+  } else {
+    if (document.body) { document.body.classList.add('bg-dark'); }
+    else { document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('bg-dark'); }); }
+  }
+</script>
+<div class="ws-page">
+<script>
+/* GHL canonical URL → Railway path remap (only runs off-GHL, e.g. api.contentbug.io direct test) */
+(function(){
+  var h=location.hostname;
+  if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com')) return;
+  var map={
+    'https://contentbug.io/home':'/portal/website/home.html',
+    'https://contentbug.io/pricing':'/portal/website/pricing.html',
+    'https://contentbug.io/portfolio':'/portal/website/portfolio.html',
+    'https://contentbug.io/free-trial':'/portal/website/booking.html',
+    'https://contentbug.io/privacy-policy':'/portal/website/privacy-policy.html',
+    'https://contentbug.io/terms':'/portal/website/terms.html'
+  };
+  document.querySelectorAll('a[href]').forEach(function(a){
+    var k=a.getAttribute('href');
+    if(map[k]) a.setAttribute('href', map[k]);
+  });
+})();
+</script>
+
+<div class="cb-header-bar" id="cb-header">
+  <a href="https://contentbug.io/home" class="cb-logo">
+    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
+  </a>
+  <nav class="cb-header" id="cbNav">
+    <a href="https://contentbug.io/home" class="cb-nav-link active">Home</a>
+    <a href="https://contentbug.io/pricing" class="cb-nav-link">Pricing</a>
+    <a href="https://contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
+    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
+    <a href="https://contentbug.io/free-trial" class="cb-nav-cta">Free Trial</a>
+  </nav>
+</div>
+<script>
+document.body.classList.add('ws-page');
+(function(){
+  var bar=document.querySelector('.cb-header-bar');
+  if(!bar)return;
+  var sentinel=document.createElement('div');
+  sentinel.style.cssText='height:0;width:0;visibility:hidden';
+  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
+      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
+    });
+  },{threshold:0});
+  io.observe(bar);
+})();
+</script>
+<section class="section"><div class="section-card">
+<div class="container">
+  <!-- Bug logo background — left half visible, right half masked off, behind all content -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(to right,black 0%,black 44%,transparent 57%);mask-image:linear-gradient(to right,black 0%,black 44%,transparent 57%)">
+    <img src="https://api.contentbug.io/portal/assets/logo-bug-white.svg" alt="" style="width:680px;height:680px;opacity:.055;display:block;object-fit:contain">
+  </div>
+
+<div class="contact-grid">
+
+  <!-- Left: Info Column -->
+  <div class="contact-info">
+    <span class="step-badge">Step 4 of 4</span>
+
+    <h1 class="contact-title">
+      You're Booked.
+      <span class="title-line-2">Here's What's Next.</span>
+    </h1>
+
+    <p class="contact-subtitle">Your intro call is confirmed. Here's exactly what happens after that call — so you know what to expect every step of the way.</p>
+
+    <div class="checklist">
+      <div class="check-item"><span class="check-icon"><svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="11" fill="var(--blue-brand)"/><path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="var(--txt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">Check your inbox — your calendar invite and free trial workspace link are on their way</span></div>
+      <div class="check-item"><span class="check-icon"><svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="11" fill="var(--blue-brand)"/><path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="var(--txt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">On your intro call we'll learn your content goals, walk you through our platform, and get your trial edit started</span></div>
+      <div class="check-item"><span class="check-icon"><svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="11" fill="var(--blue-brand)"/><path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="var(--txt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="check-text">After the intro call, your trial edit gets prepped for a live FrameLab review</span></div>
+    </div>
+
+  </div>
+
+  <!-- Right: Booking Confirmation -->
+  <div class="form-wrap" style="display:flex;flex-direction:column;justify-content:center;gap:var(--s3);position:relative;overflow:hidden">
+
+    <canvas id="fireworks" style="position:absolute;inset:0;pointer-events:none;z-index:0;border-radius:inherit"></canvas>
+
+    <!-- Checkmark -->
+    <div style="position:relative;z-index:1;text-align:center">
+      <div class="checkmark-circle" style="margin:0 auto 20px">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 20.5L17 27.5L30 13.5" stroke="var(--txt)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p style="font:700 18px/1.3 var(--font-display);color:var(--txt);margin:0 0 6px">You're all set!</p>
+      <p style="font:400 14px/1.5 var(--font);color:rgba(255,255,255,.5);margin:0">Your call details are below</p>
+    </div>
+
+    <!-- Booking details card -->
+    <div style="position:relative;z-index:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px 22px;display:flex;flex-direction:column;gap:14px">
+
+      <div style="font:700 15px/1.3 var(--font);color:var(--txt);padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.07)">{{appointment.title}}</div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:36px;height:36px;border-radius:var(--r-lg);background:rgba(41,151,255,.15);border:1px solid rgba(41,151,255,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div>
+          <div style="font:600 12px/1 var(--font);color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px">Date &amp; Time</div>
+          <div style="font:600 14px/1.3 var(--font);color:var(--txt)">{{appointment.only_start_date}} at {{appointment.only_start_time}}</div>
+          <div style="font:400 12px/1 var(--font);color:rgba(255,255,255,.4);margin-top:3px">{{appointment.timezone}}</div>
+        </div>
+      </div>
+
+      <div style="height:1px;background:rgba(255,255,255,.07)"></div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:36px;height:36px;border-radius:var(--r-lg);background:rgba(41,151,255,.15);border:1px solid rgba(41,151,255,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/></svg>
+        </div>
+        <div>
+          <div style="font:600 12px/1 var(--font);color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px">With</div>
+          <div style="font:600 14px/1.3 var(--font);color:var(--txt)">{{appointment.user.name}}</div>
+          
+        </div>
+      </div>
+
+      <div style="height:1px;background:rgba(255,255,255,.07)"></div>
+
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="width:36px;height:36px;border-radius:var(--r-lg);background:rgba(41,151,255,.15);border:1px solid rgba(41,151,255,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.362a1 1 0 0 1-1.447.894L15 14"/><rect x="1" y="6" width="14" height="12" rx="2"/></svg>
+        </div>
+        <div>
+          <div style="font:600 12px/1 var(--font);color:rgba(255,255,255,.4);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px">Meeting Link</div>
+          <a href="{{appointment.meeting_location}}" style="font:600 14px/1.3 var(--font);color:var(--blue);text-decoration:none">Join Video Call →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Add to calendar -->
+    <div style="position:relative;z-index:1;display:flex;gap:10px;justify-content:center">
+      <a href="{{appointment.googleCalendarLink}}" style="flex:1;text-align:center;padding:11px 16px;border-radius:var(--r-lg);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);font:600 12px/1 var(--font);text-decoration:none;transition:background .15s" target="_blank">+ Google Cal</a>
+      <a href="{{appointment.iCalLink}}" style="flex:1;text-align:center;padding:11px 16px;border-radius:var(--r-lg);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.7);font:600 12px/1 var(--font);text-decoration:none;transition:background .15s" target="_blank">+ Apple Cal</a>
+    </div>
+
+    <p style="position:relative;z-index:1;text-align:center;font:400 12px/1.5 var(--font);color:rgba(255,255,255,.35);margin:0">Questions? <a href="mailto:contentbug@contentbug.io" style="color:rgba(255,255,255,.5)">contentbug@contentbug.io</a></p>
+
+  </div>
+
+</div>
+</div>
+</div></section>
+
+<script>
+(function(){
+  var canvas = document.getElementById('fireworks');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var W, H;
+
+  function resize() {
+    W = canvas.width = canvas.parentElement.offsetWidth;
+    H = canvas.height = canvas.parentElement.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var particles = [];
+  var colors = ['var(--blue-brand)', 'var(--blue)', 'var(--green)', 'var(--gold)', '#ff6482', 'var(--purple)'];
+
+  function launch() {
+    var x = Math.random() * W;
+    var count = 30 + Math.floor(Math.random() * 20);
+    for (var i = 0; i < count; i++) {
+      var angle = Math.random() * Math.PI * 2;
+      var speed = 2 + Math.random() * 4;
+      particles.push({
+        x: x,
+        y: H * .4 + Math.random() * H * .2,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 2,
+        life: 1,
+        decay: .01 + Math.random() * .02,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: 2 + Math.random() * 3
+      });
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    for (var i = particles.length - 1; i >= 0; i--) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += .06;
+      p.life -= p.decay;
+      if (p.life <= 0) { particles.splice(i, 1); continue; }
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+  launch();
+  setTimeout(launch, 400);
+  setTimeout(launch, 800);
+  setTimeout(launch, 1200);
+  setTimeout(launch, 2000);
+  setTimeout(function(){ setInterval(launch, 3000); }, 3000);
+})();
+</script>
+
+<script>
+<script>
+(function(){
+  var f = document.getElementById('cb-footer');
+  if (!f) return;
+  var p = f.parentElement;
+  while (p && p !== document.documentElement) {
+    if (p !== document.body) {
+      p.style.setProperty('background', 'none', 'important');
+      p.style.setProperty('background-color', 'transparent', 'important');
+      p.style.setProperty('background-image', 'none', 'important');
+      p.style.setProperty('color', '#f5f5f7', 'important');
+      p.style.setProperty('border', 'none', 'important');
+      p.style.setProperty('box-shadow', 'none', 'important');
+      p.style.setProperty('border-radius', '0', 'important');
+    }
+    p = p.parentElement;
+  }
+})();
+</script>
+</div>

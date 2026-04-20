@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Website Templates — Content Bug</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#03080f;--card:rgba(255,255,255,.07);--card-b:rgba(255,255,255,.12);
+  --card-bt:rgba(255,255,255,.22);--txt:#f5f5f7;--txt2:rgba(255,255,255,.6);
+  --txt3:rgba(255,255,255,.35);--blue:#2997ff;--green:#34c759;--orange:#ff9f0a;--red:#ff453a;
+  --font:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  --mono:'SF Mono',Menlo,Consolas,monospace;--r:16px;--r-sm:10px;
+}
+html{scroll-behavior:smooth}
+body{background:linear-gradient(180deg,#021c36 0%,#021a32 10%,#01162c 20%,#011226 30%,#010e20 40%,#010a18 50%,#000710 60%,#000510 70%,#000308 80%,#000204 90%,#000001 100%);background-attachment:fixed;color:var(--txt);font-family:var(--font);-webkit-font-smoothing:antialiased}
+
+/* ── TOP BAR ── */
+.top-bar{position:sticky;top:0;z-index:100;padding:14px 28px;pointer-events:auto;
+  background:rgba(3,8,15,.95);
+  border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.top-bar h1{font-size:20px;font-weight:700;letter-spacing:-.3px;white-space:nowrap}
+.top-bar h1 span{color:var(--blue)}
+.top-bar .badge{font-size:9px;font-weight:700;color:var(--orange);letter-spacing:1.8px;text-transform:uppercase;
+  background:rgba(255,159,10,.08);border:1px solid rgba(255,159,10,.2);padding:4px 10px;border-radius:100px}
+.top-bar .search{flex:1;max-width:320px;padding:8px 14px;border-radius:8px;border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.04);color:var(--txt);font:13px var(--font);outline:none;transition:border-color .15s}
+.top-bar .search:focus{border-color:rgba(41,151,255,.3);background:rgba(255,255,255,.06)}
+.top-bar .search::placeholder{color:var(--txt3)}
+
+.lib{max-width:1200px;margin:0 auto;padding:24px 20px 80px}
+
+/* ── NAV ── */
+.nav-bar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;position:sticky;top:52px;z-index:90;
+  padding:10px 0;background:rgba(3,8,15,.92)}
+.nav-pill{padding:6px 14px;border-radius:100px;font-size:11px;font-weight:600;color:var(--txt3);
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);cursor:pointer;text-decoration:none;transition:all .12s}
+.nav-pill:hover{background:rgba(255,255,255,.08);color:var(--txt2)}
+.nav-pill.active{background:rgba(41,151,255,.12);color:var(--blue);border-color:rgba(41,151,255,.25)}
+
+/* ── GLASS ── */
+.glass{border-radius:var(--r);border:1px solid var(--card-b);border-top-color:var(--card-bt);
+  background:var(--card);box-shadow:0 2px 16px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08);overflow:hidden;margin-bottom:16px;contain:content}
+
+/* ── SECTION ── */
+.sec-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--txt2);margin:36px 0 12px;padding-left:4px}
+.cat-header{font-size:13px;font-weight:700;letter-spacing:-.1px;color:var(--txt);margin:32px 0 12px;
+  border-left:3px solid var(--blue);padding-left:10px}
+
+/* ── OVERVIEW GRID ── */
+.overview{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;padding:16px 20px}
+.ov-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);transition:background .12s,border-color .12s;cursor:pointer;text-decoration:none}
+.ov-item:hover{background:rgba(255,255,255,.06);border-color:rgba(41,151,255,.2)}
+.ov-icon{font-size:18px;flex-shrink:0}
+.ov-info{flex:1;min-width:0}
+.ov-name{font-size:12px;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-meta{font-size:10px;color:var(--txt3);margin-top:1px}
+.ov-type{font-size:9px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;padding:2px 6px;border-radius:4px;flex-shrink:0}
+.ov-type.page{background:rgba(41,151,255,.1);color:var(--blue)}
+.ov-type.partial{background:rgba(255,159,10,.1);color:var(--orange)}
+.ov-type.legal{background:rgba(191,90,242,.1);color:#bf5af2}
+
+/* ── TEMPLATE CARD ── */
+.tpl-card{margin-bottom:16px;contain:layout style}
+.tpl-head{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;cursor:pointer;transition:background .1s}
+.tpl-head:hover{background:rgba(255,255,255,.02)}
+.tpl-meta{flex:1;min-width:200px;display:flex;align-items:center;gap:14px}
+.tpl-emoji{font-size:22px;flex-shrink:0}
+.tpl-info{flex:1}
+.tpl-name{font-size:14px;font-weight:700;letter-spacing:-.1px}
+.tpl-desc{font-size:11px;color:var(--txt2);margin-top:2px;line-height:1.4}
+.tpl-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tpl-file{font-size:10px;color:var(--txt3);font-family:var(--mono);background:rgba(0,0,0,.2);
+  padding:3px 8px;border-radius:5px;border:1px solid rgba(255,255,255,.04)}
+.tpl-lines{font-size:10px;color:var(--txt3);font-family:var(--mono)}
+.tpl-updated{font-size:9px;color:var(--txt3);font-family:var(--mono);opacity:.7}
+.tpl-type-badge{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 8px;border-radius:5px}
+.tpl-type-badge.page{background:rgba(41,151,255,.1);color:var(--blue);border:1px solid rgba(41,151,255,.15)}
+.tpl-type-badge.partial{background:rgba(255,159,10,.1);color:var(--orange);border:1px solid rgba(255,159,10,.15)}
+.tpl-type-badge.legal{background:rgba(191,90,242,.1);color:#bf5af2;border:1px solid rgba(191,90,242,.15)}
+
+.tpl-actions{display:flex;gap:6px;flex-shrink:0}
+.btn{padding:7px 16px;border-radius:8px;font-size:11px;font-weight:600;cursor:pointer;border:none;transition:all .1s;font-family:var(--font)}
+.btn-view{background:rgba(255,255,255,.06);color:var(--txt2);border:1px solid rgba(255,255,255,.1)}
+.btn-view:hover{background:rgba(255,255,255,.12);color:var(--txt)}
+.btn-copy{background:linear-gradient(180deg,#3a9eff,#1a60e8);color:#fff;box-shadow:0 2px 6px rgba(41,151,255,.25)}
+.btn-copy:hover{box-shadow:0 3px 12px rgba(41,151,255,.4)}
+.btn.copied{background:#34c759!important;color:#fff!important;border-color:transparent!important;box-shadow:none!important}
+
+/* ── EXPANDABLE DETAIL ── */
+.tpl-detail{display:none;border-top:1px solid rgba(255,255,255,.06)}
+.tpl-detail.open{display:block}
+.tpl-preview{padding:16px;background:rgba(0,0,0,.2)}
+.tpl-preview iframe{width:100%;border:none;border-radius:10px;background:#fff;min-height:700px}
+.tpl-raw-toggle{padding:8px 20px;border-top:1px solid rgba(255,255,255,.04);display:flex;gap:12px;align-items:center}
+.tpl-raw-toggle button{font-size:10px;color:var(--txt3);background:none;border:none;cursor:pointer;font-family:var(--font);font-weight:600}
+.tpl-raw-toggle button:hover{color:var(--txt2)}
+.tpl-raw{display:none;padding:12px 20px;max-height:300px;overflow:auto;background:rgba(0,0,0,.3)}
+.tpl-raw.open{display:block}
+.tpl-raw pre{font-size:10px;font-family:var(--mono);color:var(--txt3);white-space:pre-wrap;word-break:break-all;line-height:1.5}
+
+/* ── LOADING ── */
+.spinner{display:flex;align-items:center;justify-content:center;padding:40px;color:var(--txt3);font-size:12px;gap:8px}
+.spinner .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 1s ease infinite}
+.spinner .dot:nth-child(2){animation-delay:.15s}
+.spinner .dot:nth-child(3){animation-delay:.3s}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+
+/* ── CORE BADGE ── */
+.core-badge{font-size:8px;font-weight:700;letter-spacing:.8px;color:var(--green);background:rgba(52,199,89,.1);
+  border:1px solid rgba(52,199,89,.15);padding:2px 6px;border-radius:4px;text-transform:uppercase;margin-left:4px}
+
+/* ── STATUS INDICATOR ── */
+.status-indicator{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:600;
+  letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-left:8px;transition:all .3s}
+.status-indicator .status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:background .3s,box-shadow .3s}
+.status-indicator.online{color:var(--green);background:rgba(52,199,89,.08);border:1px solid rgba(52,199,89,.2)}
+.status-indicator.online .status-dot{background:var(--green);box-shadow:0 0 6px rgba(52,199,89,.5)}
+.status-indicator.offline{color:var(--red);background:rgba(255,69,58,.08);border:1px solid rgba(255,69,58,.2)}
+.status-indicator.offline .status-dot{background:var(--red);box-shadow:0 0 6px rgba(255,69,58,.5)}
+
+/* ── TOAST NOTIFICATIONS ── */
+.toast-container{position:fixed;top:16px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast-item{display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;
+  background:rgba(3,8,15,.95);
+  border:1px solid rgba(255,255,255,.1);box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.06);
+  font-size:13px;font-weight:500;color:var(--txt);pointer-events:auto;
+  transform:translateX(120%);opacity:0;transition:transform .35s cubic-bezier(.4,0,.2,1),opacity .35s cubic-bezier(.4,0,.2,1);
+  max-width:380px;min-width:260px}
+.toast-item.visible{transform:translateX(0);opacity:1}
+.toast-item.exit{transform:translateX(120%);opacity:0}
+.toast-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px}
+.toast-item.success .toast-icon{background:rgba(52,199,89,.15);color:var(--green)}
+.toast-item.error .toast-icon{background:rgba(255,69,58,.15);color:var(--red)}
+.toast-item.info .toast-icon{background:rgba(41,151,255,.15);color:var(--blue)}
+.toast-item.deploy .toast-icon{background:rgba(191,90,242,.15);color:#bf5af2}
+.toast-msg{flex:1;line-height:1.4}
+.toast-time{font-size:9px;color:var(--txt3);font-family:var(--mono);flex-shrink:0;white-space:nowrap}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <h1><span>Content Bug</span> — Website Template Library</h1>
+  <input class="search" type="text" placeholder="Search pages…" id="searchInput">
+  <div class="badge">Internal Use Only</div>
+  <div class="status-indicator offline" id="serverStatus"><span class="status-dot"></span><span id="statusText">Offline</span></div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ── VAULT NAV ISLAND ── -->
+<style>
+/* ── VAULT NAV ISLAND ── */
+#vault-nav-island {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(13,15,18,.92);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 100px;
+  padding: 5px 6px;
+  
+  box-shadow: 0 8px 32px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.04);
+  transition: opacity .2s;
+}
+#vault-nav-island:hover { opacity: 1 !important; }
+.vni-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 13px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,.5);
+  transition: all .15s;
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  letter-spacing: -.1px;
+}
+.vni-item:hover { color: rgba(255,255,255,.85); background: rgba(255,255,255,.07); }
+.vni-item.active { color: #fff; background: rgba(33,150,243,.2); }
+.vni-item .vni-icon { font-size: 14px; line-height: 1; }
+.vni-sep { width: 1px; height: 18px; background: rgba(255,255,255,.08); margin: 0 2px; flex-shrink: 0; }
+@media (max-width: 768px) {
+  .vni-item span.vni-label { display: none; }
+  .vni-item { padding: 8px 10px; }
+}
+</style>
+<div id="vault-nav-island">
+  <a class="vni-item" href="/portal/team-knowledge-base.html" title="Knowledge Base">
+    <span class="vni-icon">📚</span><span class="vni-label">Knowledge Base</span>
+  </a>
+  <div class="vni-sep"></div>
+  <a class="vni-item" href="/portal/ghl/operator.html" title="GHL Operator">
+    <span class="vni-icon">⚙️</span><span class="vni-label">GHL Operator</span>
+  </a>
+  <a class="vni-item active" href="/portal/ghl/website-library.html" title="Website Library">
+    <span class="vni-icon">🌐</span><span class="vni-label">Websites</span>
+  </a>
+  <a class="vni-item" href="/portal/email-template-library.html" title="Email Templates">
+    <span class="vni-icon">📧</span><span class="vni-label">Emails</span>
+  </a>
+  <a class="vni-item" href="/portal/portal-template-library.html" title="Portal Templates">
+    <span class="vni-icon">🖥</span><span class="vni-label">Portal</span>
+  </a>
+  <a class="vni-item" href="/portal/ghl/workflow-builder.html" title="GHL Workflow Builder">
+    <span class="vni-icon">⚡</span><span class="vni-label">Workflows</span>
+  </a>
+  <div class="vni-sep"></div>
+  <a class="vni-item" href="/portal/" title="Portal Home" style="color:rgba(255,255,255,.3)">
+    <span class="vni-icon">🏠</span>
+  </a>
+</div>
+</div>
+
+<div class="lib">
+
+<!-- ═══ FILE OVERVIEW ═══ -->
+<p class="sec-title">All Website Files — Quick Reference</p>
+<div class="glass">
+<div class="overview" id="overviewGrid"></div>
+</div>
+
+<!-- NAV PILLS -->
+<p class="sec-title">Templates by Category</p>
+<div class="nav-bar" id="navPills"></div>
+
+<!-- TEMPLATES -->
+<div id="tplContainer"></div>
+
+</div>
+
+<script>
+const BASE = location.hostname === "localhost" ? "/website/" : "https://api.contentbug.io/portal/website/";
+
+/* ── Preview custom values — resolved for full-page previews ── */
+const CV = {
+  home: "#",
+  pricing: "#",
+  portfolio: "#",
+  faq: "#",
+  careers: "#",
+  bookfreedemo: "https://contentbugediting.com/start-free-trial",
+  start_free_trial: "https://contentbugediting.com/start-free-trial",
+  twitter: "https://x.com/contentbug",
+  instagram: "https://instagram.com/contentbug",
+  youtube: "https://youtube.com/@contentbug",
+  business_email: "hello@contentbug.io",
+  business_phone: "(323) 601-5282",
+  business_hours: "Mon–Fri 9 AM – 6 PM PST",
+  privacy_policy: "#",
+  terms_of_service: "#",
+  portal_login: "#",
+  business_name: "Content Bug"
+};
+
+function resolveCV(html) {
+  return html.replace(/\{\{custom_values\.(\w+)\}\}/g, (_, k) => CV[k] || "#");
+}
+
+const PAGES = [
+
+/* ──────── CORE PAGES ──────── */
+{id:"home",cat:"Core Pages",name:"Homepage",emoji:"🏠",file:"home.html",lines:518,type:"page",core:true,
+updated:"2026-03-18",
+desc:"Main landing — hero, creator showcase, testimonials, reviews, social proof, pricing teaser. White-base glass system, hover-to-play videos"},
+
+/* ──────── PRICING PAGES ──────── */
+
+{id:"pricing-2fm",cat:"Pricing Pages",name:"Pricing - 2 Free Months",emoji:"📅",file:"pricing-2fm.html",lines:722,type:"page",core:false,
+updated:"2026-03-25",
+desc:"All annual plans get 2 free months. Monthly still available. Modal checkout with GHL 2-step form. Basic/Silver/Gold."},
+
+{id:"pricing-3fm",cat:"Pricing Pages",name:"Pricing - 3 Free Months",emoji:"🎁",file:"pricing-3fm.html",lines:363,type:"page",core:false,
+updated:"2026-03-25",
+desc:"All annual plans get 3 free months. Monthly still available. Modal checkout with GHL 2-step form. Basic/Silver/Gold."},
+
+{id:"pricing-6fm",cat:"Pricing Pages",name:"Pricing - 6 Free Months (Gold Only)",emoji:"👑",file:"pricing-6fm.html",lines:606,type:"page",core:false,
+updated:"2026-03-25",
+desc:"Gold annual gets 6 free months. Basic/Silver annual get 3 free months. Monthly still available. Modal checkout with GHL 2-step form."},
+
+
+
+{id:"portfolio",cat:"Core Pages",name:"Portfolio",emoji:"🎥",file:"portfolio.html",lines:523,type:"page",core:true,
+updated:"2026-03-18",
+desc:"Creator showcase, hover-to-play videos, brand logos grid (14 brands), reviews section. White-base glass system"},
+
+{id:"faq",cat:"Core Pages",name:"FAQ",emoji:"❓",file:"faq.html",lines:307,type:"page",core:true,
+updated:"2026-03-18",
+desc:"Expandable accordion FAQ with reviews section. White-base glass system, centered alignment"},
+
+{id:"careers",cat:"Core Pages",name:"Careers",emoji:"💼",file:"careers.html",lines:764,type:"page",core:true,
+updated:"2026-03-18",
+desc:"Job listings, application form, reviews section. Fixed header, white-base glass system"},
+
+{id:"contact",cat:"Free Trial Funnel",name:"Step 1 — Contact Details",emoji:"①",file:"contact-details.html",lines:259,type:"page",core:false,
+updated:"2026-03-18",
+desc:"Collects name, email, phone — first step of the free trial funnel. White-base glass system"},
+
+{id:"qualification",cat:"Free Trial Funnel",name:"Step 2 — Qualification Form",emoji:"②",file:"qualification.html",lines:584,type:"page",core:false,
+updated:"2026-03-24",
+desc:"5-step wizard: email, platforms, volume, readiness, footage. Disqualifiers built in. Submits to GHL silently, redirects to Free Demo calendar with email prefilled."},
+
+{id:"booking",cat:"Free Trial Funnel",name:"Step 3 — Booking Page",emoji:"③",file:"booking.html",lines:224,type:"page",core:false,
+updated:"2026-03-18",
+desc:"Progress bar → calendar embed for scheduling the free trial onboarding call. White-base glass system"},
+
+{id:"confirmation",cat:"Free Trial Funnel",name:"Step 4 — Booking Confirmation",emoji:"④",file:"confirmation.html",lines:336,type:"page",core:false,
+updated:"2026-03-18",
+desc:"Post-booking success page with next steps, what to expect. White-base glass system"},
+
+/* ──────── LEGAL ──────── */
+{id:"privacy",cat:"Legal",name:"Privacy Policy",emoji:"🔒",file:"privacy-policy.html",lines:411,type:"legal",core:false,
+updated:"2026-03-18",
+desc:"Full privacy policy — data collection, usage, sharing, retention, CCPA/GDPR compliance. White-base system"},
+
+{id:"terms",cat:"Legal",name:"Terms of Service",emoji:"📜",file:"terms.html",lines:504,type:"legal",core:false,
+updated:"2026-03-18",
+desc:"Full terms — service scope, IP rights, payment terms, limitation of liability. White-base system"},
+
+/* ──────── CHECKOUT PAGES (REMOVED — checkout is now handled via modal on pricing pages) ──────── */
+
+/* ──────── FREE TRIAL PORTAL PAGES ──────── */
+{id:"trial-workspace",cat:"Free Trial Portal",name:"Trial Workspace",emoji:"🎬",
+lines:563,type:"page",core:false,
+url:"https://api.contentbug.io/portal/trial.html",
+updated:"2026-03-24",
+desc:"3-step free trial shell: Blueprint → Edit Request → FrameLab review calendar. Launched via email with onboarding_token param. Lives at /portal/ not /website/."},
+
+{id:"creative-review",cat:"Free Trial Portal",name:"Creative Review Call",emoji:"🎥",
+lines:321,type:"page",core:false,
+url:"https://api.contentbug.io/portal/creative-review.html",
+updated:"2026-03-24",
+desc:"Shared FrameLab + Jitsi video call room. FrameLab left 65%, video call right 35%. Both client and creative director join same URL for live co-review. Lives at /portal/ not /website/."},
+];
+
+/* ══════════════════════════════════════════════════════════════
+   RENDER — build all HTML strings first, set innerHTML ONCE
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Overview grid ── */
+const ovParts = [];
+PAGES.forEach(p => {
+  const meta = p.url ? p.url.replace("https://","") : (p.file + " · " + p.lines + " lines");
+  ovParts.push('<a class="ov-item" href="#c-' + p.id + '" onclick="openCard(\'' + p.id + '\')"><span class="ov-icon">' + p.emoji + '</span><div class="ov-info"><div class="ov-name">' + p.name + '</div><div class="ov-meta">' + meta + '</div></div><span class="ov-type ' + p.type + '">' + p.type + '</span></a>');
+});
+document.getElementById("overviewGrid").innerHTML = ovParts.join("");
+
+/* ── Nav pills ── */
+const cats = [...new Set(PAGES.map(p => p.cat))];
+const np = ['<a class="nav-pill active" href="#" onclick="fCat(\'all\',this);return false">All (' + PAGES.length + ')</a>'];
+cats.forEach(c => {
+  const cnt = PAGES.filter(p => p.cat === c).length;
+  np.push('<a class="nav-pill" href="#" onclick="fCat(\'' + c + '\',this);return false">' + c + ' (' + cnt + ')</a>');
+});
+document.getElementById("navPills").innerHTML = np.join("");
+
+/* ── Template cards ── */
+const tc = [];
+let lastCat = "";
+PAGES.forEach(p => {
+  if (p.cat !== lastCat) { lastCat = p.cat; tc.push('<div class="cat-header" data-cat="' + p.cat + '">' + p.cat + '</div>'); }
+  const src = p.url || p.file;
+  const label = p.url ? p.url.replace("https://","") : p.file;
+  const lines = p.lines ? '<span class="tpl-lines">' + p.lines + ' lines</span>' : '';
+  const copyBtn = p.url ? '' : '<button class="btn btn-copy" id="btn-' + p.id + '" onclick="copyHtml(\'' + src + '\',\'btn-' + p.id + '\')">Copy HTML</button>';
+  const coreBadge = p.core ? '<span class="core-badge">Full Preview</span>' : '';
+  const updatedLabel = p.file ? '<span class="tpl-updated" id="ts-' + p.id + '">Updated —</span>' : '';
+  tc.push(
+    '<div class="tpl-card glass" data-cat="' + p.cat + '" data-name="' + p.name.toLowerCase() + '" data-desc="' + p.desc.toLowerCase() + '" data-file="' + label.toLowerCase() + '" id="c-' + p.id + '">' +
+    '<div class="tpl-head" onclick="togDetail(\'' + p.id + '\')">' +
+    '<div class="tpl-meta"><span class="tpl-emoji">' + p.emoji + '</span>' +
+    '<div class="tpl-info"><div class="tpl-name">' + p.name + coreBadge + '</div><div class="tpl-desc">' + p.desc + '</div></div></div>' +
+    '<div class="tpl-badges"><span class="tpl-file">' + label + '</span>' + lines + updatedLabel +
+    '<span class="tpl-type-badge ' + p.type + '">' + p.type + '</span></div>' +
+    '<div class="tpl-actions" onclick="event.stopPropagation()">' +
+    '<button class="btn btn-view" onclick="openInTab(\'' + src + '\',\'' + p.id + '\')">Open ↗</button>' +
+    copyBtn + '</div></div>' +
+    '<div class="tpl-detail" id="d-' + p.id + '">' +
+    '<div class="tpl-preview" id="pv-' + p.id + '"><div class="spinner"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Loading preview…</div></div>' +
+    '<div class="tpl-raw-toggle"><button onclick="togRaw(\'r-' + p.id + '\',this,\'' + (p.file||"") + '\')">Show Raw HTML</button>' +
+    (p.file ? '<button onclick="copyHtml(\'' + p.file + '\',\'btn-' + p.id + '\')">Copy HTML</button>' : '') + '</div>' +
+    '<div class="tpl-raw" id="r-' + p.id + '"></div></div></div>'
+  );
+});
+document.getElementById("tplContainer").innerHTML = tc.join("");
+
+/* ══════════════════════════════════════════════════════════════
+   CATEGORY FILTER
+   ══════════════════════════════════════════════════════════════ */
+function fCat(c, el) {
+  document.querySelectorAll(".nav-pill").forEach(p => p.classList.remove("active"));
+  el.classList.add("active");
+  document.querySelectorAll("[data-cat]").forEach(e => {
+    e.style.display = (c === "all" || e.dataset.cat === c) ? "" : "none";
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SEARCH — debounced for 60fps
+   ══════════════════════════════════════════════════════════════ */
+let searchRAF = 0;
+document.getElementById("searchInput").addEventListener("input", function() {
+  cancelAnimationFrame(searchRAF);
+  const q = this.value.toLowerCase();
+  searchRAF = requestAnimationFrame(() => {
+    document.querySelectorAll(".tpl-card").forEach(c => {
+      const show = !q || c.dataset.name.includes(q) || c.dataset.desc.includes(q) || c.dataset.file.includes(q);
+      c.style.display = show ? "" : "none";
+    });
+    document.querySelectorAll(".cat-header").forEach(h => h.style.display = q ? "none" : "");
+  });
+});
+
+/* ══════════════════════════════════════════════════════════════
+   PREVIEW — Pages already have header+footer embedded.
+   Core pages get custom_values resolved for accurate preview.
+   ══════════════════════════════════════════════════════════════ */
+async function fetchFile(path) {
+  var bust = "?_=" + Date.now();
+  var url = (path.startsWith("http") ? path : BASE + path) + bust;
+  try {
+    var r = await fetch(url, {cache:"no-store"});
+    return await r.text();
+  } catch(e) {
+    if (!path.startsWith("http")) {
+      try {
+        var r2 = await fetch("website/" + path + bust, {cache:"no-store"});
+        return await r2.text();
+      } catch(e2) {}
+    }
+    return "<!-- Error loading " + path + " -->";
+  }
+}
+
+/* Build full-page preview — resolve GHL custom_values so links/text render correctly */
+async function buildFullPreview(pageFile) {
+  const pageHtml = await fetchFile(pageFile);
+  const resolved = resolveCV(pageHtml);
+  return '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body class="ws-page">' + resolved + '</body></html>';
+}
+
+async function togDetail(pageId) {
+  const el = document.getElementById("d-" + pageId);
+  el.classList.toggle("open");
+  if (!el.classList.contains("open")) return;
+
+  const pv = document.getElementById("pv-" + pageId);
+  if (pv.querySelector("iframe")) return;
+
+  const page = PAGES.find(p => p.id === pageId);
+  const fr = document.createElement("iframe");
+  fr.style.cssText = "width:100%;border:none;border-radius:10px;background:#fff;min-height:700px;";
+
+  if (page.file) {
+    /* Local file — build full preview with resolved custom_values */
+    pv.innerHTML = '<div class="spinner"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Loading preview…</div>';
+    const fullHtml = await buildFullPreview(page.file);
+    fr.srcdoc = fullHtml;
+  } else if (page.url) {
+    fr.src = page.url;
+  }
+
+  pv.innerHTML = "";
+  pv.appendChild(fr);
+
+  fr.addEventListener("load", () => {
+    try { fr.style.height = fr.contentDocument.body.scrollHeight + 40 + "px"; } catch(e) { fr.style.height = "900px"; }
+  });
+}
+
+function openCard(id) {
+  setTimeout(() => {
+    const detail = document.getElementById("d-" + id);
+    if (!detail.classList.contains("open")) togDetail(id);
+  }, 80);
+}
+
+function openInTab(src, pageId) {
+  const page = PAGES.find(p => p.id === pageId);
+  if (page && page.file) {
+    buildFullPreview(page.file).then(html => {
+      const blob = new Blob([html], { type: "text/html" });
+      window.open(URL.createObjectURL(blob), "_blank");
+    });
+  } else if (src.startsWith("http")) {
+    window.open(src, "_blank");
+  } else {
+    window.open(BASE + src, "_blank");
+  }
+}
+
+async function copyHtml(file, btnId) {
+  const btn = document.getElementById(btnId);
+  let html = await fetchFile(file);
+  /* Rewrite relative font paths to absolute CDN URLs so HTML works when pasted into GHL */
+  html = html.replace(/url\(["']?\.\/fonts\//g, 'url("https://api.contentbug.io/portal/website/fonts/');
+  html = html.replace(/url\(["']?fonts\//g, 'url("https://api.contentbug.io/portal/website/fonts/');
+  try {
+    await navigator.clipboard.writeText(html);
+    flash(btn);
+  } catch(e) {
+    const ta = document.createElement("textarea");
+    ta.value = html;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    flash(btn);
+  }
+}
+
+async function togRaw(rawId, btn, file) {
+  const el = document.getElementById(rawId);
+  el.classList.toggle("open");
+  btn.textContent = el.classList.contains("open") ? "Hide Raw HTML" : "Show Raw HTML";
+  if (el.classList.contains("open") && !el.dataset.loaded) {
+    el.innerHTML = '<div class="spinner"><span class="dot"></span><span class="dot"></span><span class="dot"></span> Loading…</div>';
+    const html = await fetchFile(file);
+    el.innerHTML = "<pre>" + esc(html) + "</pre>";
+    el.dataset.loaded = "1";
+  }
+}
+
+function esc(s) { return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+function flash(b) {
+  if (!b) return;
+  const o = b.textContent;
+  b.classList.add("copied");
+  b.textContent = "Copied ✓";
+  setTimeout(() => { b.classList.remove("copied"); b.textContent = o; }, 1200);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   LIVE GITHUB TIMESTAMPS — fetches last commit time per file
+   Calls /api/website-timestamps, patches all tpl-updated spans in CST.
+   Refreshes every 60 seconds so updates appear immediately.
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  const FILE_TO_ID = {};
+  PAGES.forEach(function(p){ if(p.file) FILE_TO_ID[p.file] = p.id; });
+
+  async function fetchTimestamps(){
+    try {
+      const r = await fetch('/api/website-timestamps', {cache:'no-store'});
+      if(!r.ok) return;
+      const data = await r.json();
+      if(!data.ok || !data.timestamps) return;
+      const ts = data.timestamps;
+      Object.keys(ts).forEach(function(filename){
+        const info = ts[filename];
+        const pageId = FILE_TO_ID[filename];
+        if(!pageId || !info.date) return;
+        const el = document.getElementById('ts-' + pageId);
+        if(!el) return;
+        const label = info.date + (info.time ? ' · ' + info.time + ' CST' : '');
+        if(el.textContent !== 'Updated ' + label){
+          el.textContent = 'Updated ' + label;
+          el.style.color = 'var(--green,#34c759)';
+          setTimeout(function(){ el.style.color = ''; }, 3000);
+        }
+      });
+    } catch(e){ /* silent — timestamps are non-critical */ }
+  }
+
+  /* Run immediately then every 60s */
+  fetchTimestamps();
+  setInterval(fetchTimestamps, 60000);
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   SERVER STATUS INDICATOR — polls every 5s
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  const el = document.getElementById('serverStatus');
+  const txt = document.getElementById('statusText');
+  let wasOnline = null;
+
+  async function check(){
+    try {
+      const r = await fetch('/website/home.html', {method:'HEAD', cache:'no-store'});
+      if(r.ok){
+        el.className = 'status-indicator online';
+        txt.textContent = 'Online';
+        if(wasOnline === false) showToast('Server is back online','success');
+        wasOnline = true;
+      } else { goOffline(); }
+    } catch(e){ goOffline(); }
+  }
+
+  function goOffline(){
+    el.className = 'status-indicator offline';
+    txt.textContent = 'Offline';
+    if(wasOnline === true) showToast('Server went offline','error');
+    wasOnline = false;
+  }
+
+  check();
+  setInterval(check, 5000);
+})();
+
+/* ══════════════════════════════════════════════════════════════
+   TOAST NOTIFICATION SYSTEM
+   ══════════════════════════════════════════════════════════════ */
+function showToast(msg, type, time){
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = 'toast-item ' + (type || 'info');
+
+  const icons = {success:'✓', error:'✕', info:'ℹ', deploy:'🚀'};
+  const timeStr = time || new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+
+  toast.innerHTML =
+    '<span class="toast-icon">' + (icons[type] || icons.info) + '</span>' +
+    '<span class="toast-msg">' + msg + '</span>' +
+    '<span class="toast-time">' + timeStr + '</span>';
+
+  container.appendChild(toast);
+  requestAnimationFrame(() => { requestAnimationFrame(() => { toast.classList.add('visible'); }); });
+
+  setTimeout(() => {
+    toast.classList.remove('visible');
+    toast.classList.add('exit');
+    setTimeout(() => toast.remove(), 400);
+  }, 4500);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DEPLOY NOTIFICATION POLLER — checks notifications.json
+   ══════════════════════════════════════════════════════════════ */
+(function(){
+  let lastSeen = Date.now();
+
+  async function poll(){
+    try {
+      const r = await fetch('/notifications.json?t=' + Date.now(), {cache:'no-store'});
+      const data = await r.json();
+      if(!data.notifications) return;
+      data.notifications.forEach(n => {
+        const ts = new Date(n.time).getTime();
+        if(ts > lastSeen){
+          showToast(n.message, n.type || 'deploy', new Date(n.time).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}));
+        }
+      });
+      if(data.notifications.length){
+        const newest = Math.max(...data.notifications.map(n => new Date(n.time).getTime()));
+        if(newest > lastSeen) lastSeen = newest;
+      }
+    } catch(e){}
+  }
+
+  setInterval(poll, 8000);
+})();
+</script>
+</body>
+</html>
