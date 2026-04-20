@@ -24,12 +24,12 @@
   var h=location.hostname;
   if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com')) return;
   var map={
-    'https://contentbug.io/home':'/portal/website/home.html',
-    'https://contentbug.io/pricing':'/portal/website/pricing.html',
-    'https://contentbug.io/portfolio':'/portal/website/portfolio.html',
-    'https://contentbug.io/free-trial':'/portal/website/booking.html',
-    'https://contentbug.io/privacy-policy':'/portal/website/privacy-policy.html',
-    'https://contentbug.io/terms':'/portal/website/terms.html'
+    'https://api.contentbug.io/home':'/portal/website/home.html',
+    'https://api.contentbug.io/pricing':'/portal/website/pricing.html',
+    'https://api.contentbug.io/portfolio':'/portal/website/portfolio.html',
+    'https://api.contentbug.io/free-trial':'/portal/website/booking.html',
+    'https://api.contentbug.io/privacy':'/portal/website/privacy-policy.html',
+    'https://api.contentbug.io/terms':'/portal/website/terms.html'
   };
   document.querySelectorAll('a[href]').forEach(function(a){
     var k=a.getAttribute('href');
@@ -39,15 +39,15 @@
 </script>
 
 <div class="cb-header-bar" id="cb-header">
-  <a href="https://contentbug.io/home" class="cb-logo">
+  <a href="https://api.contentbug.io/home" class="cb-logo">
     <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
   </a>
   <nav class="cb-header" id="cbNav">
-    <a href="https://contentbug.io/home" class="cb-nav-link active">Home</a>
-    <a href="https://contentbug.io/pricing" class="cb-nav-link">Pricing</a>
-    <a href="https://contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
+    <a href="https://api.contentbug.io/home" class="cb-nav-link active">Home</a>
+    <a href="https://api.contentbug.io/pricing" class="cb-nav-link">Pricing</a>
+    <a href="https://api.contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
     <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
-    <a href="https://contentbug.io/free-trial" class="cb-nav-cta">Free Trial</a>
+    <a href="https://api.contentbug.io/free-trial" class="cb-nav-cta">Free Trial</a>
   </nav>
 </div>
 <script>
