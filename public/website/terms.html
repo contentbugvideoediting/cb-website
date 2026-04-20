@@ -181,7 +181,7 @@ body{
     '{{custom_values.careers}}':'/website/careers.html',
     '{{custom_values.faq}}':'/website/faq.html',
     '{{custom_values.bookfreedemo}}':'/website/booking.html',
-    '{{custom_values.portal_login}}':'https://app.contentbug.io',
+    '{{custom_values.portal_login}}':'https://api.contentbug.io/portal/login.html',
     '{{custom_values.privacy_policy}}':'/website/privacy-policy.html',
     '{{custom_values.terms_of_service}}':'/website/terms.html'
   };
@@ -192,11 +192,11 @@ body{
   document.querySelectorAll('body *').forEach(function(el){
     if(el.children.length===0 && el.textContent && el.textContent.indexOf('{{custom_values.')>-1){
       var t=el.textContent;
-      t=t.replace(/\{\{custom_values\.business_email\}\}/g,'support@contentbug.io');
-      t=t.replace(/\{\{custom_values\.business_phone\}\}/g,'+1 (949) 700-2055');
+      t=t.replace(/\{\{custom_values\.business_email\}\}/g,'contentbug@contentbug.io');
+      t=t.replace(/\{\{custom_values\.business_phone\}\}/g,'+1 (385) 200-7582');
       t=t.replace(/\{\{custom_values\.business_name\}\}/g,'Content Bug Video Editing, LLC');
-      t=t.replace(/\{\{custom_values\.business_address\}\}/g,'Orange County, California');
-      t=t.replace(/\{\{custom_values\.business_hours\}\}/g,'Mon-Fri 9am-6pm PT');
+      t=t.replace(/\{\{custom_values\.business_address\}\}/g,'9016 Carondelet Pl, Brentwood, TN 37027');
+      t=t.replace(/\{\{custom_values\.business_hours\}\}/g,'Mon-Fri 9am-6pm MST');
       el.textContent=t;
     }
   });
@@ -204,15 +204,15 @@ body{
 </script>
 
 <div class="cb-header-bar" id="cb-header">
-  <a href="{{custom_values.home}}" class="cb-logo">
+  <a href="https://contentbug.io/home" class="cb-logo">
     <img src="https://assets.cdn.filesafe.space/mCNHhjy593eUueqfuqyU/media/69aee8207c2702858b33014d.svg" alt="Content Bug">
   </a>
   <nav class="cb-header" id="cbNav">
-    <a href="{{custom_values.home}}" class="cb-nav-link">Home</a>
-    <a href="{{custom_values.pricing}}" class="cb-nav-link">Pricing</a>
-    <a href="{{custom_values.portfolio}}" class="cb-nav-link">Portfolio</a>
-    <a href="{{custom_values.portal_login}}" class="cb-nav-link">Login</a>
-    <a href="{{custom_values.bookfreedemo}}" class="cb-nav-cta">Start Free Trial</a>
+    <a href="https://contentbug.io/home" class="cb-nav-link">Home</a>
+    <a href="https://contentbug.io/pricing" class="cb-nav-link">Pricing</a>
+    <a href="https://contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
+    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
+    <a href="https://contentbugediting.com/start-free-trial" class="cb-nav-cta">Start Free Trial</a>
   </nav>
 </div>
 <script>
@@ -437,7 +437,7 @@ body{
     <h2>11. DMCA and Copyright Claims</h2>
     <p>Content Bug respects intellectual property rights and expects Clients to do the same.</p>
     <h3>11.1 Copyright Infringement Claims</h3>
-    <p>If you believe content on our platform infringes your copyright, please contact our designated DMCA agent at <strong>support@contentbug.io</strong> with:</p>
+    <p>If you believe content on our platform infringes your copyright, please contact our designated DMCA agent at <strong>contentbug@contentbug.io</strong> with:</p>
     <ul>
       <li>A physical or electronic signature of the copyright owner or authorized agent</li>
       <li>Identification of the copyrighted work claimed to be infringed</li>
@@ -456,7 +456,7 @@ body{
       <p><strong>PLEASE READ THIS SECTION CAREFULLY. IT AFFECTS YOUR LEGAL RIGHTS, INCLUDING YOUR RIGHT TO FILE A LAWSUIT IN COURT.</strong></p>
     </div>
     <h3>12.1 Informal Resolution</h3>
-    <p>Before initiating any formal dispute resolution proceeding, you agree to first contact us at <strong>support@contentbug.io</strong> to attempt informal resolution for at least thirty (30) days. Most disputes can be resolved through good-faith communication.</p>
+    <p>Before initiating any formal dispute resolution proceeding, you agree to first contact us at <strong>contentbug@contentbug.io</strong> to attempt informal resolution for at least thirty (30) days. Most disputes can be resolved through good-faith communication.</p>
     <h3>12.2 Binding Arbitration</h3>
     <p>If informal resolution fails, any dispute, claim, or controversy arising out of or relating to these Terms or the Services shall be resolved exclusively through <strong>binding arbitration</strong> administered by the American Arbitration Association ("AAA") in accordance with its Consumer Arbitration Rules.</p>
     <ul>
@@ -540,20 +540,20 @@ body{
     <p>If you have any questions about these Terms of Service, please contact us:</p>
     <div class="contact-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span>Content Bug Video Editing, LLC &middot; Orange County, California</span>
+      <span>Content Bug Video Editing, LLC &middot; Brentwood, TN</span>
     </div>
     <div class="contact-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      <a href="mailto:support@contentbug.io">support@contentbug.io</a>
+      <a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a>
     </div>
     <div class="contact-item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      <a href="tel:+19497002055">+1 (949) 700-2055</a>
+      <a href="tel:+13852007582">+1 (385) 200-7582</a>
     </div>
     <div class="btn-row">
-      <a href="{{custom_values.home}}" class="btn btn-ghost">Back to Home</a>
-      <a href="{{custom_values.privacy_policy}}" class="btn btn-ghost">Privacy Policy</a>
-      <a href="{{custom_values.bookfreedemo}}" class="btn btn-primary">Start Free Trial</a>
+      <a href="https://contentbug.io/home" class="btn btn-ghost">Back to Home</a>
+      <a href="https://contentbug.io/privacy-policy" class="btn btn-ghost">Privacy Policy</a>
+      <a href="https://contentbugediting.com/start-free-trial" class="btn btn-primary">Start Free Trial</a>
     </div>
   </div>
 </div>

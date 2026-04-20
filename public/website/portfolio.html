@@ -232,7 +232,7 @@ body{
     '{{custom_values.careers}}':'/website/careers.html',
     '{{custom_values.faq}}':'/website/faq.html',
     '{{custom_values.bookfreedemo}}':'/website/booking.html',
-    '{{custom_values.portal_login}}':'https://app.contentbug.io',
+    '{{custom_values.portal_login}}':'https://api.contentbug.io/portal/login.html',
     '{{custom_values.privacy_policy}}':'/website/privacy-policy.html',
     '{{custom_values.terms_of_service}}':'/website/terms.html'
   };
@@ -243,10 +243,10 @@ body{
   document.querySelectorAll('body *').forEach(function(el){
     if(el.children.length===0 && el.textContent && el.textContent.indexOf('{{custom_values.')>-1){
       var t=el.textContent;
-      t=t.replace(/\{\{custom_values\.business_email\}\}/g,'support@contentbug.io');
-      t=t.replace(/\{\{custom_values\.business_phone\}\}/g,'+1 (949) 700-2055');
+      t=t.replace(/\{\{custom_values\.business_email\}\}/g,'contentbug@contentbug.io');
+      t=t.replace(/\{\{custom_values\.business_phone\}\}/g,'+1 (385) 200-7582');
       t=t.replace(/\{\{custom_values\.business_name\}\}/g,'Content Bug Video Editing, LLC');
-      t=t.replace(/\{\{custom_values\.business_hours\}\}/g,'Mon-Fri 9am-6pm PT');
+      t=t.replace(/\{\{custom_values\.business_hours\}\}/g,'Mon-Fri 9am-6pm MST');
       el.textContent=t;
     }
   });
@@ -254,15 +254,15 @@ body{
 </script>
 
 <div class="cb-header-bar" id="cb-header">
-  <a href="{{custom_values.home}}" class="cb-logo">
+  <a href="https://contentbug.io/home" class="cb-logo">
     <img src="https://assets.cdn.filesafe.space/mCNHhjy593eUueqfuqyU/media/69aee8207c2702858b33014d.svg" alt="Content Bug">
   </a>
   <nav class="cb-header" id="cbNav">
-    <a href="{{custom_values.home}}" class="cb-nav-link">Home</a>
-    <a href="{{custom_values.pricing}}" class="cb-nav-link">Pricing</a>
-    <a href="{{custom_values.portfolio}}" class="cb-nav-link active">Portfolio</a>
-    <a href="{{custom_values.portal_login}}" class="cb-nav-link">Login</a>
-    <a href="{{custom_values.bookfreedemo}}" class="cb-nav-cta">Start Free Trial</a>
+    <a href="https://contentbug.io/home" class="cb-nav-link">Home</a>
+    <a href="https://contentbug.io/pricing" class="cb-nav-link">Pricing</a>
+    <a href="https://contentbug.io/portfolio" class="cb-nav-link active">Portfolio</a>
+    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
+    <a href="https://contentbugediting.com/start-free-trial" class="cb-nav-cta">Start Free Trial</a>
   </nav>
 </div>
 <script>

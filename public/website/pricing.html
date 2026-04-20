@@ -259,7 +259,7 @@ body{
     '{{custom_values.careers}}':'/website/careers.html',
     '{{custom_values.faq}}':'/website/faq.html',
     '{{custom_values.bookfreedemo}}':'/website/booking.html',
-    '{{custom_values.portal_login}}':'https://app.contentbug.io',
+    '{{custom_values.portal_login}}':'https://api.contentbug.io/portal/login.html',
     '{{custom_values.privacy_policy}}':'/website/privacy-policy.html',
     '{{custom_values.terms_of_service}}':'/website/terms.html'
   };
@@ -271,15 +271,15 @@ body{
 </script>
 
 <div class="cb-header-bar" id="cb-header">
-  <a href="{{custom_values.home}}" class="cb-logo">
+  <a href="https://contentbug.io/home" class="cb-logo">
     <img src="https://assets.cdn.filesafe.space/mCNHhjy593eUueqfuqyU/media/69aee8207c2702858b33014d.svg" alt="Content Bug">
   </a>
   <nav class="cb-header" id="cbNav">
-    <a href="{{custom_values.home}}" class="cb-nav-link">Home</a>
-    <a href="{{custom_values.pricing}}" class="cb-nav-link active">Pricing</a>
-    <a href="{{custom_values.portfolio}}" class="cb-nav-link">Portfolio</a>
-    <a href="{{custom_values.portal_login}}" class="cb-nav-link">Login</a>
-    <a href="{{custom_values.bookfreedemo}}" class="cb-nav-cta">Start Free Trial</a>
+    <a href="https://contentbug.io/home" class="cb-nav-link">Home</a>
+    <a href="https://contentbug.io/pricing" class="cb-nav-link active">Pricing</a>
+    <a href="https://contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
+    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
+    <a href="https://contentbugediting.com/start-free-trial" class="cb-nav-cta">Start Free Trial</a>
   </nav>
 </div>
 
@@ -422,7 +422,7 @@ body{
 <div class="cta-block fade-up">
   <h3>The Real Question Isn&rsquo;t &ldquo;Can You Afford It?&rdquo;</h3>
   <p>It&rsquo;s: How much growth are you losing by not scaling content faster?</p>
-  <a href="{{custom_values.bookfreedemo}}" class="cta-pill">Start Free Trial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+  <a href="https://contentbugediting.com/start-free-trial" class="cta-pill">Start Free Trial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
 </div>
 
 </div>
@@ -588,7 +588,7 @@ body{
 })();
 
 /* Checkout modal */
-var CO_URLS = { basic: '{{custom_values.basic2fm}}', silver: '{{custom_values.silver2freemonths}}', gold: '{{custom_values.gold2freemonths}}' };
+var CO_URLS = { basic: 'https://contentbug.io/basic-checkout-2-free-months', silver: 'https://contentbug.io/silver-checkout-2-free-months', gold: 'https://contentbug.io/gold-checkout-2-free-months' };
 var CO_TESTIMONIALS = [
   { name:'Austin Uhl', sub:'171K+ subscribers', stars:5, text:'LOVING the new flow. This is great quality and super helpful!' },
   { name:'Dr. Tracey Marks', sub:'2.05M subscribers', stars:5, text:'I\'m satisfied with the pacing of the editing. These look REALLY good.' },
