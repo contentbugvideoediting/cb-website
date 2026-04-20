@@ -158,219 +158,152 @@ body{
   <div class="wiz-step-rail" id="qRail"></div>
 
   <!-- Scrollable Content -->
+
+  <!-- Scrollable Content -->
   <div class="wiz-content" id="qBody" style="padding:24px">
 
-    <!-- ═══ STEP 0: Contact Details ═══ -->
-    <div class="qw-step active" data-step="0">
-      <div class="qw-title">Let's get started.</div>
-      <div class="qw-sub">Tell us a bit about yourself so we know who to send your free edit to.</div>
-      <div style="width:100%;max-width:420px;text-align:left;margin:0 auto">
-        <div class="q-row">
-          <div class="q-field"><label>First Name *</label><input id="qFirstName" placeholder="First name" autocomplete="given-name"></div>
-          <div class="q-field"><label>Last Name *</label><input id="qLastName" placeholder="Last name" autocomplete="family-name"></div>
+    <!-- ═══ STEP 1: Qualify (contact + 5 questions inline) ═══ -->
+    <div class="qw-step active" data-step="1">
+
+      <!-- Sub-screen 0: Contact details -->
+      <div class="qw-sub-screen" data-sub="0">
+        <div class="qw-title">Let's get started.</div>
+        <div class="qw-sub">Tell us a bit about yourself so we know who to send your free edit to.</div>
+        <div style="width:100%;max-width:420px;text-align:left;margin:16px auto 0">
+          <div class="q-row">
+            <div class="q-field"><label>First Name *</label><input id="qFirstName" placeholder="First name" autocomplete="given-name"></div>
+            <div class="q-field"><label>Last Name *</label><input id="qLastName" placeholder="Last name" autocomplete="family-name"></div>
+          </div>
+          <div class="q-field"><label>Email *</label><input id="qEmail" type="email" placeholder="you@example.com" autocomplete="email"><div class="q-error" id="qEmailErr">Please enter a valid email address.</div></div>
+          <div class="q-field"><label>Phone <span class="q-optional">(optional)</span></label><input id="qPhone" type="tel" placeholder="(555) 123-4567" autocomplete="tel"></div>
         </div>
-        <div class="q-field"><label>Email *</label><input id="qEmail" type="email" placeholder="you@example.com" autocomplete="email"><div class="q-error" id="qEmailErr">Please enter a valid email address.</div></div>
-        <div class="q-field"><label>Phone <span class="q-optional">(optional)</span></label><input id="qPhone" type="tel" placeholder="(555) 123-4567" autocomplete="tel"></div>
       </div>
+
+      <!-- Sub-screens 1-5: qualification questions -->
+      <div class="qw-sub-screen" data-sub="q" style="display:none">
+        <div class="qw-sub" style="opacity:.6;margin-bottom:4px">Question <span id="qSubQNum">1</span> of 5</div>
+        <div class="qw-title" id="qSubQTitle">What type of content do you create?</div>
+        <div class="qw-sub" id="qSubQHint">Pick all that apply.</div>
+        <div style="width:100%;max-width:480px;text-align:left;margin:16px auto 0">
+
+          <div class="q-subq" data-subq="0">
+            <div class="q-chips" id="qContentTypes" data-multi="true">
+              <div class="q-chip" data-val="YouTube Long-form">YouTube Long-form</div>
+              <div class="q-chip" data-val="YouTube Shorts">YouTube Shorts</div>
+              <div class="q-chip" data-val="TikTok">TikTok</div>
+              <div class="q-chip" data-val="Instagram Reels">Instagram Reels</div>
+              <div class="q-chip" data-val="Podcast">Podcast</div>
+              <div class="q-chip" data-val="Course Content">Course Content</div>
+              <div class="q-chip" data-val="Other">Other</div>
+            </div>
+          </div>
+
+          <div class="q-subq" data-subq="1" style="display:none">
+            <div class="q-chips" id="qPostFreq">
+              <div class="q-chip" data-val="Daily">Daily</div>
+              <div class="q-chip" data-val="3-5x per week">3-5x per week</div>
+              <div class="q-chip" data-val="1-2x per week">1-2x per week</div>
+              <div class="q-chip" data-val="A few times a month">A few times a month</div>
+              <div class="q-chip" data-val="Just starting out">Just starting out</div>
+            </div>
+          </div>
+
+          <div class="q-subq" data-subq="2" style="display:none">
+            <div class="q-chips" id="qGoal">
+              <div class="q-chip" data-val="Grow my audience">Grow my audience</div>
+              <div class="q-chip" data-val="Save time">Save time</div>
+              <div class="q-chip" data-val="Look more professional">Look more professional</div>
+              <div class="q-chip" data-val="Increase revenue">Increase revenue</div>
+              <div class="q-chip" data-val="All of the above">All of the above</div>
+            </div>
+          </div>
+
+          <div class="q-subq" data-subq="3" style="display:none">
+            <div class="q-chips" id="qFootage">
+              <div class="q-chip q-chip-lg" data-val="Yes I'm ready to go">Yes I'm ready to go</div>
+              <div class="q-chip q-chip-lg" data-val="I have footage but not edited yet">I have footage but not edited yet</div>
+              <div class="q-chip q-chip-lg" data-val="I'm still filming">I'm still filming</div>
+              <div class="q-chip q-chip-lg" data-val="Not yet">Not yet</div>
+            </div>
+          </div>
+
+          <div class="q-subq" data-subq="4" style="display:none">
+            <div class="q-chips" id="qVolume">
+              <div class="q-chip" data-val="1-4 videos / month">1-4 videos / month</div>
+              <div class="q-chip" data-val="5-10 videos / month">5-10 videos / month</div>
+              <div class="q-chip" data-val="11-20 videos / month">11-20 videos / month</div>
+              <div class="q-chip" data-val="20+ videos / month">20+ videos / month</div>
+              <div class="q-chip" data-val="Unsure — figuring it out">Unsure &mdash; figuring it out</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Sub-screen 6: Disqualified dead-end (no demo, no footage, just reminder) -->
+      <div class="qw-sub-screen" data-sub="dq" style="display:none">
+        <div class="q-result-icon not-qualified">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#f5d060" stroke-width="2" width="32" height="32"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="qw-title">Not quite the right fit &mdash; yet.</div>
+        <div class="qw-sub" id="qDqTip">Keep building and come back when you have footage ready.</div>
+        <div style="font:400 13px/1.5 var(--font);color:rgba(255,255,255,.5);margin:20px 0 12px">Want us to let you know when you're ready?</div>
+        <div class="q-remind" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <input class="q-field" id="qRemindEmail" type="email" placeholder="your@email.com" style="padding:10px 12px;border-radius:var(--r-lg);font:400 13px/1 var(--font);color:var(--txt);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);outline:none">
+          <button class="btn btn-g5 btn-sm" onclick="qRemind()">Remind Me</button>
+        </div>
+      </div>
+
     </div>
 
-    <!-- ═══ STEP 1: 5 Qualification Questions — one at a time ═══ -->
-    <div class="qw-step" data-step="1">
-      <div class="qw-sub" id="qSubQLabel" style="opacity:.6;margin-bottom:4px">Question <span id="qSubQNum">1</span> of 5</div>
-      <div class="qw-title" id="qSubQTitle">What type of content do you create?</div>
-      <div class="qw-sub" id="qSubQHint">Pick all that apply.</div>
-
-      <!-- Sub-question panels -->
-      <div style="width:100%;max-width:480px;text-align:left;margin:16px auto 0">
-
-        <div class="q-subq" data-subq="0">
-          <div class="q-chips" id="qContentTypes" data-multi="true">
-            <div class="q-chip" data-val="YouTube Long-form">YouTube Long-form</div>
-            <div class="q-chip" data-val="YouTube Shorts">YouTube Shorts</div>
-            <div class="q-chip" data-val="TikTok">TikTok</div>
-            <div class="q-chip" data-val="Instagram Reels">Instagram Reels</div>
-            <div class="q-chip" data-val="Podcast">Podcast</div>
-            <div class="q-chip" data-val="Course Content">Course Content</div>
-            <div class="q-chip" data-val="Other">Other</div>
-          </div>
-        </div>
-
-        <div class="q-subq" data-subq="1" style="display:none">
-          <div class="q-chips" id="qPostFreq">
-            <div class="q-chip" data-val="Daily">Daily</div>
-            <div class="q-chip" data-val="3-5x per week">3-5x per week</div>
-            <div class="q-chip" data-val="1-2x per week">1-2x per week</div>
-            <div class="q-chip" data-val="A few times a month">A few times a month</div>
-            <div class="q-chip" data-val="Just starting out">Just starting out</div>
-          </div>
-        </div>
-
-        <div class="q-subq" data-subq="2" style="display:none">
-          <div class="q-chips" id="qGoal">
-            <div class="q-chip" data-val="Grow my audience">Grow my audience</div>
-            <div class="q-chip" data-val="Save time">Save time</div>
-            <div class="q-chip" data-val="Look more professional">Look more professional</div>
-            <div class="q-chip" data-val="Increase revenue">Increase revenue</div>
-            <div class="q-chip" data-val="All of the above">All of the above</div>
-          </div>
-        </div>
-
-        <div class="q-subq" data-subq="3" style="display:none">
-          <div class="q-chips" id="qFootage">
-            <div class="q-chip q-chip-lg" data-val="Yes I'm ready to go">Yes I'm ready to go</div>
-            <div class="q-chip q-chip-lg" data-val="I have footage but not edited yet">I have footage but not edited yet</div>
-            <div class="q-chip q-chip-lg" data-val="I'm still filming">I'm still filming</div>
-            <div class="q-chip q-chip-lg" data-val="Not yet">Not yet</div>
-          </div>
-        </div>
-
-        <div class="q-subq" data-subq="4" style="display:none">
-          <div class="q-chips" id="qVolume">
-            <div class="q-chip" data-val="1-4 videos / month">1-4 videos / month</div>
-            <div class="q-chip" data-val="5-10 videos / month">5-10 videos / month</div>
-            <div class="q-chip" data-val="11-20 videos / month">11-20 videos / month</div>
-            <div class="q-chip" data-val="20+ videos / month">20+ videos / month</div>
-            <div class="q-chip" data-val="Unsure — figuring it out">Unsure — figuring it out</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ═══ STEP 2: Qualification Result + Calendar (merged) ═══ -->
+    <!-- ═══ STEP 2: Pick Your Style (blueprint builder iframe) ═══ -->
     <div class="qw-step" data-step="2">
-      <!-- Result panel -->
-      <div id="qResultPanel"></div>
-
-      <!-- Calendar panel (only shown if qualified) -->
-      <div id="qCalendarPanel" style="display:none">
-        <div class="qw-title">Pick a time for your free demo call.</div>
-        <div class="qw-sub">30 min with our Creative Director — we'll align on your style and kick off your free edit.</div>
-        <div style="width:100%;max-width:440px;text-align:left;margin:20px auto 0">
-          <div class="q-day-cards" id="qDayCards"></div>
-          <div id="qSlotsWrap"></div>
-          <div class="q-tz" id="qTzLabel"></div>
-        </div>
-      </div>
+      <div class="qw-title">Pick your editing style.</div>
+      <div class="qw-sub">Build your style blueprint below so we know exactly how to cut your video.</div>
+      <iframe id="qBuilderFrame" src="about:blank" style="width:100%;height:640px;border:none;border-radius:var(--r-xl);margin-top:16px;background:rgba(0,0,0,.2)" loading="lazy" title="Blueprint Builder"></iframe>
+      <div class="qw-sub" style="margin-top:10px;color:rgba(255,255,255,.55);font-size:13px">Save your blueprint above, then hit Continue.</div>
     </div>
 
-    <!-- ═══ STEP 3: Demo Call Confirmation ═══ -->
+    <!-- ═══ STEP 3: Drop Your Footage (request-trial.html iframe) ═══ -->
     <div class="qw-step" data-step="3">
-      <div class="q-result-icon qualified">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <div class="qw-title">You're booked in.</div>
-      <div class="qw-sub" id="qConfirmSub">Your free demo call is confirmed. Check your email for the calendar invite.</div>
-
-      <div style="width:100%;max-width:440px;margin:20px auto 0;text-align:left">
-        <div class="q-summary" id="qConfirmSummary"></div>
-
-        <div class="glass-card" style="padding:16px;margin-top:16px">
-          <div style="font:600 14px/1.4 var(--font);color:var(--txt);margin-bottom:8px">What happens next?</div>
-          <div style="font:400 13px/1.7 var(--font);color:rgba(255,255,255,.7)">
-            <div style="display:flex;gap:10px;margin-bottom:8px"><span style="color:var(--blue-brand)">1.</span><span>Check your email for the confirmation + calendar invite.</span></div>
-            <div style="display:flex;gap:10px;margin-bottom:8px"><span style="color:var(--blue-brand)">2.</span><span>Upload your footage + pick a style in the next step.</span></div>
-            <div style="display:flex;gap:10px"><span style="color:var(--blue-brand)">3.</span><span>We'll have your free edit ready by your demo call — just show up.</span></div>
-          </div>
-        </div>
-      </div>
+      <div class="qw-title">Drop your raw footage.</div>
+      <div class="qw-sub">Upload your clips and submit your free trial edit. We'll have it back in 12 hours.</div>
+      <iframe id="qFootageFrame" src="/portal/request-trial.html?source=free-trial-wizard" style="width:100%;height:580px;border:none;border-radius:var(--r-xl);margin-top:16px;background:rgba(0,0,0,.2)" loading="lazy" title="Submit Free Trial Footage"></iframe>
     </div>
 
-    <!-- ═══ STEP 4: Submit Footage + Blueprint Selection ═══ -->
-    <div class="qw-step" data-step="4">
-      <div class="qw-title">Drop your footage + pick your style.</div>
-      <div class="qw-sub">Upload your raw clips and tell us how you want it edited. We'll have your free edit ready by your demo call.</div>
-
-      <!-- Part 1: Blueprint selector — tabs: Preset Library (fast) vs Custom Builder -->
-      <div class="q-section" style="margin-top:20px">
-        <div class="q-section-title">Choose your editing style</div>
-        <div class="q-section-sub">In a hurry? Grab a preset. Want control? Build your own.</div>
-
-        <!-- Tab buttons -->
-        <div class="q-style-tabs" id="qStyleTabs" style="display:flex;gap:8px;margin:12px 0 16px;justify-content:center">
-          <button type="button" class="btn btn-ghost q-style-tab active" data-tab="preset">Pick a Preset (Fast)</button>
-          <button type="button" class="btn btn-ghost q-style-tab" data-tab="custom">Build My Own (Custom)</button>
-        </div>
-
-        <!-- Preset panel: 8 preset chips -->
-        <div id="qStylePreset">
-          <div class="q-preset-chips" id="qPresetChips" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px">
-            <div class="q-preset-chip" data-preset="Hormozi Dark Authority">Hormozi Dark Authority</div>
-            <div class="q-preset-chip" data-preset="MrBeast Energy">MrBeast Energy</div>
-            <div class="q-preset-chip" data-preset="Clean &amp; Minimal">Clean &amp; Minimal</div>
-            <div class="q-preset-chip" data-preset="Podcast Pro">Podcast Pro</div>
-            <div class="q-preset-chip" data-preset="Cinematic Vlog">Cinematic Vlog</div>
-            <div class="q-preset-chip" data-preset="Fast-Cut Entertainment">Fast-Cut Entertainment</div>
-            <div class="q-preset-chip" data-preset="Corporate Polish">Corporate Polish</div>
-            <div class="q-preset-chip" data-preset="Educational Clarity">Educational Clarity</div>
-          </div>
-          <div class="q-section-sub" id="qPresetPicked" style="margin-top:10px;color:rgba(255,255,255,.5)">No preset selected yet.</div>
-        </div>
-
-        <!-- Custom panel: real blueprint builder iframe -->
-        <div id="qStyleCustom" style="display:none">
-          <iframe id="qBuilderFrame" src="about:blank" style="width:100%;height:620px;border:none;border-radius:var(--r-xl);background:rgba(0,0,0,.2)" loading="lazy" title="Blueprint Builder"></iframe>
-          <div class="q-section-sub" style="margin-top:8px;color:rgba(255,255,255,.5)">Save your blueprint above, then continue below.</div>
-        </div>
-      </div>
-
-      <!-- Part 2: Footage submission — real request iframe, labeled for free-trial pipeline -->
-      <div class="q-section" style="margin-top:24px">
-        <div class="q-section-title">Drop your raw footage</div>
-        <div class="q-section-sub">Labeled as <strong>Free Trial Edit</strong> so our pipeline picks it up immediately.</div>
-        <iframe id="qFootageFrame" src="/portal/request-trial.html?source=free-trial-wizard" style="width:100%;height:560px;border:none;border-radius:var(--r-xl);margin-top:10px;background:rgba(0,0,0,.2)" loading="lazy" title="Submit Free Trial Footage"></iframe>
-      </div>
-    </div>
-
-    <!-- ═══ STEP 5: Final Confirmation ═══ -->
-    <div class="qw-step" data-step="5">
+    <!-- ═══ SUCCESS: auto-shown after footage submission ═══ -->
+    <div class="qw-step" data-step="done">
       <div class="q-result-icon qualified">
         <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
       <div class="qw-title">You're all set.</div>
-      <div class="qw-sub">Your free trial is live. We'll have your edit ready by your demo call.</div>
-
-      <div style="width:100%;max-width:480px;margin:20px auto 0;text-align:left">
-
+      <div class="qw-sub">Your free trial is live. Your edit will be ready in 12 hours &mdash; we just emailed you the portal login so you can review, revise, and download.</div>
+      <div style="width:100%;max-width:440px;margin:24px auto 0;text-align:left">
         <div class="glass-card" style="padding:20px;margin-bottom:14px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
             <div style="width:32px;height:32px;border-radius:50%;background:rgba(41,151,255,.15);display:flex;align-items:center;justify-content:center">
               <svg viewBox="0 0 24 24" fill="none" stroke="#2997ff" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div>
-              <div style="font:600 15px/1.3 var(--font);color:var(--txt)">Turnaround: 12 hours max</div>
-              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.55)">Your edit will be ready by the next business day — just show up to your free demo call.</div>
+              <div style="font:600 15px/1.3 var(--font);color:var(--txt)">Turnaround: 12 hours</div>
+              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.55)">Your edit will be ready by the next business day.</div>
             </div>
           </div>
         </div>
-
         <div class="glass-card" style="padding:20px;margin-bottom:14px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
             <div style="width:32px;height:32px;border-radius:50%;background:rgba(52,211,153,.15);display:flex;align-items:center;justify-content:center">
               <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
             <div>
               <div style="font:600 15px/1.3 var(--font);color:var(--txt)">Confirmation sent to your email</div>
-              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.55)" id="qFinalEmail">We just sent you everything: demo call invite, upload confirmation, next steps.</div>
+              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.55)" id="qFinalEmail">We just sent you your portal login and upload confirmation.</div>
             </div>
           </div>
         </div>
-
-        <div class="glass-card" style="padding:20px;margin-bottom:14px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-            <div style="width:32px;height:32px;border-radius:50%;background:rgba(245,208,96,.15);display:flex;align-items:center;justify-content:center">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#f5d060" stroke-width="2" width="16" height="16"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div>
-              <div style="font:600 15px/1.3 var(--font);color:var(--txt)" id="qFinalSlot">Demo call booked</div>
-              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.55)">Add the invite to your calendar so you don't miss it.</div>
-            </div>
-          </div>
-        </div>
-
-        <div style="text-align:center;margin-top:20px">
-          <a href="https://api.contentbug.io/portal/login.html" class="btn btn-g5" style="text-decoration:none">Go to Portal &rarr;</a>
-        </div>
+      </div>
+      <div style="text-align:center;margin-top:20px">
+        <a href="https://api.contentbug.io/portal/login.html" class="btn btn-g5" style="text-decoration:none;padding:14px 32px;font-size:15px">Go to Your Portal &rarr;</a>
       </div>
     </div>
 
@@ -385,6 +318,7 @@ body{
 </div>
 </div>
 </section>
+</main>
 </main>
 
 <!-- ═══ FOOTER (Desktop home.html) ═══ -->
@@ -456,449 +390,374 @@ body{
 })();
 </script>
 
+<!-- ═══ WIZARD JS (3-step state machine) ═══ -->
 <script>
-/* =====================================================================
-   Content Bug — Free Trial Wizard v3 (6-step)
-   Steps: 0 Contact | 1 Qualify (5 Qs one-at-a-time) | 2 Result+Calendar |
-          3 Demo Confirmation | 4 Footage+Blueprint | 5 Final
-   ===================================================================== */
-var $=function(id){return document.getElementById(id)};
-var E=function(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')};
-var API=location.origin;
+(function(){
+  'use strict';
 
-/* ── State ── */
-var step=0;
-var subQ=0;                 /* sub-question index 0..4 inside step 1 */
-var firstName='',lastName='',email='',phone='';
-var contentTypes=[];
-var postFreq='',primaryGoal='',hasFootage='',volume='';
-var qualified=false,score=0;
-var selectedDay='',selectedSlot='';
-var selectedPreset='',styleTab='preset',builderBlueprint=null;
-var trialSubmitted=false;
+  /* API base — same-origin (api.contentbug.io serves both website + portal) */
+  var API = '';
 
-/* ── Sub-question meta ── */
-var SUBQ=[
-  {title:'What type of content do you create?',hint:'Pick all that apply.',id:'qContentTypes',multi:true},
-  {title:'How often do you post?',hint:'One answer.',id:'qPostFreq',multi:false},
-  {title:"What's your main goal with video editing?",hint:'One answer.',id:'qGoal',multi:false},
-  {title:'Do you have footage ready to edit right now?',hint:'One answer.',id:'qFootage',multi:false},
-  {title:'How many videos do you need edited per month?',hint:'One answer.',id:'qVolume',multi:false}
-];
+  /* ───────── STATE ───────── */
+  var state = {
+    step: 1,          // 1 = Qualify | 2 = Style | 3 = Footage | 'done' = success
+    subQ: 0,          // within step 1: 0 = contact | 1-5 = questions | 'dq' = disqualified
+    contact: { first:'', last:'', email:'', phone:'' },
+    answers: {
+      contentTypes: [],   // q1 multi
+      postFreq:     '',   // q2 single
+      goal:         '',   // q3 single
+      footage:      '',   // q4 single
+      volume:       ''    // q5 single
+    },
+    score: 0,
+    qualified: false,
+    blueprintSaved: false,
+    footageSubmitted: false,
+    builderLoaded: false,
+    submittedContact: false
+  };
 
-/* ── Step Rail Icons (6 steps) ── */
-var RAIL_ICONS=['user-plus','edit','calendar','mail','video','check'];
+  /* ───────── DOM ───────── */
+  var $ = function(id){ return document.getElementById(id); };
+  var qRail   = $('qRail');
+  var qFoot   = $('qFoot');
+  var qBack   = $('qBack');
+  var qNext   = $('qNext');
+  var qBody   = $('qBody');
 
-function renderRail(){
-  var base='/portal/assets/icons/animated-lottie/white/',h='';
-  for(var i=0;i<6;i++){
-    var done=i<step,active=i===step;
-    var cls='wiz-step-dot'+(done?' done':active?' active':'');
-    var icon=done?'check':RAIL_ICONS[i];
-    var ap=done?' autoplay':'';
-    h+='<div class="'+cls+'"><lottie-icon src="'+base+icon+'.json" size="20"'+ap+' key="'+i+'-'+icon+'"></lottie-icon></div>';
-    if(i<5)h+='<div class="wiz-step-wire'+(done?' done':'')+'"></div>';
-  }
-  $('qRail').innerHTML=h;
-}
-
-/* ── Chip Interaction ── */
-document.addEventListener('click',function(e){
-  var chip=e.target.closest('.q-chip');
-  if(chip){
-    var group=chip.parentElement;
-    var multi=group.dataset.multi==='true';
-    if(multi){
-      chip.classList.toggle('selected');
-    }else{
-      group.querySelectorAll('.q-chip').forEach(function(c){c.classList.remove('selected')});
-      chip.classList.add('selected');
+  /* ───────── STEP RAIL (3 dots) ───────── */
+  function renderRail(){
+    if(!qRail) return;
+    var done = state.step === 'done';
+    var html = '';
+    for(var i=1;i<=3;i++){
+      var cls = 'wiz-step-dot';
+      if(done || state.step > i) cls += ' complete';
+      else if(state.step === i) cls += ' active';
+      html += '<div class="'+cls+'" data-step="'+i+'"></div>';
+      if(i < 3) html += '<div class="wiz-step-line'+((done || state.step > i) ? ' complete' : '')+'"></div>';
     }
-    readChips();
-    $('qNext').disabled=!qValid();
+    qRail.innerHTML = html;
   }
-  var pc=e.target.closest('.q-preset-chip');
-  if(pc){
-    var parent=pc.parentElement;
-    parent.querySelectorAll('.q-preset-chip').forEach(function(c){c.classList.remove('selected')});
-    pc.classList.add('selected');
-    selectedPreset=pc.dataset.preset||'';
-    $('qPresetPicked').textContent='Preset selected: '+selectedPreset;
-    $('qPresetPicked').style.color='rgba(52,211,153,.85)';
-    $('qNext').disabled=!qValid();
+
+  /* ───────── STEP/SUB VISIBILITY ───────── */
+  function showStep(){
+    document.querySelectorAll('.qw-step').forEach(function(el){
+      el.classList.remove('active');
+      el.style.display = 'none';
+    });
+    var key = state.step === 'done' ? 'done' : String(state.step);
+    var cur = document.querySelector('.qw-step[data-step="'+key+'"]');
+    if(cur){
+      cur.classList.add('active');
+      cur.style.display = '';
+    }
+    renderRail();
+    renderFooter();
+    if(qBody) qBody.scrollTop = 0;
   }
-  var tab=e.target.closest('.q-style-tab');
-  if(tab){
-    styleTab=tab.dataset.tab;
-    document.querySelectorAll('.q-style-tab').forEach(function(t){t.classList.remove('active')});
-    tab.classList.add('active');
-    if(styleTab==='preset'){
-      $('qStylePreset').style.display='';
-      $('qStyleCustom').style.display='none';
-    }else{
-      $('qStylePreset').style.display='none';
-      $('qStyleCustom').style.display='';
-      /* Lazy-load builder iframe on first open */
-      var fr=$('qBuilderFrame');
-      if(fr.src==='about:blank'||fr.src.indexOf('about:blank')===0){
-        fr.src='/portal/blueprints.html?embed=1&trial=1';
+
+  function showSub(sub){
+    state.subQ = sub;
+    document.querySelectorAll('.qw-step[data-step="1"] .qw-sub-screen').forEach(function(el){
+      el.style.display = 'none';
+    });
+    if(sub === 0){
+      document.querySelector('.qw-sub-screen[data-sub="0"]').style.display = '';
+    } else if(sub === 'dq'){
+      document.querySelector('.qw-sub-screen[data-sub="dq"]').style.display = '';
+    } else {
+      var wrap = document.querySelector('.qw-sub-screen[data-sub="q"]');
+      wrap.style.display = '';
+      document.querySelectorAll('.q-subq').forEach(function(el){ el.style.display='none'; });
+      var cur = document.querySelector('.q-subq[data-subq="'+(sub-1)+'"]');
+      if(cur) cur.style.display = '';
+      $('qSubQNum').textContent = sub;
+      var titles = [
+        'What type of content do you create?',
+        'How often do you post?',
+        "What's your main goal with video?",
+        'Do you have footage ready to edit?',
+        'How many videos per month?'
+      ];
+      var hints = [
+        'Pick all that apply.',
+        'Pick the one closest to your pace.',
+        'Pick what matters most right now.',
+        'Pick what describes you best.',
+        'Pick your target volume.'
+      ];
+      $('qSubQTitle').textContent = titles[sub-1];
+      $('qSubQHint').textContent  = hints[sub-1];
+    }
+    renderFooter();
+  }
+
+  /* ───────── FOOTER (Back + Next) ───────── */
+  function renderFooter(){
+    if(!qFoot) return;
+    if(state.step === 'done'){ qFoot.style.display = 'none'; return; }
+    qFoot.style.display = '';
+
+    // Back button: hidden on step 1 sub-0 (contact), otherwise visible
+    var canBack = !(state.step === 1 && state.subQ === 0);
+    qBack.hidden = !canBack;
+
+    // Next button label
+    if(state.step === 1 && state.subQ === 'dq'){
+      qNext.hidden = true;
+    } else if(state.step === 3){
+      qNext.hidden = true;   // step 3 auto-advances on iframe submit
+    } else {
+      qNext.hidden = false;
+      if(state.step === 1 && state.subQ === 5) qNext.innerHTML = 'Continue &rarr;';
+      else if(state.step === 2) qNext.innerHTML = 'Continue &rarr;';
+      else qNext.innerHTML = 'Continue &rarr;';
+    }
+
+    // Enabled state
+    var valid = qValid();
+    qNext.disabled = !valid;
+    qNext.style.opacity = valid ? '1' : '.5';
+    qNext.style.pointerEvents = valid ? '' : 'none';
+  }
+
+  /* ───────── VALIDATION ───────── */
+  function qValid(){
+    if(state.step === 1){
+      if(state.subQ === 0){
+        var first = $('qFirstName').value.trim();
+        var last  = $('qLastName').value.trim();
+        var email = $('qEmail').value.trim();
+        return !!(first && last && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+      }
+      if(state.subQ === 1) return state.answers.contentTypes.length > 0;
+      if(state.subQ === 2) return !!state.answers.postFreq;
+      if(state.subQ === 3) return !!state.answers.goal;
+      if(state.subQ === 4) return !!state.answers.footage;
+      if(state.subQ === 5) return !!state.answers.volume;
+      if(state.subQ === 'dq') return false;
+    }
+    if(state.step === 2) return state.blueprintSaved;
+    if(state.step === 3) return state.footageSubmitted;
+    return true;
+  }
+
+  /* ───────── SCORING ───────── */
+  function computeScore(){
+    var s = 0;
+    if(state.answers.contentTypes.length > 0) s += 20;
+    if(state.answers.postFreq) s += 15;
+    if(state.answers.goal) s += 15;
+    // footage: "Yes I'm ready to go" / "I have footage but not edited yet" qualify, others disqualify
+    if(state.answers.footage === "Yes I'm ready to go") s += 30;
+    else if(state.answers.footage === "I have footage but not edited yet") s += 25;
+    else if(state.answers.footage === "I'm still filming") s += 5;
+    else s += 0;
+    if(state.answers.volume) s += 20;
+    state.score = s;
+    // qualified if score >= 70 AND footage is ready/not-edited
+    state.qualified = s >= 70 && (
+      state.answers.footage === "Yes I'm ready to go" ||
+      state.answers.footage === "I have footage but not edited yet"
+    );
+    return state.qualified;
+  }
+
+  /* ───────── CHIPS ───────── */
+  function wireChips(){
+    document.querySelectorAll('.q-chips').forEach(function(group){
+      var multi = group.getAttribute('data-multi') === 'true';
+      group.addEventListener('click', function(ev){
+        var chip = ev.target.closest('.q-chip');
+        if(!chip) return;
+        if(multi){
+          chip.classList.toggle('active');
+        } else {
+          group.querySelectorAll('.q-chip').forEach(function(c){ c.classList.remove('active'); });
+          chip.classList.add('active');
+        }
+        // sync answers
+        if(group.id === 'qContentTypes'){
+          state.answers.contentTypes = Array.from(group.querySelectorAll('.q-chip.active')).map(function(c){ return c.getAttribute('data-val'); });
+        } else {
+          var active = group.querySelector('.q-chip.active');
+          var val = active ? active.getAttribute('data-val') : '';
+          if(group.id === 'qPostFreq') state.answers.postFreq = val;
+          if(group.id === 'qGoal')     state.answers.goal     = val;
+          if(group.id === 'qFootage')  state.answers.footage  = val;
+          if(group.id === 'qVolume')   state.answers.volume   = val;
+        }
+        renderFooter();
+      });
+    });
+  }
+
+  /* ───────── CONTACT INPUTS ───────── */
+  function wireContact(){
+    ['qFirstName','qLastName','qEmail','qPhone'].forEach(function(id){
+      var el = $(id);
+      if(!el) return;
+      el.addEventListener('input', function(){
+        state.contact.first = $('qFirstName').value.trim();
+        state.contact.last  = $('qLastName').value.trim();
+        state.contact.email = $('qEmail').value.trim();
+        state.contact.phone = $('qPhone').value.trim();
+        renderFooter();
+      });
+    });
+  }
+
+  /* ───────── SUBMIT CONTACT + ANSWERS → /api/trial/submit ───────── */
+  function submitContact(){
+    if(state.submittedContact) return Promise.resolve();
+    state.submittedContact = true;
+    var payload = {
+      first_name:    state.contact.first,
+      last_name:     state.contact.last,
+      email:         state.contact.email,
+      phone:         state.contact.phone,
+      content_types: state.answers.contentTypes,
+      post_freq:     state.answers.postFreq,
+      goal:          state.answers.goal,
+      footage:       state.answers.footage,
+      volume:        state.answers.volume,
+      score:         state.score,
+      qualified:     state.qualified,
+      source:        'free-trial-wizard'
+    };
+    return fetch('/api/trial/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(payload)
+    }).catch(function(){ state.submittedContact = false; });
+  }
+
+  /* ───────── DISQUALIFY ───────── */
+  function qDq(){
+    var tip = 'Keep building and come back when you have footage ready.';
+    if(state.answers.footage === 'Not yet' || state.answers.footage === "I'm still filming"){
+      tip = "We'll be here when your footage is ready. Come back and pick up right where you left off.";
+    }
+    var el = $('qDqTip');
+    if(el) el.textContent = tip;
+    state.subQ = 'dq';
+    submitContact();   // still create contact, role=trial, trial_status=disqualified
+    showSub('dq');
+  }
+  window.qRemind = function(){
+    var email = ($('qRemindEmail')||{}).value || '';
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      alert('Please enter a valid email.');
+      return;
+    }
+    fetch('/api/trial/remind', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      credentials:'include',
+      body: JSON.stringify({ email: email, contact_email: state.contact.email })
+    }).finally(function(){
+      var btn = document.querySelector('.q-remind .btn');
+      if(btn){ btn.textContent = "We'll email you."; btn.disabled = true; btn.style.opacity='.6'; }
+    });
+  };
+
+  /* ───────── LAZY-LOAD BUILDER IFRAME ───────── */
+  function loadBuilder(){
+    if(state.builderLoaded) return;
+    var fr = $('qBuilderFrame');
+    if(!fr) return;
+    var p = new URLSearchParams({
+      embed:'1',
+      trial:'1',
+      email: state.contact.email,
+      first: state.contact.first,
+      last:  state.contact.last
+    });
+    fr.src = '/portal/blueprints.html?' + p.toString();
+    state.builderLoaded = true;
+  }
+
+  /* ───────── IFRAME MESSAGES ───────── */
+  window.addEventListener('message', function(ev){
+    if(!ev || !ev.data) return;
+    var t = ev.data.type || ev.data;
+    if(t === 'blueprintSaved' || t === 'blueprintCreated'){
+      state.blueprintSaved = true;
+      renderFooter();
+    }
+    if(t === 'trialProjectSubmitted' || t === 'freeTrialFootageSubmitted'){
+      state.footageSubmitted = true;
+      var em = $('qFinalEmail');
+      if(em && state.contact.email){
+        em.textContent = 'Portal login + upload confirmation sent to ' + state.contact.email + '.';
+      }
+      state.step = 'done';
+      showStep();
+    }
+  });
+
+  /* ───────── NEXT / PREV ───────── */
+  window.qNext = function(){
+    if(!qValid()) return;
+
+    if(state.step === 1){
+      if(state.subQ === 0){
+        showSub(1);
+        return;
+      }
+      if(state.subQ >= 1 && state.subQ <= 4){
+        showSub(state.subQ + 1);
+        return;
+      }
+      if(state.subQ === 5){
+        computeScore();
+        if(!state.qualified){
+          qDq();
+          return;
+        }
+        submitContact();
+        state.step = 2;
+        showStep();
+        // small delay so iframe doesn't compete with step transition paint
+        setTimeout(loadBuilder, 80);
+        return;
       }
     }
-    $('qNext').disabled=!qValid();
-  }
-});
+    if(state.step === 2){
+      state.step = 3;
+      showStep();
+      return;
+    }
+  };
+  window.qPrev = function(){
+    if(state.step === 1){
+      if(state.subQ === 'dq'){ showSub(5); return; }
+      if(state.subQ > 0){ showSub(state.subQ - 1); return; }
+      return;
+    }
+    if(state.step === 2){
+      state.step = 1;
+      showStep();
+      showSub(5);
+      return;
+    }
+    if(state.step === 3){
+      state.step = 2;
+      showStep();
+      return;
+    }
+  };
 
-function readChips(){
-  contentTypes=[];
-  $('qContentTypes').querySelectorAll('.q-chip.selected').forEach(function(c){contentTypes.push(c.dataset.val)});
-  var pf=$('qPostFreq').querySelector('.q-chip.selected');postFreq=pf?pf.dataset.val:'';
-  var g=$('qGoal').querySelector('.q-chip.selected');primaryGoal=g?g.dataset.val:'';
-  var f=$('qFootage').querySelector('.q-chip.selected');hasFootage=f?f.dataset.val:'';
-  var v=$('qVolume').querySelector('.q-chip.selected');volume=v?v.dataset.val:'';
-}
-
-/* ── Validation ── */
-function isEmailValid(e){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)}
-function qValid(){
-  if(step===0){
-    return $('qFirstName').value.trim()&&$('qLastName').value.trim()&&isEmailValid($('qEmail').value.trim());
-  }
-  if(step===1){
-    if(subQ===0)return contentTypes.length>0;
-    if(subQ===1)return !!postFreq;
-    if(subQ===2)return !!primaryGoal;
-    if(subQ===3)return !!hasFootage;
-    if(subQ===4)return !!volume;
-  }
-  if(step===2){
-    if(!qualified)return false;
-    return !!selectedDay && !!selectedSlot;
-  }
-  if(step===3){return true;}
-  if(step===4){
-    /* Need either a preset picked OR a custom blueprint saved, AND footage submitted */
-    var styleOK=!!selectedPreset||!!builderBlueprint;
-    return styleOK && trialSubmitted;
-  }
-  return true;
-}
-
-/* ── Input listeners ── */
-['qFirstName','qLastName','qEmail','qPhone'].forEach(function(id){
-  $(id).addEventListener('input',function(){$('qNext').disabled=!qValid()});
-});
-$('qEmail').addEventListener('blur',function(){
-  var v=$('qEmail').value.trim();
-  $('qEmailErr').style.display=(v&&!isEmailValid(v))?'block':'none';
-});
-
-/* ── Navigation ── */
-function qShow(n){
-  step=n;
-  firstName=$('qFirstName').value.trim();
-  lastName=$('qLastName').value.trim();
-  email=$('qEmail').value.trim();
-  phone=$('qPhone').value.trim();
-
-  document.querySelectorAll('.qw-step').forEach(function(s){s.classList.remove('active')});
-  var el=document.querySelector('.qw-step[data-step="'+n+'"]');
-  if(el){void el.offsetWidth;el.classList.add('active')}
-  renderRail();
-
-  $('qBack').hidden=(n===0);
-
-  var foot=$('qFoot');
-  foot.hidden=false;
-  var btn=$('qNext');
-  btn.disabled=!qValid();
-  btn.className='btn btn-g5';
-  btn.style.display='';
-
-  if(n===0){ btn.textContent='Continue \u2192'; }
-  else if(n===1){ showSubQ(subQ); return; }
-  else if(n===2){
-    buildResultAndCalendar();
-    if(!qualified){ btn.style.display='none'; }
-    else{ btn.textContent='Confirm Booking \u2192'; }
-  }
-  else if(n===3){
-    buildConfirm();
-    btn.textContent='Upload Footage + Pick Style \u2192';
-  }
-  else if(n===4){
-    btn.textContent='Finish Free Trial \u2192';
-  }
-  else if(n===5){
-    buildFinal();
-    foot.hidden=true;
-  }
-}
-
-function showSubQ(i){
-  subQ=i;
-  var meta=SUBQ[i];
-  $('qSubQNum').textContent=(i+1);
-  $('qSubQTitle').textContent=meta.title;
-  $('qSubQHint').textContent=meta.hint;
-  document.querySelectorAll('.q-subq').forEach(function(s){s.style.display='none'});
-  var panel=document.querySelector('.q-subq[data-subq="'+i+'"]');
-  if(panel)panel.style.display='';
-  var btn=$('qNext');
-  btn.disabled=!qValid();
-  btn.textContent=(i<4)?'Next \u2192':'See My Results \u2192';
-  $('qBack').hidden=false;
-}
-
-function qNext(){
-  if(step===0){
-    if(!isEmailValid($('qEmail').value.trim())){$('qEmailErr').style.display='block';return}
-    qShow(1);
-    return;
-  }
-  if(step===1){
-    if(!qValid())return;
-    if(subQ<4){ showSubQ(subQ+1); return; }
-    readChips();
-    computeScore();
-    qShow(2);
-    return;
-  }
-  if(step===2){
-    if(!qualified)return;
-    if(!selectedDay||!selectedSlot)return;
-    /* Submit booking to /api/trial/submit BEFORE going to step 3 */
-    submitBooking();
-    return;
-  }
-  if(step===3){ qShow(4); return; }
-  if(step===4){
-    if(!qValid())return;
-    /* Final submit: attach style + mark complete */
-    submitStyle();
-    return;
-  }
-}
-function qPrev(){
-  if(step===1 && subQ>0){ showSubQ(subQ-1); return; }
-  if(step>0) qShow(step-1);
-}
-
-/* ── Scoring ── */
-function computeScore(){
-  score=0;
-  if(contentTypes.some(function(t){return t.indexOf('YouTube')>=0||t==='Podcast'}))score+=2;
-  if(postFreq==='Daily'||postFreq==='3-5x per week')score+=2;
-  else if(postFreq==='1-2x per week')score+=1;
-  if(primaryGoal==='Grow my audience'||primaryGoal==='Increase revenue'||primaryGoal==='All of the above')score+=2;
-  if(hasFootage.indexOf('Yes')===0||hasFootage.indexOf('I have footage')===0)score+=2;
-  if(volume==='5-10 videos / month'||volume==='11-20 videos / month'||volume==='20+ videos / month')score+=1;
-  qualified=score>=4;
-}
-
-/* ── Step 2: Result + Calendar ── */
-function buildResultAndCalendar(){
-  var el=$('qResultPanel');
-  if(qualified){
-    el.innerHTML='<div class="q-result-icon qualified"><svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg></div>'+
-      '<div class="qw-title">You\'re in.</div>'+
-      '<div class="qw-sub" style="margin-bottom:20px">You\'re exactly who we built Content Bug for. Pick a demo call time below.</div>';
-    $('qCalendarPanel').style.display='';
-    buildCalendar();
-  }else{
-    var tip='Keep building and come back when you have footage ready.';
-    if(postFreq==='Just starting out')tip='Start posting consistently, then come back.';
-    else if(hasFootage==='Not yet')tip='Get some footage filmed first — we\'ll be here.';
-    el.innerHTML='<div class="q-result-icon not-qualified"><svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" width="32" height="32"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>'+
-      '<div class="qw-title">Not quite the right fit — yet.</div>'+
-      '<div class="qw-sub">'+E(tip)+'</div>'+
-      '<div style="font:400 13px/1.5 var(--font);color:rgba(255,255,255,.5);margin:20px 0 12px">Want us to let you know when you\'re ready?</div>'+
-      '<div class="q-remind" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">'+
-        '<input class="q-field" id="qRemindEmail" type="email" value="'+E(email)+'" placeholder="your@email.com" style="padding:10px 12px;border-radius:var(--r-lg);font:400 13px/1 var(--font);color:var(--txt);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);outline:none">'+
-        '<button class="btn btn-g5 btn-sm" onclick="qRemind()">Remind Me</button>'+
-      '</div>';
-    $('qCalendarPanel').style.display='none';
-  }
-}
-
-async function qRemind(){
-  var remindEmail=($('qRemindEmail')||{}).value||email;
-  if(!remindEmail||!isEmailValid(remindEmail))return;
-  try{
-    await fetch(API+'/api/trial/submit',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({firstName:firstName,lastName:lastName,email:remindEmail,phone:phone,
-        contentTypes:contentTypes,postFreq:postFreq,primaryGoal:primaryGoal,hasFootage:hasFootage,volume:volume,
-        qualified:false,score:score,source:'Free Trial Wizard — Remind Me'})
-    });
-    if(typeof event!=='undefined'&&event&&event.target){var btn=event.target;btn.textContent='Sent!';btn.disabled=true;}
-  }catch(e){alert('Something went wrong. Please try again.')}
-}
-
-/* ── Calendar ── */
-var slotsCache={};
-function getNextBusinessDays(count){
-  var days=[],d=new Date();d.setDate(d.getDate()+1);
-  while(days.length<count){
-    var dow=d.getDay();
-    if(dow!==0&&dow!==6)days.push(new Date(d));
-    d.setDate(d.getDate()+1);
-  }
-  return days;
-}
-function formatDateISO(d){var y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return y+'-'+m+'-'+day}
-function formatDateLabel(d){
-  var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return days[d.getDay()]+', '+months[d.getMonth()]+' '+d.getDate();
-}
-function buildCalendar(){
-  var bizDays=getNextBusinessDays(2);
-  if(!selectedDay)selectedDay=formatDateISO(bizDays[0]);
-  var dh='';
-  bizDays.forEach(function(d){
-    var iso=formatDateISO(d);
-    var sel=iso===selectedDay?' selected':'';
-    dh+='<div class="q-day-card'+sel+'" onclick="qSelectDay(\''+iso+'\')">'+
-      '<div class="q-day-label">'+formatDateLabel(d)+'</div>'+
-      '<div class="q-day-date">'+iso+'</div></div>';
-  });
-  $('qDayCards').innerHTML=dh;
-  try{$('qTzLabel').textContent='All times in '+Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
-  fetchSlots(selectedDay);
-}
-function qSelectDay(iso){
-  selectedDay=iso;selectedSlot='';
-  document.querySelectorAll('.q-day-card').forEach(function(c){
-    c.classList.toggle('selected',c.querySelector('.q-day-date').textContent===iso);
-  });
-  fetchSlots(iso);
-  $('qNext').disabled=!qValid();
-}
-async function fetchSlots(dateStr){
-  var wrap=$('qSlotsWrap');
-  wrap.innerHTML='<div class="q-slots-loading"><span class="spinner-sm"></span>Loading available times...</div>';
-  if(slotsCache[dateStr]){renderSlots(slotsCache[dateStr]);return;}
-  try{
-    var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
-    var res=await fetch(API+'/api/calendar/slots?date='+encodeURIComponent(dateStr)+'&timezone='+encodeURIComponent(tz));
-    if(!res.ok)throw new Error('Failed');
-    var data=await res.json();
-    var slots=data.slots||data||[];
-    slotsCache[dateStr]=slots;
-    renderSlots(slots);
-  }catch(e){
-    wrap.innerHTML='<div class="q-slots-loading" style="color:rgba(255,255,255,.4)">No availability — pick another day.</div>';
-  }
-}
-function renderSlots(slots){
-  var wrap=$('qSlotsWrap');
-  if(!slots.length){wrap.innerHTML='<div class="q-slots-loading" style="color:rgba(255,255,255,.4)">No availability — pick another day.</div>';return;}
-  var h='<div class="q-slots">';
-  slots.forEach(function(s){
-    var label=typeof s==='string'?s:(s.label||s.time||s.startTime||'');
-    var val=typeof s==='string'?s:(s.value||s.slot||s.startTime||label);
-    var sel=val===selectedSlot?' selected':'';
-    h+='<div class="q-slot'+sel+'" onclick="qSelectSlot(\''+E(val)+'\')">'+E(label)+'</div>';
-  });
-  h+='</div>';
-  wrap.innerHTML=h;
-}
-function qSelectSlot(slot){
-  selectedSlot=slot;
-  document.querySelectorAll('.q-slot').forEach(function(c){
-    c.classList.toggle('selected',c.getAttribute('onclick').indexOf("'"+slot+"'")>=0);
-  });
-  $('qNext').disabled=!qValid();
-}
-
-/* ── Submit booking (end of step 2 → step 3) ── */
-async function submitBooking(){
-  var btn=$('qNext');
-  btn.disabled=true;btn.classList.add('loading');
-  btn.innerHTML='<span class="spinner-sm"></span>Booking...';
-  try{
-    var tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
-    var payload={
-      firstName:firstName,lastName:lastName,email:email,phone:phone,
-      contentTypes:contentTypes,postFreq:postFreq,primaryGoal:primaryGoal,hasFootage:hasFootage,volume:volume,
-      qualified:true,score:score,
-      appointmentDate:selectedDay,appointmentTime:selectedSlot,
-      appointmentTitle:'Content Bug Free Trial — Demo Call',
-      timezone:tz,source:'Free Trial Wizard',label:'Free Trial Edit'
-    };
-    var res=await fetch(API+'/api/trial/submit',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
-    });
-    if(!res.ok){var d=await res.json();throw new Error(d.error||'Submission failed')}
-    qShow(3);
-  }catch(e){
-    btn.disabled=false;btn.classList.remove('loading');
-    btn.innerHTML='Confirm Booking \u2192';
-    alert(e.message||'Something went wrong. Please try again.');
-  }
-}
-
-/* ── Step 3: Confirmation details ── */
-function buildConfirm(){
-  var rows=[
-    {l:'Name',v:E(firstName+' '+lastName)},
-    {l:'Email',v:E(email)},
-    {l:'Demo Call',v:E(selectedDay+' at '+selectedSlot)},
-    {l:'Duration',v:'30 min with Creative Director'}
-  ];
-  $('qConfirmSummary').innerHTML=rows.map(function(r){
-    return '<div class="q-summary-row"><span class="q-summary-lbl">'+r.l+'</span><span class="q-summary-val">'+r.v+'</span></div>';
-  }).join('');
-}
-
-/* ── Step 4: Footage + style ── */
-/* Listen for iframe postMessages from request.html (footage submitted) and blueprints.html (blueprint saved) */
-window.addEventListener('message',function(e){
-  var d=e.data||{};
-  if(d.type==='trialProjectSubmitted'||d.type==='freeTrialFootageSubmitted'){
-    trialSubmitted=true;
-    $('qNext').disabled=!qValid();
-  }
-  if(d.type==='blueprintSaved'||d.type==='blueprintCreated'){
-    builderBlueprint=d.blueprint||d.payload||true;
-    $('qNext').disabled=!qValid();
-  }
-});
-
-async function submitStyle(){
-  var btn=$('qNext');
-  btn.disabled=true;btn.classList.add('loading');
-  btn.innerHTML='<span class="spinner-sm"></span>Finishing...';
-  try{
-    var payload={
-      email:email,
-      stylePreset:selectedPreset||'',
-      customBlueprint:builderBlueprint?true:false,
-      source:'Free Trial Wizard — Style',
-      label:'Free Trial Edit'
-    };
-    await fetch(API+'/api/trial/submit',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
-    }).catch(function(){/* non-blocking */});
-    qShow(5);
-  }catch(e){
-    btn.disabled=false;btn.classList.remove('loading');
-    btn.innerHTML='Finish Free Trial \u2192';
-    alert(e.message||'Something went wrong.');
-  }
-}
-
-/* ── Step 5: Final screen ── */
-function buildFinal(){
-  $('qFinalEmail').textContent='We just emailed '+email+' with your demo call invite, upload confirmation, and next steps.';
-  $('qFinalSlot').textContent='Demo call: '+selectedDay+' at '+selectedSlot;
-}
-
-/* ── Init ── */
-renderRail();
-$('qNext').disabled=!qValid();
+  /* ───────── INIT ───────── */
+  wireChips();
+  wireContact();
+  showStep();
+  showSub(0);
+})();
 </script>
+
 </body>
 </html>
