@@ -1,0 +1,426 @@
+<link rel="stylesheet" href="https://api.contentbug.io/assets/design-system.css">
+<script>
+  if (window.self === window.top) {
+    document.documentElement.classList.add('bg-dark');
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.classList.add('bg-dark');
+      document.body.classList.add('cb-grid');
+      var s = document.querySelector('.ws-page');
+      if (s) {
+        s.classList.add('shell-body-glass');
+        s.style.margin = '8px 16px';
+        s.style.minHeight = 'calc(100vh - 16px)';
+      }
+    });
+  } else {
+    if (document.body) { document.body.classList.add('bg-dark'); }
+    else { document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('bg-dark'); }); }
+  }
+</script>
+<div class="ws-page">
+<script>
+/* GHL canonical URL → Railway path remap (only runs off-GHL, e.g. api.contentbug.io direct test) */
+(function(){
+  var h=location.hostname;
+  if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com')) return;
+  var map={
+    'https://contentbug.io/home':'/home',
+    'https://contentbug.io/pricing':'/pricing',
+    'https://contentbug.io/portfolio':'/portfolio',
+    'https://contentbug.io/free-trial':'/booking',
+    'https://contentbug.io/privacy-policy':'/privacy',
+    'https://contentbug.io/terms':'/terms'
+  };
+  document.querySelectorAll('a[href]').forEach(function(a){
+    var k=a.getAttribute('href');
+    if(map[k]) a.setAttribute('href', map[k]);
+  });
+})();
+</script>
+
+<div class="cb-header-bar" id="cb-header">
+  <a href="https://contentbug.io/home" class="cb-logo">
+    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
+  </a>
+  <nav class="cb-header" id="cbNav">
+    <a href="https://contentbug.io/home" class="cb-nav-link active">Home</a>
+    <a href="https://contentbug.io/pricing" class="cb-nav-link">Pricing</a>
+    <a href="https://contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
+    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
+    <a href="https://contentbug.io/free-trial" class="cb-nav-cta">Free Trial</a>
+  </nav>
+</div>
+<script>
+document.body.classList.add('ws-page');
+(function(){
+  var bar=document.querySelector('.cb-header-bar');
+  if(!bar)return;
+  var sentinel=document.createElement('div');
+  sentinel.style.cssText='height:0;width:0;visibility:hidden';
+  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
+      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
+    });
+  },{threshold:0});
+  io.observe(bar);
+})();
+</script>
+<section class="section"><div class="section-card">
+<div class="container">
+  <!-- Bug icon &mdash; premium depth backdrop, centered behind headline -->
+  <div style="display:flex;justify-content:center;margin-top:0px;margin-bottom:-220px;position:relative;pointer-events:none;z-index:1">
+    <div style="position:relative;display:inline-flex;align-items:center;justify-content:center">
+      <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(26,100,255,.04) 0%,rgba(26,100,255,.01) 35%,transparent 60%);pointer-events:none"></div>
+      <div style="position:relative;width:400px;height:400px;-webkit-mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%);mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%)">
+        <img loading="lazy" decoding="async" src="https://api.contentbug.io/website/assets/logo-bug-icon.png" alt="Content Bug" style="width:400px;height:400px;opacity:.06;display:block;object-fit:contain">
+      </div>
+    </div>
+  </div>
+
+  <div class="legal-header" style="position:relative;z-index:2">
+    <span class="section-label">LEGAL</span>
+    <h1 class="hero-title">Terms of Service</h1>
+    <p class="last-updated">Last Updated: February 2026</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>1. Agreement to Terms</h2>
+    <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("Client," "you," or "your") and <strong>Content Bug Video Editing, LLC</strong>, a Tennessee limited liability company ("Company," "we," "us," or "our"), governing your access to and use of our video editing subscription services, website, client portal, and related services (collectively, the "Services").</p>
+    <div class="warning-box">
+      <p><strong>IMPORTANT:</strong> By accessing or using our Services, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, you must not access or use our Services.</p>
+    </div>
+    <p>We reserve the right to modify these Terms at any time with thirty (30) days written notice. We will notify you of material changes by posting the updated Terms on our website and updating the "Last Updated" date. Your continued use of the Services after any modifications constitutes acceptance of the revised Terms.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>2. Description of Services</h2>
+    <p>Content Bug provides professional video editing subscription services for content creators, businesses, and individuals. Our Services include, but are not limited to:</p>
+    <ul>
+      <li>Short-form video editing (TikTok, YouTube Shorts, Instagram Reels)</li>
+      <li>Long-form video editing (YouTube, podcasts, educational content)</li>
+      <li>Custom motion graphics and visual effects</li>
+      <li>Color grading and audio enhancement</li>
+      <li>Thumbnail design and static graphics</li>
+      <li>Access to our client portal for project management</li>
+      <li>Unlimited revision requests</li>
+    </ul>
+    <h3>2.1 Subscription Plans</h3>
+    <p>We offer three subscription tiers with the following specifications:</p>
+    <table class="plan-table">
+      <thead><tr><th>Plan</th><th>Monthly Price</th><th>Long-Form Videos</th></tr></thead>
+      <tbody>
+        <tr><td class="plan-name">Basic</td><td>$750/month</td><td>5 videos</td></tr>
+        <tr><td class="plan-name">Silver</td><td>$1,300/month</td><td>10 videos</td></tr>
+        <tr><td class="plan-name">Gold</td><td>$1,950/month</td><td>15 videos</td></tr>
+      </tbody>
+    </table>
+    <h3>2.2 Turnaround Times</h3>
+    <p>Turnaround times are <strong>estimates only</strong> and vary based on multiple factors including:</p>
+    <ul>
+      <li>Length of raw footage submitted</li>
+      <li>Complexity and style of edit requested</li>
+      <li>Level of detail and customization required</li>
+      <li>Number of revision rounds needed</li>
+      <li>Current project queue volume</li>
+    </ul>
+    <p><strong>There are no guaranteed turnaround times.</strong> All delivery estimates provided are approximate and subject to change based on project requirements.</p>
+    <p>All plans include <strong>unlimited short-form videos</strong> (under 60 seconds) and <strong>unlimited revisions</strong>. A "long-form video" is defined as any video exceeding 60 seconds in final delivered duration.</p>
+    <h3>2.3 Rollover Policy</h3>
+    <p>Unused long-form video credits do <strong>not</strong> roll over to subsequent billing periods. Each billing cycle resets your long-form allocation.</p>
+    <h3>2.4 Service Limitations</h3>
+    <p>Our Services do <strong>not</strong> include:</p>
+    <ul>
+      <li>Original video production or filming</li>
+      <li>Stock footage licensing (Client provides or approves)</li>
+      <li>Music licensing (Client provides licensed music)</li>
+      <li>Script writing or content strategy</li>
+      <li>Social media management or posting</li>
+      <li>Real-time/live video production</li>
+    </ul>
+  </div>
+
+  <div class="legal-section">
+    <h2>3. Account Registration and Security</h2>
+    <p>To access our Services, you must create an account and provide accurate, complete, and current information. You are responsible for:</p>
+    <ul>
+      <li>Maintaining the confidentiality of your account credentials</li>
+      <li>All activities that occur under your account</li>
+      <li>Notifying us immediately of any unauthorized access or security breaches</li>
+      <li>Ensuring your contact information remains current and accurate</li>
+    </ul>
+    <p>We reserve the right to suspend or terminate accounts that contain false information, violate these Terms, or engage in fraudulent activity.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>4. Payment Terms</h2>
+    <h3>4.1 Subscription Billing</h3>
+    <p>All subscription fees are billed in advance on a monthly recurring basis. By subscribing to our Services, you authorize us to charge your designated payment method for all applicable fees.</p>
+    <h3>4.2 Payment Processing</h3>
+    <p>Payments are processed securely through Stripe, Inc. We do not store your complete payment card information on our servers. All payment data is encrypted and handled in accordance with PCI-DSS compliance standards.</p>
+    <h3>4.3 Failed Payments</h3>
+    <p>If a payment fails, we will attempt to process the charge up to three (3) additional times. Continued payment failures may result in service suspension. You remain responsible for all outstanding amounts.</p>
+    <h3>4.4 Price Changes</h3>
+    <p>We reserve the right to modify pricing with thirty (30) days' written notice. Price changes will take effect at your next billing cycle following the notice period.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>5. Cancellation and Refund Policy</h2>
+    <h3>5.1 Cancellation</h3>
+    <p>You may cancel your subscription at any time through your client portal or by contacting us directly. Cancellation will take effect at the end of your current billing period. You will retain access to Services until the end of your paid period.</p>
+    <h3>5.2 Refund Policy</h3>
+    <div class="warning-box">
+      <p><strong>ALL SUBSCRIPTION FEES ARE STRICTLY NON-REFUNDABLE. ZERO REFUNDS UNDER ANY CIRCUMSTANCES.</strong></p>
+    </div>
+    <p>Due to the nature of our services and the immediate allocation of resources upon subscription, we do not offer refunds for any reason whatsoever. This includes but is not limited to:</p>
+    <ul>
+      <li>Dissatisfaction with deliverables</li>
+      <li>Failure to use allocated services or video credits</li>
+      <li>Business closure or change in content strategy</li>
+      <li>Partial months or prepaid annual subscriptions</li>
+      <li>Any other reason not explicitly listed</li>
+    </ul>
+    <p><strong>Annual subscriptions are non-refundable.</strong> If you pay for a full year in advance, you are not entitled to any refund for any portion of the subscription period, even if you choose to cancel early or do not use the services.</p>
+    <h3>5.3 No Pauses or Freezes</h3>
+    <p><strong>Subscriptions cannot be paused or frozen.</strong> Your billing continues regardless of whether you submit content for editing. It is your responsibility to utilize your allocated video credits within each billing period.</p>
+    <h3>5.4 Monthly Credit Reset</h3>
+    <p><strong>Long-form video credits reset at the beginning of each billing period.</strong> Unused credits do not roll over to subsequent months. There are no carryovers, credits, or compensation for unused allocations. It is your sole responsibility to manage and utilize your subscription benefits within each billing cycle.</p>
+    <h3>5.5 Payment Obligations and Collections</h3>
+    <div class="warning-box">
+      <p><strong>FAILURE TO PAY WILL RESULT IN DEBT COLLECTION.</strong></p>
+    </div>
+    <p>By subscribing to our Services, you agree to pay all fees when due. If any payment is missed, late, or declined:</p>
+    <ul>
+      <li>Your account will be immediately suspended</li>
+      <li>Access to all services, deliverables, and portal features will be revoked</li>
+      <li>Outstanding balances will accrue late fees as permitted by law</li>
+      <li><strong>Delinquent accounts will be sent to third-party debt collection agencies</strong></li>
+      <li>You will be responsible for all collection costs, legal fees, and associated expenses</li>
+    </ul>
+    <p>We reserve the right to report delinquent accounts to credit bureaus and pursue all available legal remedies to recover unpaid amounts.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>6. Content and Intellectual Property</h2>
+    <h3>6.1 Your Content</h3>
+    <p>You retain all ownership rights to the raw footage, images, audio, and other materials you provide to us ("Your Content"). By submitting Your Content, you grant Content Bug a limited, non-exclusive, royalty-free license to use, copy, modify, and process Your Content solely for the purpose of providing the Services.</p>
+    <h3>6.2 Deliverables</h3>
+    <p>Upon full payment of all applicable fees, you will own the edited videos and deliverables we create for you ("Deliverables"). Until full payment is received, Content Bug retains all rights to the Deliverables.</p>
+    <h3>6.3 Portfolio Rights</h3>
+    <p>Unless you opt out in writing, you grant Content Bug the right to use Deliverables in our portfolio, marketing materials, social media, and case studies. You may opt out by notifying us in writing at any time.</p>
+    <h3>6.4 Third-Party Content</h3>
+    <p>You represent and warrant that you have all necessary rights, licenses, and permissions for any content you provide, including but not limited to music, images, footage, and graphics. You agree to indemnify us against any claims arising from your use of third-party content.</p>
+    <h3>6.5 Company Intellectual Property</h3>
+    <p>All Content Bug branding, trademarks, logos, software, templates, presets, and proprietary editing techniques remain our exclusive property. No license or rights to our intellectual property are granted except as expressly stated herein.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>7. Acceptable Use Policy</h2>
+    <p>You agree not to use our Services to create, edit, or distribute content that:</p>
+    <ul>
+      <li>Is illegal, harmful, threatening, abusive, harassing, defamatory, or obscene</li>
+      <li>Promotes violence, discrimination, or hatred against individuals or groups</li>
+      <li>Infringes upon intellectual property rights of third parties</li>
+      <li>Contains malware, viruses, or other harmful code</li>
+      <li>Violates any applicable local, state, national, or international law</li>
+      <li>Involves child exploitation or endangerment in any form</li>
+      <li>Constitutes spam, phishing, or fraudulent schemes</li>
+      <li>Misrepresents your identity or affiliation</li>
+    </ul>
+    <p>We reserve the right to refuse service, terminate accounts, or remove content that violates this policy, at our sole discretion and without prior notice or refund.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>8. Disclaimer of Warranties</h2>
+    <div class="warning-box">
+      <p><strong>SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED.</strong></p>
+    </div>
+    <p>To the maximum extent permitted by applicable law, Content Bug disclaims all warranties, including but not limited to:</p>
+    <ul>
+      <li>Implied warranties of merchantability and fitness for a particular purpose</li>
+      <li>Warranties regarding the accuracy, reliability, or completeness of Services</li>
+      <li>Warranties that Services will be uninterrupted, timely, or error-free</li>
+      <li>Warranties regarding results achieved from using our Services</li>
+    </ul>
+    <p>We do not guarantee specific outcomes including but not limited to: video performance metrics, audience growth, revenue generation, or engagement rates. Results vary based on content quality, niche, algorithm changes, and factors outside our control.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>9. Limitation of Liability</h2>
+    <div class="warning-box">
+      <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, CONTENT BUG SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.</strong></p>
+    </div>
+    <p>In no event shall Content Bug's total liability exceed the amount paid by you in the three (3) months preceding the claim. This limitation applies to:</p>
+    <ul>
+      <li>Lost profits, revenue, or business opportunities</li>
+      <li>Loss of data or content</li>
+      <li>Business interruption</li>
+      <li>Reputational damage</li>
+      <li>Cost of substitute services</li>
+      <li>Any other intangible losses</li>
+    </ul>
+    <p>These limitations apply regardless of the legal theory (contract, tort, strict liability, or otherwise) and even if Content Bug has been advised of the possibility of such damages.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>10. Indemnification</h2>
+    <p>You agree to defend, indemnify, and hold harmless Content Bug Video Editing, LLC, its owners, officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any and all claims, damages, obligations, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from or related to:</p>
+    <ul>
+      <li>Your use of the Services</li>
+      <li>Your violation of these Terms</li>
+      <li>Your violation of any third-party rights, including intellectual property rights</li>
+      <li>Your Content or any content you submit through the Services</li>
+      <li>Any misrepresentation made by you</li>
+      <li>Your negligent or wrongful conduct</li>
+      <li>Any claims by third parties arising from your edited content</li>
+    </ul>
+    <p>We reserve the right, at your expense, to assume exclusive defense and control of any matter subject to indemnification. This indemnification obligation survives termination of your subscription and these Terms.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>11. DMCA and Copyright Claims</h2>
+    <p>Content Bug respects intellectual property rights and expects Clients to do the same.</p>
+    <h3>11.1 Copyright Infringement Claims</h3>
+    <p>If you believe content on our platform infringes your copyright, please contact our designated DMCA agent at <strong>contentbug@contentbug.io</strong> with:</p>
+    <ul>
+      <li>A physical or electronic signature of the copyright owner or authorized agent</li>
+      <li>Identification of the copyrighted work claimed to be infringed</li>
+      <li>Identification of the infringing material and its location</li>
+      <li>Your contact information (address, telephone number, email)</li>
+      <li>A statement of good faith belief that use is unauthorized</li>
+      <li>A statement under penalty of perjury that the information is accurate</li>
+    </ul>
+    <h3>11.2 Repeat Infringers</h3>
+    <p>We reserve the right to terminate accounts of repeat copyright infringers without refund.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>12. Dispute Resolution and Arbitration</h2>
+    <div class="highlight-box">
+      <p><strong>PLEASE READ THIS SECTION CAREFULLY. IT AFFECTS YOUR LEGAL RIGHTS, INCLUDING YOUR RIGHT TO FILE A LAWSUIT IN COURT.</strong></p>
+    </div>
+    <h3>12.1 Informal Resolution</h3>
+    <p>Before initiating any formal dispute resolution proceeding, you agree to first contact us at <strong>contentbug@contentbug.io</strong> to attempt informal resolution for at least thirty (30) days. Most disputes can be resolved through good-faith communication.</p>
+    <h3>12.2 Binding Arbitration</h3>
+    <p>If informal resolution fails, any dispute, claim, or controversy arising out of or relating to these Terms or the Services shall be resolved exclusively through <strong>binding arbitration</strong> administered by the American Arbitration Association ("AAA") in accordance with its Consumer Arbitration Rules.</p>
+    <ul>
+      <li>Arbitration will take place in Nashville, Tennessee, or virtually at your election</li>
+      <li>The arbitrator's decision is final and binding</li>
+      <li>Judgment on the award may be entered in any court of competent jurisdiction</li>
+      <li>Each party bears its own costs; filing fees split equally</li>
+    </ul>
+    <h3>12.3 Class Action Waiver</h3>
+    <p><strong>YOU AND CONTENT BUG AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, COLLECTIVE, OR REPRESENTATIVE PROCEEDING.</strong></p>
+    <h3>12.4 Exceptions</h3>
+    <p>Either party may seek injunctive relief in court for intellectual property infringement or unauthorized access to Services. Either party may bring an individual action in small claims court for disputes within the court's jurisdictional limits.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>13. Force Majeure</h2>
+    <p>Content Bug shall not be liable for any failure or delay in performance due to circumstances beyond our reasonable control, including but not limited to:</p>
+    <ul>
+      <li>Acts of God, natural disasters, or severe weather events</li>
+      <li>War, terrorism, civil unrest, or government actions</li>
+      <li>Pandemics, epidemics, or public health emergencies</li>
+      <li>Power outages, internet service disruptions, or telecommunications failures</li>
+      <li>Cyberattacks, hacking, or system security breaches</li>
+      <li>Strikes, labor disputes, or supply chain disruptions</li>
+      <li>Third-party service provider failures</li>
+    </ul>
+    <p>In such events, our obligations will be suspended for the duration of the force majeure event. If the event continues for more than thirty (30) days, either party may terminate the subscription without penalty.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>14. Governing Law and Jurisdiction</h2>
+    <p>These Terms and any disputes arising hereunder shall be governed by and construed in accordance with the laws of the <strong>State of Tennessee</strong>, without regard to its conflict of law principles.</p>
+    <p>Subject to the arbitration provisions above, you consent to the exclusive jurisdiction and venue of the state and federal courts located in <strong>Davidson County, Tennessee</strong> for any legal proceedings not subject to arbitration.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>15. Confidentiality</h2>
+    <p>Each party agrees to maintain the confidentiality of any proprietary or confidential information received from the other party. This includes, but is not limited to:</p>
+    <ul>
+      <li>Business strategies, pricing, and financial information</li>
+      <li>Unreleased content, creative concepts, and project details</li>
+      <li>Technical information, software, and systems</li>
+      <li>Personal information and customer data</li>
+    </ul>
+    <p>Confidential information shall not be disclosed to third parties without prior written consent, except as required by law or to fulfill the Services. This confidentiality obligation survives termination of your subscription.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>16. Communications</h2>
+    <p>By using our Services, you consent to receive communications from us electronically, including:</p>
+    <ul>
+      <li>Email notifications regarding your account and projects</li>
+      <li>SMS/text messages for urgent updates (message and data rates may apply)</li>
+      <li>In-app notifications through the client portal</li>
+      <li>Marketing communications (you may opt out at any time)</li>
+    </ul>
+    <p>Reply STOP to opt-out of SMS. Reply HELP for assistance. Opting out of marketing communications will not affect service-related communications.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>17. General Provisions</h2>
+    <h3>17.1 Entire Agreement</h3>
+    <p>These Terms, together with our Privacy Policy and any service-specific agreements, constitute the entire agreement between you and Content Bug regarding the Services and supersede all prior agreements, understandings, and communications.</p>
+    <h3>17.2 Severability</h3>
+    <p>If any provision of these Terms is found to be unenforceable or invalid by a court of competent jurisdiction, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
+    <h3>17.3 Waiver</h3>
+    <p>Our failure to enforce any right or provision of these Terms shall not constitute a waiver of such right or provision. Any waiver must be in writing and signed by an authorized representative of Content Bug.</p>
+    <h3>17.4 Assignment</h3>
+    <p>You may not assign or transfer these Terms or your rights hereunder without our prior written consent. We may assign these Terms without restriction. Any attempted assignment in violation of this section is void.</p>
+    <h3>17.5 Survival</h3>
+    <p>Sections relating to intellectual property, limitation of liability, indemnification, dispute resolution, governing law, and any other provisions that by their nature should survive, shall survive termination of these Terms.</p>
+  </div>
+
+</div>
+</div></section>
+
+<section class="section"><div class="section-card">
+<div class="container">
+  <div class="contact-box fade-up">
+    <h3>Questions About These Terms?</h3>
+    <p>If you have any questions about these Terms of Service, please contact us:</p>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>Content Bug Video Editing, LLC &middot; 9016 Carondelet Pl, Brentwood, TN 37027</span>
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a>
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:+1 (385) 200-7582">+1 (385) 200-7582</a>
+    </div>
+    <div class="btn-row">
+      <a href="https://contentbug.io/home" class="btn btn-ghost">Back to Home</a>
+      <a href="https://contentbug.io/privacy-policy" class="btn btn-ghost">Privacy Policy</a>
+      <a href="https://contentbug.io/free-trial" class="btn btn-primary">Free Trial</a>
+    </div>
+  </div>
+</div>
+</div></section>
+
+<script>
+(function(){
+  var f = document.getElementById('cb-footer');
+  if (!f) return;
+  var p = f.parentElement;
+  while (p && p !== document.documentElement) {
+    if (p !== document.body) {
+      p.style.setProperty('background', 'none', 'important');
+      p.style.setProperty('background-color', 'transparent', 'important');
+      p.style.setProperty('background-image', 'none', 'important');
+      p.style.setProperty('color', 'var(--txt3)', 'important');
+      p.style.setProperty('border', 'none', 'important');
+      p.style.setProperty('box-shadow', 'none', 'important');
+      p.style.setProperty('border-radius', '0', 'important');
+    }
+    p = p.parentElement;
+  }
+})();
+</script>
+</div>
