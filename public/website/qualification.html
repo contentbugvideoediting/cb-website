@@ -263,7 +263,14 @@ body{
       <iframe id="qRequestFrame" src="about:blank" style="width:100%;height:720px;border:none;border-radius:var(--r-xl);margin-top:16px;background:rgba(0,0,0,.2)" loading="lazy" title="Submit Your Free Trial Edit"></iframe>
     </div>
 
-    <!-- ═══ SUCCESS: auto-shown after submission ═══ -->
+    <!-- ═══ STEP 3: Book your demo call ═══ -->
+    <div class="qw-step" data-step="3">
+      <div class="qw-title">Book your demo call.</div>
+      <div class="qw-sub">Last step — lock in a 15-minute call so we can walk you through your free edit and your portal. Portal access unlocks once you book.</div>
+      <iframe id="qDemoFrame" src="about:blank" style="width:100%;height:720px;border:none;border-radius:var(--r-xl);margin-top:16px;background:rgba(0,0,0,.2)" loading="lazy" title="Book Your Demo Call"></iframe>
+    </div>
+
+    <!-- ═══ SUCCESS: auto-shown after demo booking ═══ -->
     <div class="qw-step" data-step="done">
       <div class="q-result-icon qualified">
         <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>
@@ -388,11 +395,13 @@ body{
   'use strict';
 
   var state = {
-    step: 1,          // 1 = Qualify | 2 = Request | 'done' = success
+    step: 1,          // 1 = Qualify | 2 = Request | 3 = Demo | 'done' = success
     subQ: 0,          // within step 1: 0 = contact | 1-5 = questions | 'dq' = disqualified
     contact: { first:'', last:'', email:'', phone:'' },
     answers: { contentTypes:[], postFreq:'', goal:'', footage:'', volume:'' },
-    score: 0, qualified:false, requestLoaded:false, submittedContact:false, footageSubmitted:false
+    score: 0, qualified:false,
+    requestLoaded:false, demoLoaded:false,
+    submittedContact:false, editSubmitted:false, demoBooked:false
   };
   var $ = function(id){ return document.getElementById(id); };
   var qRail = $('qRail'), qFoot = $('qFoot'), qBack = $('qBack'), qNext = $('qNext'), qBody = $('qBody');
@@ -440,9 +449,9 @@ body{
     if(!qFoot) return;
     if(state.step === 'done'){ qFoot.style.display='none'; return; }
     qFoot.style.display = '';
-    qBack.hidden = !(state.step === 1 && state.subQ !== 0) && !(state.step === 2);
-    // Hide Next on step 2 (user submits from inside iframe) and on disqualified
-    if(state.step === 2 || (state.step === 1 && state.subQ === 'dq')){ qNext.hidden = true; }
+    qBack.hidden = !(state.step === 1 && state.subQ !== 0) && (state.step !== 2) && (state.step !== 3);
+    // Hide Next on step 2, step 3 (user acts inside iframe), and on disqualified
+    if(state.step === 2 || state.step === 3 || (state.step === 1 && state.subQ === 'dq')){ qNext.hidden = true; }
     else { qNext.hidden = false; qNext.innerHTML = 'Continue &rarr;'; }
     var v = qValid();
     qNext.disabled = !v;
@@ -463,6 +472,7 @@ body{
       if(state.subQ === 'dq') return false;
     }
     if(state.step === 2) return false;   // user submits from inside the iframe
+    if(state.step === 3) return false;   // user books from inside the iframe
     return true;
   }
   function computeScore(){
@@ -550,15 +560,49 @@ body{
     fr.src = '/portal/request-trial.html?' + p.toString();
     state.requestLoaded = true;
   }
+  function loadDemo(){
+    if(state.demoLoaded) return;
+    var fr = $('qDemoFrame'); if(!fr) return;
+    /* GHL calendar widget URL — set GHL_DEMO_CALENDAR_URL in Railway and
+       inject as a <meta name="cb-demo-calendar" content="..."> if you want
+       to override. Falls back to the contentbug demo calendar path below. */
+    var meta = document.querySelector('meta[name="cb-demo-calendar"]');
+    var base = (meta && meta.content) || 'https://api.contentbug.io/widget/booking/free-trial-demo';
+    var p = new URLSearchParams({
+      first_name: state.contact.first, last_name: state.contact.last,
+      email: state.contact.email, phone: state.contact.phone
+    });
+    fr.src = base + (base.indexOf('?') === -1 ? '?' : '&') + p.toString();
+    state.demoLoaded = true;
+  }
+  function bookDemo(appointmentDateTime, tz){
+    state.demoBooked = true;
+    fetch('/api/trial/book-demo', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      credentials:'include',
+      body: JSON.stringify({ email: state.contact.email, appointmentDateTime: appointmentDateTime || '', appointmentTimezone: tz || '' })
+    }).finally(function(){
+      var em = $('qFinalEmail');
+      if(em && state.contact.email) em.textContent = 'Portal login + edit confirmation sent to ' + state.contact.email + '.';
+      state.step = 'done';
+      showStep();
+    });
+  }
   window.addEventListener('message', function(ev){
     if(!ev || !ev.data) return;
     var t = ev.data.type || ev.data;
     if(t === 'trialProjectSubmitted' || t === 'freeTrialFootageSubmitted'){
-      state.footageSubmitted = true;
-      var em = $('qFinalEmail');
-      if(em && state.contact.email) em.textContent = 'Portal login + upload confirmation sent to ' + state.contact.email + '.';
-      state.step = 'done';
-      showStep();
+      state.editSubmitted = true;
+      state.step = 3; showStep();
+      setTimeout(loadDemo, 80);
+      return;
+    }
+    /* GHL / Calendly / generic calendar booked events */
+    if(t === 'demoBooked' || t === 'appointmentBooked' || (ev.data && ev.data.event === 'calendly.event_scheduled')){
+      var appt = (ev.data && (ev.data.appointmentDateTime || ev.data.payload && ev.data.payload.event && ev.data.payload.event.start_time)) || '';
+      var tz   = (ev.data && (ev.data.timezone || ev.data.appointmentTimezone)) || '';
+      bookDemo(appt, tz);
     }
   });
   window.qNext = function(){
@@ -581,6 +625,7 @@ body{
       if(state.subQ > 0){ showSub(state.subQ - 1); return; }
     }
     if(state.step === 2){ state.step = 1; showStep(); showSub(5); }
+    if(state.step === 3){ state.step = 2; showStep(); }
   };
   wireChips(); wireContact(); showStep(); showSub(0);
 })();
