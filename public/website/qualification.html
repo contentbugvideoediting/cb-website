@@ -42,6 +42,23 @@
     <a href="https://api.contentbug.io/free-trial" class="cb-nav-cta active">Free Trial</a>
   </nav>
 </div>
+<script>
+/* Sticky-nav behavior — identical to home/pricing/portfolio. */
+(function(){
+  var bar=document.querySelector('.cb-header-bar');
+  if(!bar)return;
+  var sentinel=document.createElement('div');
+  sentinel.style.cssText='height:0;width:0;visibility:hidden';
+  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
+      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
+    });
+  },{threshold:0});
+  io.observe(bar);
+})();
+</script>
 
 <!-- ═══ WIZARD (sits on top of ws-page background, not as modal overlay) ═══ -->
 <section class="section" id="qShell" style="padding:40px 20px 80px">
@@ -289,6 +306,52 @@
 </div>
 </div>
 </section>
+
+<!-- Content Bug Footer — same as home/pricing/portfolio -->
+<footer class="cb-footer" id="cb-footer">
+  <div class="cb-ft-grid">
+    <div class="cb-ft-brand">
+      <a href="https://api.contentbug.io/home" class="cb-logo">
+        <img loading="lazy" decoding="async" src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug" style="height:28px;filter:brightness(0) invert(1)">
+      </a>
+      <div class="cb-ft-tagline">Unlimited video editing for creators who move fast.</div>
+      <div class="cb-ft-social">
+        <a href="https://x.com/contentbug" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://instagram.com/contentbug" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="https://youtube.com/@contentbug" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://tiktok.com/@contentbug" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
+        <a href="https://facebook.com/contentbug" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+      </div>
+    </div>
+    <div class="cb-ft-col">
+      <div class="cb-ft-col-title">EXPLORE</div>
+      <a href="https://api.contentbug.io/home">Home</a>
+      <a href="https://api.contentbug.io/pricing">Pricing</a>
+      <a href="https://api.contentbug.io/portfolio">Portfolio</a>
+    </div>
+    <div class="cb-ft-col">
+      <div class="cb-ft-col-title">COMPANY</div>
+      <a href="https://api.contentbug.io/faq">FAQ</a>
+      <a href="https://api.contentbug.io/free-trial">Start Free Trial</a>
+      <a href="https://api.contentbug.io/portal/login.html">Portal Login</a>
+    </div>
+    <div class="cb-ft-col">
+      <div class="cb-ft-col-title">CONTACT</div>
+      <div class="cb-ft-contact-item"><a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a></div>
+      <div class="cb-ft-contact-item"><a href="tel:+1 (385) 200-7582">+1 (385) 200-7582</a></div>
+      <div class="cb-ft-hours"><strong>Hours:</strong> Monday - Friday (9-6pm MST)</div>
+    </div>
+  </div>
+  <div class="cb-ft-divider"></div>
+  <div class="cb-ft-legal">
+    <span>&copy; 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
+    <div class="cb-ft-legal-links">
+      <a href="https://api.contentbug.io/privacy">Privacy Policy</a>
+      <span class="cb-ft-legal-sep">&middot;</span>
+      <a href="https://api.contentbug.io/terms">Terms of Service</a>
+    </div>
+  </div>
+</footer>
 
 <script>
 /* =====================================================================
