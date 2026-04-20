@@ -14,24 +14,126 @@
 <link rel="stylesheet" href="/website/qualification.css">
 <script>if(document.body){document.body.classList.add("bg-dark")}else{document.addEventListener("DOMContentLoaded",function(){document.body.classList.add("bg-dark")})}</script>
 <style>
-  /* Match marketing website background — same 2-layer gradient as home/pricing/portfolio. */
-  html{background:#000001 !important}
-  body.bg-dark{
-    background:
-      linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.045) 22%,rgba(255,255,255,.055) 40%,rgba(255,255,255,.07) 60%,rgba(255,255,255,.09) 75%,rgba(255,255,255,.11) 88%,rgba(255,255,255,.14) 100%),
-      linear-gradient(180deg,#032a4b 0%,#032848 10%,#022240 20%,#021c36 30%,#02172e 40%,#011226 50%,#010d1e 60%,#010916 70%,#00050e 80%,#000308 90%,#000001 100%) !important;
-    background-attachment:fixed,fixed !important;
-    background-repeat:no-repeat,no-repeat !important;
-    background-size:100% 100vh,100% 100vh !important;
-  }
+/* ═════════════════════════════════════════════════════════════════
+   FREE TRIAL — mirrors Desktop/website/home.html inline styles
+   (tokens, body bg, header bar, footer). Uses !important on
+   conflicting selectors to beat design-system.css .ws-page overrides.
+   ═════════════════════════════════════════════════════════════════ */
+
+/* TOKENS */
+.ws-page{
+  --blue:#1a9eff;--blue-brand:#0071e3;--blue-hover:#0077ed;
+  --txt:#fff;--txt2:#d0d0d5;--txt3:#9a9aa0;--txt4:#6a6a70;
+  --glass-b:1px solid rgba(255,255,255,.08);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --font-display:'SF Pro Display',-apple-system,BlinkMacSystemFont,system-ui,'Helvetica Neue',Arial,sans-serif;
+  --font:'SF Pro Text',-apple-system,BlinkMacSystemFont,system-ui,'Helvetica Neue',Arial,sans-serif;
+}
+
+/* PORTAL BACKGROUND — 2 fixed layers: glass overlay on blue gradient */
+html{background:#000001 !important}
+body{
+  margin:0 !important;padding:0 !important;color:#fff !important;min-height:100vh !important;
+  font:400 16px/1.6 var(--font) !important;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.045) 22%,rgba(255,255,255,.055) 40%,rgba(255,255,255,.07) 60%,rgba(255,255,255,.09) 75%,rgba(255,255,255,.11) 88%,rgba(255,255,255,.14) 100%),
+    linear-gradient(180deg,#032a4b 0%,#032848 10%,#022240 20%,#021c36 30%,#02172e 40%,#011226 50%,#010d1e 60%,#010916 70%,#00050e 80%,#000308 90%,#000001 100%) !important;
+  background-attachment:fixed,fixed !important;
+  background-repeat:no-repeat,no-repeat !important;
+  background-size:100% 100vh,100% 100vh !important;
+}
+.ws-page{min-height:100vh;color:#fff}
+
+/* HEADER NAV — overrides design-system .ws-page .cb-header-bar !important with same specificity; inline source order wins */
+.ws-page .cb-header-bar{position:relative!important;z-index:100!important;padding:24px 40px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;max-width:1320px!important;margin:0 auto!important;top:auto!important;background:transparent!important;border:none!important}
+.ws-page .cb-header-bar .cb-logo{display:flex!important;position:static!important;left:auto!important;top:auto!important;transform:none!important;align-items:center!important}
+.ws-page .cb-header-bar .cb-logo img{height:32px!important;width:auto!important;display:block!important}
+.ws-page .cb-header{display:flex!important;align-items:center!important;gap:6px!important;padding:8px!important;border-radius:100px!important;background:rgba(255,255,255,.03)!important;border:var(--glass-b)!important;position:static!important;top:auto!important;left:auto!important;transform:none!important;box-shadow:none!important;width:auto!important;height:auto!important}
+.ws-page .cb-header.nav-fixed{position:fixed!important;top:16px!important;left:50%!important;transform:translateX(-50%)!important;z-index:200!important;background:rgba(10,14,22,.72)!important;box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1)!important}
+.ws-page .cb-nav-link{padding:10px 18px!important;border-radius:100px!important;font:500 14px/1 var(--font)!important;color:var(--txt2)!important;transition:color .2s,background .2s!important;background:transparent!important}
+.ws-page .cb-nav-link:hover{color:#fff!important;background:rgba(255,255,255,.06)!important}
+.ws-page .cb-nav-link.active{color:#fff!important;background:rgba(255,255,255,.08)!important}
+.ws-page .cb-nav-cta{padding:10px 20px!important;border-radius:100px!important;font:600 14px/1 var(--font)!important;color:#fff!important;background:linear-gradient(180deg,#2997ff 0%,#0071e3 100%)!important;box-shadow:0 1px 2px rgba(0,0,0,.3),0 4px 12px rgba(0,113,227,.35),inset 0 1px 0 rgba(255,255,255,.2)!important;transition:transform .2s,box-shadow .2s!important;border:none!important}
+.ws-page .cb-nav-cta:hover{transform:translateY(-1px)!important;box-shadow:0 2px 4px rgba(0,0,0,.35),0 8px 20px rgba(0,113,227,.5),inset 0 1px 0 rgba(255,255,255,.25)!important}
+
+/* SECTIONS + CONTAINERS */
+.ws-page .section{padding:96px 24px;position:relative}
+.ws-page .section:first-of-type{padding-top:40px}
+.ws-page .container{max-width:860px;margin:0 auto}
+
+/* FOOTER — full-width outer, inner glass card capped at 1200px */
+.ws-page .cb-footer{position:relative!important;padding:72px 40px 40px!important;margin-top:96px!important;color:#fff!important;background:transparent!important;width:100%!important;max-width:100%!important;border:none!important;border-top:none!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
+.ws-page .cb-ft-glass{position:relative;max-width:1200px;margin:0 auto;padding:40px 40px 28px;border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08)}
+.ws-page .cb-ft-grid{display:grid!important;grid-template-columns:1.4fr 1fr 1fr 1.3fr!important;gap:40px 48px!important;max-width:none!important;margin:0!important;align-items:start!important}
+.ws-page .cb-ft-brand{display:flex!important;flex-direction:column!important;gap:12px!important}
+.ws-page .cb-ft-brand .cb-logo{position:static!important;left:auto!important;top:auto!important;transform:none!important;display:inline-flex!important;align-items:center!important}
+.ws-page .cb-ft-brand .cb-logo img{height:28px!important;width:auto!important;display:block!important}
+.ws-page .cb-ft-tagline{font:400 14px/1.55 var(--font)!important;color:rgba(255,255,255,.75)!important;margin:4px 0 0!important;max-width:320px!important}
+.ws-page .cb-ft-social{display:flex!important;gap:10px!important;margin-top:10px!important}
+.ws-page .cb-ft-social a{width:36px!important;height:36px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border-radius:10px!important;border:1px solid rgba(255,255,255,.15)!important;background:rgba(255,255,255,.05)!important;color:#fff!important;transition:background .15s,color .15s,transform .15s!important;transform:none!important}
+.ws-page .cb-ft-social a:hover{background:rgba(255,255,255,.1)!important;transform:translateY(-1px)!important}
+.ws-page .cb-ft-social svg{width:15px!important;height:15px!important;display:block!important}
+.ws-page .cb-ft-col{display:flex!important;flex-direction:column!important;gap:0!important}
+.ws-page .cb-ft-col-title{font:600 11px/1 var(--font)!important;text-transform:uppercase!important;letter-spacing:2px!important;color:#fff!important;margin-bottom:16px!important}
+.ws-page .cb-ft-col a{display:block!important;font:400 14px/1 var(--font)!important;color:rgba(255,255,255,.75)!important;padding:7px 0!important;text-decoration:none!important;transition:color .15s ease!important;line-height:1!important}
+.ws-page .cb-ft-col a:hover{color:#fff!important}
+.ws-page .cb-ft-contact-item{margin-bottom:10px!important}
+.ws-page .cb-ft-contact-item a{font:400 14px/1.4 var(--font)!important;color:rgba(255,255,255,.75)!important;text-decoration:none!important;transition:color .15s ease!important}
+.ws-page .cb-ft-contact-item a:hover{color:#fff!important}
+.ws-page .cb-ft-hours{font:400 13px/1.5 var(--font)!important;color:rgba(255,255,255,.6)!important;margin-top:10px!important;padding-top:0!important;border-top:none!important}
+.ws-page .cb-ft-hours strong{color:rgba(255,255,255,.85)!important;font-weight:500!important}
+.ws-page .cb-ft-divider{height:1px!important;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12) 20%,rgba(255,255,255,.12) 80%,transparent)!important;margin:32px 0 20px!important;max-width:none!important}
+.ws-page .cb-ft-legal{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;flex-wrap:wrap!important;font:400 12px/1.5 var(--font)!important;color:rgba(255,255,255,.6)!important;max-width:none!important}
+.ws-page .cb-ft-legal span{color:rgba(255,255,255,.6)!important;font-size:12px!important}
+.ws-page .cb-ft-legal a{color:rgba(255,255,255,.6)!important;text-decoration:none!important;transition:color .15s ease!important;font-size:12px!important}
+.ws-page .cb-ft-legal a:hover{color:#fff!important}
+.ws-page .cb-ft-legal-links{display:flex!important;align-items:center!important;gap:10px!important}
+.ws-page .cb-ft-legal-sep{color:rgba(255,255,255,.3)!important}
+
+/* RESPONSIVE */
+@media (max-width:860px){
+  .ws-page .cb-footer{padding:48px 20px 32px!important;margin-top:64px!important}
+  .ws-page .cb-ft-glass{padding:32px 24px 24px}
+  .ws-page .cb-ft-grid{grid-template-columns:1fr 1fr!important;gap:28px!important}
+  .ws-page .cb-ft-brand{grid-column:span 2!important}
+  .ws-page .cb-ft-legal{flex-direction:column!important;align-items:flex-start!important}
+}
+@media (max-width:820px){
+  .ws-page .cb-header-bar{padding:16px 20px!important;flex-wrap:wrap!important;gap:12px!important}
+  .ws-page .cb-header{order:3!important;width:100%!important;overflow-x:auto!important;scrollbar-width:none!important;justify-content:flex-start!important}
+  .ws-page .cb-header::-webkit-scrollbar{display:none}
+  .ws-page .section{padding:72px 20px}
+}
+@media (max-width:520px){
+  .ws-page .cb-ft-grid{grid-template-columns:1fr!important}
+  .ws-page .cb-ft-brand{grid-column:span 1!important}
+}
 </style>
 </head>
-<body class="bg-dark cb-grid">
+<body>
+<div class="ws-page bg-dark cb-grid">
 <script src="/assets/icons/animated-lottie/lottie-icons.js"></script>
 
-<!-- ═══ WIZARD (centered overlay on dark background — no header, no footer) ═══ -->
-<div class="wiz-overlay open ft-overlay" id="qShell" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto;z-index:10">
-<div class="wiz-shell wiz-shell-tall" style="position:relative;margin:auto;width:100%;max-width:560px;max-height:none;transform:none;opacity:1">
+<!-- ═══ HEADER BAR (Desktop home.html) ═══ -->
+<div class="cb-header-bar" id="cb-header">
+  <a href="https://api.contentbug.io/home" class="cb-logo">
+    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
+  </a>
+  <nav class="cb-header" id="cbNav">
+    <a href="https://api.contentbug.io/home" class="cb-nav-link">Home</a>
+    <a href="https://api.contentbug.io/pricing" class="cb-nav-link">Pricing</a>
+    <a href="https://api.contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
+    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
+    <a href="https://api.contentbug.io/free-trial" class="cb-nav-cta">Start Free Trial</a>
+  </nav>
+</div>
+
+<!-- ═══ WIZARD ═══ -->
+<main>
+<section class="section" id="qShell">
+<div class="container">
+<div class="wiz-shell" style="position:relative;margin:0 auto;width:100%;max-height:none;transform:none;opacity:1">
 
   <!-- Brand Header -->
   <div class="wiz-brand" style="padding:20px 24px 0">
@@ -273,6 +375,77 @@
 
 </div>
 </div>
+</section>
+</main>
+
+<!-- ═══ FOOTER (Desktop home.html) ═══ -->
+<footer class="cb-footer" id="cb-footer">
+  <div class="cb-ft-glass">
+    <div class="cb-ft-grid">
+      <div class="cb-ft-brand">
+        <a href="https://api.contentbug.io/home" class="cb-logo">
+          <img loading="lazy" decoding="async" src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug" style="height:28px;filter:brightness(0) invert(1)">
+        </a>
+        <div class="cb-ft-tagline">Helping you edit less, create more, and scale faster.</div>
+        <div class="cb-ft-social">
+          <a href="https://x.com/contentbug" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://instagram.com/contentbug" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://youtube.com/@contentbug" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://tiktok.com/@contentbug" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
+          <a href="https://facebook.com/contentbug" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        </div>
+      </div>
+      <div class="cb-ft-col">
+        <div class="cb-ft-col-title">Explore</div>
+        <a href="https://api.contentbug.io/home">Home</a>
+        <a href="https://api.contentbug.io/pricing">Pricing</a>
+        <a href="https://api.contentbug.io/portfolio">Portfolio</a>
+      </div>
+      <div class="cb-ft-col">
+        <div class="cb-ft-col-title">Company</div>
+        <a href="https://api.contentbug.io/faq">FAQ</a>
+        <a href="mailto:contentbug@contentbug.io?subject=Careers%20Inquiry">Careers</a>
+        <a href="https://api.contentbug.io/free-trial">Start Free Trial</a>
+        <a href="https://api.contentbug.io/portal/login.html">Studio Login</a>
+      </div>
+      <div class="cb-ft-col">
+        <div class="cb-ft-col-title">Contact</div>
+        <div class="cb-ft-contact-item"><a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a></div>
+        <div class="cb-ft-contact-item"><a href="tel:+13852007582">+1 (385) 200-7582</a></div>
+        <div class="cb-ft-hours"><strong>Hours:</strong> Mon&ndash;Fri 9am&ndash;6pm MST</div>
+      </div>
+    </div>
+    <div class="cb-ft-divider"></div>
+    <div class="cb-ft-legal">
+      <span>&copy; 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
+      <div class="cb-ft-legal-links">
+        <a href="https://api.contentbug.io/privacy">Privacy Policy</a>
+        <span class="cb-ft-legal-sep">&middot;</span>
+        <a href="https://api.contentbug.io/terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /.ws-page -->
+
+<!-- Sticky nav — pill floats after scroll past header -->
+<script>
+(function(){
+  var bar=document.querySelector('.cb-header-bar');
+  if(!bar)return;
+  var sentinel=document.createElement('div');
+  sentinel.style.cssText='height:0;width:0;visibility:hidden';
+  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
+      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
+    });
+  },{threshold:0});
+  io.observe(bar);
+})();
+</script>
 
 <script>
 /* =====================================================================
