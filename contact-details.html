@@ -1,0 +1,182 @@
+<link rel="stylesheet" href="https://api.contentbug.io/assets/design-system.css">
+<script>
+  if (window.self === window.top) {
+    document.documentElement.classList.add('bg-dark');
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.classList.add('bg-dark');
+      document.body.classList.add('cb-grid');
+      var s = document.querySelector('.ws-page');
+      if (s) {
+        s.classList.add('shell-body-glass');
+        s.style.margin = '8px 16px';
+        s.style.minHeight = 'calc(100vh - 16px)';
+      }
+    });
+  } else {
+    if (document.body) { document.body.classList.add('bg-dark'); }
+    else { document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('bg-dark'); }); }
+  }
+</script>
+<div class="ws-page">
+<script>
+/* GHL canonical URL → Railway path remap (only runs off-GHL, e.g. api.contentbug.io direct test) */
+(function(){
+  var h=location.hostname;
+  if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com')) return;
+  var map={
+    'https://contentbug.io/home':'/home',
+    'https://contentbug.io/pricing':'/pricing',
+    'https://contentbug.io/portfolio':'/portfolio',
+    'https://contentbug.io/free-trial':'/booking',
+    'https://contentbug.io/privacy-policy':'/privacy',
+    'https://contentbug.io/terms':'/terms'
+  };
+  document.querySelectorAll('a[href]').forEach(function(a){
+    var k=a.getAttribute('href');
+    if(map[k]) a.setAttribute('href', map[k]);
+  });
+})();
+</script>
+
+<div class="cb-header-bar" id="cb-header">
+  <a href="https://contentbug.io/home" class="cb-logo">
+    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
+  </a>
+  <nav class="cb-header" id="cbNav">
+    <a href="https://contentbug.io/home" class="cb-nav-link active">Home</a>
+    <a href="https://contentbug.io/pricing" class="cb-nav-link">Pricing</a>
+    <a href="https://contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
+    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
+    <a href="https://contentbug.io/free-trial" class="cb-nav-cta">Free Trial</a>
+  </nav>
+</div>
+<script>
+document.body.classList.add('ws-page');
+(function(){
+  var bar=document.querySelector('.cb-header-bar');
+  if(!bar)return;
+  var sentinel=document.createElement('div');
+  sentinel.style.cssText='height:0;width:0;visibility:hidden';
+  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
+      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
+    });
+  },{threshold:0});
+  io.observe(bar);
+})();
+</script>
+
+<section class="section">
+<div class="container">
+  <!-- Bug logo background — left half visible, right half masked off, behind all content -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(to right,black 0%,black 44%,transparent 57%);mask-image:linear-gradient(to right,black 0%,black 44%,transparent 57%)">
+    <img src="https://api.contentbug.io/portal/assets/logo-bug-white.svg" alt="" style="width:680px;height:680px;opacity:.055;display:block;object-fit:contain">
+  </div>
+
+<div class="contact-grid" style="position:relative;z-index:1">
+
+  <!-- Left: Info Column -->
+  <div class="contact-info">
+    <span class="step-badge">Step 1 of 4</span>
+
+    <h1 class="contact-title">
+      Your Free Trial
+      <span class="title-line-2">Starts Here</span>
+    </h1>
+
+    <p class="contact-subtitle">We'll edit a piece of your content for free so you can see our quality, speed, communication, and process firsthand before committing to anything.</p>
+
+    <div class="checklist">
+
+      <div class="check-item">
+        <span class="check-icon">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="11" fill="var(--blue-brand)"/>
+            <path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="var(--txt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="check-text">Get a free edit so you can judge the quality yourself</span>
+      </div>
+
+      <div class="check-item">
+        <span class="check-icon">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="11" fill="var(--blue-brand)"/>
+            <path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="var(--txt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="check-text">See our speed, communication, and process firsthand</span>
+      </div>
+
+      <div class="check-item">
+        <span class="check-icon">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="11" fill="var(--blue-brand)"/>
+            <path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="var(--txt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="check-text">Get a real feel for our team before committing</span>
+      </div>
+
+      <div class="check-item">
+        <span class="check-icon">
+          <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="11" fill="var(--blue-brand)"/>
+            <path d="M6.5 11.5L9.5 14.5L15.5 8.5" stroke="var(--txt)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="check-text">No pressure — we'd rather show you than pitch you</span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Right: Form Column — wrapped in portal glass-card treatment -->
+  <div class="form-wrap glass-card" style="padding:0;overflow:hidden">
+    <iframe
+      src="https://links.contentbug.io/widget/form/8Nv0Gs5qKIoWLK9ogudu"
+      style="width:100%;height:100%;border:none;border-radius:inherit;background:transparent"
+      id="inline-8Nv0Gs5qKIoWLK9ogudu"
+      data-layout="{'id':'INLINE'}"
+      data-trigger-type="alwaysShow"
+      data-trigger-value=""
+      data-activation-type="alwaysActivated"
+      data-activation-value=""
+      data-deactivation-type="neverDeactivate"
+      data-deactivation-value=""
+      data-form-name="Contact Details"
+      data-height="606"
+      data-layout-iframe-id="inline-8Nv0Gs5qKIoWLK9ogudu"
+      data-form-id="8Nv0Gs5qKIoWLK9ogudu"
+      title="Contact Details"
+    ></iframe>
+    <script src="https://links.contentbug.io/js/form_embed.js"></script>
+  </div>
+
+</div>
+</div>
+</section>
+
+<script>
+(function(){
+  var f = document.getElementById('cb-footer');
+  if (!f) return;
+  var p = f.parentElement;
+  while (p && p !== document.documentElement) {
+    if (p !== document.body) {
+      p.style.setProperty('background', 'none', 'important');
+      p.style.setProperty('background-color', 'transparent', 'important');
+      p.style.setProperty('background-image', 'none', 'important');
+      p.style.setProperty('color', '#f5f5f7', 'important');
+      p.style.setProperty('border', 'none', 'important');
+      p.style.setProperty('box-shadow', 'none', 'important');
+      p.style.setProperty('border-radius', '0', 'important');
+    }
+    p = p.parentElement;
+  }
+})();
+</script>
+</div>
