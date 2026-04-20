@@ -240,7 +240,7 @@ body{
         </div>
       </div>
 
-      <!-- Sub-screen 6: Disqualified dead-end (no demo, no footage, just reminder) -->
+      <!-- Sub-screen 6: Disqualified dead-end -->
       <div class="qw-sub-screen" data-sub="dq" style="display:none">
         <div class="q-result-icon not-qualified">
           <svg viewBox="0 0 24 24" fill="none" stroke="#f5d060" stroke-width="2" width="32" height="32"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
@@ -256,22 +256,14 @@ body{
 
     </div>
 
-    <!-- ═══ STEP 2: Pick Your Style (blueprint builder iframe) ═══ -->
+    <!-- ═══ STEP 2: Submit your Free Trial Edit (request-trial wizard iframe) ═══ -->
     <div class="qw-step" data-step="2">
-      <div class="qw-title">Pick your editing style.</div>
-      <div class="qw-sub">Build your style blueprint below so we know exactly how to cut your video.</div>
-      <iframe id="qBuilderFrame" src="about:blank" style="width:100%;height:640px;border:none;border-radius:var(--r-xl);margin-top:16px;background:rgba(0,0,0,.2)" loading="lazy" title="Blueprint Builder"></iframe>
-      <div class="qw-sub" style="margin-top:10px;color:rgba(255,255,255,.55);font-size:13px">Save your blueprint above, then hit Continue.</div>
+      <div class="qw-title">Your Free Trial Edit.</div>
+      <div class="qw-sub">Upload your footage, pick or build your blueprint, then submit — we'll have your edit back in 12 hours.</div>
+      <iframe id="qRequestFrame" src="about:blank" style="width:100%;height:720px;border:none;border-radius:var(--r-xl);margin-top:16px;background:rgba(0,0,0,.2)" loading="lazy" title="Submit Your Free Trial Edit"></iframe>
     </div>
 
-    <!-- ═══ STEP 3: Drop Your Footage (request-trial.html iframe) ═══ -->
-    <div class="qw-step" data-step="3">
-      <div class="qw-title">Drop your raw footage.</div>
-      <div class="qw-sub">Upload your clips and submit your free trial edit. We'll have it back in 12 hours.</div>
-      <iframe id="qFootageFrame" src="/portal/request-trial.html?source=free-trial-wizard" style="width:100%;height:580px;border:none;border-radius:var(--r-xl);margin-top:16px;background:rgba(0,0,0,.2)" loading="lazy" title="Submit Free Trial Footage"></iframe>
-    </div>
-
-    <!-- ═══ SUCCESS: auto-shown after footage submission ═══ -->
+    <!-- ═══ SUCCESS: auto-shown after submission ═══ -->
     <div class="qw-step" data-step="done">
       <div class="q-result-icon qualified">
         <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>
@@ -395,141 +387,72 @@ body{
 (function(){
   'use strict';
 
-  /* API base — same-origin (api.contentbug.io serves both website + portal) */
-  var API = '';
-
-  /* ───────── STATE ───────── */
   var state = {
-    step: 1,          // 1 = Qualify | 2 = Style | 3 = Footage | 'done' = success
+    step: 1,          // 1 = Qualify | 2 = Request | 'done' = success
     subQ: 0,          // within step 1: 0 = contact | 1-5 = questions | 'dq' = disqualified
     contact: { first:'', last:'', email:'', phone:'' },
-    answers: {
-      contentTypes: [],   // q1 multi
-      postFreq:     '',   // q2 single
-      goal:         '',   // q3 single
-      footage:      '',   // q4 single
-      volume:       ''    // q5 single
-    },
-    score: 0,
-    qualified: false,
-    blueprintSaved: false,
-    footageSubmitted: false,
-    builderLoaded: false,
-    submittedContact: false
+    answers: { contentTypes:[], postFreq:'', goal:'', footage:'', volume:'' },
+    score: 0, qualified:false, requestLoaded:false, submittedContact:false, footageSubmitted:false
   };
-
-  /* ───────── DOM ───────── */
   var $ = function(id){ return document.getElementById(id); };
-  var qRail   = $('qRail');
-  var qFoot   = $('qFoot');
-  var qBack   = $('qBack');
-  var qNext   = $('qNext');
-  var qBody   = $('qBody');
+  var qRail = $('qRail'), qFoot = $('qFoot'), qBack = $('qBack'), qNext = $('qNext'), qBody = $('qBody');
 
-  /* ───────── STEP RAIL (3 dots) ───────── */
   function renderRail(){
     if(!qRail) return;
     var done = state.step === 'done';
     var html = '';
     for(var i=1;i<=3;i++){
       var cls = 'wiz-step-dot';
-      if(done || state.step > i) cls += ' complete';
+      if(done || state.step > i || (state.step==='done')) cls += ' complete';
       else if(state.step === i) cls += ' active';
-      html += '<div class="'+cls+'" data-step="'+i+'"></div>';
+      html += '<div class="'+cls+'"></div>';
       if(i < 3) html += '<div class="wiz-step-line'+((done || state.step > i) ? ' complete' : '')+'"></div>';
     }
     qRail.innerHTML = html;
   }
-
-  /* ───────── STEP/SUB VISIBILITY ───────── */
   function showStep(){
-    document.querySelectorAll('.qw-step').forEach(function(el){
-      el.classList.remove('active');
-      el.style.display = 'none';
-    });
+    document.querySelectorAll('.qw-step').forEach(function(el){ el.classList.remove('active'); el.style.display='none'; });
     var key = state.step === 'done' ? 'done' : String(state.step);
     var cur = document.querySelector('.qw-step[data-step="'+key+'"]');
-    if(cur){
-      cur.classList.add('active');
-      cur.style.display = '';
-    }
-    renderRail();
-    renderFooter();
+    if(cur){ cur.classList.add('active'); cur.style.display=''; }
+    renderRail(); renderFooter();
     if(qBody) qBody.scrollTop = 0;
   }
-
   function showSub(sub){
     state.subQ = sub;
-    document.querySelectorAll('.qw-step[data-step="1"] .qw-sub-screen').forEach(function(el){
-      el.style.display = 'none';
-    });
-    if(sub === 0){
-      document.querySelector('.qw-sub-screen[data-sub="0"]').style.display = '';
-    } else if(sub === 'dq'){
-      document.querySelector('.qw-sub-screen[data-sub="dq"]').style.display = '';
-    } else {
-      var wrap = document.querySelector('.qw-sub-screen[data-sub="q"]');
-      wrap.style.display = '';
+    document.querySelectorAll('.qw-step[data-step="1"] .qw-sub-screen').forEach(function(el){ el.style.display='none'; });
+    if(sub === 0){ document.querySelector('.qw-sub-screen[data-sub="0"]').style.display = ''; }
+    else if(sub === 'dq'){ document.querySelector('.qw-sub-screen[data-sub="dq"]').style.display = ''; }
+    else {
+      document.querySelector('.qw-sub-screen[data-sub="q"]').style.display = '';
       document.querySelectorAll('.q-subq').forEach(function(el){ el.style.display='none'; });
       var cur = document.querySelector('.q-subq[data-subq="'+(sub-1)+'"]');
       if(cur) cur.style.display = '';
       $('qSubQNum').textContent = sub;
-      var titles = [
-        'What type of content do you create?',
-        'How often do you post?',
-        "What's your main goal with video?",
-        'Do you have footage ready to edit?',
-        'How many videos per month?'
-      ];
-      var hints = [
-        'Pick all that apply.',
-        'Pick the one closest to your pace.',
-        'Pick what matters most right now.',
-        'Pick what describes you best.',
-        'Pick your target volume.'
-      ];
+      var titles = ['What type of content do you create?','How often do you post?',"What's your main goal with video?",'Do you have footage ready to edit?','How many videos per month?'];
+      var hints  = ['Pick all that apply.','Pick the one closest to your pace.','Pick what matters most right now.','Pick what describes you best.','Pick your target volume.'];
       $('qSubQTitle').textContent = titles[sub-1];
       $('qSubQHint').textContent  = hints[sub-1];
     }
     renderFooter();
   }
-
-  /* ───────── FOOTER (Back + Next) ───────── */
   function renderFooter(){
     if(!qFoot) return;
-    if(state.step === 'done'){ qFoot.style.display = 'none'; return; }
+    if(state.step === 'done'){ qFoot.style.display='none'; return; }
     qFoot.style.display = '';
-
-    // Back button: hidden on step 1 sub-0 (contact), otherwise visible
-    var canBack = !(state.step === 1 && state.subQ === 0);
-    qBack.hidden = !canBack;
-
-    // Next button label
-    if(state.step === 1 && state.subQ === 'dq'){
-      qNext.hidden = true;
-    } else if(state.step === 3){
-      qNext.hidden = true;   // step 3 auto-advances on iframe submit
-    } else {
-      qNext.hidden = false;
-      if(state.step === 1 && state.subQ === 5) qNext.innerHTML = 'Continue &rarr;';
-      else if(state.step === 2) qNext.innerHTML = 'Continue &rarr;';
-      else qNext.innerHTML = 'Continue &rarr;';
-    }
-
-    // Enabled state
-    var valid = qValid();
-    qNext.disabled = !valid;
-    qNext.style.opacity = valid ? '1' : '.5';
-    qNext.style.pointerEvents = valid ? '' : 'none';
+    qBack.hidden = !(state.step === 1 && state.subQ !== 0) && !(state.step === 2);
+    // Hide Next on step 2 (user submits from inside iframe) and on disqualified
+    if(state.step === 2 || (state.step === 1 && state.subQ === 'dq')){ qNext.hidden = true; }
+    else { qNext.hidden = false; qNext.innerHTML = 'Continue &rarr;'; }
+    var v = qValid();
+    qNext.disabled = !v;
+    qNext.style.opacity = v ? '1' : '.5';
+    qNext.style.pointerEvents = v ? '' : 'none';
   }
-
-  /* ───────── VALIDATION ───────── */
   function qValid(){
     if(state.step === 1){
       if(state.subQ === 0){
-        var first = $('qFirstName').value.trim();
-        var last  = $('qLastName').value.trim();
-        var email = $('qEmail').value.trim();
+        var first=$('qFirstName').value.trim(), last=$('qLastName').value.trim(), email=$('qEmail').value.trim();
         return !!(first && last && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
       }
       if(state.subQ === 1) return state.answers.contentTypes.length > 0;
@@ -539,46 +462,29 @@ body{
       if(state.subQ === 5) return !!state.answers.volume;
       if(state.subQ === 'dq') return false;
     }
-    if(state.step === 2) return state.blueprintSaved;
-    if(state.step === 3) return state.footageSubmitted;
+    if(state.step === 2) return false;   // user submits from inside the iframe
     return true;
   }
-
-  /* ───────── SCORING ───────── */
   function computeScore(){
-    var s = 0;
-    if(state.answers.contentTypes.length > 0) s += 20;
-    if(state.answers.postFreq) s += 15;
-    if(state.answers.goal) s += 15;
-    // footage: "Yes I'm ready to go" / "I have footage but not edited yet" qualify, others disqualify
-    if(state.answers.footage === "Yes I'm ready to go") s += 30;
-    else if(state.answers.footage === "I have footage but not edited yet") s += 25;
-    else if(state.answers.footage === "I'm still filming") s += 5;
-    else s += 0;
-    if(state.answers.volume) s += 20;
+    var s=0;
+    if(state.answers.contentTypes.length) s+=20;
+    if(state.answers.postFreq) s+=15;
+    if(state.answers.goal) s+=15;
+    if(state.answers.footage === "Yes I'm ready to go") s+=30;
+    else if(state.answers.footage === "I have footage but not edited yet") s+=25;
+    else if(state.answers.footage === "I'm still filming") s+=5;
+    if(state.answers.volume) s+=20;
     state.score = s;
-    // qualified if score >= 70 AND footage is ready/not-edited
-    state.qualified = s >= 70 && (
-      state.answers.footage === "Yes I'm ready to go" ||
-      state.answers.footage === "I have footage but not edited yet"
-    );
+    state.qualified = s >= 70 && (state.answers.footage === "Yes I'm ready to go" || state.answers.footage === "I have footage but not edited yet");
     return state.qualified;
   }
-
-  /* ───────── CHIPS ───────── */
   function wireChips(){
     document.querySelectorAll('.q-chips').forEach(function(group){
       var multi = group.getAttribute('data-multi') === 'true';
       group.addEventListener('click', function(ev){
-        var chip = ev.target.closest('.q-chip');
-        if(!chip) return;
-        if(multi){
-          chip.classList.toggle('active');
-        } else {
-          group.querySelectorAll('.q-chip').forEach(function(c){ c.classList.remove('active'); });
-          chip.classList.add('active');
-        }
-        // sync answers
+        var chip = ev.target.closest('.q-chip'); if(!chip) return;
+        if(multi){ chip.classList.toggle('active'); }
+        else { group.querySelectorAll('.q-chip').forEach(function(c){ c.classList.remove('active'); }); chip.classList.add('active'); }
         if(group.id === 'qContentTypes'){
           state.answers.contentTypes = Array.from(group.querySelectorAll('.q-chip.active')).map(function(c){ return c.getAttribute('data-val'); });
         } else {
@@ -593,12 +499,9 @@ body{
       });
     });
   }
-
-  /* ───────── CONTACT INPUTS ───────── */
   function wireContact(){
     ['qFirstName','qLastName','qEmail','qPhone'].forEach(function(id){
-      var el = $(id);
-      if(!el) return;
+      var el = $(id); if(!el) return;
       el.addEventListener('input', function(){
         state.contact.first = $('qFirstName').value.trim();
         state.contact.last  = $('qLastName').value.trim();
@@ -608,154 +511,78 @@ body{
       });
     });
   }
-
-  /* ───────── SUBMIT CONTACT + ANSWERS → /api/trial/submit ───────── */
   function submitContact(){
     if(state.submittedContact) return Promise.resolve();
     state.submittedContact = true;
-    var payload = {
-      first_name:    state.contact.first,
-      last_name:     state.contact.last,
-      email:         state.contact.email,
-      phone:         state.contact.phone,
-      content_types: state.answers.contentTypes,
-      post_freq:     state.answers.postFreq,
-      goal:          state.answers.goal,
-      footage:       state.answers.footage,
-      volume:        state.answers.volume,
-      score:         state.score,
-      qualified:     state.qualified,
-      source:        'free-trial-wizard'
-    };
     return fetch('/api/trial/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify(payload)
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      credentials:'include',
+      body: JSON.stringify({
+        first_name: state.contact.first, last_name: state.contact.last,
+        email: state.contact.email, phone: state.contact.phone,
+        content_types: state.answers.contentTypes, post_freq: state.answers.postFreq,
+        goal: state.answers.goal, footage: state.answers.footage, volume: state.answers.volume,
+        score: state.score, qualified: state.qualified, source: 'free-trial-wizard'
+      })
     }).catch(function(){ state.submittedContact = false; });
   }
-
-  /* ───────── DISQUALIFY ───────── */
   function qDq(){
     var tip = 'Keep building and come back when you have footage ready.';
-    if(state.answers.footage === 'Not yet' || state.answers.footage === "I'm still filming"){
-      tip = "We'll be here when your footage is ready. Come back and pick up right where you left off.";
-    }
-    var el = $('qDqTip');
-    if(el) el.textContent = tip;
-    state.subQ = 'dq';
-    submitContact();   // still create contact, role=trial, trial_status=disqualified
+    if(state.answers.footage === 'Not yet' || state.answers.footage === "I'm still filming") tip = "We'll be here when your footage is ready. Come back and pick up right where you left off.";
+    var el = $('qDqTip'); if(el) el.textContent = tip;
+    submitContact();
     showSub('dq');
   }
   window.qRemind = function(){
     var email = ($('qRemindEmail')||{}).value || '';
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
-      alert('Please enter a valid email.');
-      return;
-    }
-    fetch('/api/trial/remind', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      credentials:'include',
-      body: JSON.stringify({ email: email, contact_email: state.contact.email })
-    }).finally(function(){
-      var btn = document.querySelector('.q-remind .btn');
-      if(btn){ btn.textContent = "We'll email you."; btn.disabled = true; btn.style.opacity='.6'; }
-    });
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert('Please enter a valid email.'); return; }
+    fetch('/api/trial/remind', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ email: email, contact_email: state.contact.email }) })
+      .finally(function(){ var btn = document.querySelector('.q-remind .btn'); if(btn){ btn.textContent = "We'll email you."; btn.disabled = true; btn.style.opacity='.6'; } });
   };
-
-  /* ───────── LAZY-LOAD BUILDER IFRAME ───────── */
-  function loadBuilder(){
-    if(state.builderLoaded) return;
-    var fr = $('qBuilderFrame');
-    if(!fr) return;
+  function loadRequest(){
+    if(state.requestLoaded) return;
+    var fr = $('qRequestFrame'); if(!fr) return;
     var p = new URLSearchParams({
-      embed:'1',
-      trial:'1',
-      email: state.contact.email,
-      first: state.contact.first,
-      last:  state.contact.last
+      source:'free-trial-wizard', trial:'1',
+      email: state.contact.email, first: state.contact.first, last: state.contact.last
     });
-    fr.src = '/portal/blueprints.html?' + p.toString();
-    state.builderLoaded = true;
+    fr.src = '/portal/request-trial.html?' + p.toString();
+    state.requestLoaded = true;
   }
-
-  /* ───────── IFRAME MESSAGES ───────── */
   window.addEventListener('message', function(ev){
     if(!ev || !ev.data) return;
     var t = ev.data.type || ev.data;
-    if(t === 'blueprintSaved' || t === 'blueprintCreated'){
-      state.blueprintSaved = true;
-      renderFooter();
-    }
     if(t === 'trialProjectSubmitted' || t === 'freeTrialFootageSubmitted'){
       state.footageSubmitted = true;
       var em = $('qFinalEmail');
-      if(em && state.contact.email){
-        em.textContent = 'Portal login + upload confirmation sent to ' + state.contact.email + '.';
-      }
+      if(em && state.contact.email) em.textContent = 'Portal login + upload confirmation sent to ' + state.contact.email + '.';
       state.step = 'done';
       showStep();
     }
   });
-
-  /* ───────── NEXT / PREV ───────── */
   window.qNext = function(){
     if(!qValid()) return;
-
     if(state.step === 1){
-      if(state.subQ === 0){
-        showSub(1);
-        return;
-      }
-      if(state.subQ >= 1 && state.subQ <= 4){
-        showSub(state.subQ + 1);
-        return;
-      }
+      if(state.subQ === 0){ showSub(1); return; }
+      if(state.subQ >= 1 && state.subQ <= 4){ showSub(state.subQ + 1); return; }
       if(state.subQ === 5){
         computeScore();
-        if(!state.qualified){
-          qDq();
-          return;
-        }
+        if(!state.qualified){ qDq(); return; }
         submitContact();
-        state.step = 2;
-        showStep();
-        // small delay so iframe doesn't compete with step transition paint
-        setTimeout(loadBuilder, 80);
-        return;
+        state.step = 2; showStep();
+        setTimeout(loadRequest, 80);
       }
-    }
-    if(state.step === 2){
-      state.step = 3;
-      showStep();
-      return;
     }
   };
   window.qPrev = function(){
     if(state.step === 1){
       if(state.subQ === 'dq'){ showSub(5); return; }
       if(state.subQ > 0){ showSub(state.subQ - 1); return; }
-      return;
     }
-    if(state.step === 2){
-      state.step = 1;
-      showStep();
-      showSub(5);
-      return;
-    }
-    if(state.step === 3){
-      state.step = 2;
-      showStep();
-      return;
-    }
+    if(state.step === 2){ state.step = 1; showStep(); showSub(5); }
   };
-
-  /* ───────── INIT ───────── */
-  wireChips();
-  wireContact();
-  showStep();
-  showSub(0);
+  wireChips(); wireContact(); showStep(); showSub(0);
 })();
 </script>
 
