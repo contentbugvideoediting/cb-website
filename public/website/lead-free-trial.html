@@ -256,12 +256,10 @@ body{
 
     </div>
 
-    <!-- ═══ STEP 2: Submit your Free Trial Edit (request-trial wizard iframe) ═══ -->
-    <div class="qw-step" data-step="2">
-      <div class="qw-title">Your Free Trial Edit.</div>
-      <div class="qw-sub">Upload your footage, pick or build your blueprint, then submit — we'll have your edit back in 12 hours.</div>
-      <iframe id="qRequestFrame" src="about:blank" style="width:100%;height:720px;border:none;border-radius:var(--r-xl);margin-top:16px;background:rgba(0,0,0,.2)" loading="lazy" title="Submit Your Free Trial Edit"></iframe>
-    </div>
+    <!-- STEP 2 REMOVED — submit-edit moved into /portal as trial-submit-modal.js.
+         On qualified, /api/trial/submit issues a session cookie and returns a
+         redirect URL; we location.replace() straight into the portal. The modal
+         there handles footage upload + blueprint pick/build. See docs/trial-portal-states.md. -->
 
     <!-- ═══ STEP 3: Book your demo call ═══ -->
     <div class="qw-step" data-step="3">
@@ -522,7 +520,7 @@ body{
     });
   }
   function submitContact(){
-    if(state.submittedContact) return Promise.resolve();
+    if(state.submittedContact) return Promise.resolve(null);
     state.submittedContact = true;
     return fetch('/api/trial/submit', {
       method:'POST',
@@ -535,7 +533,8 @@ body{
         goal: state.answers.goal, footage: state.answers.footage, volume: state.answers.volume,
         score: state.score, qualified: state.qualified, source: 'free-trial-wizard'
       })
-    }).catch(function(){ state.submittedContact = false; });
+    }).then(function(r){ return r.ok ? r.json() : null; })
+      .catch(function(){ state.submittedContact = false; return null; });
   }
   function qDq(){
     var tip = 'Keep building and come back when you have footage ready.';
@@ -550,16 +549,8 @@ body{
     fetch('/api/trial/remind', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ email: email, contact_email: state.contact.email }) })
       .finally(function(){ var btn = document.querySelector('.q-remind .btn'); if(btn){ btn.textContent = "We'll email you."; btn.disabled = true; btn.style.opacity='.6'; } });
   };
-  function loadRequest(){
-    if(state.requestLoaded) return;
-    var fr = $('qRequestFrame'); if(!fr) return;
-    var p = new URLSearchParams({
-      source:'free-trial-wizard', trial:'1',
-      email: state.contact.email, first: state.contact.first, last: state.contact.last
-    });
-    fr.src = '/portal/request-trial.html?' + p.toString();
-    state.requestLoaded = true;
-  }
+  /* loadRequest() removed — request-trial.html is dead. Submit-edit happens
+     inside the real portal via trial-submit-modal.js after auto-login. */
   function loadDemo(){
     if(state.demoLoaded) return;
     var fr = $('qDemoFrame'); if(!fr) return;
@@ -613,9 +604,23 @@ body{
       if(state.subQ === 5){
         computeScore();
         if(!state.qualified){ qDq(); return; }
-        submitContact();
-        state.step = 2; showStep();
-        setTimeout(loadRequest, 80);
+        /* Qualified → submit contact, auto-login, redirect into portal.
+           Old flow: step=2 iframe loaded request-trial.html. Killed 2026-04-21. */
+        var btn = $('qNext');
+        if(btn){ btn.disabled = true; btn.style.opacity='.6'; btn.textContent = 'Setting up your portal…'; }
+        submitContact().then(function(resp){
+          var dest = (resp && resp.redirect) ? resp.redirect
+                   : '/portal/index.html?welcome=trial&stage=submit-edit';
+          /* Cross-origin: lead-free-trial.html is served from the website
+             domain; /portal/ lives on api.contentbug.io. Use absolute URL
+             so the cookie set by /api/trial/submit (same-origin with /portal)
+             is present when the portal boots. */
+          try {
+            location.replace('https://api.contentbug.io' + dest);
+          } catch (e) {
+            location.href = 'https://api.contentbug.io' + dest;
+          }
+        });
       }
     }
   };
