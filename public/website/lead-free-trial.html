@@ -55,6 +55,24 @@ body{
 }
 .ws-page{min-height:100vh;color:#fff}
 
+/* CB-WIZARD-SURFACE — inlined from design-system.css (cb-website is a
+   separate deploy from cb-portal-shell). Keep in sync with master copy. */
+.cb-wizard-surface{
+  position:relative;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 40px 120px rgba(0,0,0,.55),0 8px 40px rgba(0,0,0,.35);
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.11) 0%,rgba(255,255,255,.07) 35%,rgba(255,255,255,.035) 70%,rgba(255,255,255,.015) 100%),
+    linear-gradient(180deg,#032a4b 0%,#022240 25%,#01172e 55%,#010916 80%,#00050e 100%);
+}
+.cb-wizard-surface .cb-wiz-card,
+.cb-wizard-surface .cb-wiz-card-opt,
+.cb-wizard-surface .cb-wiz-input,
+.cb-wizard-surface .cb-wiz-select,
+.cb-wizard-surface .cb-wiz-textarea,
+.cb-wizard-surface .cb-wiz-toggle{background:transparent;border:1px solid rgba(255,255,255,.12)}
+
 /* HEADER NAV — overrides design-system .ws-page .cb-header-bar !important with same specificity; inline source order wins */
 .ws-page .cb-header-bar{position:relative!important;z-index:100!important;padding:24px 40px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;max-width:1320px!important;margin:0 auto!important;top:auto!important;background:transparent!important;border:none!important}
 .ws-page .cb-header-bar .cb-logo{display:flex!important;position:static!important;left:auto!important;top:auto!important;transform:none!important;align-items:center!important}
@@ -142,7 +160,7 @@ body{
 <main>
 <section class="section" id="qShell">
 <div class="container">
-<div class="wiz-shell" style="position:relative;margin:0 auto;width:100%;max-height:none;transform:none;opacity:1">
+<div class="wiz-shell cb-wizard-surface" style="position:relative;margin:0 auto;width:100%;max-height:none;transform:none;opacity:1">
 
   <!-- Brand Header -->
   <div class="wiz-brand" style="padding:20px 24px 0">
