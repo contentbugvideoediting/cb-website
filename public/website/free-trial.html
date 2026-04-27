@@ -451,7 +451,7 @@ body{
          redirect URL; we location.replace() straight into the portal. The modal
          there handles footage upload + blueprint pick/build. See docs/trial-portal-states.md. -->
 
-    <!-- ═══ STEP 2: Qualified — book your intro call (GHL Free Demo calendar) ═══ -->
+    <!-- ═══ STEP 2: Qualified — book your free trial intro call (GHL calendar embed) ═══ -->
     <div class="qw-step" data-step="2">
       <div class="q-result-icon qualified" style="margin:0 auto 12px;width:54px;height:54px;border-radius:50%;background:rgba(126,203,161,.12);border:1px solid rgba(126,203,161,.45);display:flex;align-items:center;justify-content:center">
         <svg viewBox="0 0 24 24" fill="none" stroke="#7ecba1" stroke-width="2.5" width="26" height="26"><polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -459,7 +459,7 @@ body{
       <div class="qw-title">You qualify for a free trial edit</div>
       <div class="qw-sub">You look like a strong fit for Content Bug. Book a quick intro call to activate your free trial and get your first edit moving.</div>
       <div style="width:100%;max-width:780px;margin:18px auto 0;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08)">
-        <iframe id="qDemoFrame"
+        <iframe id="qIntroCallFrame"
           src="https://links.contentbug.io/widget/booking/jMEjaEOpcdbZDvcQFXGY"
           style="width:100%;border:none;overflow:hidden;display:block;min-height:720px;background:transparent"
           scrolling="no"
@@ -469,7 +469,7 @@ body{
       <p style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.5);text-align:center;margin:14px auto 0;max-width:480px">No card required. Your first edit is free on us.</p>
     </div>
 
-    <!-- STEP 3 removed: bookDemo() now hard-redirects to /intro-call-booked.
+    <!-- STEP 3 removed: bookIntroCall() now hard-redirects to /intro-call-booked.
          The standalone confirmation page is the single source of truth. -->
 
 
@@ -570,7 +570,7 @@ body{
     contact: { first:'', last:'', email:'', phone:'' },
     answers: { contentTypes:[], volume:'', goal:'', timing:'', footage:'' },
     score: 0, qualified:false,
-    submittedContact:false, demoBooked:false,
+    submittedContact:false, introCallBooked:false,
     bookedSlot:''     // human-readable booked datetime once GHL posts back
   };
   var $ = function(id){ return document.getElementById(id); };
@@ -595,7 +595,7 @@ body{
       else if(state.subQ === 'dq') pct = 83;                              /* disqualified at end of qs */
       else pct = Math.round((state.subQ / 6) * 100);                      /* qs 1-5 → 17/33/50/67/83 */
     } else if(state.step === 2){ pct = 100; }                              /* qualified, book intro call */
-    /* step 3 removed — bookDemo() redirects to /intro-call-booked */
+    /* step 3 removed — bookIntroCall() redirects to /intro-call-booked */
     var pf = document.getElementById('qProgressFill');
     var pe = document.getElementById('qPercent');
     if(pf) pf.style.width = pct + '%';
@@ -766,11 +766,11 @@ body{
     fetch('/api/trial/remind', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ email: email, contact_email: state.contact.email }) })
       .finally(function(){ var btn = document.querySelector('.q-remind .btn'); if(btn){ btn.textContent = "We'll email you."; btn.disabled = true; btn.style.opacity='.6'; } });
   };
-  /* GHL calendar iframe is hardcoded in HTML (jMEjaEOpcdbZDvcQFXGY = Free Demo).
+  /* GHL calendar iframe is hardcoded in HTML (jMEjaEOpcdbZDvcQFXGY = Free Trial Intro Call).
      Pre-fill name/email by appending query params on first show — the GHL widget
      auto-populates matching fields if the param keys match. */
   function prefillCalendar(){
-    var fr = $('qDemoFrame'); if(!fr) return;
+    var fr = $('qIntroCallFrame'); if(!fr) return;
     /* Don't reset src if user already started filling out the iframe */
     if(fr.dataset.prefilled === '1') return;
     var base = fr.src.split('?')[0];
@@ -781,16 +781,16 @@ body{
     fr.src = base + '?' + p.toString();
     fr.dataset.prefilled = '1';
   }
-  function bookDemo(appointmentDateTime, tz){
-    if(state.demoBooked) return;
-    state.demoBooked = true;
+  function bookIntroCall(appointmentDateTime, tz){
+    if(state.introCallBooked) return;
+    state.introCallBooked = true;
     /* Fire the server hook (Airtable + GHL trial_intro_call_booked webhook),
        then hard-redirect to the standalone /intro-call-booked confirmation
        page. Single source of truth — no in-wizard step 3 fallback. The GHL
        calendar's formSubmitRedirectURL also points at /intro-call-booked,
        so even if this postMessage handler doesn't fire, the user still
        lands on the same page. */
-    fetch('/api/trial/book-demo', {
+    fetch('/api/trial/book-intro-call', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       credentials:'include',
@@ -818,7 +818,7 @@ body{
     var isBook = (
       t === 'appointment_booked' ||
       t === 'appointmentBooked' ||
-      t === 'demoBooked' ||
+      t === 'introCallBooked' ||
       t === 'booking_confirmed' ||
       t === 'leadconnector:appointment_booked' ||
       (d && d.event === 'calendly.event_scheduled') ||
@@ -830,7 +830,7 @@ body{
                   || (d.payload && d.payload.event && d.payload.event.start_time)
                   || '');
       var tz   = (d.timezone || d.appointmentTimezone || (d.payload && (d.payload.timezone || d.payload.tz)) || '');
-      bookDemo(appt, tz);
+      bookIntroCall(appt, tz);
     }
   });
   window.qNext = function(){
@@ -843,7 +843,7 @@ body{
         if(!state.qualified){ qDq(); return; }
         /* Qualified → submit contact (creates Airtable + GHL records, fires
            lead-qualified webhook), then advance to Step 2: GHL calendar.
-           After they book, postMessage handler fires bookDemo() → hard
+           After they book, postMessage handler fires bookIntroCall() → hard
            redirect to /intro-call-booked (standalone confirmation page). */
         var btn = $('qNext');
         if(btn){ btn.disabled = true; btn.style.opacity='.6'; btn.textContent = 'Loading your calendar…'; }
