@@ -189,8 +189,8 @@ body{
    FREE TRIAL — clean split page (hero+bullets left · wizard right)
    Standard website padding/spacing. No clutter.
    ═══════════════════════════════════════════════════════════════════════ */
-.ftpage { max-width:1240px; margin:0 auto; padding:56px 48px 96px }
-.ftpage-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start }
+.ftpage { max-width:none; width:100%; margin:0 auto; padding:48px clamp(40px, 6vw, 120px) 80px }
+.ftpage-grid { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 580px); gap:80px; align-items:start; max-width:1600px; margin:0 auto }
 .ftpage-left { padding-top:16px }
 .ftpage-eyebrow { font:700 12px/1 var(--font-display); color:#2997ff; letter-spacing:.18em; text-transform:uppercase; margin:0 0 16px }
 .ftpage-h1 { font:700 44px/1.1 var(--font-display); letter-spacing:-.02em; color:#fff; margin:0 0 18px }
