@@ -74,6 +74,44 @@ body{
 .cb-wizard-surface .cb-wiz-textarea,
 .cb-wizard-surface .cb-wiz-toggle{background:transparent;border:1px solid rgba(255,255,255,.12)}
 
+/* ════════════════════════════════════════════════════════════════════════
+   .wz WIZARD V2 — inlined from cb-portal-shell design-system.css so the
+   marketing-site free-trial card matches the portal wizards exactly.
+   Keep in sync with public/assets/design-system.css .wz block.
+   ════════════════════════════════════════════════════════════════════════ */
+.wz{
+  position:relative; color:#fff; margin:0 auto; max-height:none; width:min(760px,92vw);
+  background:linear-gradient(180deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.06) 12%,rgba(255,255,255,.04) 30%,rgba(255,255,255,.03) 55%,rgba(255,255,255,.02) 100%);
+  border:1px solid rgba(255,255,255,.12); border-top-color:rgba(255,255,255,.18);
+  border-radius:24px;
+  box-shadow:0 40px 100px rgba(0,0,0,.30),0 8px 32px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.18);
+  overflow:hidden; display:flex; flex-direction:column;
+}
+.wz::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;z-index:2;background:linear-gradient(90deg,transparent,rgba(255,255,255,.20) 25%,rgba(255,255,255,.35) 50%,rgba(255,255,255,.20) 75%,transparent);pointer-events:none}
+.wz > *{position:relative;z-index:1}
+.wz--md .wiz-hero{padding:50px 40px 8px;text-align:center;flex-shrink:0;position:relative}
+.wz--md .wiz-content{padding:32px 40px 8px;flex:1 1 auto;overflow-y:auto;display:flex;flex-direction:column}
+.wz--md .wiz-footer{padding:22px 40px 28px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid rgba(255,255,255,.05)}
+.wz .wiz-title{font:600 60px/1.0 var(--font-display);letter-spacing:-.025em;color:#fff;margin:0;text-align:center}
+.wz .wiz-percent{font:500 13px/1.3 var(--font);color:rgba(255,255,255,.55);margin:18px 0 0;letter-spacing:0;text-align:center}
+.wz .wiz-progress{margin:10px auto 0;width:76%;height:7px;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 1px 0 rgba(0,0,0,.25);overflow:hidden;position:relative}
+.wz .wiz-progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#2997ff 0%,#5fb3ff 60%,#84c4ff 100%);box-shadow:0 0 12px rgba(41,151,255,.55),0 0 24px rgba(41,151,255,.25),inset 0 1px 0 rgba(255,255,255,.35);position:relative;overflow:hidden;transition:width 320ms ease}
+.wz .wiz-progress-fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 100%);transform:translateX(-100%);animation:wz-shimmer 2.2s ease-in-out infinite}
+@keyframes wz-shimmer{0%{transform:translateX(-100%)}60%{transform:translateX(100%)}100%{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){.wz .wiz-progress-fill::after{animation:none}}
+.wz .wiz-footer .btn{min-width:120px;height:44px;padding:0 20px;font-size:14px;border-radius:12px}
+.wz .wiz-footer .btn-g5{border-color:transparent;position:relative;overflow:hidden}
+.wz .wiz-footer .btn-g5::before{content:"";position:absolute;top:0;left:22%;right:22%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55) 50%,transparent);pointer-events:none}
+.wz .wiz-footer .btn-g5:hover{border-color:transparent}
+.wz .wiz-footer .btn-ghost{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.10);color:rgba(255,255,255,.78)}
+.wz .wiz-footer .btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#fff}
+@media (max-width:640px){
+  .wz--md .wiz-hero{padding:32px 20px 8px}
+  .wz--md .wiz-content{padding:24px 20px 8px}
+  .wz--md .wiz-footer{padding:16px 20px 22px}
+  .wz .wiz-title{font-size:42px;letter-spacing:-.02em}
+}
+
 /* HEADER NAV — overrides design-system .ws-page .cb-header-bar !important with same specificity; inline source order wins */
 .ws-page .cb-header-bar{position:relative!important;z-index:100!important;padding:24px 40px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;max-width:1320px!important;margin:0 auto!important;top:auto!important;background:transparent!important;border:none!important}
 .ws-page .cb-header-bar .cb-logo{display:flex!important;position:static!important;left:auto!important;top:auto!important;transform:none!important;align-items:center!important}
@@ -161,20 +199,17 @@ body{
 <main>
 <section class="section" id="qShell">
 <div class="container">
-<div class="wiz-shell cb-wizard-surface" style="position:relative;margin:0 auto;width:100%;max-height:none;transform:none;opacity:1">
+<div class="wz wz--md" style="margin:0 auto">
 
-  <!-- Brand Header -->
-  <div class="wiz-brand" style="padding:20px 24px 0">
-    <div class="login-logo-ring" style="width:56px;height:56px;margin-bottom:10px">
-      <img src="https://api.contentbug.io/portal/assets/logo-bug-white.svg" alt="Content Bug" style="width:30px;height:30px">
-    </div>
-    <div class="wiz-brand-eyebrow">Content Bug Video Editing</div>
-    <div class="wiz-brand-title" style="font-size:24px;margin-bottom:10px">Start Free Trial</div>
-    <div class="wiz-brand-divider"></div>
+  <!-- Hero — big title + percent + heavy shimmer progress (matches portal/18-wizards.html spec) -->
+  <div class="wiz-hero">
+    <h2 class="wiz-title">Free Trial</h2>
+    <p class="wiz-percent" id="qPercent">Step 1 of 3 · 0% complete</p>
+    <div class="wiz-progress"><div class="wiz-progress-fill" id="qProgressFill" style="width:0%"></div></div>
   </div>
 
-  <!-- Step Rail (6 dots) -->
-  <div class="wiz-step-rail" id="qRail"></div>
+  <!-- Tiny dot rail kept for sub-step glance, sits below hero -->
+  <div class="wiz-step-rail" id="qRail" style="padding-top:6px"></div>
 
   <!-- Scrollable Content -->
 
@@ -458,6 +493,24 @@ body{
       if(i < 3) html += '<div class="wiz-step-line'+(state.step > i ? ' complete' : '')+'"></div>';
     }
     qRail.innerHTML = html;
+
+    /* Hero percent + progress bar (matches portal/18-wizards.html spec) */
+    var pct = 0, label = '';
+    if(state.step === 1){
+      var subSlot = (state.subQ === 0) ? 0 : (state.subQ === 'dq') ? 5 : state.subQ;
+      pct = Math.round((subSlot / 6) * 33);
+      label = (state.subQ === 0) ? 'Step 1 of 3 · Quick contact' :
+              (state.subQ === 'dq') ? 'Step 1 of 3 · Not the right fit' :
+              'Step 1 of 3 · Question ' + state.subQ + ' of 5';
+    } else if(state.step === 2){
+      pct = 66; label = 'Step 2 of 3 · Pick a time';
+    } else if(state.step === 3){
+      pct = 100; label = 'Step 3 of 3 · Booked';
+    }
+    var pf = document.getElementById('qProgressFill');
+    var pe = document.getElementById('qPercent');
+    if(pf) pf.style.width = pct + '%';
+    if(pe) pe.textContent = label + ' · ' + pct + '%';
   }
   function showStep(){
     document.querySelectorAll('.qw-step').forEach(function(el){ el.classList.remove('active'); el.style.display='none'; });
