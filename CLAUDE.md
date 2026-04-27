@@ -9,8 +9,8 @@
 
 ## TABLE OF CONTENTS
 0. [Access & tokens](#0-access--tokens)
-1. [GitHub repos (22)](#1-github-repos-22)
-2. [Railway services (28)](#2-railway-services-28)
+1. [GitHub repos (32)](#1-github-repos-32)
+2. [Railway services (27)](#2-railway-services-27)
 3. [API endpoints (by service)](#3-api-endpoints-by-service)
 4. [Airtable schemas](#4-airtable-schemas)
 5. [Environment variables](#5-environment-variables)
@@ -25,7 +25,7 @@
 ## 0. ACCESS & TOKENS
 
 ### 0.1 GitHub
-- Org: `contentbugvideoediting` (private, 22 repos)
+- Org: `contentbugvideoediting` (private, 32 repos as of 2026-04-27)
 - Auth: `gh` CLI on operator's machine. `gh auth status` should show `contentbugvideoediting` active.
 - Do NOT embed PATs in code/commits — use `gh auth token` at boot if needed.
 
@@ -61,7 +61,7 @@
 
 ---
 
-## 1. GITHUB REPOS (22)
+## 1. GITHUB REPOS (32)
 
 | Repo | Visibility | Role | Live URL |
 |---|---|---|---|
@@ -90,7 +90,7 @@
 
 ---
 
-## 2. RAILWAY SERVICES (28)
+## 2. RAILWAY SERVICES (27)
 
 Project `zippy-connection` · `00734216-9f4f-4a75-86f9-5a9ac87baa4e`
 
