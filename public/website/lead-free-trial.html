@@ -280,46 +280,67 @@ body{
          redirect URL; we location.replace() straight into the portal. The modal
          there handles footage upload + blueprint pick/build. See docs/trial-portal-states.md. -->
 
-    <!-- ═══ STEP 3: Book your demo call ═══ -->
-    <div class="qw-step" data-step="3">
-      <div class="qw-title">Book your demo call.</div>
-      <div class="qw-sub">Last step — lock in a 15-minute call so we can walk you through your free edit and your portal. Portal access unlocks once you book.</div>
-      <iframe id="qDemoFrame" src="about:blank" style="width:100%;height:720px;border:none;border-radius:var(--r-xl);margin-top:16px;background:rgba(0,0,0,.2)" loading="lazy" title="Book Your Demo Call"></iframe>
+    <!-- ═══ STEP 2: Book your demo call (GHL Free Demo calendar) ═══ -->
+    <div class="qw-step" data-step="2">
+      <div class="qw-title">Pick a time for your demo call.</div>
+      <div class="qw-sub">15 minutes with our team. We'll walk you through your free edit and unlock your portal.</div>
+      <div style="width:100%;max-width:780px;margin:24px auto 0;border-radius:var(--r-xl);overflow:hidden;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06)">
+        <iframe id="qDemoFrame"
+          src="https://links.contentbug.io/widget/booking/jMEjaEOpcdbZDvcQFXGY"
+          style="width:100%;border:none;overflow:hidden;display:block;min-height:760px;background:transparent"
+          scrolling="no"
+          loading="lazy"
+          title="Book Your Free Demo"></iframe>
+      </div>
     </div>
 
-    <!-- ═══ SUCCESS: auto-shown after demo booking ═══ -->
-    <div class="qw-step" data-step="done">
+    <!-- ═══ STEP 3: Booking confirmation — auto-shown when GHL postMessage fires ═══ -->
+    <div class="qw-step" data-step="3">
       <div class="q-result-icon qualified">
         <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <div class="qw-title">You're all set.</div>
-      <div class="qw-sub">Your free trial is live. Your edit will be ready in 12 hours &mdash; we just emailed you the portal login so you can review, revise, and download.</div>
-      <div style="width:100%;max-width:440px;margin:24px auto 0;text-align:left">
-        <div class="glass-card" style="padding:20px;margin-bottom:14px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-            <div style="width:32px;height:32px;border-radius:50%;background:rgba(41,151,255,.15);display:flex;align-items:center;justify-content:center">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2997ff" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div class="qw-title">Your call is booked.</div>
+      <div class="qw-sub" id="qBookSub">We just emailed you the calendar invite — your free trial is officially live.</div>
+      <div style="width:100%;max-width:480px;margin:24px auto 0;text-align:left">
+        <div class="glass-card" style="padding:18px 20px;margin-bottom:12px;border-radius:14px;background:rgba(41,151,255,.06);border:1px solid rgba(41,151,255,.18)" id="qBookSlotCard">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(41,151,255,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#2997ff" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>
-            <div>
-              <div style="font:600 15px/1.3 var(--font);color:var(--txt)">Turnaround: 12 hours</div>
-              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.55)">Your edit will be ready by the next business day.</div>
+            <div style="min-width:0">
+              <div style="font:600 14px/1.3 var(--font);color:var(--txt)" id="qBookWhen">Demo call confirmed</div>
+              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.6)">Check your inbox for the calendar invite + Zoom link.</div>
             </div>
           </div>
         </div>
-        <div class="glass-card" style="padding:20px;margin-bottom:14px">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-            <div style="width:32px;height:32px;border-radius:50%;background:rgba(52,211,153,.15);display:flex;align-items:center;justify-content:center">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <div class="glass-card" style="padding:18px 20px;margin-bottom:12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(126,203,161,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#7ecba1" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
-            <div>
-              <div style="font:600 15px/1.3 var(--font);color:var(--txt)">Confirmation sent to your email</div>
-              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.55)" id="qFinalEmail">We just sent you your portal login and upload confirmation.</div>
+            <div style="min-width:0">
+              <div style="font:600 14px/1.3 var(--font);color:var(--txt)">12-hour edit turnaround</div>
+              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.6)">Once you upload footage in your portal, we ship within 12h.</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card" style="padding:18px 20px;margin-bottom:12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10)">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(245,208,96,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#f5d060" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div style="min-width:0">
+              <div style="font:600 14px/1.3 var(--font);color:var(--txt)">Portal login on the way</div>
+              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.6)" id="qFinalEmail">You'll get an email with your portal access — start uploading footage anytime.</div>
             </div>
           </div>
         </div>
       </div>
-      <div style="text-align:center;margin-top:20px">
-        <a href="https://api.contentbug.io/portal/login.html" class="btn btn-g5" style="text-decoration:none;padding:14px 32px;font-size:15px">Go to Your Portal &rarr;</a>
+      <div style="text-align:center;margin-top:24px">
+        <a href="https://api.contentbug.io/portal/login.html" class="btn btn-g5" style="text-decoration:none;padding:14px 32px;font-size:15px;display:inline-flex;align-items:center;gap:10px">
+          Go to Your Portal
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
 
@@ -406,40 +427,41 @@ body{
 })();
 </script>
 
-<!-- ═══ WIZARD JS (3-step state machine) ═══ -->
+<!-- GHL booking widget embed (auto-resize + postMessage on book) -->
+<script src="https://links.contentbug.io/js/form_embed.js" type="text/javascript"></script>
+
+<!-- ═══ WIZARD JS — 3-step state machine (Qualify → Calendar → Confirmation) ═══ -->
 <script>
 (function(){
   'use strict';
 
   var state = {
-    step: 1,          // 1 = Qualify | 2 = Request | 3 = Demo | 'done' = success
+    step: 1,          // 1 = Qualify | 2 = Calendar | 3 = Booking confirmed
     subQ: 0,          // within step 1: 0 = contact | 1-5 = questions | 'dq' = disqualified
     contact: { first:'', last:'', email:'', phone:'' },
     answers: { contentTypes:[], postFreq:'', goal:'', footage:'', volume:'' },
     score: 0, qualified:false,
-    requestLoaded:false, demoLoaded:false,
-    submittedContact:false, editSubmitted:false, demoBooked:false
+    submittedContact:false, demoBooked:false,
+    bookedSlot:''     // human-readable booked datetime once GHL posts back
   };
   var $ = function(id){ return document.getElementById(id); };
   var qRail = $('qRail'), qFoot = $('qFoot'), qBack = $('qBack'), qNext = $('qNext'), qBody = $('qBody');
 
   function renderRail(){
     if(!qRail) return;
-    var done = state.step === 'done';
     var html = '';
     for(var i=1;i<=3;i++){
       var cls = 'wiz-step-dot';
-      if(done || state.step > i || (state.step==='done')) cls += ' complete';
+      if(state.step > i) cls += ' complete';
       else if(state.step === i) cls += ' active';
       html += '<div class="'+cls+'"></div>';
-      if(i < 3) html += '<div class="wiz-step-line'+((done || state.step > i) ? ' complete' : '')+'"></div>';
+      if(i < 3) html += '<div class="wiz-step-line'+(state.step > i ? ' complete' : '')+'"></div>';
     }
     qRail.innerHTML = html;
   }
   function showStep(){
     document.querySelectorAll('.qw-step').forEach(function(el){ el.classList.remove('active'); el.style.display='none'; });
-    var key = state.step === 'done' ? 'done' : String(state.step);
-    var cur = document.querySelector('.qw-step[data-step="'+key+'"]');
+    var cur = document.querySelector('.qw-step[data-step="'+String(state.step)+'"]');
     if(cur){ cur.classList.add('active'); cur.style.display=''; }
     renderRail(); renderFooter();
     if(qBody) qBody.scrollTop = 0;
@@ -464,11 +486,13 @@ body{
   }
   function renderFooter(){
     if(!qFoot) return;
-    if(state.step === 'done'){ qFoot.style.display='none'; return; }
+    /* Step 3 (booking confirmed) — hide footer entirely; user clicks "Go to Portal" CTA */
+    if(state.step === 3){ qFoot.style.display='none'; return; }
     qFoot.style.display = '';
-    qBack.hidden = !(state.step === 1 && state.subQ !== 0) && (state.step !== 2) && (state.step !== 3);
-    // Hide Next on step 2, step 3 (user acts inside iframe), and on disqualified
-    if(state.step === 2 || state.step === 3 || (state.step === 1 && state.subQ === 'dq')){ qNext.hidden = true; }
+    /* Back button visible on questions, calendar, and disqualified — hidden only on first contact step */
+    qBack.hidden = (state.step === 1 && state.subQ === 0);
+    /* Hide Next on step 2 (calendar — user books inside iframe) and on disqualified */
+    if(state.step === 2 || (state.step === 1 && state.subQ === 'dq')){ qNext.hidden = true; }
     else { qNext.hidden = false; qNext.innerHTML = 'Continue &rarr;'; }
     var v = qValid();
     qNext.disabled = !v;
@@ -488,8 +512,8 @@ body{
       if(state.subQ === 5) return !!state.answers.volume;
       if(state.subQ === 'dq') return false;
     }
-    if(state.step === 2) return false;   // user submits from inside the iframe
-    if(state.step === 3) return false;   // user books from inside the iframe
+    if(state.step === 2) return false;   // user books inside the GHL iframe
+    if(state.step === 3) return false;   // success — Go to Portal CTA only
     return true;
   }
   function computeScore(){
@@ -568,25 +592,34 @@ body{
     fetch('/api/trial/remind', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ email: email, contact_email: state.contact.email }) })
       .finally(function(){ var btn = document.querySelector('.q-remind .btn'); if(btn){ btn.textContent = "We'll email you."; btn.disabled = true; btn.style.opacity='.6'; } });
   };
-  /* loadRequest() removed — request-trial.html is dead. Submit-edit happens
-     inside the real portal via trial-submit-modal.js after auto-login. */
-  function loadDemo(){
-    if(state.demoLoaded) return;
+  /* GHL calendar iframe is hardcoded in HTML (jMEjaEOpcdbZDvcQFXGY = Free Demo).
+     Pre-fill name/email by appending query params on first show — the GHL widget
+     auto-populates matching fields if the param keys match. */
+  function prefillCalendar(){
     var fr = $('qDemoFrame'); if(!fr) return;
-    /* GHL calendar widget URL — set GHL_DEMO_CALENDAR_URL in Railway and
-       inject as a <meta name="cb-demo-calendar" content="..."> if you want
-       to override. Falls back to the contentbug demo calendar path below. */
-    var meta = document.querySelector('meta[name="cb-demo-calendar"]');
-    var base = (meta && meta.content) || 'https://api.contentbug.io/widget/booking/free-trial-demo';
+    /* Don't reset src if user already started filling out the iframe */
+    if(fr.dataset.prefilled === '1') return;
+    var base = fr.src.split('?')[0];
     var p = new URLSearchParams({
       first_name: state.contact.first, last_name: state.contact.last,
       email: state.contact.email, phone: state.contact.phone
     });
-    fr.src = base + (base.indexOf('?') === -1 ? '?' : '&') + p.toString();
-    state.demoLoaded = true;
+    fr.src = base + '?' + p.toString();
+    fr.dataset.prefilled = '1';
   }
   function bookDemo(appointmentDateTime, tz){
+    if(state.demoBooked) return;
     state.demoBooked = true;
+    /* Format the booked slot for the confirmation card */
+    if(appointmentDateTime){
+      try {
+        var dt = new Date(appointmentDateTime);
+        if(!isNaN(dt.getTime())){
+          var opts = { weekday:'long', month:'short', day:'numeric', hour:'numeric', minute:'2-digit', timeZoneName:'short' };
+          state.bookedSlot = dt.toLocaleString(undefined, opts);
+        }
+      } catch(e){}
+    }
     fetch('/api/trial/book-demo', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
@@ -595,23 +628,33 @@ body{
     }).finally(function(){
       var em = $('qFinalEmail');
       if(em && state.contact.email) em.textContent = 'Portal login + edit confirmation sent to ' + state.contact.email + '.';
-      state.step = 'done';
-      showStep();
+      var when = $('qBookWhen');
+      if(when && state.bookedSlot) when.textContent = state.bookedSlot;
+      state.step = 3; showStep();
     });
   }
+  /* GHL booking widgets postMessage on appointment confirmation. Handle the
+     known shapes: form_embed.js fires { type, payload } or { event, ... }.
+     We listen broadly to cover GHL's varying conventions. */
   window.addEventListener('message', function(ev){
     if(!ev || !ev.data) return;
-    var t = ev.data.type || ev.data;
-    if(t === 'trialProjectSubmitted' || t === 'freeTrialFootageSubmitted'){
-      state.editSubmitted = true;
-      state.step = 3; showStep();
-      setTimeout(loadDemo, 80);
-      return;
-    }
-    /* GHL / Calendly / generic calendar booked events */
-    if(t === 'demoBooked' || t === 'appointmentBooked' || (ev.data && ev.data.event === 'calendly.event_scheduled')){
-      var appt = (ev.data && (ev.data.appointmentDateTime || ev.data.payload && ev.data.payload.event && ev.data.payload.event.start_time)) || '';
-      var tz   = (ev.data && (ev.data.timezone || ev.data.appointmentTimezone)) || '';
+    var d = ev.data;
+    var t = (d && (d.type || d.event)) || '';
+    var isBook = (
+      t === 'appointment_booked' ||
+      t === 'appointmentBooked' ||
+      t === 'demoBooked' ||
+      t === 'booking_confirmed' ||
+      t === 'leadconnector:appointment_booked' ||
+      (d && d.event === 'calendly.event_scheduled') ||
+      (typeof t === 'string' && t.toLowerCase().indexOf('appointment') >= 0 && t.toLowerCase().indexOf('book') >= 0)
+    );
+    if(isBook){
+      var appt = (d.appointmentDateTime || d.startTime || d.start_time
+                  || (d.payload && (d.payload.startTime || d.payload.start_time))
+                  || (d.payload && d.payload.event && d.payload.event.start_time)
+                  || '');
+      var tz   = (d.timezone || d.appointmentTimezone || (d.payload && (d.payload.timezone || d.payload.tz)) || '');
       bookDemo(appt, tz);
     }
   });
@@ -623,22 +666,16 @@ body{
       if(state.subQ === 5){
         computeScore();
         if(!state.qualified){ qDq(); return; }
-        /* Qualified → submit contact, auto-login, redirect into portal.
-           Old flow: step=2 iframe loaded request-trial.html. Killed 2026-04-21. */
+        /* Qualified → submit contact (creates Airtable + GHL records, fires
+           lead-qualified webhook), then advance to Step 2: GHL calendar.
+           After they book, postMessage handler fires bookDemo() → Step 3. */
         var btn = $('qNext');
-        if(btn){ btn.disabled = true; btn.style.opacity='.6'; btn.textContent = 'Setting up your portal…'; }
-        submitContact().then(function(resp){
-          var dest = (resp && resp.redirect) ? resp.redirect
-                   : '/portal/index.html?welcome=trial&stage=submit-edit';
-          /* Cross-origin: lead-free-trial.html is served from the website
-             domain; /portal/ lives on api.contentbug.io. Use absolute URL
-             so the cookie set by /api/trial/submit (same-origin with /portal)
-             is present when the portal boots. */
-          try {
-            location.replace('https://api.contentbug.io' + dest);
-          } catch (e) {
-            location.href = 'https://api.contentbug.io' + dest;
-          }
+        if(btn){ btn.disabled = true; btn.style.opacity='.6'; btn.textContent = 'Loading your calendar…'; }
+        submitContact().finally(function(){
+          state.step = 2; showStep();
+          /* Pre-fill name/email into the GHL widget */
+          setTimeout(prefillCalendar, 60);
+          if(btn){ btn.disabled=false; btn.style.opacity=''; btn.innerHTML='Continue &rarr;'; }
         });
       }
     }
@@ -648,8 +685,8 @@ body{
       if(state.subQ === 'dq'){ showSub(5); return; }
       if(state.subQ > 0){ showSub(state.subQ - 1); return; }
     }
-    if(state.step === 2){ state.step = 1; showStep(); showSub(5); }
-    if(state.step === 3){ state.step = 2; showStep(); }
+    if(state.step === 2){ state.step = 1; showStep(); showSub(5); return; }
+    /* Step 3 (booking confirmed) — no back; user clicks Go to Portal */
   };
   wireChips(); wireContact(); showStep(); showSub(0);
 })();
