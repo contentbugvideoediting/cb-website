@@ -168,6 +168,24 @@ body{
 .ws-page .cb-ft-legal-sep{color:rgba(255,255,255,.3)!important}
 
 /* ═══════════════════════════════════════════════════════════════════════
+   KILL THE FOOTER GLASS CARD — make footer items blend straight into the
+   page gradient instead of sitting on a separate card with a visible top
+   edge. User specifically called out the "page break" the card created.
+   ═══════════════════════════════════════════════════════════════════════ */
+.ws-page .cb-footer{margin-top:48px!important;padding:48px 40px 40px!important}
+.ws-page .cb-ft-glass{
+  background:transparent!important;
+  border:none!important;
+  border-top:none!important;
+  box-shadow:none!important;
+  padding:24px 40px 24px!important;
+}
+.ws-page .cb-ft-divider{
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.06) 20%,rgba(255,255,255,.06) 80%,transparent)!important;
+  margin:24px 0 16px!important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
    FREE TRIAL SPLIT LAYOUT — copy on left, wizard on right.
    Stacks on mobile (left above right).
    ═══════════════════════════════════════════════════════════════════════ */
