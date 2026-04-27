@@ -228,37 +228,18 @@ body{
     <!-- ═══ STEP 1: Qualify (contact + 5 questions inline) ═══ -->
     <div class="qw-step active" data-step="1">
 
-      <!-- Sub-screen 0: Contact details — GHL embedded form (Lead - Contact Details) -->
+      <!-- Sub-screen 0: Contact details -->
       <div class="qw-sub-screen" data-sub="0">
         <div class="qw-title">Let's get started.</div>
         <div class="qw-sub">Tell us a bit about yourself so we know who to send your free edit to.</div>
-        <!-- Centered iframe wrapper — auto-resized by form_embed.js. SF Pro Text inherits from container; GHL form fields take ~16-18px line-height by default which matches our wizard rhythm. -->
-        <div class="q-ghl-form-wrap" style="width:100%;max-width:520px;margin:0 auto;padding:8px 0 4px">
-          <iframe
-            src="https://links.contentbug.io/widget/form/lUq4PLuNYU9XazfO4juk"
-            id="inline-lUq4PLuNYU9XazfO4juk"
-            data-layout='{"id":"INLINE"}'
-            data-trigger-type="alwaysShow"
-            data-trigger-value=""
-            data-activation-type="alwaysActivated"
-            data-activation-value=""
-            data-deactivation-type="neverDeactivate"
-            data-deactivation-value=""
-            data-form-name="Lead - Contact Details"
-            data-height="434"
-            data-layout-iframe-id="inline-lUq4PLuNYU9XazfO4juk"
-            data-form-id="lUq4PLuNYU9XazfO4juk"
-            title="Lead - Contact Details"
-            style="width:100%;min-height:434px;border:none;border-radius:12px;background:transparent;display:block;font-family:'SF Pro Text',-apple-system,BlinkMacSystemFont,system-ui,sans-serif"
-          ></iframe>
+        <div style="width:100%;max-width:420px;text-align:left;margin:16px auto 0">
+          <div class="q-row">
+            <div class="q-field"><label>First Name *</label><input id="qFirstName" placeholder="First name" autocomplete="given-name"></div>
+            <div class="q-field"><label>Last Name *</label><input id="qLastName" placeholder="Last name" autocomplete="family-name"></div>
+          </div>
+          <div class="q-field"><label>Email *</label><input id="qEmail" type="email" placeholder="you@example.com" autocomplete="email"><div class="q-error" id="qEmailErr">Please enter a valid email address.</div></div>
+          <div class="q-field"><label>Phone <span class="q-optional">(optional)</span></label><input id="qPhone" type="tel" placeholder="(555) 123-4567" autocomplete="tel"></div>
         </div>
-        <!-- Hidden mirror inputs so legacy qValid/state code still works after iframe form submits -->
-        <input id="qFirstName" type="hidden">
-        <input id="qLastName" type="hidden">
-        <input id="qEmail" type="hidden">
-        <input id="qPhone" type="hidden">
-        <span id="qEmailErr" style="display:none"></span>
-        <p id="qFormHint" style="font:400 12px/1.4 'SF Pro Text';color:rgba(255,255,255,.5);text-align:center;margin:14px auto 0;max-width:420px">After you submit above, we'll continue to the qualification questions.</p>
       </div>
 
       <!-- Sub-screens 1-5: qualification questions -->
@@ -591,11 +572,8 @@ body{
   function qValid(){
     if(state.step === 1){
       if(state.subQ === 0){
-        /* GHL form embed handles capture + auto-advances on submit. The
-           Continue button is a manual-advance fallback in case postMessage
-           doesn't fire for any reason. Always-valid here so user can manually
-           advance after they've submitted the iframe form. */
-        return true;
+        var first=$('qFirstName').value.trim(), last=$('qLastName').value.trim(), email=$('qEmail').value.trim();
+        return !!(first && last && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
       }
       if(state.subQ === 1) return state.answers.contentTypes.length > 0;
       if(state.subQ === 2) return !!state.answers.postFreq;
@@ -725,52 +703,13 @@ body{
       state.step = 3; showStep();
     });
   }
-  /* GHL form_embed.js postMessages: covers BOTH form-submit (Lead Contact
-     Details on sub_0) AND appointment-booked (Free Demo on step 2). Listen
-     broadly to handle GHL's varying naming conventions. */
+  /* GHL booking widgets postMessage on appointment confirmation. Handle the
+     known shapes: form_embed.js fires { type, payload } or { event, ... }.
+     We listen broadly to cover GHL's varying conventions. */
   window.addEventListener('message', function(ev){
     if(!ev || !ev.data) return;
     var d = ev.data;
     var t = (d && (d.type || d.event)) || '';
-    var tlc = String(t).toLowerCase();
-
-    /* === GHL form submit success (sub_0 Contact Details) === */
-    var isFormSubmit = (
-      tlc === 'form_submit' || tlc === 'form_submitted' || tlc === 'forms.submitted' ||
-      tlc === 'submitform.success' || tlc === 'submit_success' ||
-      tlc.indexOf('form_submit') >= 0 ||
-      (tlc.indexOf('form') >= 0 && tlc.indexOf('submit') >= 0) ||
-      (tlc.indexOf('lead') >= 0 && tlc.indexOf('captured') >= 0)
-    );
-    if(isFormSubmit){
-      /* Pull whatever data GHL gave us — fields may be at d.fields, d.data,
-         d.payload.fields, or d.formData. Normalize to first/last/email/phone. */
-      var f = (d.fields || d.data || d.formData
-               || (d.payload && (d.payload.fields || d.payload.data))
-               || {}) || {};
-      var firstN = f.first_name || f.firstName || f.first || (f.full_name||'').split(' ')[0] || '';
-      var lastN  = f.last_name  || f.lastName  || f.last  || (f.full_name||'').split(' ').slice(1).join(' ') || '';
-      var emailN = f.email || f.email_address || '';
-      var phoneN = f.phone || f.phone_number  || '';
-      if(firstN) state.contact.first = firstN;
-      if(lastN)  state.contact.last  = lastN;
-      if(emailN) state.contact.email = emailN;
-      if(phoneN) state.contact.phone = phoneN;
-      /* Mirror to hidden inputs so legacy qValid() passes */
-      var qf = $('qFirstName'), ql = $('qLastName'), qe = $('qEmail'), qp = $('qPhone');
-      if(qf) qf.value = state.contact.first || '—';
-      if(ql) ql.value = state.contact.last  || '—';
-      if(qe) qe.value = state.contact.email || 'submitted@ghl.form';
-      if(qp) qp.value = state.contact.phone || '';
-      state.iframeContactSubmitted = true;
-      var hint = $('qFormHint');
-      if(hint){ hint.style.color = 'rgba(124,227,165,.85)'; hint.textContent = '✓ Got it. Continuing to qualification…'; }
-      /* Auto-advance after a beat so the user sees the confirmation state */
-      setTimeout(function(){ if(state.step === 1 && state.subQ === 0) showSub(1); }, 700);
-      return;
-    }
-
-    /* === GHL booking widget appointment confirmation (step 2 Free Demo) === */
     var isBook = (
       t === 'appointment_booked' ||
       t === 'appointmentBooked' ||
@@ -778,7 +717,7 @@ body{
       t === 'booking_confirmed' ||
       t === 'leadconnector:appointment_booked' ||
       (d && d.event === 'calendly.event_scheduled') ||
-      (tlc.indexOf('appointment') >= 0 && tlc.indexOf('book') >= 0)
+      (typeof t === 'string' && t.toLowerCase().indexOf('appointment') >= 0 && t.toLowerCase().indexOf('book') >= 0)
     );
     if(isBook){
       var appt = (d.appointmentDateTime || d.startTime || d.start_time
