@@ -268,18 +268,18 @@ body{
       <div class="ic-check">
         <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" width="34" height="34"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <h1 class="ic-h1">Your free trial intro call is confirmed.</h1>
-      <p class="ic-sub">We just emailed you the calendar invite + Zoom link. Open your inbox — your free trial is officially live.</p>
+      <h1 class="ic-h1" id="icHeadline">Your free trial intro call is confirmed.</h1>
+      <p class="ic-sub" id="icSub">We just emailed you the calendar invite + Zoom link. Open your inbox — your free trial is officially live.</p>
       <div style="text-align:center">
-        <span class="ic-email-pill">
+        <span class="ic-email-pill" id="icEmailPill">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Check your email for next steps
+          <span id="icEmailPillText">Check your email for next steps</span>
         </span>
       </div>
 
       <!-- Two big action cards — Submit Free Edit + Build Editing Blueprint -->
       <div class="ic-actions">
-        <a href="https://api.contentbug.io/portal/request.html?free_trial=1" class="ic-card">
+        <a id="icCtaSubmit" href="https://api.contentbug.io/portal/request.html?free_trial=1" class="ic-card">
           <div class="ic-card-head">
             <div class="ic-card-num">1</div>
             <div class="ic-card-icon">
@@ -293,7 +293,7 @@ body{
           </span>
         </a>
 
-        <a href="https://api.contentbug.io/portal/blueprint-builder.html?free_trial=1" class="ic-card">
+        <a id="icCtaBlueprint" href="https://api.contentbug.io/portal/blueprint-builder.html?free_trial=1" class="ic-card">
           <div class="ic-card-head">
             <div class="ic-card-num">2</div>
             <div class="ic-card-icon">
@@ -315,7 +315,7 @@ body{
 
       <!-- Secondary: just go to portal -->
       <div style="text-align:center">
-        <a href="https://api.contentbug.io/portal/login.html" class="ic-foot-cta">
+        <a id="icCtaPortal" href="https://api.contentbug.io/portal/login.html" class="ic-foot-cta">
           Or open my portal
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
@@ -383,6 +383,57 @@ body{
 </footer>
 
 </div><!-- /.ws-page -->
+
+<!-- ─── Personalize from URL params + thread contact context into CTAs ───
+     Expected params (any subset works — all optional):
+       first_name · last_name · email · phone · contactId
+     GHL email/SMS pass them via merge tags. Example canonical URL:
+       https://contentbug.io/intro-call-booked
+         ?first_name={{contact.first_name}}
+         &last_name={{contact.last_name}}
+         &email={{contact.email}}
+         &phone={{contact.phone}}
+         &contactId={{contact.id}}
+     Page reads them client-side, personalizes the headline + email pill,
+     and re-points the two action-card CTAs (and "open my portal") at the
+     portal with contactId/email so the user lands logged-in. ─────────── */
+<script>
+(function(){
+  var p = new URLSearchParams(location.search);
+  var first    = (p.get('first_name')||'').trim();
+  var email    = (p.get('email')||'').trim();
+  var phone    = (p.get('phone')||'').trim();
+  var contact  = (p.get('contactId')||'').trim();
+
+  // Personalize headline if first name provided
+  if(first){
+    var h = document.getElementById('icHeadline');
+    if(h) h.textContent = first + ", your free trial intro call is confirmed.";
+  }
+
+  // Personalize email pill — show the actual email so it feels real
+  if(email){
+    var et = document.getElementById('icEmailPillText');
+    if(et) et.textContent = "Confirmation sent to " + email;
+  }
+
+  // Append contact context to all CTA links so the portal can identify
+  // the user (and skip the login wall) the moment they click through
+  function passThru(id){
+    var a = document.getElementById(id);
+    if(!a) return;
+    var u = new URL(a.href);
+    if(contact) u.searchParams.set('contactId', contact);
+    if(email)   u.searchParams.set('email',     email);
+    if(first)   u.searchParams.set('first_name',first);
+    if(phone)   u.searchParams.set('phone',     phone);
+    a.href = u.toString();
+  }
+  passThru('icCtaSubmit');
+  passThru('icCtaBlueprint');
+  passThru('icCtaPortal');
+})();
+</script>
 
 <!-- Sticky nav — same pattern as the rest of the marketing site -->
 <script>

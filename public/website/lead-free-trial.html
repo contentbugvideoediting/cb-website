@@ -796,7 +796,16 @@ body{
       credentials:'include',
       body: JSON.stringify({ email: state.contact.email, appointmentDateTime: appointmentDateTime || '', appointmentTimezone: tz || '' })
     }).finally(function(){
-      window.location.replace('/intro-call-booked');
+      // Pass contact context to the confirmation page so it personalizes
+      // the headline + threads contactId/email into the CTA links.
+      var c = state.contact || {};
+      var p = new URLSearchParams();
+      if(c.first) p.set('first_name', c.first);
+      if(c.last)  p.set('last_name',  c.last);
+      if(c.email) p.set('email',      c.email);
+      if(c.phone) p.set('phone',      c.phone);
+      var qs = p.toString();
+      window.location.replace('/intro-call-booked' + (qs ? '?' + qs : ''));
     });
   }
   /* GHL booking widgets postMessage on appointment confirmation. Handle the
