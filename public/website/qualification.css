@@ -466,7 +466,7 @@ body:not(.ws-page) .cb-header{
 
 /* ═══════════════════════════════════════════════════════════
    WIZARD — free trial / qualification flow
-   (all classes referenced from lead-free-trial.html)
+   (all classes referenced from free-trial.html)
    ═══════════════════════════════════════════════════════════ */
 .ws-page .wiz-shell{
   max-width:720px;margin:24px auto;border-radius:var(--r-2xl);
