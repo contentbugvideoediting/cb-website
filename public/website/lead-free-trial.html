@@ -190,16 +190,28 @@ body{
    Standard website padding/spacing. No clutter.
    ═══════════════════════════════════════════════════════════════════════ */
 .ftpage { margin:0 auto; padding:40px 24px 64px }
-.ftpage-grid { display:flex; justify-content:center; align-items:flex-start; gap:64px; max-width:1100px; margin:0 auto }
-.ftpage-left { padding-top:8px; width:480px; flex-shrink:0 }
-.ftpage-right { width:540px; flex-shrink:0; position:sticky; top:24px }
+.ftpage-grid { display:flex; justify-content:center; align-items:stretch; gap:64px; max-width:1100px; margin:0 auto }
+.ftpage-left { padding-top:8px; width:480px; flex-shrink:0; display:flex; flex-direction:column }
+.ftpage-left-top { /* eyebrow + h1 + sub */ }
+.ftpage-left-mid { margin-top:8px /* bullets sit close to sub */ }
+.ftpage-left-bottom { margin-top:auto; padding-top:32px /* pushes how-it-works + trust to the bottom edge */ }
+.ftpage-right { width:540px; flex-shrink:0; align-self:flex-start; position:sticky; top:24px }
 .ftpage-eyebrow { font:700 12px/1 var(--font-display); color:#2997ff; letter-spacing:.18em; text-transform:uppercase; margin:0 0 16px }
 .ftpage-h1 { font:700 44px/1.1 var(--font-display); letter-spacing:-.02em; color:#fff; margin:0 0 18px }
 .ftpage-sub { font:400 16px/1.55 var(--font); color:rgba(255,255,255,.72); margin:0 0 28px; max-width:440px }
-.ftpage-bullets { list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:12px }
+.ftpage-bullets { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px }
 .ftpage-bullets li { font:500 15px/1.4 var(--font); color:rgba(255,255,255,.88); padding-left:22px; position:relative }
 .ftpage-bullets li::before { content:""; position:absolute; left:0; top:8px; width:6px; height:6px; border-radius:50%; background:#2997ff; box-shadow:0 0 0 3px rgba(41,151,255,.18) }
-.ftpage-trust { font:400 13px/1.5 var(--font); color:rgba(255,255,255,.5); margin:18px 0 0; max-width:420px }
+
+/* "How it works" mini block — fills the middle vertical space + reinforces wizard steps */
+.ftpage-hiw { margin:0; padding:20px 22px; border-radius:14px; background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.06) }
+.ftpage-hiw-title { font:600 11px/1 var(--font); color:rgba(255,255,255,.55); text-transform:uppercase; letter-spacing:.16em; margin:0 0 14px }
+.ftpage-hiw-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:14px; counter-reset:hiwstep }
+.ftpage-hiw-list li { counter-increment:hiwstep; padding-left:36px; position:relative; font:500 14px/1.4 var(--font); color:rgba(255,255,255,.88) }
+.ftpage-hiw-list li::before { content:counter(hiwstep); position:absolute; left:0; top:-1px; width:24px; height:24px; border-radius:50%; background:rgba(41,151,255,.12); border:1px solid rgba(41,151,255,.32); color:#2997ff; font:600 12px/24px var(--font-display); text-align:center }
+.ftpage-hiw-list li small { display:block; font:400 12.5px/1.5 var(--font); color:rgba(255,255,255,.55); margin-top:2px; font-weight:400 }
+
+.ftpage-trust { font:400 13px/1.5 var(--font); color:rgba(255,255,255,.5); margin:14px 0 0; max-width:420px }
 /* .ftpage-right re-declared above with sticky + right-justify — leaving this orphan rule out */
 @media (max-width:980px){
   .ftpage { padding:32px 20px 56px }
@@ -249,19 +261,35 @@ body{
 <!-- ═══ FREE TRIAL — clean split page (hero left · wizard right) ═══ -->
 <main class="ftpage" id="qShell">
   <div class="ftpage-grid">
-    <!-- ═══ LEFT: hero + bullets ═══ -->
+    <!-- ═══ LEFT: hero + bullets + how-it-works + trust (flex column, distributed) ═══ -->
     <section class="ftpage-left">
-      <p class="ftpage-eyebrow">Free Trial</p>
-      <h1 class="ftpage-h1">Get your first edit on us</h1>
-      <p class="ftpage-sub">See what working with Content Bug actually feels like — real editors, real quality, real turnaround. No card, no commitment.</p>
-      <ul class="ftpage-bullets">
-        <li>Your first edit free on us</li>
-        <li>~12-hour turnaround on your trial edit</li>
-        <li>A real look at our editing quality and speed</li>
-        <li>Option to build your own editing Blueprint</li>
-        <li>Activated after a quick intro call</li>
-      </ul>
-      <p class="ftpage-trust">No card required. No pressure. Just a simple way to see if Content Bug is the right fit.</p>
+      <div class="ftpage-left-top">
+        <p class="ftpage-eyebrow">Free Trial</p>
+        <h1 class="ftpage-h1">Get your first edit on us</h1>
+        <p class="ftpage-sub">See what working with Content Bug actually feels like — real editors, real quality, real turnaround. No card, no commitment.</p>
+      </div>
+
+      <div class="ftpage-left-mid">
+        <ul class="ftpage-bullets">
+          <li>Your first edit free on us</li>
+          <li>~12-hour turnaround on your trial edit</li>
+          <li>A real look at our editing quality and speed</li>
+          <li>Option to build your own editing Blueprint</li>
+          <li>Activated after a quick intro call</li>
+        </ul>
+      </div>
+
+      <div class="ftpage-left-bottom">
+        <div class="ftpage-hiw">
+          <div class="ftpage-hiw-title">How it works</div>
+          <ol class="ftpage-hiw-list">
+            <li>Share your contact details<small>So we know where to send your free edit and updates.</small></li>
+            <li>Answer 5 quick qualification questions<small>Tells us your content, volume, goals, and timing.</small></li>
+            <li>Book your intro call to activate the trial<small>15-minute call. We email your free edit link right after.</small></li>
+          </ol>
+        </div>
+        <p class="ftpage-trust">No card required. No pressure. Just a simple way to see if Content Bug is the right fit.</p>
+      </div>
     </section>
 
     <!-- ═══ RIGHT: wizard ═══ -->
