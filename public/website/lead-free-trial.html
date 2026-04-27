@@ -168,22 +168,24 @@ body{
 .ws-page .cb-ft-legal-sep{color:rgba(255,255,255,.3)!important}
 
 /* ═══════════════════════════════════════════════════════════════════════
-   KILL THE FOOTER GLASS CARD — make footer items blend straight into the
-   page gradient instead of sitting on a separate card with a visible top
-   edge. User specifically called out the "page break" the card created.
+   KILL THE FOOTER PAGE BREAK — tight gap so the body-bg fade-to-black
+   between wizard end + footer doesn't create a visible "band."
+   Footer card stays transparent so it blends straight into the page bg.
    ═══════════════════════════════════════════════════════════════════════ */
-.ws-page .cb-footer{margin-top:48px!important;padding:48px 40px 40px!important}
+.ws-page .cb-footer{margin-top:0!important;padding:32px 40px 32px!important;background:transparent!important}
 .ws-page .cb-ft-glass{
   background:transparent!important;
   border:none!important;
   border-top:none!important;
   box-shadow:none!important;
-  padding:24px 40px 24px!important;
+  padding:8px 40px 8px!important;
 }
 .ws-page .cb-ft-divider{
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.06) 20%,rgba(255,255,255,.06) 80%,transparent)!important;
-  margin:24px 0 16px!important;
+  margin:20px 0 12px!important;
 }
+/* Tighten the bottom of the wizard page itself so the wizard sits closer to the footer */
+.ftpage{padding-bottom:24px!important}
 
 /* ═══════════════════════════════════════════════════════════════════════
    FREE TRIAL — clean split page (hero+bullets left · wizard right)
@@ -267,16 +269,6 @@ body{
         <p class="ftpage-eyebrow">Free Trial</p>
         <h1 class="ftpage-h1">Get your first edit on us</h1>
         <p class="ftpage-sub">See what working with Content Bug actually feels like — real editors, real quality, real turnaround. No card, no commitment.</p>
-      </div>
-
-      <div class="ftpage-left-mid">
-        <ul class="ftpage-bullets">
-          <li>Your first edit free on us</li>
-          <li>~12-hour turnaround on your trial edit</li>
-          <li>A real look at our editing quality and speed</li>
-          <li>Option to build your own editing Blueprint</li>
-          <li>Activated after a quick intro call</li>
-        </ul>
       </div>
 
       <div class="ftpage-left-bottom">
