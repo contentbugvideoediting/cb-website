@@ -186,31 +186,26 @@ body{
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   FREE TRIAL SPLIT LAYOUT — copy on left, wizard on right.
-   Stacks on mobile (left above right).
+   FREE TRIAL — clean split page (hero+bullets left · wizard right)
+   Standard website padding/spacing. No clutter.
    ═══════════════════════════════════════════════════════════════════════ */
-.ft-split { display:grid; grid-template-columns:1fr 1fr; gap:56px; max-width:1320px; margin:0 auto; padding:48px 40px 64px; align-items:start }
-.ft-left { padding-top:8px; color:#fff }
-.ft-eyebrow { font:700 13px/1 var(--font-display); color:#2997ff; letter-spacing:.18em; text-transform:uppercase; margin:0 0 18px }
-.ft-headline { font:700 56px/1.05 var(--font-display); letter-spacing:-.025em; color:#fff; margin:0 0 22px }
-.ft-body p { font:400 16px/1.6 var(--font); color:rgba(255,255,255,.78); margin:0 0 16px; max-width:560px }
-.ft-section-title { font:600 11px/1 var(--font); text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,.55); margin:36px 0 14px }
-.ft-list { list-style:none; padding:0; margin:0 0 28px; display:flex; flex-direction:column; gap:10px }
-.ft-list li { font:400 15px/1.5 var(--font); color:rgba(255,255,255,.85); padding-left:26px; position:relative }
-.ft-list li::before { content:''; position:absolute; left:0; top:8px; width:14px; height:14px; border-radius:50%; background:rgba(41,151,255,.15); border:1px solid rgba(41,151,255,.45); display:flex; align-items:center; justify-content:center }
-.ft-list li::after { content:''; position:absolute; left:4px; top:11px; width:6px; height:3px; border-left:1.5px solid #2997ff; border-bottom:1.5px solid #2997ff; transform:rotate(-45deg) }
-.ft-steps { list-style:none; padding:0; margin:0 0 28px; counter-reset:ftstep; display:flex; flex-direction:column; gap:18px }
-.ft-steps li { counter-increment:ftstep; padding-left:42px; position:relative }
-.ft-steps li::before { content:counter(ftstep); position:absolute; left:0; top:0; width:28px; height:28px; border-radius:50%; background:rgba(41,151,255,.12); border:1px solid rgba(41,151,255,.35); color:#2997ff; font:600 13px/28px var(--font-display); text-align:center }
-.ft-step-title { font:600 15px/1.3 var(--font-display); color:#fff; margin:0 0 4px }
-.ft-step-body { font:400 13.5px/1.55 var(--font); color:rgba(255,255,255,.68); max-width:480px }
-.ft-reassurance { font:400 13px/1.5 var(--font); color:rgba(255,255,255,.55); margin:24px 0 0; max-width:520px; padding:14px 16px; border-radius:12px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08) }
-.ft-right { position:sticky; top:24px }
+.ftpage { max-width:1240px; margin:0 auto; padding:56px 48px 96px }
+.ftpage-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start }
+.ftpage-left { padding-top:16px }
+.ftpage-eyebrow { font:700 12px/1 var(--font-display); color:#2997ff; letter-spacing:.18em; text-transform:uppercase; margin:0 0 16px }
+.ftpage-h1 { font:700 44px/1.1 var(--font-display); letter-spacing:-.02em; color:#fff; margin:0 0 18px }
+.ftpage-sub { font:400 16px/1.55 var(--font); color:rgba(255,255,255,.72); margin:0 0 28px; max-width:440px }
+.ftpage-bullets { list-style:none; padding:0; margin:0 0 24px; display:flex; flex-direction:column; gap:12px }
+.ftpage-bullets li { font:500 15px/1.4 var(--font); color:rgba(255,255,255,.88); padding-left:22px; position:relative }
+.ftpage-bullets li::before { content:""; position:absolute; left:0; top:8px; width:6px; height:6px; border-radius:50%; background:#2997ff; box-shadow:0 0 0 3px rgba(41,151,255,.18) }
+.ftpage-trust { font:400 13px/1.5 var(--font); color:rgba(255,255,255,.5); margin:18px 0 0; max-width:420px }
+.ftpage-right { position:sticky; top:24px }
 @media (max-width:980px){
-  .ft-split { grid-template-columns:1fr; gap:40px; padding:32px 20px 64px }
-  .ft-left { padding-top:0; text-align:left }
-  .ft-headline { font-size:42px; letter-spacing:-.02em }
-  .ft-right { position:relative; top:auto }
+  .ftpage { padding:32px 20px 56px }
+  .ftpage-grid { grid-template-columns:1fr; gap:36px }
+  .ftpage-left { padding-top:0 }
+  .ftpage-h1 { font-size:36px }
+  .ftpage-right { position:relative; top:auto }
 }
 
 /* RESPONSIVE */
@@ -250,46 +245,26 @@ body{
   </nav>
 </div>
 
-<!-- ═══ FREE TRIAL — SPLIT LAYOUT (copy left, wizard right) ═══ -->
-<main class="ft-split" id="qShell">
-  <!-- ═════════ LEFT: marketing copy ═════════ -->
-  <section class="ft-left">
-    <p class="ft-eyebrow">Free Trial</p>
-    <h1 class="ft-headline">Get your first edit on us</h1>
-    <div class="ft-body">
-      <p>This is the easiest way to see what working with Content Bug actually feels like.</p>
-      <p>You'll get a real look at our editing quality, how fast we move, and how smooth the process becomes when your content is handled by a team that knows how to make it look good and perform.</p>
-      <p>If you qualify, we'll activate your free trial after a quick intro call, send over your free edit link, and give you the option to build your editing Blueprint so your first edit matches your style, your content, and your vision from the start.</p>
-    </div>
-    <h3 class="ft-section-title">What you'll get</h3>
-    <ul class="ft-list">
-      <li>Your first edit free on us</li>
-      <li>A real look at our editing quality</li>
-      <li>A feel for our turnaround speed</li>
-      <li>A clear intro to how Content Bug works</li>
-      <li>The option to build your editing Blueprint</li>
-      <li>Usually around a 12-hour turnaround on your trial edit</li>
-    </ul>
-    <h3 class="ft-section-title">How it works</h3>
-    <ol class="ft-steps">
-      <li>
-        <div class="ft-step-title">Share your details</div>
-        <div class="ft-step-body">Start with your contact info so we know where to send everything.</div>
-      </li>
-      <li>
-        <div class="ft-step-title">Answer a few quick questions</div>
-        <div class="ft-step-body">Tell us what kind of content you need help with, your volume, your goals, and how soon you want to hand off editing.</div>
-      </li>
-      <li>
-        <div class="ft-step-title">Book your intro call to activate your trial</div>
-        <div class="ft-step-body">If you qualify, you'll unlock your free trial by booking a quick intro call. After that, we'll email your free edit link and next steps.</div>
-      </li>
-    </ol>
-    <p class="ft-reassurance">No card required. No pressure. Just a simple way to see if Content Bug is the right fit.</p>
-  </section>
+<!-- ═══ FREE TRIAL — clean split page (hero left · wizard right) ═══ -->
+<main class="ftpage" id="qShell">
+  <div class="ftpage-grid">
+    <!-- ═══ LEFT: hero + bullets ═══ -->
+    <section class="ftpage-left">
+      <p class="ftpage-eyebrow">Free Trial</p>
+      <h1 class="ftpage-h1">Get your first edit on us</h1>
+      <p class="ftpage-sub">See what working with Content Bug actually feels like — real editors, real quality, real turnaround. No card, no commitment.</p>
+      <ul class="ftpage-bullets">
+        <li>Your first edit free on us</li>
+        <li>~12-hour turnaround on your trial edit</li>
+        <li>A real look at our editing quality and speed</li>
+        <li>Option to build your own editing Blueprint</li>
+        <li>Activated after a quick intro call</li>
+      </ul>
+      <p class="ftpage-trust">No card required. No pressure. Just a simple way to see if Content Bug is the right fit.</p>
+    </section>
 
-  <!-- ═════════ RIGHT: wizard ═════════ -->
-  <aside class="ft-right">
+    <!-- ═══ RIGHT: wizard ═══ -->
+    <aside class="ftpage-right">
 <div class="wz wz--md" style="margin:0 auto">
 
   <!-- Hero — big title + percent + heavy shimmer progress (matches portal/18-wizards.html spec) -->
@@ -487,7 +462,8 @@ body{
   </div>
 
 </div>
-  </aside>
+    </aside>
+  </div>
 </main>
 
 <!-- ═══ FOOTER (Desktop home.html) ═══ -->
