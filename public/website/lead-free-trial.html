@@ -469,55 +469,9 @@ body{
       <p style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.5);text-align:center;margin:14px auto 0;max-width:480px">No card required. Your first edit is free on us.</p>
     </div>
 
-    <!-- ═══ STEP 3: Booking confirmation — auto-shown when GHL postMessage fires ═══ -->
-    <div class="qw-step" data-step="3">
-      <div class="q-result-icon qualified">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" width="32" height="32"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <div class="qw-title">Your call is booked.</div>
-      <div class="qw-sub" id="qBookSub">We just emailed you the calendar invite — your free trial is officially live.</div>
-      <div style="width:100%;max-width:480px;margin:24px auto 0;text-align:left">
-        <div class="glass-card" style="padding:18px 20px;margin-bottom:12px;border-radius:14px;background:rgba(41,151,255,.06);border:1px solid rgba(41,151,255,.18)" id="qBookSlotCard">
-          <div style="display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:rgba(41,151,255,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#2997ff" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <div style="min-width:0">
-              <div style="font:600 14px/1.3 var(--font);color:var(--txt)" id="qBookWhen">Intro call confirmed</div>
-              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.6)">Check your inbox for the calendar invite + Zoom link.</div>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card" style="padding:18px 20px;margin-bottom:12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10)">
-          <div style="display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:rgba(126,203,161,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#7ecba1" stroke-width="2" width="18" height="18"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <div style="min-width:0">
-              <div style="font:600 14px/1.3 var(--font);color:var(--txt)">12-hour edit turnaround</div>
-              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.6)">Once you upload footage in your portal, we ship within 12h.</div>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card" style="padding:18px 20px;margin-bottom:12px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.10)">
-          <div style="display:flex;align-items:center;gap:12px">
-            <div style="width:36px;height:36px;border-radius:50%;background:rgba(245,208,96,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#f5d060" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <div style="min-width:0">
-              <div style="font:600 14px/1.3 var(--font);color:var(--txt)">Portal login on the way</div>
-              <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.6)" id="qFinalEmail">You'll get an email with your portal access — start uploading footage anytime.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:24px">
-        <a href="https://api.contentbug.io/portal/login.html" class="btn btn-g5" style="text-decoration:none;padding:14px 32px;font-size:15px;display:inline-flex;align-items:center;gap:10px">
-          Go to Your Portal
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="9 18 15 12 9 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-    </div>
+    <!-- STEP 3 removed: bookDemo() now hard-redirects to /intro-call-booked.
+         The standalone confirmation page is the single source of truth. -->
+
 
   </div>
 
@@ -641,7 +595,7 @@ body{
       else if(state.subQ === 'dq') pct = 83;                              /* disqualified at end of qs */
       else pct = Math.round((state.subQ / 6) * 100);                      /* qs 1-5 → 17/33/50/67/83 */
     } else if(state.step === 2){ pct = 100; }                              /* qualified, book intro call */
-    else if(state.step === 3){ pct = 100; }                                /* intro call booked */
+    /* step 3 removed — bookDemo() redirects to /intro-call-booked */
     var pf = document.getElementById('qProgressFill');
     var pe = document.getElementById('qPercent');
     if(pf) pf.style.width = pct + '%';
@@ -674,8 +628,6 @@ body{
   }
   function renderFooter(){
     if(!qFoot) return;
-    /* Step 3 (booking confirmed) — hide footer entirely; user clicks "Go to Portal" CTA */
-    if(state.step === 3){ qFoot.style.display='none'; return; }
     qFoot.style.display = '';
     /* Back button visible on questions, calendar, and disqualified — hidden only on first contact step */
     qBack.hidden = (state.step === 1 && state.subQ === 0);
@@ -697,7 +649,6 @@ body{
         else if(state.subQ === 'dq') qm.textContent = 'Step 2 / 3 · not the right fit yet';
         else                         qm.textContent = 'Step 2 / 3 · question ' + state.subQ + ' of 5';
       } else if(state.step === 2){ qm.textContent = 'Step 3 / 3 · qualified — book your intro call'; }
-      else if(state.step === 3){   qm.textContent = 'Step 3 / 3 · intro call booked'; }
       else qm.textContent = '';
     }
     var v = qValid();
@@ -719,7 +670,6 @@ body{
       if(state.subQ === 'dq') return false;
     }
     if(state.step === 2) return false;   // user books inside the GHL iframe
-    if(state.step === 3) return false;   // success — Go to Portal CTA only
     return true;
   }
   function computeScore(){
@@ -834,27 +784,19 @@ body{
   function bookDemo(appointmentDateTime, tz){
     if(state.demoBooked) return;
     state.demoBooked = true;
-    /* Format the booked slot for the confirmation card */
-    if(appointmentDateTime){
-      try {
-        var dt = new Date(appointmentDateTime);
-        if(!isNaN(dt.getTime())){
-          var opts = { weekday:'long', month:'short', day:'numeric', hour:'numeric', minute:'2-digit', timeZoneName:'short' };
-          state.bookedSlot = dt.toLocaleString(undefined, opts);
-        }
-      } catch(e){}
-    }
+    /* Fire the server hook (Airtable + GHL trial_intro_call_booked webhook),
+       then hard-redirect to the standalone /intro-call-booked confirmation
+       page. Single source of truth — no in-wizard step 3 fallback. The GHL
+       calendar's formSubmitRedirectURL also points at /intro-call-booked,
+       so even if this postMessage handler doesn't fire, the user still
+       lands on the same page. */
     fetch('/api/trial/book-demo', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       credentials:'include',
       body: JSON.stringify({ email: state.contact.email, appointmentDateTime: appointmentDateTime || '', appointmentTimezone: tz || '' })
     }).finally(function(){
-      var em = $('qFinalEmail');
-      if(em && state.contact.email) em.textContent = 'Portal login + edit confirmation sent to ' + state.contact.email + '.';
-      var when = $('qBookWhen');
-      if(when && state.bookedSlot) when.textContent = state.bookedSlot;
-      state.step = 3; showStep();
+      window.location.replace('/intro-call-booked');
     });
   }
   /* GHL booking widgets postMessage on appointment confirmation. Handle the
@@ -892,7 +834,8 @@ body{
         if(!state.qualified){ qDq(); return; }
         /* Qualified → submit contact (creates Airtable + GHL records, fires
            lead-qualified webhook), then advance to Step 2: GHL calendar.
-           After they book, postMessage handler fires bookDemo() → Step 3. */
+           After they book, postMessage handler fires bookDemo() → hard
+           redirect to /intro-call-booked (standalone confirmation page). */
         var btn = $('qNext');
         if(btn){ btn.disabled = true; btn.style.opacity='.6'; btn.textContent = 'Loading your calendar…'; }
         submitContact().finally(function(){
