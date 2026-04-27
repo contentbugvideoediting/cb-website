@@ -1,520 +1,327 @@
-<link rel="stylesheet" href="../../assets/design-system.css">
-<script>
-  if (window.self === window.top) {
-    document.documentElement.classList.add('bg-dark');
-    document.addEventListener('DOMContentLoaded', function () {
-      document.body.classList.add('bg-dark');
-      document.body.classList.add('cb-grid');
-      var s = document.querySelector('.ws-page');
-      if (s) {
-        s.classList.add('shell-body-glass');
-        s.style.margin = '8px 16px';
-        s.style.minHeight = 'calc(100vh - 16px)';
-      }
-    });
-  } else {
-    if (document.body) { document.body.classList.add('bg-dark'); }
-    else { document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('bg-dark'); }); }
-  }
-</script>
-<div class="ws-page">
-<script>
-/* GHL canonical URL → Railway path remap (only runs off-GHL, e.g. api.contentbug.io direct test) */
-(function(){
-  var h=location.hostname;
-  if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com')) return;
-  var map={
-    'https://api.contentbug.io/home':'/home',
-    'https://api.contentbug.io/pricing':'/pricing',
-    'https://api.contentbug.io/portfolio':'/portfolio',
-    'https://api.contentbug.io/free-trial':'/booking',
-    'https://api.contentbug.io/privacy':'/privacy',
-    'https://api.contentbug.io/terms':'/terms'
-  };
-  document.querySelectorAll('a[href]').forEach(function(a){
-    var k=a.getAttribute('href');
-    if(map[k]) a.setAttribute('href', map[k]);
-  });
-})();
-</script>
+<!-- GHL custom code · home.html · CB Design System v3 · paste into GHL page Custom Code (Header) or Footer -->
+<link rel="stylesheet" href="https://api.contentbug.io/website/shared/colors_and_type.css">
+<link rel="stylesheet" href="https://api.contentbug.io/website/shared/site.css">
+<style>
+/* GHL backdrop force — own the body inside GHL's chrome */
+html { background: #02060f !important; }
+body {
+  background:
+    radial-gradient(140% 90% at 50% 115%, rgba(255,165,90,.42) 0%, rgba(255,165,90,.22) 28%, rgba(255,165,90,.10) 52%, rgba(255,165,90,.03) 72%, rgba(255,165,90,0) 90%),
+    radial-gradient(110% 70% at 50% 30%, rgba(60,130,230,.28) 0%, rgba(60,130,230,.14) 35%, rgba(60,130,230,.04) 60%, rgba(60,130,230,0) 75%),
+    linear-gradient(in oklab 180deg, #050b1f 0%, #0c2452 50%, #02060f 100%) !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: 100vw 100vh !important;
+  color: #fff !important;
+  margin: 0 !important;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+body, body * { text-shadow: 0 1px 2px rgba(0,0,0,.55); }
+body input, body textarea, body select, body code, body pre, body .mono { text-shadow: none !important; }
+</style>
 
-<div class="cb-header-bar" id="cb-header">
-  <a href="https://api.contentbug.io/home" class="cb-logo">
-    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
-  </a>
-  <nav class="cb-header" id="cbNav">
-    <a href="https://api.contentbug.io/home" class="cb-nav-link active">Home</a>
-    <a href="https://api.contentbug.io/pricing" class="cb-nav-link">Pricing</a>
-    <a href="https://api.contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
-    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
-    <a href="https://api.contentbug.io/free-trial" class="cb-nav-cta">Start Free Trial</a>
-  </nav>
-</div>
-<script>
-document.body.classList.add('ws-page');
-(function(){
-  var bar=document.querySelector('.cb-header-bar');
-  if(!bar)return;
-  var sentinel=document.createElement('div');
-  sentinel.style.cssText='height:0;width:0;visibility:hidden';
-  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
-      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
-    });
-  },{threshold:0});
-  io.observe(bar);
-})();
-</script>
-<main id="cb-home">
 
-<!-- ═══ SECTION 1 &mdash; HERO ═══ -->
-<section class="section"><div class="section-card">
-<div class="container">
-<div class="section-header">
 
-  <!-- Bug icon — premium depth backdrop, centered behind headline (restored per Sean 2026-04-15) -->
-  <div style="display:flex;justify-content:center;margin-top:80px;margin-bottom:-200px;position:relative;pointer-events:none;z-index:1">
-    <div style="position:relative;display:inline-flex;align-items:center;justify-content:center">
-      <!-- Subtle radial glow behind logo -->
-      <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(26,100,255,.04) 0%,rgba(26,100,255,.01) 35%,transparent 60%);pointer-events:none"></div>
-      <!-- Logo with radial fade mask — center visible, edges dissolve -->
-      <div style="position:relative;width:400px;height:400px;-webkit-mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%);mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%)">
-        <img loading="lazy" decoding="async" src="https://api.contentbug.io/portal/assets/logo-bug-white.svg" alt="Content Bug" style="width:400px;height:400px;opacity:.06;display:block;object-fit:contain">
+<div class="cb-page">
+
+<header class="cb-nav">
+  <div class="cb-nav__inner">
+    <a class="cb-nav__brand" href="{{custom_values.home}}" aria-label="Content Bug — Home">
+      <span class="cb-nav__bug"><img src="https://api.contentbug.io/website/shared/assets/bug-white.png" alt="" width="18" height="18" decoding="async"></span>
+      <span class="cb-nav__name">Content Bug</span>
+    </a>
+    <nav class="cb-nav__links">
+      <a class="cb-nav__link is-active" href="{{custom_values.home}}">Home</a>
+      <a class="cb-nav__link" href="{{custom_values.pricing}}">Pricing</a>
+      <a class="cb-nav__link" href="{{custom_values.portfolio}}">Portfolio</a>
+      <a class="cb-nav__link" href="{{custom_values.content_portal_login}}">Login</a>
+      <a class="cb-btn cb-btn--blue cb-btn--md cb-nav__cta" href="{{custom_values.free_trial}}">Start Free Trial</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cb-section cb-bug-watermark cb-bug-watermark--center cb-bug-watermark--xxl cb-bug-watermark--ghost" style="--bug-pos:50% 28%">
+  <div class="cb-container">
+    <div class="hm-hero">
+      <span class="eyebrow">CONTENT BUG VIDEO EDITING</span>
+      <h1><em>Unlimited Edits.</em> Premium Quality.<span class="l2">Fast Turnarounds. One Flat Monthly Rate.</span></h1>
+      <p class="cb-lede">Your own dedicated editing team for filming, editing, reviewing, and scaling your content.</p>
+      <a href="{{custom_values.free_trial}}" class="cb-btn cb-btn--blue cb-btn--xl">Start My Free Trial</a>
+
+      <div class="hm-stats">
+        <div class="hm-stat"><div class="hm-stat__v">500+</div><div class="hm-stat__l">Creators Served</div></div>
+        <div class="hm-stat"><div class="hm-stat__v">15,000+</div><div class="hm-stat__l">Videos Delivered</div></div>
+        <div class="hm-stat"><div class="hm-stat__v gold">4.9<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="hm-stat__l gold">Quality Rating</div></div>
+        <div class="hm-stat"><div class="hm-stat__v">3.3x</div><div class="hm-stat__l">Content Output</div></div>
+        <div class="hm-stat"><div class="hm-stat__v">17.4 hrs</div><div class="hm-stat__l">Saved Per Week</div></div>
+      </div>
+
+      <div class="hm-showcase">
+        <article class="cb-card hm-show-card inactive" data-show="0">
+          <div class="hm-show-labels"><span class="hm-show-tag hm-show-tag--raw">RAW</span><span class="hm-show-tag hm-show-tag--edit">EDITED</span></div>
+          <div class="hm-show-compare">
+            <div class="hm-show-vid"><video preload="metadata" muted playsinline loop src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/696162e5ed792ec60523910b.mp4"></video></div>
+            <div class="hm-show-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+            <div class="hm-show-vid"><video preload="metadata" muted playsinline loop src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67575fcffe5b4c0b0f3f1b26.mp4"></video></div>
+          </div>
+        </article>
+        <article class="cb-card hm-show-card active" data-show="1">
+          <div class="hm-show-labels"><span class="hm-show-tag hm-show-tag--raw">RAW</span><span class="hm-show-tag hm-show-tag--edit">EDITED</span></div>
+          <div class="hm-show-compare">
+            <div class="hm-show-vid"><video preload="metadata" muted playsinline loop autoplay src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/696162e5ed792ec60523910b.mp4"></video></div>
+            <div class="hm-show-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+            <div class="hm-show-vid"><video preload="metadata" muted playsinline loop autoplay src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67575fcf988a5f6ebca22750.mp4"></video></div>
+          </div>
+        </article>
+        <article class="cb-card hm-show-card inactive" data-show="2">
+          <div class="hm-show-labels"><span class="hm-show-tag hm-show-tag--raw">RAW</span><span class="hm-show-tag hm-show-tag--edit">EDITED</span></div>
+          <div class="hm-show-compare">
+            <div class="hm-show-vid"><video preload="metadata" muted playsinline loop src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/696162e5ed792ec60523910b.mp4"></video></div>
+            <div class="hm-show-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
+            <div class="hm-show-vid"><video preload="metadata" muted playsinline loop src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67575fcfb8e0d78afc3cc4f3.mp4"></video></div>
+          </div>
+        </article>
       </div>
     </div>
   </div>
+</section>
 
-  <p class="section-label" style="position:relative;z-index:2;text-align:center">CONTENT BUG VIDEO EDITING</p>
-  <h1 class="hero-title" style="position:relative;z-index:2;text-align:center">
-    <span class="line1"><em>Unlimited Edits.</em> Premium Quality.</span>
-    <span class="line2" style="color:rgba(255,255,255,.55);display:block;margin-top:8px">Fast Turnarounds. Flat Monthly Rate.</span>
-  </h1>
-  <p class="section-sub">Your own dedicated editing team for filming, editing, reviewing, and scaling your content.</p>
-<div style="display:flex;justify-content:center;margin-top:var(--s4);margin-bottom:8px">
-  <a href="https://api.contentbug.io/free-trial" style="display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--blue) 0%,var(--blue-brand) 100%);color:var(--txt);font-family:var(--font-display);font-size:17px;font-weight:600;padding:var(--s2) 40px;border-radius:980px;text-decoration:none;border:none;box-shadow:0 4px 20px rgba(0,113,227,.45);letter-spacing:-.01em">Start My Free Trial</a>
-</div>
-</div>
-
-<div class="stats-row">
-  <div class="stat"><div class="stat-value">500+</div><div class="stat-label">Creators Served</div></div>
-  <div class="stat"><div class="stat-value">15,000+</div><div class="stat-label">Videos Delivered</div></div>
-  <div class="stat"><div class="stat-value accent">4.9<svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" style="vertical-align:middle;margin-left:2px"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div class="stat-label accent">Quality Rating</div></div>
-  <div class="stat"><div class="stat-value">3.3x</div><div class="stat-label">Content Output</div></div>
-  <div class="stat"><div class="stat-value">17.4 hrs</div><div class="stat-label">Saved Per Week</div></div>
-</div>
-
-<div class="showcase-grid">
-  <div class="showcase-card inactive" data-showcase="0">
-    <div class="showcase-labels-row"><span class="showcase-top-label showcase-top-label-raw">RAW</span><span class="showcase-top-label-spacer"></span><span class="showcase-top-label showcase-top-label-edit">EDITED</span></div>
-    <div class="showcase-compare">
-      <div class="showcase-video"><video preload="metadata" muted playsinline loop src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/696162e5ed792ec60523910b.mp4"></video></div>
-      <div class="showcase-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
-      <div class="showcase-video"><video preload="metadata" muted playsinline loop src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67575fcffe5b4c0b0f3f1b26.mp4"></video></div>
+<section class="cb-section">
+  <div class="cb-container">
+    <div class="cb-page-hero" style="padding-bottom:0">
+      <div class="hm-stars"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+      <h2 class="cb-h2">Trusted By 500+ Creators &amp; Businesses</h2>
+      <p class="cb-lede">Some of the creators and brands who caught the content bug</p>
     </div>
-  </div>
-  <div class="showcase-card active" data-showcase="1">
-    <div class="showcase-labels-row"><span class="showcase-top-label showcase-top-label-raw">RAW</span><span class="showcase-top-label-spacer"></span><span class="showcase-top-label showcase-top-label-edit">EDITED</span></div>
-    <div class="showcase-compare">
-      <div class="showcase-video"><video preload="metadata" muted playsinline loop autoplay src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/696162e5ed792ec60523910b.mp4"></video></div>
-      <div class="showcase-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
-      <div class="showcase-video"><video preload="metadata" muted playsinline loop autoplay src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67575fcf988a5f6ebca22750.mp4"></video></div>
-    </div>
-  </div>
-  <div class="showcase-card inactive" data-showcase="2">
-    <div class="showcase-labels-row"><span class="showcase-top-label showcase-top-label-raw">RAW</span><span class="showcase-top-label-spacer"></span><span class="showcase-top-label showcase-top-label-edit">EDITED</span></div>
-    <div class="showcase-compare">
-      <div class="showcase-video"><video preload="metadata" muted playsinline loop src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/696162e5ed792ec60523910b.mp4"></video></div>
-      <div class="showcase-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg></div>
-      <div class="showcase-video"><video preload="metadata" muted playsinline loop src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/67575fcfb8e0d78afc3cc4f3.mp4"></video></div>
-    </div>
-  </div>
-</div>
-</div>
-</div></section>
 
-<!-- ═══ SECTION 2 &mdash; TRUST / CREATOR SHOWCASE ═══ -->
-<section class="section"><div class="section-card">
-<div class="container">
-<div class="section-header">
-  <div class="stars-row">
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-  </div>
-  <h2 class="section-title">Trusted By 500+ Creators &amp; Businesses</h2>
-  <p class="section-sub">Some of the creators and brands who caught the content bug</p>
-</div>
-
-<div class="creator-rail-wrap">
-  <div class="creator-rail" id="creatorRail">
-    <div class="creator-chip active" data-creator="0"><div class="creator-chip-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/t48740gfrxCwt_Qf2UR-WqV0XSs483J8xHzs4knEb016QI6x6GWChjWSkKfgSxXhj9hGjCPh_g=s160-c-k-c0x00ffffff-no-rj" alt="Dr. Tracey Marks"></div><span class="creator-chip-handle">@drtraceymarks</span><span class="creator-chip-subs">2.3M</span></div>
-    <div class="creator-chip" data-creator="1"><div class="creator-chip-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/rzxzaz_Pb2gko4pRg2o7uvMfqdMl2GEAvF1HGJ-s28ZMaBV13mLyd2fsXNl5d1uZF20alfTocf8=s160-c-k-c0x00ffffff-no-rj" alt="Landon Bullock"></div><span class="creator-chip-handle">@landokalriz</span><span class="creator-chip-subs">1.8M</span></div>
-    <div class="creator-chip" data-creator="2"><div class="creator-chip-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/PGoSUKVoPyilLAlzbQ7S99-K23PJcbtxeiB5Ldk51Ds-fTAqlQ78G16HybkogvT-tnBLV7hP-A=s160-c-k-c0x00ffffff-no-rj" alt="Ideal Media"></div><span class="creator-chip-handle">@IdealMediaChannel</span><span class="creator-chip-subs">1.21M</span></div>
-    <div class="creator-chip no-click" data-creator="3"><div class="creator-chip-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/ytc/AIdro_k4uNZM7CGVSjQ50cRvgw-ktBs5pN5IyU5p1rhkqQNW5jE=s160-c-k-c0x00ffffff-no-rj" alt="Tomorrow's Filmmakers"></div><span class="creator-chip-handle">@TomorrowsFilmmakers</span><span class="creator-chip-subs">948K</span></div>
-    <div class="creator-chip" data-creator="4"><div class="creator-chip-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/JbK9voh1_-fWQt7yxtRHOmzDBlBVKuKaBN3WYhVg8lVViNCkUuGcRVPTUlzOewEBRUBNQfJcbQ=s160-c-k-c0x00ffffff-no-rj" alt="The Heart Leader Podcast"></div><span class="creator-chip-handle">@heartleaderpodcast</span><span class="creator-chip-subs">171K</span></div>
-    <div class="creator-chip" data-creator="5"><div class="creator-chip-avatar"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/zDdzbACpAgKHbyTton-rpmY0J3EYbnfZYhtoGMo9y69SaOnP2aq6qS0OKzxs4ofhri_cTbtg0g=s160-c-k-c0x00ffffff-no-rj" alt="Avery Smith"></div><span class="creator-chip-handle">@averysmith</span><span class="creator-chip-subs">60.5K</span></div>
-  </div>
-  <div class="showcase-divider"></div>
-  <div class="showcase-stage open" id="showcaseStage">
-    <div class="showcase-meta">
-      <div class="showcase-meta-name" id="showcaseMetaName">Dr. Tracey Marks</div>
-      <div class="showcase-meta-subs" id="showcaseMetaSubs">2.3M subscribers</div>
-      <div class="showcase-meta-focus" id="showcaseMetaFocus">Long-form educational clarity · Tight pacing · Respectful storytelling</div>
-    </div>
-    <div class="showcase-videos" id="showcaseVideos">
-      <div class="showcase-vcard"><iframe src="https://www.youtube.com/embed/zWzjdl2dLjM?rel=0&modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-      <div class="showcase-vcard"><iframe src="https://www.youtube.com/embed/3mfgoijFWgk?rel=0&modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-      <div class="showcase-vcard"><iframe src="https://www.youtube.com/embed/JIrQXSAWeUE?rel=0&modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-    </div>
-  </div>
-</div>
-
-</div>
-</div></section>
-
-<!-- ═══ SECTION 3 &mdash; HOW IT WORKS ═══ -->
-<section class="section" id="how"><div class="section-card">
-<div class="container">
-<div class="section-header">
-  <span class="section-label">How It Works</span>
-  <h2 class="section-title">Simple Process. Premium Results.</h2>
-  <p class="section-sub">Three steps. Zero friction. Content that looks expensive.</p>
-</div>
-<div class="steps-grid">
-  <div class="card"><div class="step-head"><div class="step-number">1</div><h3 class="step-title">Upload Your Footage</h3></div><p class="step-desc">Drop your raw footage into your portal. Add notes, references, or just let your blueprint do the talking.</p><div class="step-list"><div class="step-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Drag &amp; drop upload</span></div><div class="step-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Add notes &amp; references</span></div><div class="step-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Style blueprint applied automatically</span></div></div></div>
-  <div class="card"><div class="step-head"><div class="step-number">2</div><h3 class="step-title">We Edit. You Review.</h3></div><p class="step-desc">Your dedicated editor delivers a polished cut. Review it, leave feedback, request changes &mdash; unlimited revisions included.</p><div class="step-list"><div class="step-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Dedicated editor on every project</span></div><div class="step-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Click-to-comment feedback</span></div><div class="step-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Unlimited revisions</span></div></div></div>
-  <div class="card"><div class="step-head"><div class="step-number">3</div><h3 class="step-title">Download &amp; Publish</h3></div><p class="step-desc">Approve your edit and download the final file. Optimized for every platform. Ready to post.</p><div class="step-list"><div class="step-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Platform-optimized exports</span></div><div class="step-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Instant downloads</span></div><div class="step-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Your content, your brand</span></div></div></div>
-</div>
-</div>
-</div></section>
-
-<!-- ═══ SECTION 4 &mdash; PORTFOLIO ═══ -->
-<section class="section" id="portfolio"><div class="section-card">
-<div class="container">
-<div class="section-header">
-  <span class="section-label">Short-Form Transformations</span>
-  <h2 class="section-title">Raw In. Scroll-Stopping Shorts Out.</h2>
-  <p class="section-sub">The same footage &mdash; professionally edited with hooks, pacing, and visuals designed for today's short-form platforms.</p>
-</div>
-<div class="portfolio-grid">
-  <div class="portfolio-card"><span class="portfolio-badge">Before &rarr; After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/65ea68b949278d1bd2a7a392.mp4" type="video/mp4"></video></div>
-  <div class="portfolio-card"><span class="portfolio-badge">Before &rarr; After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/654d5e157b3caa7a0d933b82.mp4" type="video/mp4"></video></div>
-  <div class="portfolio-card"><span class="portfolio-badge">Before &rarr; After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/65a80f182aaf1b8536103650.mp4" type="video/mp4"></video></div>
-  <div class="portfolio-card"><span class="portfolio-badge">Before &rarr; After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/6568aeb93d381e4e680aac45.mp4" type="video/mp4"></video></div>
-  <div class="portfolio-card"><span class="portfolio-badge">Before &rarr; After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/693f7b1c96e7531c39af6cd2.mp4" type="video/mp4"></video></div>
-</div>
-</div>
-</div></section>
-
-<!-- ═══ SECTION 5 &mdash; TEAM & FEATURES ═══ -->
-<section class="section" id="team"><div class="section-card">
-<div class="container">
-<div class="section-header">
-  <span class="section-label">Your Dedicated Editing Team</span>
-  <h2 class="section-title">Quality You Can Rely On. A Team You Don't Have to Manage.</h2>
-  <p class="section-sub">We're not a freelancer marketplace. You get a dedicated editing team &mdash; editors, project managers, and creative directors &mdash; all hired full-time and managed in-house.</p>
-</div>
-<div class="features-grid">
-  <div class="card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="feature-title">Dedicated Editing Team</h3><p class="feature-desc">Dedicated editors who learn your style, a project manager who keeps everything on track, and creative directors who help dial in your content strategy.</p></div>
-  <div class="card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><h3 class="feature-title">Top 3% Acceptance</h3><p class="feature-desc">Hundreds apply each month. We're picky because your content deserves it. Only editors who genuinely understand creator content make the cut.</p></div>
-  <div class="card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div><h3 class="feature-title">Real-World Testing</h3><p class="feature-desc">Every editor passes live skill tests with actual creator content. No theoretical exams &mdash; just real editing under real conditions.</p></div>
-  <div class="card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3 class="feature-title">Daily Quality Review</h3><p class="feature-desc">Every video is reviewed before delivery. We catch issues before you do. Our internal QA loop means problems get fixed fast.</p></div>
-  <div class="card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h3 class="feature-title">Weekly Masterclasses</h3><p class="feature-desc">Our editors stay sharp with mandatory weekly training on storytelling, hooks, pacing, and what's working right now.</p></div>
-  <div class="card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div><h3 class="feature-title">Retention-First Editing</h3><p class="feature-desc">We don't just cut clips &mdash; we engineer watch time. Every edit follows frameworks built around hooks, pacing, and engagement.</p></div>
-  <div class="card"><div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3 class="feature-title">Direct Team Access</h3><p class="feature-desc">No ticket systems. Chat directly with your editors and project manager inside the portal. Quick questions, fast tweaks.</p></div>
-  <div class="card"><div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3 class="feature-title">NDA Protected</h3><p class="feature-desc">Your unreleased content stays private. All editors sign strict NDAs and work exclusively through our secure portal.</p></div>
-</div>
-</div>
-</div></section>
-
-<!-- ═══ SECTION 6 &mdash; COMPARISON ═══ -->
-<section class="section" id="pricing"><div class="section-card">
-<div class="container">
-<div class="section-header">
-  <span class="section-label">Why Content Bug</span>
-  <h2 class="section-title">See The Content Bug Difference</h2>
-  <p class="section-sub">Built by creators who were tired of editing and dealing with unreliable, low-quality editors.</p>
-</div>
-<div class="tables-grid">
-  <div class="table-card"><div class="table-header"><h3>Editing &amp; Pricing</h3><p>What you pay for &mdash; and what you don't have to think about.</p></div><div class="table-cols"><span></span><span>Others</span><span>Content Bug</span></div><div class="table-row"><span>Video Edits</span><span class="val-no">&#x2717; Per project</span><span class="val-yes">&#x2713; Unlimited</span></div><div class="table-row"><span>Pricing</span><span class="val-no">&#x2717; Hidden fees</span><span class="val-yes">&#x2713; Flat rate</span></div><div class="table-row"><span>Revisions</span><span class="val-no">&#x2717; Limited</span><span class="val-yes">&#x2713; Unlimited</span></div><div class="table-row"><span>Team</span><span class="val-no">&#x2717; Freelancers</span><span class="val-yes">&#x2713; Dedicated editor</span></div><div class="table-row"><span>Software</span><span class="val-no">&#x2717; Extra cost</span><span class="val-yes">&#x2713; Included</span></div><div class="table-row"><span>Response Time</span><span class="val-no">&#x2717; Days</span><span class="val-yes">&#x2713; Same day</span></div></div>
-  <div class="table-card"><div class="table-header"><h3>How We Actually Work</h3><p>The difference between outsourcing and a real editing system.</p></div><div class="table-cols"><span></span><span>Others</span><span>Content Bug</span></div><div class="table-row"><span>Run By</span><span class="val-no">&#x2717; Business people</span><span class="val-yes">&#x2713; Creators</span></div><div class="table-row"><span>Editor Training</span><span class="val-no">&#x2717; None</span><span class="val-yes">&#x2713; Weekly</span></div><div class="table-row"><span>Editor Vetting</span><span class="val-no">&#x2717; Anyone</span><span class="val-yes">&#x2713; Top 3%</span></div><div class="table-row"><span>Communication</span><span class="val-no">&#x2717; Managers</span><span class="val-yes">&#x2713; Direct</span></div><div class="table-row"><span>Partnership</span><span class="val-no">&#x2717; Transactional</span><span class="val-yes">&#x2713; Long-term</span></div><div class="table-row"><span>Understanding</span><span class="val-no">&#x2717; Theory</span><span class="val-yes">&#x2713; Real experience</span></div></div>
-</div>
-</div>
-</div></section>
-
-<!-- ═══ SECTION 7 &mdash; REVIEWS ═══ -->
-<section class="section" id="reviews"><div class="section-card">
-<div class="container">
-<div class="section-header">
-  <span class="section-label">Creator Reviews</span>
-  <h2 class="section-title">Why Smart Creators Choose Content Bug</h2>
-  <p class="section-sub">Don't just take our word for it &mdash; here's what creators are saying about Content Bug.</p>
-</div>
-<div class="reviews-grid">
-  <div class="card review-card"><div class="review-top"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/t48740gfrxCwt_Qf2UR-WqV0XSs483J8xHzs4knEb016QI6x6GWChjWSkKfgSxXhj9hGjCPh_g=s800-c-k-c0x00ffffff-no-rj" alt="Dr. Tracey Marks" class="review-avatar"><div class="review-info"><div class="review-name"><a href="https://www.youtube.com/@DrTraceyMarks" target="_blank">Dr. Tracey Marks</a></div><span class="review-badge">2.05M</span></div><div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="review-quote">"Happy Monday to you. I like what you did with the color grading. I'm satisfied with the pacing of the editing. These look <strong>REALLY good</strong>. I'm super happy with how these turned out. <strong>I approved all of them.</strong>"</p></div>
-  <div class="card review-card"><div class="review-top"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/rzxzaz_Pb2gko4pRg2o7uvMfqdMl2GEAvF1HGJ-s28ZMaBV13mLyd2fsXNl5d1uZF20alfTocf8=s800-c-k-c0x00ffffff-no-rj" alt="Landon Bullock" class="review-avatar"><div class="review-info"><div class="review-name"><a href="https://www.youtube.com/@LandoKalriz" target="_blank">Landon Bullock</a></div><span class="review-badge">1.76M</span></div><div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="review-quote">"<strong>Great job on the edit man! Approved!</strong> I like how you threw all the images and visuals in there, it came out great!"</p></div>
-  <div class="card review-card"><div class="review-top"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/PGoSUKVoPyilLAlzbQ7S99-K23PJcbtxeiB5Ldk51Ds-fTAqlQ78G16HybkogvT-tnBLV7hP-A=s800-c-k-c0x00ffffff-no-rj" alt="Ideal Media" class="review-avatar"><div class="review-info"><div class="review-name"><a href="https://www.youtube.com/@IdealMediaChannel" target="_blank">Ideal Media</a></div><span class="review-badge">1.21M</span></div><div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="review-quote">"<strong>Looks amazing!</strong> Love the quality."</p></div>
-  <div class="card review-card"><div class="review-top"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/ytc/AIdro_k4uNZM7CGVSjQ50cRvgw-ktBs5pN5IyU5p1rhkqQNW5jE=s800-c-k-c0x00ffffff-no-rj" alt="Justus McCranie" class="review-avatar"><div class="review-info"><div class="review-name"><a href="https://www.youtube.com/@TomorrowsFilmmakers" target="_blank">Justus McCranie</a></div><span class="review-badge">942K</span></div><div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="review-quote">"<strong>Looks Fantastic!</strong> Love it."</p></div>
-  <div class="card review-card"><div class="review-top"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/JbK9voh1_-fWQt7yxtRHOmzDBlBVKuKaBN3WYhVg8lVViNCkUuGcRVPTUlzOewEBRUBNQfJcbQ=s800-c-k-c0x00ffffff-no-rj" alt="Austin Uhl" class="review-avatar"><div class="review-info"><div class="review-name"><a href="https://www.youtube.com/@theheartleaderpodcast" target="_blank">Austin Uhl</a></div><span class="review-badge">171K+</span></div><div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="review-quote">"Hey Sean! <strong>LOVING the new flow</strong> of the editors providing updates and ETAs and Sharon providing Outstanding Deliverables and screen shots for editing allocations. This is great quality and super helpful! 🙌"</p></div>
-  <div class="card review-card"><div class="review-top"><img loading="lazy" decoding="async" src="https://yt3.googleusercontent.com/zDdzbACpAgKHbyTton-rpmY0J3EYbnfZYhtoGMo9y69SaOnP2aq6qS0OKzxs4ofhri_cTbtg0g=s800-c-k-c0x00ffffff-no-rj" alt="Avery Smith" class="review-avatar"><div class="review-info"><div class="review-name"><a href="https://www.youtube.com/@averysmith" target="_blank">Avery Smith</a></div><span class="review-badge">60.5K</span></div><div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="review-quote">"Hey @everyone just wanted to share I recently hit <strong>25,000 subscribers</strong> on YouTube! And one of the videos y'all edited back in the Fall is now at <strong>124k views!</strong> Thanks for all your hard work!"</p></div>
-</div>
-
-<div class="card featured-review">
-  <div class="featured-top"><div class="featured-avatar">N</div><div class="featured-info"><h4>Nate</h4><p>Online Security &middot; Owner of Cryptexa</p></div><span class="featured-badge">Pro Plan Member</span></div>
-  <div class="featured-body">
-    <p>"I've been in the game long enough to know when a service goes beyond the standard and that's exactly what <strong>Content Bug delivered</strong>."</p>
-    <p>"From the moment I enrolled in the Pro Plan, it felt like stepping into a <strong>true white-glove experience</strong>. I was assigned a dedicated project manager who not only coordinated the moving parts but actually gave hands-on guidance &mdash; camera settings, shot framing, lighting tweaks, and a sharp QA eye that elevated every frame of my content."</p>
-    <p>"The done-for-you scriptwriting has been an <strong>absolute luxury</strong>. It took the weight off my shoulders so I could stay in creative flow without getting bogged down in outlines or formatting."</p>
-    <p>"What truly impressed me was the editorial execution. The graphics were <strong>custom-built, not pulled from generic templates</strong>. And when I used dual angles from one camera setup, their seamless transitions made it look like a multi-cam shoot. <strong>Top-tier craftsmanship.</strong>"</p>
-    <p>"The submission process? <strong>Silky smooth.</strong> I uploaded via the portal, got paired with two editors, and left feedback directly in the Content Portal. Couldn't be easier."</p>
-    <p>"If you're building a brand, coaching business, or course and want your video content to actually match your vision &mdash; <strong>this is the move</strong>. Highly recommend starting with the free trial. Happy to Have Been Bitten by the Content Bug 💻🐛🚀"</p>
-  </div>
-</div>
-
-<p class="sub-title">More Creator Feedback</p>
-<div class="mini-grid">
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">L</div><div><div class="mini-name">Levi R.</div><div class="mini-role">Online Car Sales</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"<strong>WOW</strong> beyond impressed with the edit. So much better than anything I could have ever put together!"</p></div>
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">C</div><div><div class="mini-name">Catherine J.</div><div class="mini-role">Kids Education</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"Holy crap. You're knocking that video out of the park!! Like wow. <strong>Exactly what I envisioned!!</strong> Beyond expectations."</p></div>
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">T</div><div><div class="mini-name">Tom Z.</div><div class="mini-role">Education</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"<strong>SOOO GOOD</strong>, I love the edits and am constantly impressed!"</p></div>
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">R</div><div><div class="mini-name">Richard</div><div class="mini-role">Education</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"Your output has been incredible. You have been <strong>crushing ALL of my short term requests</strong>. What I really dig is all the updates I get from you &mdash; from starting the project, to 'clocking in', to finishing. <strong>There is so much comfort in this.</strong>"</p></div>
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">C</div><div><div class="mini-name">Clay B.</div><div class="mini-role">Agency Owner</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"These are <strong>AMAZING!!!!</strong> WOW. I'm blown away."</p></div>
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">K</div><div><div class="mini-name">KoiAcademy</div><div class="mini-role">Education</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"<strong>Love what you're building here</strong> and appreciate the quality!"</p></div>
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">J</div><div><div class="mini-name">Joe W.</div><div class="mini-role">Finance</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"<strong>EXCELLENT VIDEO!!!</strong> Great work. This is going to change my ability to effectively teach and help others."</p></div>
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">T</div><div><div class="mini-name">Troy</div><div class="mini-role">Martial Arts</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"Bro wow dude. She's a killer, got me for sure man. <strong>SOO HAPPY MAN.</strong> Keep her man, don't let that editor go far!"</p></div>
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">B</div><div><div class="mini-name">Brandon T.</div><div class="mini-role">Finance</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"Definitely wasn't expecting <strong>as high quality of a return</strong> as I got today. Would have taken me 1-2 days to create the overlays/animations that you guys put on my video."</p></div>
-  <div class="card mini-card"><div class="mini-top"><div class="mini-avatar">J</div><div><div class="mini-name">Jacob R.</div><div class="mini-role">Business Coaching</div></div><div class="mini-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div><p class="mini-quote">"Honestly wasn't sure what to expect. Definitely wasn't expecting <strong>as high quality of a return</strong> as I got today."</p></div>
-</div>
-
-<div class="brand-logo-grid">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3a4b07ff3f0d1cd2c1.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3a840ed1c2c838f1ed.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3a1f68d1bc1f5ef8a0.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3b840ed1e94038f1f2.png" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3b840ed13bd838f1f3.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3b1f68d1b6875ef8a1.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3c4b07ff764a1cd2c3.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3c840ed168fc38f1f4.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3c1f68d1ba015ef8a2.png" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3d840ed1d09c38f1f5.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3d1f68d188b75ef8a3.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3d4b07ffdc0c1cd2c5.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3e4b07ff34fd1cd2c6.svg" alt="">
-  <img loading="lazy" decoding="async" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3e840ed1d1d738f1f6.svg" alt="">
-</div>
-
-</div>
-</div></section>
-
-<script>
-(function(){
-  var cards=document.querySelectorAll('.portfolio-card, .video-card');
-  cards.forEach(function(card){
-    var v=card.querySelector('video');
-    if(!v)return;
-    card.addEventListener('mouseenter',function(){v.play().catch(function(){});});
-    card.addEventListener('mouseleave',function(){v.pause();v.currentTime=0;});
-    /* Mobile: play on tap, pause on second tap */
-    var playing=false;
-    card.addEventListener('touchstart',function(e){
-      e.preventDefault();
-      if(playing){v.pause();v.currentTime=0;playing=false;}
-      else{v.play().catch(function(){});playing=true;}
-    },{passive:false});
-  });
-})();
-</script>
-
-</main>
-
-<script>
-(function(){
-  var el = document.getElementById('cb-home');
-  if (!el) return;
-  var p = el.parentElement;
-  while (p && p !== document.documentElement) {
-    if (p !== document.body) {
-      p.style.setProperty('background', 'none', 'important');
-      p.style.setProperty('background-color', 'transparent', 'important');
-      p.style.setProperty('background-image', 'none', 'important');
-      p.style.setProperty('border', 'none', 'important');
-      p.style.setProperty('box-shadow', 'none', 'important');
-      p.style.setProperty('border-radius', '0', 'important');
-    }
-    p = p.parentElement;
-  }
-})();
-</script>
-
-<script>
-(function(){
-  var creators = [
-    { name:'Dr. Tracey Marks',     subs:'2.3M subscribers',   focus:'Long-form educational clarity · Tight pacing · Respectful storytelling',           videos:['zWzjdl2dLjM','3mfgoijFWgk','JIrQXSAWeUE'] },
-    { name:'Landon Bullock',       subs:'1.8M subscribers',   focus:'Narrative pacing · Retention over long runtimes · Clean comedic timing',            videos:['JjO11LB1U48','_cgPkqWsGWo','luBxLl0j_wA'] },
-    { name:'Ideal Media',          subs:'1.21M subscribers',  focus:'Educational structure · Clean motion + visual hierarchy',                           videos:['4FKkjZC_FSQ','DpC7oohljjM','p2gPSnu9mx8'] },
-    { name:"Tomorrow's Filmmakers",subs:'948K subscribers',   focus:'Educational long-form flow · Chapter pacing · Technical clarity',                   videos:[] },
-    { name:'The Heart Leader Podcast',  subs:'171K subscribers',   focus:'Conversation flow · Cut discipline · Listener retention',                           videos:['5e2EH4u0Rzg','SBPRfjLOpaA','Sgpt4VTCjio'] },
-    { name:'Avery Smith',          subs:'60.5K subscribers',    focus:'Creator-led storytelling · Consistent pacing · Scalable workflow',                  videos:['mSWtnjq4LRE','lo3VU1srV1E','79SINWkIJDQ'] }
-  ];
-
-  var rail       = document.getElementById('creatorRail');
-  var stage      = document.getElementById('showcaseStage');
-  var metaName   = document.getElementById('showcaseMetaName');
-  var metaSubs   = document.getElementById('showcaseMetaSubs');
-  var metaFocus  = document.getElementById('showcaseMetaFocus');
-  var videoGrid  = document.getElementById('showcaseVideos');
-  var chips      = rail.querySelectorAll('.creator-chip');
-  var current    = 0;
-
-  function loadCreator(idx) {
-    var c = creators[idx];
-    metaName.textContent  = c.name;
-    metaSubs.textContent  = c.subs;
-    metaFocus.textContent = c.focus;
-    stage.style.opacity   = '0';
-    setTimeout(function(){
-      videoGrid.innerHTML = c.videos.map(function(id){
-        return '<div class="showcase-vcard"><iframe src="https://www.youtube.com/embed/'+id+'?rel=0&modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe></div>';
-      }).join('');
-      stage.style.opacity = '';
-      stage.classList.add('open');
-    }, 120);
-  }
-
-  chips.forEach(function(chip){
-    if (chip.classList.contains('no-click')) {
-      chip.style.cursor = 'default';
-      chip.style.opacity = '1';
-      return;
-    }
-    chip.addEventListener('click', function(){
-      var idx = parseInt(chip.getAttribute('data-creator'));
-      if (idx === current) return;
-      chips.forEach(function(c){ c.classList.remove('active'); });
-      chip.classList.add('active');
-      current = idx;
-      loadCreator(idx);
-      chip.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
-    });
-  });
-
-  /* Drag-to-scroll on desktop */
-  var isDrag = false, startX = 0, scrollL = 0, moved = false;
-  rail.addEventListener('mousedown', function(e){ isDrag=true; moved=false; startX=e.pageX-rail.offsetLeft; scrollL=rail.scrollLeft; rail.classList.add('grabbing'); });
-  rail.addEventListener('mousemove', function(e){ if(!isDrag)return; e.preventDefault(); var x=e.pageX-rail.offsetLeft; var walk=(x-startX)*1.5; rail.scrollLeft=scrollL-walk; if(Math.abs(x-startX)>5)moved=true; });
-  function endDrag(){ isDrag=false; rail.classList.remove('grabbing'); }
-  rail.addEventListener('mouseup', endDrag);
-  rail.addEventListener('mouseleave', endDrag);
-  rail.addEventListener('click', function(e){ if(moved){ e.stopPropagation(); moved=false; } }, true);
-})();
-
-/* ═══ Showcase: one-at-a-time playback &mdash; middle card first ═══ */
-(function(){
-  var cards = document.querySelectorAll('.showcase-card');
-  if (!cards.length) return;
-  var defaultIdx = 1;
-  function activate(idx){
-    cards.forEach(function(c,i){
-      var vids = c.querySelectorAll('video');
-      if (i === idx) { c.classList.remove('inactive'); c.classList.add('active'); vids.forEach(function(v){ v.play(); }); }
-      else { c.classList.remove('active'); c.classList.add('inactive'); vids.forEach(function(v){ v.pause(); v.currentTime=0; }); }
-    });
-  }
-  cards.forEach(function(card,i){ card.addEventListener('mouseenter', function(){ activate(i); }); });
-  var grid = document.querySelector('.showcase-grid');
-  if (grid) { grid.addEventListener('mouseleave', function(){ activate(defaultIdx); }); }
-  activate(defaultIdx);
-})();
-</script>
-
-<script>
-(function(){
-  var els=document.querySelectorAll('.fade-up');
-  if(!els.length)return;
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.style.opacity='1';
-        e.target.style.transform='translateY(0)';
-        io.unobserve(e.target);
-      }
-    });
-  },{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
-  els.forEach(function(el){
-    el.style.opacity='0';
-    el.style.transform='translateY(24px)';
-    el.style.transition='opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)';
-    io.observe(el);
-  });
-})();
-</script>
-
-<!-- Content Bug Footer &mdash; GHL Embed Partial &mdash; Design System Compliant -->
-
-<footer class="cb-footer" id="cb-footer">
-  <div class="cb-ft-grid">
-    <div class="cb-ft-brand">
-      <a href="https://api.contentbug.io/home" class="cb-logo">
-        <img loading="lazy" decoding="async" src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug" style="height:28px;filter:brightness(0) invert(1)">
-      </a>
-      <div class="cb-ft-tagline">Unlimited video editing for creators who move fast.</div>
-      <div class="cb-ft-social">
-        <a href="https://x.com/contentbug" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-        <a href="https://instagram.com/contentbug" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-        <a href="https://youtube.com/@contentbug" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://tiktok.com/@contentbug" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
-        <a href="https://facebook.com/contentbug" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+    <div class="cb-card hm-rail-wrap">
+      <div class="hm-rail" id="hmRail">
+        <div class="hm-chip active" data-creator="0"><div class="hm-chip-av"><img loading="lazy" src="https://yt3.googleusercontent.com/t48740gfrxCwt_Qf2UR-WqV0XSs483J8xHzs4knEb016QI6x6GWChjWSkKfgSxXhj9hGjCPh_g=s160-c-k-c0x00ffffff-no-rj" alt=""></div><span class="hm-chip-h">@drtraceymarks</span><span class="hm-chip-s">2.3M</span></div>
+        <div class="hm-chip" data-creator="1"><div class="hm-chip-av"><img loading="lazy" src="https://yt3.googleusercontent.com/rzxzaz_Pb2gko4pRg2o7uvMfqdMl2GEAvF1HGJ-s28ZMaBV13mLyd2fsXNl5d1uZF20alfTocf8=s160-c-k-c0x00ffffff-no-rj" alt=""></div><span class="hm-chip-h">@landokalriz</span><span class="hm-chip-s">1.8M</span></div>
+        <div class="hm-chip" data-creator="2"><div class="hm-chip-av"><img loading="lazy" src="https://yt3.googleusercontent.com/PGoSUKVoPyilLAlzbQ7S99-K23PJcbtxeiB5Ldk51Ds-fTAqlQ78G16HybkogvT-tnBLV7hP-A=s160-c-k-c0x00ffffff-no-rj" alt=""></div><span class="hm-chip-h">@IdealMediaChannel</span><span class="hm-chip-s">1.21M</span></div>
+        <div class="hm-chip no-click" data-creator="3"><div class="hm-chip-av"><img loading="lazy" src="https://yt3.googleusercontent.com/ytc/AIdro_k4uNZM7CGVSjQ50cRvgw-ktBs5pN5IyU5p1rhkqQNW5jE=s160-c-k-c0x00ffffff-no-rj" alt=""></div><span class="hm-chip-h">@TomorrowsFilmmakers</span><span class="hm-chip-s">948K</span></div>
+        <div class="hm-chip" data-creator="4"><div class="hm-chip-av"><img loading="lazy" src="https://yt3.googleusercontent.com/JbK9voh1_-fWQt7yxtRHOmzDBlBVKuKaBN3WYhVg8lVViNCkUuGcRVPTUlzOewEBRUBNQfJcbQ=s160-c-k-c0x00ffffff-no-rj" alt=""></div><span class="hm-chip-h">@heartleaderpodcast</span><span class="hm-chip-s">171K</span></div>
+        <div class="hm-chip" data-creator="5"><div class="hm-chip-av"><img loading="lazy" src="https://yt3.googleusercontent.com/zDdzbACpAgKHbyTton-rpmY0J3EYbnfZYhtoGMo9y69SaOnP2aq6qS0OKzxs4ofhri_cTbtg0g=s160-c-k-c0x00ffffff-no-rj" alt=""></div><span class="hm-chip-h">@averysmith</span><span class="hm-chip-s">60.5K</span></div>
+      </div>
+      <div class="hm-rail-divider"></div>
+      <div class="hm-stage open" id="hmStage">
+        <div class="hm-meta">
+          <div class="hm-meta__name" id="hmMetaName">Dr. Tracey Marks</div>
+          <div class="hm-meta__subs" id="hmMetaSubs">2.3M subscribers</div>
+          <div class="hm-meta__focus" id="hmMetaFocus">Long-form educational clarity · Tight pacing · Respectful storytelling</div>
+        </div>
+        <div class="hm-vids" id="hmVids">
+          <div class="hm-vcard"><iframe src="https://www.youtube.com/embed/zWzjdl2dLjM?rel=0&amp;modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="hm-vcard"><iframe src="https://www.youtube.com/embed/3mfgoijFWgk?rel=0&amp;modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="hm-vcard"><iframe src="https://www.youtube.com/embed/JIrQXSAWeUE?rel=0&amp;modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        </div>
       </div>
     </div>
-    <div class="cb-ft-col">
-      <div class="cb-ft-col-title">EXPLORE</div>
-      <a href="https://api.contentbug.io/home">Home</a>
-      <a href="https://api.contentbug.io/pricing">Pricing</a>
-      <a href="https://api.contentbug.io/portfolio">Portfolio</a>
+  </div>
+</section>
+
+<section class="cb-section">
+  <div class="cb-container">
+    <div class="cb-page-hero" style="padding-bottom:0">
+      <span class="eyebrow">How It Works</span>
+      <h2 class="cb-h2">Simple Process. Premium Results.</h2>
+      <p class="cb-lede">Three steps. Zero friction. Content that looks expensive.</p>
     </div>
-    <div class="cb-ft-col">
-      <div class="cb-ft-col-title">COMPANY</div>
-      <a href="https://api.contentbug.io/faq">FAQ</a>
-      <a href="https://api.contentbug.io/free-trial">Start Free Trial</a>
-      <a href="https://api.contentbug.io/portal/login.html">Portal Login</a>
-    </div>
-    <div class="cb-ft-col">
-      <div class="cb-ft-col-title">CONTACT</div>
-      <div class="cb-ft-contact-item"><a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a></div>
-      <div class="cb-ft-contact-item"><a href="tel:+1 (385) 200-7582">+1 (385) 200-7582</a></div>
-      <div class="cb-ft-hours"><strong>Hours:</strong> Monday - Friday (9-6pm MST)</div>
+    <div class="hm-steps">
+      <article class="cb-card hm-step"><div class="hm-step__num">1</div><h3 class="cb-h3">Upload Your Footage</h3><p>Drop your raw footage into your portal. Add notes, references, or just let your blueprint do the talking.</p><ul><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Drag &amp; drop upload</span></li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Add notes &amp; references</span></li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Style blueprint applied automatically</span></li></ul></article>
+      <article class="cb-card hm-step"><div class="hm-step__num">2</div><h3 class="cb-h3">We Edit. You Review.</h3><p>Your dedicated editor delivers a polished cut. Review it, leave feedback, request changes — unlimited revisions included.</p><ul><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Dedicated editor on every project</span></li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Click-to-comment feedback</span></li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Unlimited revisions</span></li></ul></article>
+      <article class="cb-card hm-step"><div class="hm-step__num">3</div><h3 class="cb-h3">Download &amp; Publish</h3><p>Approve your edit and download the final file. Optimized for every platform. Ready to post.</p><ul><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Platform-optimized exports</span></li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Instant downloads</span></li><li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg><span>Your content, your brand</span></li></ul></article>
     </div>
   </div>
-  <div class="cb-ft-divider"></div>
-  <div class="cb-ft-legal">
-    <span>&copy; 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
-    <div class="cb-ft-legal-links">
-      <a href="https://api.contentbug.io/privacy">Privacy Policy</a>
-      <span class="cb-ft-legal-sep">&middot;</span>
-      <a href="https://api.contentbug.io/terms">Terms of Service</a>
+</section>
+
+<section class="cb-section">
+  <div class="cb-container">
+    <div class="cb-page-hero" style="padding-bottom:0">
+      <span class="eyebrow">Short-Form Transformations</span>
+      <h2 class="cb-h2">Raw In. Scroll-Stopping Shorts Out.</h2>
+      <p class="cb-lede">The same footage — professionally edited with hooks, pacing, and visuals designed for today's short-form platforms.</p>
+    </div>
+    <div class="hm-pf">
+      <div class="hm-pf-card"><span class="hm-pf-badge">Before → After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/65ea68b949278d1bd2a7a392.mp4" type="video/mp4"></video></div>
+      <div class="hm-pf-card"><span class="hm-pf-badge">Before → After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/654d5e157b3caa7a0d933b82.mp4" type="video/mp4"></video></div>
+      <div class="hm-pf-card"><span class="hm-pf-badge">Before → After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/65a80f182aaf1b8536103650.mp4" type="video/mp4"></video></div>
+      <div class="hm-pf-card"><span class="hm-pf-badge">Before → After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/6568aeb93d381e4e680aac45.mp4" type="video/mp4"></video></div>
+      <div class="hm-pf-card"><span class="hm-pf-badge">Before → After</span><video preload="metadata" loop muted playsinline><source src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/693f7b1c96e7531c39af6cd2.mp4" type="video/mp4"></video></div>
+    </div>
+  </div>
+</section>
+
+<section class="cb-section">
+  <div class="cb-container">
+    <div class="cb-page-hero" style="padding-bottom:0">
+      <span class="eyebrow">Your Dedicated Editing Team</span>
+      <h2 class="cb-h2">Quality You Can Rely On. A Team You Don't Have to Manage.</h2>
+      <p class="cb-lede">We're not a freelancer marketplace. You get a dedicated editing team — editors, project managers, and creative directors — all hired full-time and managed in-house.</p>
+    </div>
+    <div class="hm-feat">
+      <article class="cb-card"><div class="hm-feat__icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3 class="cb-h4">Dedicated Editing Team</h3><p>Dedicated editors who learn your style, a project manager who keeps everything on track, and creative directors who help dial in your content strategy.</p></article>
+      <article class="cb-card"><div class="hm-feat__icon"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><h3 class="cb-h4">Top 3% Acceptance</h3><p>Hundreds apply each month. We're picky because your content deserves it. Only editors who genuinely understand creator content make the cut.</p></article>
+      <article class="cb-card"><div class="hm-feat__icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg></div><h3 class="cb-h4">Real-World Testing</h3><p>Every editor passes live skill tests with actual creator content. No theoretical exams — just real editing under real conditions.</p></article>
+      <article class="cb-card"><div class="hm-feat__icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h3 class="cb-h4">Daily Quality Review</h3><p>Every video is reviewed before delivery. We catch issues before you do. Our internal QA loop means problems get fixed fast.</p></article>
+      <article class="cb-card"><div class="hm-feat__icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h3 class="cb-h4">Weekly Masterclasses</h3><p>Our editors stay sharp with mandatory weekly training on storytelling, hooks, pacing, and what's working right now.</p></article>
+      <article class="cb-card"><div class="hm-feat__icon"><svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div><h3 class="cb-h4">Retention-First Editing</h3><p>We don't just cut clips — we engineer watch time. Every edit follows frameworks built around hooks, pacing, and engagement.</p></article>
+      <article class="cb-card"><div class="hm-feat__icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3 class="cb-h4">Direct Team Access</h3><p>No ticket systems. Chat directly with your editors and project manager inside the portal. Quick questions, fast tweaks.</p></article>
+      <article class="cb-card"><div class="hm-feat__icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><h3 class="cb-h4">NDA Protected</h3><p>Your unreleased content stays private. All editors sign strict NDAs and work exclusively through our secure portal.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="cb-section">
+  <div class="cb-container">
+    <div class="cb-page-hero" style="padding-bottom:0">
+      <span class="eyebrow">Why Content Bug</span>
+      <h2 class="cb-h2">See The Content Bug Difference</h2>
+      <p class="cb-lede">Built by creators who were tired of editing and dealing with unreliable, low-quality editors.</p>
+    </div>
+    <div class="hm-tables">
+      <article class="cb-card">
+        <div class="hm-tbl-head"><h3>Editing &amp; Pricing</h3><p>What you pay for — and what you don't have to think about.</p></div>
+        <div class="hm-tbl-cols"><span></span><span>Others</span><span>Content Bug</span></div>
+        <div class="hm-tbl-row"><span>Video Edits</span><span class="hm-tbl-no">✗ Per project</span><span class="hm-tbl-yes">✓ Unlimited</span></div>
+        <div class="hm-tbl-row"><span>Pricing</span><span class="hm-tbl-no">✗ Hidden fees</span><span class="hm-tbl-yes">✓ Flat rate</span></div>
+        <div class="hm-tbl-row"><span>Revisions</span><span class="hm-tbl-no">✗ Limited</span><span class="hm-tbl-yes">✓ Unlimited</span></div>
+        <div class="hm-tbl-row"><span>Team</span><span class="hm-tbl-no">✗ Freelancers</span><span class="hm-tbl-yes">✓ Dedicated editor</span></div>
+        <div class="hm-tbl-row"><span>Software</span><span class="hm-tbl-no">✗ Extra cost</span><span class="hm-tbl-yes">✓ Included</span></div>
+        <div class="hm-tbl-row"><span>Response Time</span><span class="hm-tbl-no">✗ Days</span><span class="hm-tbl-yes">✓ Same day</span></div>
+      </article>
+      <article class="cb-card">
+        <div class="hm-tbl-head"><h3>How We Actually Work</h3><p>The difference between outsourcing and a real editing system.</p></div>
+        <div class="hm-tbl-cols"><span></span><span>Others</span><span>Content Bug</span></div>
+        <div class="hm-tbl-row"><span>Run By</span><span class="hm-tbl-no">✗ Business people</span><span class="hm-tbl-yes">✓ Creators</span></div>
+        <div class="hm-tbl-row"><span>Editor Training</span><span class="hm-tbl-no">✗ None</span><span class="hm-tbl-yes">✓ Weekly</span></div>
+        <div class="hm-tbl-row"><span>Editor Vetting</span><span class="hm-tbl-no">✗ Anyone</span><span class="hm-tbl-yes">✓ Top 3%</span></div>
+        <div class="hm-tbl-row"><span>Communication</span><span class="hm-tbl-no">✗ Managers</span><span class="hm-tbl-yes">✓ Direct</span></div>
+        <div class="hm-tbl-row"><span>Partnership</span><span class="hm-tbl-no">✗ Transactional</span><span class="hm-tbl-yes">✓ Long-term</span></div>
+        <div class="hm-tbl-row"><span>Understanding</span><span class="hm-tbl-no">✗ Theory</span><span class="hm-tbl-yes">✓ Real experience</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cb-section">
+  <div class="cb-container">
+    <div class="cb-page-hero" style="padding-bottom:0">
+      <span class="eyebrow">Creator Reviews</span>
+      <h2 class="cb-h2">Why Smart Creators Choose Content Bug</h2>
+      <p class="cb-lede">Don't just take our word for it — here's what creators are saying about Content Bug.</p>
+    </div>
+
+    <div class="hm-rev">
+      <article class="cb-card"><div class="hm-rev-top"><img loading="lazy" src="https://yt3.googleusercontent.com/t48740gfrxCwt_Qf2UR-WqV0XSs483J8xHzs4knEb016QI6x6GWChjWSkKfgSxXhj9hGjCPh_g=s800-c-k-c0x00ffffff-no-rj" alt="Dr. Tracey Marks" class="hm-rev-av"><div class="hm-rev-info"><div class="hm-rev-name"><a href="https://www.youtube.com/@DrTraceyMarks" target="_blank">Dr. Tracey Marks</a></div><span class="hm-rev-badge">2.05M</span></div><div class="hm-rev-stars">★★★★★</div></div><p class="hm-rev-q">"Happy Monday to you. I like what you did with the color grading. I'm satisfied with the pacing of the editing. These look <strong>REALLY good</strong>. I'm super happy with how these turned out. <strong>I approved all of them.</strong>"</p></article>
+      <article class="cb-card"><div class="hm-rev-top"><img loading="lazy" src="https://yt3.googleusercontent.com/rzxzaz_Pb2gko4pRg2o7uvMfqdMl2GEAvF1HGJ-s28ZMaBV13mLyd2fsXNl5d1uZF20alfTocf8=s800-c-k-c0x00ffffff-no-rj" alt="Landon Bullock" class="hm-rev-av"><div class="hm-rev-info"><div class="hm-rev-name"><a href="https://www.youtube.com/@LandoKalriz" target="_blank">Landon Bullock</a></div><span class="hm-rev-badge">1.76M</span></div><div class="hm-rev-stars">★★★★★</div></div><p class="hm-rev-q">"<strong>Great job on the edit man! Approved!</strong> I like how you threw all the images and visuals in there, it came out great!"</p></article>
+      <article class="cb-card"><div class="hm-rev-top"><img loading="lazy" src="https://yt3.googleusercontent.com/PGoSUKVoPyilLAlzbQ7S99-K23PJcbtxeiB5Ldk51Ds-fTAqlQ78G16HybkogvT-tnBLV7hP-A=s800-c-k-c0x00ffffff-no-rj" alt="Ideal Media" class="hm-rev-av"><div class="hm-rev-info"><div class="hm-rev-name"><a href="https://www.youtube.com/@IdealMediaChannel" target="_blank">Ideal Media</a></div><span class="hm-rev-badge">1.21M</span></div><div class="hm-rev-stars">★★★★★</div></div><p class="hm-rev-q">"<strong>Looks amazing!</strong> Love the quality."</p></article>
+      <article class="cb-card"><div class="hm-rev-top"><img loading="lazy" src="https://yt3.googleusercontent.com/ytc/AIdro_k4uNZM7CGVSjQ50cRvgw-ktBs5pN5IyU5p1rhkqQNW5jE=s800-c-k-c0x00ffffff-no-rj" alt="Justus McCranie" class="hm-rev-av"><div class="hm-rev-info"><div class="hm-rev-name"><a href="https://www.youtube.com/@TomorrowsFilmmakers" target="_blank">Justus McCranie</a></div><span class="hm-rev-badge">942K</span></div><div class="hm-rev-stars">★★★★★</div></div><p class="hm-rev-q">"<strong>Looks Fantastic!</strong> Love it."</p></article>
+      <article class="cb-card"><div class="hm-rev-top"><img loading="lazy" src="https://yt3.googleusercontent.com/JbK9voh1_-fWQt7yxtRHOmzDBlBVKuKaBN3WYhVg8lVViNCkUuGcRVPTUlzOewEBRUBNQfJcbQ=s800-c-k-c0x00ffffff-no-rj" alt="Austin Uhl" class="hm-rev-av"><div class="hm-rev-info"><div class="hm-rev-name"><a href="https://www.youtube.com/@theheartleaderpodcast" target="_blank">Austin Uhl</a></div><span class="hm-rev-badge">171K+</span></div><div class="hm-rev-stars">★★★★★</div></div><p class="hm-rev-q">"Hey Sean! <strong>LOVING the new flow</strong> of the editors providing updates and ETAs and Sharon providing Outstanding Deliverables and screen shots for editing allocations. This is great quality and super helpful!"</p></article>
+      <article class="cb-card"><div class="hm-rev-top"><img loading="lazy" src="https://yt3.googleusercontent.com/zDdzbACpAgKHbyTton-rpmY0J3EYbnfZYhtoGMo9y69SaOnP2aq6qS0OKzxs4ofhri_cTbtg0g=s800-c-k-c0x00ffffff-no-rj" alt="Avery Smith" class="hm-rev-av"><div class="hm-rev-info"><div class="hm-rev-name"><a href="https://www.youtube.com/@averysmith" target="_blank">Avery Smith</a></div><span class="hm-rev-badge">60.5K</span></div><div class="hm-rev-stars">★★★★★</div></div><p class="hm-rev-q">"Hey @everyone just wanted to share I recently hit <strong>25,000 subscribers</strong> on YouTube! And one of the videos y'all edited back in the Fall is now at <strong>124k views!</strong> Thanks for all your hard work!"</p></article>
+    </div>
+
+    <article class="cb-card cb-card--lg hm-feat-rev">
+      <div class="hm-feat-rev-top"><div class="hm-feat-rev-av">N</div><div class="hm-feat-rev-info"><h4>Nate</h4><p>Online Security · Owner of Cryptexa</p></div><span class="hm-feat-rev-tag">Pro Plan Member</span></div>
+      <div class="hm-feat-rev-body">
+        <p>"I've been in the game long enough to know when a service goes beyond the standard and that's exactly what <strong>Content Bug delivered</strong>."</p>
+        <p>"From the moment I enrolled in the Pro Plan, it felt like stepping into a <strong>true white-glove experience</strong>. I was assigned a dedicated project manager who not only coordinated the moving parts but actually gave hands-on guidance — camera settings, shot framing, lighting tweaks, and a sharp QA eye that elevated every frame of my content."</p>
+        <p>"The done-for-you scriptwriting has been an <strong>absolute luxury</strong>. It took the weight off my shoulders so I could stay in creative flow without getting bogged down in outlines or formatting."</p>
+        <p>"What truly impressed me was the editorial execution. The graphics were <strong>custom-built, not pulled from generic templates</strong>. And when I used dual angles from one camera setup, their seamless transitions made it look like a multi-cam shoot. <strong>Top-tier craftsmanship.</strong>"</p>
+        <p>"The submission process? <strong>Silky smooth.</strong> I uploaded via the portal, got paired with two editors, and left feedback directly in the Content Portal. Couldn't be easier."</p>
+        <p>"If you're building a brand, coaching business, or course and want your video content to actually match your vision — <strong>this is the move</strong>. Highly recommend starting with the free trial. Happy to Have Been Bitten by the Content Bug."</p>
+      </div>
+    </article>
+
+    <p class="hm-mini-title">More Creator Feedback</p>
+    <div class="hm-mini">
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">L</div><div><div class="hm-mini-name">Levi R.</div><div class="hm-mini-role">Online Car Sales</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"<strong>WOW</strong> beyond impressed with the edit. So much better than anything I could have ever put together!"</p></article>
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">C</div><div><div class="hm-mini-name">Catherine J.</div><div class="hm-mini-role">Kids Education</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"Holy crap. You're knocking that video out of the park!! Like wow. <strong>Exactly what I envisioned!!</strong> Beyond expectations."</p></article>
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">T</div><div><div class="hm-mini-name">Tom Z.</div><div class="hm-mini-role">Education</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"<strong>SOOO GOOD</strong>, I love the edits and am constantly impressed!"</p></article>
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">R</div><div><div class="hm-mini-name">Richard</div><div class="hm-mini-role">Education</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"Your output has been incredible. You have been <strong>crushing ALL of my short term requests</strong>. What I really dig is all the updates I get from you — from starting the project, to 'clocking in', to finishing. <strong>There is so much comfort in this.</strong>"</p></article>
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">C</div><div><div class="hm-mini-name">Clay B.</div><div class="hm-mini-role">Agency Owner</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"These are <strong>AMAZING!!!!</strong> WOW. I'm blown away."</p></article>
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">K</div><div><div class="hm-mini-name">KoiAcademy</div><div class="hm-mini-role">Education</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"<strong>Love what you're building here</strong> and appreciate the quality!"</p></article>
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">J</div><div><div class="hm-mini-name">Joe W.</div><div class="hm-mini-role">Finance</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"<strong>EXCELLENT VIDEO!!!</strong> Great work. This is going to change my ability to effectively teach and help others."</p></article>
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">T</div><div><div class="hm-mini-name">Troy</div><div class="hm-mini-role">Martial Arts</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"Bro wow dude. She's a killer, got me for sure man. <strong>SOO HAPPY MAN.</strong> Keep her man, don't let that editor go far!"</p></article>
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">B</div><div><div class="hm-mini-name">Brandon T.</div><div class="hm-mini-role">Finance</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"Definitely wasn't expecting <strong>as high quality of a return</strong> as I got today. Would have taken me 1-2 days to create the overlays/animations that you guys put on my video."</p></article>
+      <article class="cb-card hm-mini-card"><div class="hm-mini-top"><div class="hm-mini-av">J</div><div><div class="hm-mini-name">Jacob R.</div><div class="hm-mini-role">Business Coaching</div></div><div class="hm-mini-stars">★★★★★</div></div><p class="hm-mini-q">"Honestly wasn't sure what to expect. Definitely wasn't expecting <strong>as high quality of a return</strong> as I got today."</p></article>
+    </div>
+
+    <div class="cb-card hm-brands">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3a4b07ff3f0d1cd2c1.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3a840ed1c2c838f1ed.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3a1f68d1bc1f5ef8a0.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3b840ed1e94038f1f2.png" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3b840ed13bd838f1f3.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3b1f68d1b6875ef8a1.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3c4b07ff764a1cd2c3.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3c840ed168fc38f1f4.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3c1f68d1ba015ef8a2.png" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3d840ed1d09c38f1f5.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3d1f68d188b75ef8a3.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3d4b07ffdc0c1cd2c5.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3e4b07ff34fd1cd2c6.svg" alt="">
+      <img loading="lazy" src="https://storage.googleapis.com/msgsndr/mCNHhjy593eUueqfuqyU/media/697d3a3e840ed1d1d738f1f6.svg" alt="">
+    </div>
+  </div>
+</section>
+
+<footer class="cb-footer">
+  <div class="cb-container">
+    <div class="cb-footer__grid">
+      <div class="cb-footer__col">
+        <a class="cb-nav__brand" href="{{custom_values.home}}" style="margin-bottom:14px">
+          <span class="cb-nav__bug"><img src="https://api.contentbug.io/website/shared/assets/bug-white.png" alt="" width="18" height="18"></span>
+          <span class="cb-nav__name">Content Bug</span>
+        </a>
+        <p class="cb-meta" style="max-width:280px;line-height:1.55">Helping you edit less, create more, and scale faster.</p>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <a href="https://x.com/contentbug" aria-label="X" class="cb-soc"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://instagram.com/contentbug" aria-label="Instagram" class="cb-soc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://youtube.com/@contentbug" aria-label="YouTube" class="cb-soc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg></a>
+          <a href="https://tiktok.com/@contentbug" aria-label="TikTok" class="cb-soc"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
+          <a href="https://facebook.com/contentbug" aria-label="Facebook" class="cb-soc"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        </div>
+      </div>
+      <div class="cb-footer__col"><h4>Explore</h4><ul><li><a href="{{custom_values.home}}">Home</a></li><li><a href="{{custom_values.pricing}}">Pricing</a></li><li><a href="{{custom_values.portfolio}}">Portfolio</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Company</h4><ul><li><a href="{{custom_values.faq}}">FAQ</a></li><li><a href="mailto:{{custom_values.business_email}}?subject=Careers%20Inquiry">Careers</a></li><li><a href="{{custom_values.free_trial}}">Start Free Trial</a></li><li><a href="{{custom_values.content_portal_login}}">Studio Login</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Contact</h4><ul><li><a href="mailto:{{custom_values.business_email}}">contentbug@contentbug.io</a></li><li><a href="tel:{{custom_values.business_phone}}">+1 (385) 200-7582</a></li><li style="color:var(--txt4);font-size:13px;line-height:1.5"><strong style="color:var(--txt3);font-weight:500">Hours:</strong><br>Mon–Fri 9am–6pm MST</li></ul></div>
+    </div>
+    <div class="cb-footer__bottom">
+      <span>© 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
+      <span style="display:inline-flex;gap:14px;align-items:center"><a href="{{custom_values.privacy_policy}}">Privacy Policy</a><span style="color:var(--txt4)">·</span><a href="{{custom_values.terms_of_service}}">Terms of Service</a></span>
     </div>
   </div>
 </footer>
+
+</div>
+
+<style>.cb-soc{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid var(--bord-2);background:var(--surf-2);color:var(--txt3);transition:background var(--dur) var(--ease),color var(--dur) var(--ease)}.cb-soc:hover{background:var(--surf-4);color:var(--txt)}</style>
+
+<script src="https://api.contentbug.io/website/shared/site.js" defer></script>
 <script>
 (function(){
-  var f = document.getElementById('cb-footer');
-  if (!f) return;
-  var p = f.parentElement;
-  while (p && p !== document.documentElement) {
-    if (p !== document.body) {
-      p.style.setProperty('background', 'none', 'important');
-      p.style.setProperty('background-color', 'transparent', 'important');
-      p.style.setProperty('background-image', 'none', 'important');
-      p.style.setProperty('color', '#f5f5f7', 'important');
-      p.style.setProperty('border', 'none', 'important');
-      p.style.setProperty('box-shadow', 'none', 'important');
-      p.style.setProperty('border-radius', '0', 'important');
-    }
-    p = p.parentElement;
-  }
+  var creators=[{name:'Dr. Tracey Marks',subs:'2.3M subscribers',focus:'Long-form educational clarity · Tight pacing · Respectful storytelling',videos:['zWzjdl2dLjM','3mfgoijFWgk','JIrQXSAWeUE']},{name:'Landon Bullock',subs:'1.8M subscribers',focus:'Narrative pacing · Retention over long runtimes · Clean comedic timing',videos:['JjO11LB1U48','_cgPkqWsGWo','luBxLl0j_wA']},{name:'Ideal Media',subs:'1.21M subscribers',focus:'Educational structure · Clean motion + visual hierarchy',videos:['4FKkjZC_FSQ','DpC7oohljjM','p2gPSnu9mx8']},{name:"Tomorrow's Filmmakers",subs:'948K subscribers',focus:'Educational long-form flow · Chapter pacing · Technical clarity',videos:[]},{name:'The Heart Leader Podcast',subs:'171K subscribers',focus:'Conversation flow · Cut discipline · Listener retention',videos:['5e2EH4u0Rzg','SBPRfjLOpaA','Sgpt4VTCjio']},{name:'Avery Smith',subs:'60.5K subscribers',focus:'Creator-led storytelling · Consistent pacing · Scalable workflow',videos:['mSWtnjq4LRE','lo3VU1srV1E','79SINWkIJDQ']}];
+  var rail=document.getElementById('hmRail'),stage=document.getElementById('hmStage'),metaName=document.getElementById('hmMetaName'),metaSubs=document.getElementById('hmMetaSubs'),metaFocus=document.getElementById('hmMetaFocus'),videoGrid=document.getElementById('hmVids');
+  var chips=rail.querySelectorAll('.hm-chip'),current=0;
+  function load(idx){var c=creators[idx];metaName.textContent=c.name;metaSubs.textContent=c.subs;metaFocus.textContent=c.focus;stage.style.opacity='0';setTimeout(function(){videoGrid.innerHTML=c.videos.map(function(id){return '<div class="hm-vcard"><iframe src="https://www.youtube.com/embed/'+id+'?rel=0&modestbranding=1" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe></div>';}).join('');stage.style.opacity='';stage.classList.add('open');},120);}
+  chips.forEach(function(chip){if(chip.classList.contains('no-click'))return;chip.addEventListener('click',function(){var idx=parseInt(chip.getAttribute('data-creator'));if(idx===current)return;chips.forEach(function(c){c.classList.remove('active');});chip.classList.add('active');current=idx;load(idx);chip.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});});});
+  var isDrag=false,startX=0,scrollL=0,moved=false;
+  rail.addEventListener('mousedown',function(e){isDrag=true;moved=false;startX=e.pageX-rail.offsetLeft;scrollL=rail.scrollLeft;rail.classList.add('grabbing');});
+  rail.addEventListener('mousemove',function(e){if(!isDrag)return;e.preventDefault();var x=e.pageX-rail.offsetLeft;var walk=(x-startX)*1.5;rail.scrollLeft=scrollL-walk;if(Math.abs(x-startX)>5)moved=true;});
+  function endDrag(){isDrag=false;rail.classList.remove('grabbing');}
+  rail.addEventListener('mouseup',endDrag);rail.addEventListener('mouseleave',endDrag);
+  rail.addEventListener('click',function(e){if(moved){e.stopPropagation();moved=false;}},true);
+})();
+(function(){
+  var cards=document.querySelectorAll('.hm-show-card');if(!cards.length)return;
+  function activate(idx){cards.forEach(function(c,i){var vids=c.querySelectorAll('video');if(i===idx){c.classList.remove('inactive');c.classList.add('active');vids.forEach(function(v){v.play().catch(function(){});});}else{c.classList.remove('active');c.classList.add('inactive');vids.forEach(function(v){v.pause();v.currentTime=0;});}});}
+  cards.forEach(function(card,i){card.addEventListener('mouseenter',function(){activate(i);});});
+  var grid=document.querySelector('.hm-showcase');if(grid)grid.addEventListener('mouseleave',function(){activate(1);});
+  activate(1);
+})();
+(function(){
+  document.querySelectorAll('.hm-pf-card').forEach(function(card){var v=card.querySelector('video');if(!v)return;card.addEventListener('mouseenter',function(){v.play().catch(function(){});});card.addEventListener('mouseleave',function(){v.pause();v.currentTime=0;});var playing=false;card.addEventListener('touchstart',function(e){e.preventDefault();if(playing){v.pause();v.currentTime=0;playing=false;}else{v.play().catch(function(){});playing=true;}},{passive:false});});
 })();
 </script>
-</div>
+

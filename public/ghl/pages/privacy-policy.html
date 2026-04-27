@@ -1,332 +1,288 @@
-<link rel="stylesheet" href="../../assets/design-system.css">
-<script>
-  if (window.self === window.top) {
-    document.documentElement.classList.add('bg-dark');
-    document.addEventListener('DOMContentLoaded', function () {
-      document.body.classList.add('bg-dark');
-      document.body.classList.add('cb-grid');
-      var s = document.querySelector('.ws-page');
-      if (s) {
-        s.classList.add('shell-body-glass');
-        s.style.margin = '8px 16px';
-        s.style.minHeight = 'calc(100vh - 16px)';
-      }
-    });
-  } else {
-    if (document.body) { document.body.classList.add('bg-dark'); }
-    else { document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('bg-dark'); }); }
-  }
-</script>
-<div class="ws-page">
-<script>
-/* GHL canonical URL → Railway path remap (only runs off-GHL, e.g. api.contentbug.io direct test) */
-(function(){
-  var h=location.hostname;
-  if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com')) return;
-  var map={
-    'https://api.contentbug.io/home':'/home',
-    'https://api.contentbug.io/pricing':'/pricing',
-    'https://api.contentbug.io/portfolio':'/portfolio',
-    'https://api.contentbug.io/free-trial':'/booking',
-    'https://api.contentbug.io/privacy':'/privacy',
-    'https://api.contentbug.io/terms':'/terms'
-  };
-  document.querySelectorAll('a[href]').forEach(function(a){
-    var k=a.getAttribute('href');
-    if(map[k]) a.setAttribute('href', map[k]);
-  });
-})();
-</script>
+<!-- GHL custom code · privacy-policy.html · CB Design System v3 · paste into GHL page Custom Code (Header) or Footer -->
+<link rel="stylesheet" href="https://api.contentbug.io/website/shared/colors_and_type.css">
+<link rel="stylesheet" href="https://api.contentbug.io/website/shared/site.css">
+<style>
+/* GHL backdrop force — own the body inside GHL's chrome */
+html { background: #02060f !important; }
+body {
+  background:
+    radial-gradient(140% 90% at 50% 115%, rgba(255,165,90,.42) 0%, rgba(255,165,90,.22) 28%, rgba(255,165,90,.10) 52%, rgba(255,165,90,.03) 72%, rgba(255,165,90,0) 90%),
+    radial-gradient(110% 70% at 50% 30%, rgba(60,130,230,.28) 0%, rgba(60,130,230,.14) 35%, rgba(60,130,230,.04) 60%, rgba(60,130,230,0) 75%),
+    linear-gradient(in oklab 180deg, #050b1f 0%, #0c2452 50%, #02060f 100%) !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: 100vw 100vh !important;
+  color: #fff !important;
+  margin: 0 !important;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+body, body * { text-shadow: 0 1px 2px rgba(0,0,0,.55); }
+body input, body textarea, body select, body code, body pre, body .mono { text-shadow: none !important; }
+</style>
 
-<div class="cb-header-bar" id="cb-header">
-  <a href="https://api.contentbug.io/home" class="cb-logo">
-    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
-  </a>
-  <nav class="cb-header" id="cbNav">
-    <a href="https://api.contentbug.io/home" class="cb-nav-link active">Home</a>
-    <a href="https://api.contentbug.io/pricing" class="cb-nav-link">Pricing</a>
-    <a href="https://api.contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
-    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
-    <a href="https://api.contentbug.io/free-trial" class="cb-nav-cta">Start Free Trial</a>
-  </nav>
-</div>
-<script>
-document.body.classList.add('ws-page');
-(function(){
-  var bar=document.querySelector('.cb-header-bar');
-  if(!bar)return;
-  var sentinel=document.createElement('div');
-  sentinel.style.cssText='height:0;width:0;visibility:hidden';
-  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
-      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
-    });
-  },{threshold:0});
-  io.observe(bar);
-})();
-</script>
-<section class="section" id="cb-privacy"><div class="section-card">
-<div class="container">
 
-  <!-- Bug icon &mdash; premium depth backdrop, centered behind headline -->
-  <div style="display:flex;justify-content:center;margin-top:0px;margin-bottom:-220px;position:relative;pointer-events:none;z-index:1">
-    <div style="position:relative;display:inline-flex;align-items:center;justify-content:center">
-      <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(26,100,255,.04) 0%,rgba(26,100,255,.01) 35%,transparent 60%);pointer-events:none"></div>
-      <div style="position:relative;width:400px;height:400px;-webkit-mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%);mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%)">
-        <img loading="lazy" decoding="async" src="https://api.contentbug.io/website/assets/logo-bug-icon.png" alt="Content Bug" style="width:400px;height:400px;opacity:.06;display:block;object-fit:contain">
+
+<div class="cb-page">
+
+<header class="cb-nav">
+  <div class="cb-nav__inner">
+    <a class="cb-nav__brand" href="{{custom_values.home}}" aria-label="Content Bug — Home">
+      <span class="cb-nav__bug"><img src="https://api.contentbug.io/website/shared/assets/bug-white.png" alt="" width="18" height="18" decoding="async"></span>
+      <span class="cb-nav__name">Content Bug</span>
+    </a>
+    <nav class="cb-nav__links">
+      <a class="cb-nav__link" href="{{custom_values.home}}">Home</a>
+      <a class="cb-nav__link" href="{{custom_values.pricing}}">Pricing</a>
+      <a class="cb-nav__link" href="{{custom_values.portfolio}}">Portfolio</a>
+      <a class="cb-nav__link" href="{{custom_values.content_portal_login}}">Login</a>
+      <a class="cb-btn cb-btn--blue cb-btn--md cb-nav__cta" href="{{custom_values.free_trial}}">Start Free Trial</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cb-section">
+  <div class="cb-container">
+    <div class="cb-page-hero">
+      <span class="eyebrow">LEGAL</span>
+      <h1 class="cb-h1">Privacy Policy</h1>
+      <p class="cb-meta" style="margin-top:10px">Last Updated: March 2026</p>
+    </div>
+  </div>
+</section>
+
+<section class="cb-section" style="padding-top:0">
+  <div class="cb-container">
+    <div class="lg-shell">
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">1. Introduction</h2>
+        <p>Content Bug Video Editing, LLC ("we," "us," or "our") describes how we gather, utilize, share, and safeguard your information when you access our website, services, and applications. By using our services, you consent to this policy's terms.</p>
+        <p>This policy applies to all Content Bug subscription plans including <strong>Basic</strong>, <strong>Silver</strong>, and <strong>Gold</strong> tiers.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">2. Information We Collect</h2>
+        <h3>Direct Submissions</h3>
+        <ul>
+          <li>Account creation data (name, email, phone, address, company)</li>
+          <li>Payment and subscription details</li>
+          <li>Content for editing (videos, audio, images, creative briefs)</li>
+          <li>Communications with our support team</li>
+          <li>Meeting scheduling information</li>
+          <li>Employment applications</li>
+        </ul>
+        <h3>Automatic Collection</h3>
+        <ul>
+          <li>Device details (IP address, browser type, operating system, screen resolution)</li>
+          <li>Usage patterns (pages visited, features used, time spent)</li>
+          <li>General location based on IP address</li>
+          <li>System logs and access times</li>
+        </ul>
+        <h3>Third-Party Sources</h3>
+        <ul>
+          <li>Payment processors provide transaction data</li>
+          <li>Analytics providers supply usage statistics</li>
+          <li>Social platforms share authorized profile info</li>
+          <li>Cloud storage providers send file metadata</li>
+        </ul>
+        <h3>Sensitive Information</h3>
+        <p>We do <strong>not</strong> intentionally collect social security numbers, financial account details, health data, or biometric identifiers. Any inadvertent submissions receive careful handling and deletion upon request.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">3. How We Use Your Information</h2>
+        <h3>Service Delivery</h3>
+        <p>We process edit requests, manage accounts, personalize experiences, and develop features based on usage analysis.</p>
+        <h3>Business Operations</h3>
+        <p>We process payments, send confirmations, enforce agreements, detect fraud, and maintain compliance records.</p>
+        <h3>Marketing Communications</h3>
+        <p>With your consent, we send promotional emails, deliver targeted advertising, conduct surveys, and feature case studies.</p>
+        <h3>Legal Compliance</h3>
+        <p>We respond to legal processes, government requests, and investigate policy violations as required by law.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">4. Information Sharing</h2>
+        <div class="lg-highlight"><p><strong>We do not sell your personal information.</strong> We have not sold personal information in the past 12 months and have no intention of doing so.</p></div>
+        <h3>Service Providers</h3>
+        <p>We share data with trusted vendors who help operate our business:</p>
+        <ul>
+          <li>Payment processors (Stripe)</li>
+          <li>Cloud storage and file transfer providers</li>
+          <li>Email services</li>
+          <li>Analytics platforms</li>
+          <li>Customer support tools</li>
+          <li>Video conferencing (Zoom)</li>
+          <li>CRM systems (GoHighLevel)</li>
+        </ul>
+        <p>All vendors face contractual obligations to protect your data.</p>
+        <h3>Business Transfers</h3>
+        <p>Information may transfer during mergers, acquisitions, or asset sales. We will provide notification in such events.</p>
+        <h3>Legal Requirements</h3>
+        <p>We may disclose information for court orders, law enforcement requests, rights protection, policy violation investigations, and fraud prevention.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">5. Cookies and Tracking</h2>
+        <h3>Cookie Types</h3>
+        <ul>
+          <li><strong>Essential cookies:</strong> Required for functionality and security (session/persistent)</li>
+          <li><strong>Functional cookies:</strong> Remember your preferences (up to 1 year)</li>
+          <li><strong>Analytics cookies:</strong> Track performance and usage (up to 2 years)</li>
+          <li><strong>Marketing cookies:</strong> Enable targeted advertising (up to 2 years)</li>
+        </ul>
+        <h3>Your Control</h3>
+        <p>Your browser allows you to block cookies, delete sessions, or allow first-party only. Note that blocking essential cookies may affect functionality.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">6. Data Retention</h2>
+        <ul>
+          <li><strong>Account information:</strong> Duration of subscription plus 3 years</li>
+          <li><strong>Transaction records:</strong> 7 years (legal requirement)</li>
+          <li><strong>Video files:</strong> 90 days after delivery</li>
+          <li><strong>Support communications:</strong> 3 years post-resolution</li>
+          <li><strong>Marketing preferences:</strong> Until you opt-out</li>
+          <li><strong>Analytics data:</strong> 26 months (aggregated)</li>
+        </ul>
+        <p>Unnecessary data is securely deleted or anonymized.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">7. Data Security</h2>
+        <h3>Our Protective Measures</h3>
+        <ul>
+          <li>TLS/SSL and AES-256 encryption</li>
+          <li>Role-based access and multi-factor authentication</li>
+          <li>Firewalls, intrusion detection, DDoS protection</li>
+          <li>24/7 monitoring and logging</li>
+          <li>Third-party vendor security reviews</li>
+          <li>Employee security training</li>
+        </ul>
+        <h3>Your Responsibilities</h3>
+        <ul>
+          <li>Maintain credential confidentiality</li>
+          <li>Use strong, unique passwords</li>
+          <li>Report unauthorized access immediately</li>
+          <li>Keep contact information current</li>
+        </ul>
+        <p><strong>Limitation:</strong> No method of transmission or storage is 100% secure. We cannot guarantee absolute security but will notify affected individuals of any breach as required by law.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">8. Your Rights and Choices</h2>
+        <h3>Access and Portability</h3>
+        <p>You may request access to your personal information and receive portable copies of your data.</p>
+        <h3>Correction</h3>
+        <p>You can correct inaccurate, update outdated, or complete incomplete information.</p>
+        <h3>Deletion</h3>
+        <p>You may request deletion of your data, subject to legal exceptions for transaction completion, legal compliance, and fraud detection.</p>
+        <h3>Opt-Out Options</h3>
+        <ul>
+          <li>Marketing emails: Use unsubscribe links</li>
+          <li>SMS: Reply STOP</li>
+          <li>Targeted advertising: Adjust browser preferences</li>
+          <li>Data sharing: Contact us directly</li>
+        </ul>
+        <p>To exercise your rights, contact <strong>contentbug@contentbug.io</strong>. We respond within 30 days after identity verification.</p>
+        <div class="lg-highlight"><p><strong>Non-Discrimination:</strong> We will not discriminate against you for exercising your privacy rights. Service quality remains identical regardless of your choices.</p></div>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">9. California Privacy Rights (CCPA/CPRA)</h2>
+        <p>California residents enjoy additional protections:</p>
+        <ul>
+          <li><strong>Right to Know:</strong> Request disclosure of collected categories, sources, business purposes, and third-party recipients</li>
+          <li><strong>Right to Delete:</strong> Request deletion of collected information (with exceptions)</li>
+          <li><strong>Right to Correct:</strong> Request correction of inaccurate data</li>
+          <li><strong>Right to Opt-Out:</strong> We do not sell personal information or share for cross-context behavioral advertising</li>
+        </ul>
+        <p>Authorized agents may submit requests on your behalf with proper verification.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">10. International Data Transfers</h2>
+        <p>Content Bug operates from the United States. Your information may be processed internationally where our service providers operate.</p>
+        <h3>Safeguards</h3>
+        <ul>
+          <li>Standard contractual clauses</li>
+          <li>Data processing agreements</li>
+          <li>Applicable framework compliance</li>
+        </ul>
+        <h3>GDPR (European Users)</h3>
+        <p>Processing bases include consent, contract performance, legitimate interests, or legal obligations. You may lodge complaints with your supervisory authority.</p>
+        <h3>PIPEDA (Canadian Users)</h3>
+        <p>We comply with the Personal Information Protection and Electronic Documents Act. You retain access, correction, and consent withdrawal rights.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">11. Children's Privacy</h2>
+        <p>Our services are intended for users 18 years and older. We do <strong>not</strong> knowingly collect personal information from children under 18. If we discover child data has been collected, it will be promptly deleted. Report concerns to <strong>contentbug@contentbug.io</strong>.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">12. Your Content</h2>
+        <h3>Ownership</h3>
+        <p>You retain all ownership rights to your submitted content (videos, audio, images). We claim no ownership of your creative work.</p>
+        <h3>Processing License</h3>
+        <p>By submitting content, you grant Content Bug a limited, non-exclusive license to process your materials solely for providing our editing services.</p>
+        <h3>Storage and Confidentiality</h3>
+        <p>Content remains on secure servers during editing. Completed projects are retained for 90 days post-delivery. All content is treated as confidential and shared only with editors working on your projects.</p>
+        <h3>Portfolio Use</h3>
+        <p>We request explicit permission before using any work in our portfolio or marketing materials.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">13. SMS/Text and Communications Policy</h2>
+        <ul>
+          <li>Message frequency varies based on account activity</li>
+          <li>Standard message and data rates may apply</li>
+          <li>Reply STOP to opt-out of SMS</li>
+          <li>Reply HELP for assistance</li>
+          <li>Phone numbers are never shared for third-party marketing</li>
+        </ul>
+        <p>Team member calls may be recorded for quality assurance and training purposes. You will be notified before recording begins.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">14. Policy Changes</h2>
+        <p>We may update this policy periodically. Changes will be posted on our website with an updated effective date. Significant changes will be communicated via email. Continued use of our services after updates constitutes acceptance.</p>
+      </article>
+
+      <article class="cb-card cb-card--lg lg-contact">
+        <h3>Contact Us</h3>
+        <p>For privacy-related questions or to exercise your rights, contact us:</p>
+        <div class="lg-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Content Bug Video Editing, LLC · Brentwood, TN</span></div>
+        <div class="lg-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:{{custom_values.business_email}}">contentbug@contentbug.io</a></div>
+        <div class="lg-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:{{custom_values.business_phone}}">+1 (385) 200-7582</a></div>
+        <p class="lg-response"><strong>Response Time:</strong> Within 30 days of verified request</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer class="cb-footer">
+  <div class="cb-container">
+    <div class="cb-footer__grid">
+      <div class="cb-footer__col">
+        <a class="cb-nav__brand" href="{{custom_values.home}}" style="margin-bottom:14px">
+          <span class="cb-nav__bug"><img src="https://api.contentbug.io/website/shared/assets/bug-white.png" alt="" width="18" height="18"></span>
+          <span class="cb-nav__name">Content Bug</span>
+        </a>
+        <p class="cb-meta" style="max-width:280px;line-height:1.55">Helping you edit less, create more, and scale faster.</p>
       </div>
+      <div class="cb-footer__col"><h4>Explore</h4><ul><li><a href="{{custom_values.home}}">Home</a></li><li><a href="{{custom_values.pricing}}">Pricing</a></li><li><a href="{{custom_values.portfolio}}">Portfolio</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Account</h4><ul><li><a href="{{custom_values.content_portal_login}}">Portal Login</a></li><li><a href="{{custom_values.pricing}}">Pricing Plans</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Contact</h4><ul><li><a href="mailto:{{custom_values.business_email}}">contentbug@contentbug.io</a></li><li><a href="tel:{{custom_values.business_phone}}">+1 (385) 200-7582</a></li><li style="color:var(--txt4);font-size:13px;line-height:1.5">9016 Carondelet Pl<br>Brentwood, TN 37027</li><li style="color:var(--txt4);font-size:13px;line-height:1.5"><strong style="color:var(--txt3);font-weight:500">Hours:</strong> Mon–Fri 9am–6pm MST</li></ul></div>
+    </div>
+    <div class="cb-footer__bottom">
+      <span>© 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
+      <span style="display:inline-flex;gap:14px;align-items:center"><a href="{{custom_values.privacy_policy}}">Privacy Policy</a><span style="color:var(--txt4)">·</span><a href="{{custom_values.terms_of_service}}">Terms of Service</a></span>
     </div>
   </div>
-
-  <div class="legal-header" style="position:relative;z-index:2">
-    <span class="section-label">LEGAL</span>
-    <h1 class="hero-title">Privacy Policy</h1>
-    <p class="last-updated">Last Updated: March 2026</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>1. Introduction</h2>
-    <p>Content Bug Video Editing, LLC ("we," "us," or "our") describes how we gather, utilize, share, and safeguard your information when you access our website, services, and applications. By using our services, you consent to this policy's terms.</p>
-    <p>This policy applies to all Content Bug subscription plans including <strong>Basic</strong>, <strong>Silver</strong>, and <strong>Gold</strong> tiers.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>2. Information We Collect</h2>
-    <h3>Direct Submissions</h3>
-    <ul>
-      <li>Account creation data (name, email, phone, address, company)</li>
-      <li>Payment and subscription details</li>
-      <li>Content for editing (videos, audio, images, creative briefs)</li>
-      <li>Communications with our support team</li>
-      <li>Meeting scheduling information</li>
-      <li>Employment applications</li>
-    </ul>
-    <h3>Automatic Collection</h3>
-    <ul>
-      <li>Device details (IP address, browser type, operating system, screen resolution)</li>
-      <li>Usage patterns (pages visited, features used, time spent)</li>
-      <li>General location based on IP address</li>
-      <li>System logs and access times</li>
-    </ul>
-    <h3>Third-Party Sources</h3>
-    <ul>
-      <li>Payment processors provide transaction data</li>
-      <li>Analytics providers supply usage statistics</li>
-      <li>Social platforms share authorized profile info</li>
-      <li>Cloud storage providers send file metadata</li>
-    </ul>
-    <h3>Sensitive Information</h3>
-    <p>We do <strong>not</strong> intentionally collect social security numbers, financial account details, health data, or biometric identifiers. Any inadvertent submissions receive careful handling and deletion upon request.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>3. How We Use Your Information</h2>
-    <h3>Service Delivery</h3>
-    <p>We process edit requests, manage accounts, personalize experiences, and develop features based on usage analysis.</p>
-    <h3>Business Operations</h3>
-    <p>We process payments, send confirmations, enforce agreements, detect fraud, and maintain compliance records.</p>
-    <h3>Marketing Communications</h3>
-    <p>With your consent, we send promotional emails, deliver targeted advertising, conduct surveys, and feature case studies.</p>
-    <h3>Legal Compliance</h3>
-    <p>We respond to legal processes, government requests, and investigate policy violations as required by law.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>4. Information Sharing</h2>
-    <div class="highlight-box">
-      <p><strong>We do not sell your personal information.</strong> We have not sold personal information in the past 12 months and have no intention of doing so.</p>
-    </div>
-    <h3>Service Providers</h3>
-    <p>We share data with trusted vendors who help operate our business:</p>
-    <ul>
-      <li>Payment processors (Stripe)</li>
-      <li>Cloud storage and file transfer providers</li>
-      <li>Email services</li>
-      <li>Analytics platforms</li>
-      <li>Customer support tools</li>
-      <li>Video conferencing (Zoom)</li>
-      <li>CRM systems (GoHighLevel)</li>
-    </ul>
-    <p>All vendors face contractual obligations to protect your data.</p>
-    <h3>Business Transfers</h3>
-    <p>Information may transfer during mergers, acquisitions, or asset sales. We will provide notification in such events.</p>
-    <h3>Legal Requirements</h3>
-    <p>We may disclose information for court orders, law enforcement requests, rights protection, policy violation investigations, and fraud prevention.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>5. Cookies and Tracking</h2>
-    <h3>Cookie Types</h3>
-    <ul>
-      <li><strong>Essential cookies:</strong> Required for functionality and security (session/persistent)</li>
-      <li><strong>Functional cookies:</strong> Remember your preferences (up to 1 year)</li>
-      <li><strong>Analytics cookies:</strong> Track performance and usage (up to 2 years)</li>
-      <li><strong>Marketing cookies:</strong> Enable targeted advertising (up to 2 years)</li>
-    </ul>
-    <h3>Your Control</h3>
-    <p>Your browser allows you to block cookies, delete sessions, or allow first-party only. Note that blocking essential cookies may affect functionality.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>6. Data Retention</h2>
-    <ul>
-      <li><strong>Account information:</strong> Duration of subscription plus 3 years</li>
-      <li><strong>Transaction records:</strong> 7 years (legal requirement)</li>
-      <li><strong>Video files:</strong> 90 days after delivery</li>
-      <li><strong>Support communications:</strong> 3 years post-resolution</li>
-      <li><strong>Marketing preferences:</strong> Until you opt-out</li>
-      <li><strong>Analytics data:</strong> 26 months (aggregated)</li>
-    </ul>
-    <p>Unnecessary data is securely deleted or anonymized.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>7. Data Security</h2>
-    <h3>Our Protective Measures</h3>
-    <ul>
-      <li>TLS/SSL and AES-256 encryption</li>
-      <li>Role-based access and multi-factor authentication</li>
-      <li>Firewalls, intrusion detection, DDoS protection</li>
-      <li>24/7 monitoring and logging</li>
-      <li>Third-party vendor security reviews</li>
-      <li>Employee security training</li>
-    </ul>
-    <h3>Your Responsibilities</h3>
-    <ul>
-      <li>Maintain credential confidentiality</li>
-      <li>Use strong, unique passwords</li>
-      <li>Report unauthorized access immediately</li>
-      <li>Keep contact information current</li>
-    </ul>
-    <p><strong>Limitation:</strong> No method of transmission or storage is 100% secure. We cannot guarantee absolute security but will notify affected individuals of any breach as required by law.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>8. Your Rights and Choices</h2>
-    <h3>Access and Portability</h3>
-    <p>You may request access to your personal information and receive portable copies of your data.</p>
-    <h3>Correction</h3>
-    <p>You can correct inaccurate, update outdated, or complete incomplete information.</p>
-    <h3>Deletion</h3>
-    <p>You may request deletion of your data, subject to legal exceptions for transaction completion, legal compliance, and fraud detection.</p>
-    <h3>Opt-Out Options</h3>
-    <ul>
-      <li>Marketing emails: Use unsubscribe links</li>
-      <li>SMS: Reply STOP</li>
-      <li>Targeted advertising: Adjust browser preferences</li>
-      <li>Data sharing: Contact us directly</li>
-    </ul>
-    <p>To exercise your rights, contact <strong>contentbug@contentbug.io</strong>. We respond within 30 days after identity verification.</p>
-    <div class="highlight-box">
-      <p><strong>Non-Discrimination:</strong> We will not discriminate against you for exercising your privacy rights. Service quality remains identical regardless of your choices.</p>
-    </div>
-  </div>
-
-  <div class="legal-section">
-    <h2>9. California Privacy Rights (CCPA/CPRA)</h2>
-    <p>California residents enjoy additional protections:</p>
-    <ul>
-      <li><strong>Right to Know:</strong> Request disclosure of collected categories, sources, business purposes, and third-party recipients</li>
-      <li><strong>Right to Delete:</strong> Request deletion of collected information (with exceptions)</li>
-      <li><strong>Right to Correct:</strong> Request correction of inaccurate data</li>
-      <li><strong>Right to Opt-Out:</strong> We do not sell personal information or share for cross-context behavioral advertising</li>
-    </ul>
-    <p>Authorized agents may submit requests on your behalf with proper verification.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>10. International Data Transfers</h2>
-    <p>Content Bug operates from the United States. Your information may be processed internationally where our service providers operate.</p>
-    <h3>Safeguards</h3>
-    <ul>
-      <li>Standard contractual clauses</li>
-      <li>Data processing agreements</li>
-      <li>Applicable framework compliance</li>
-    </ul>
-    <h3>GDPR (European Users)</h3>
-    <p>Processing bases include consent, contract performance, legitimate interests, or legal obligations. You may lodge complaints with your supervisory authority.</p>
-    <h3>PIPEDA (Canadian Users)</h3>
-    <p>We comply with the Personal Information Protection and Electronic Documents Act. You retain access, correction, and consent withdrawal rights.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>11. Children's Privacy</h2>
-    <p>Our services are intended for users 18 years and older. We do <strong>not</strong> knowingly collect personal information from children under 18. If we discover child data has been collected, it will be promptly deleted. Report concerns to <strong>contentbug@contentbug.io</strong>.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>12. Your Content</h2>
-    <h3>Ownership</h3>
-    <p>You retain all ownership rights to your submitted content (videos, audio, images). We claim no ownership of your creative work.</p>
-    <h3>Processing License</h3>
-    <p>By submitting content, you grant Content Bug a limited, non-exclusive license to process your materials solely for providing our editing services.</p>
-    <h3>Storage and Confidentiality</h3>
-    <p>Content remains on secure servers during editing. Completed projects are retained for 90 days post-delivery. All content is treated as confidential and shared only with editors working on your projects.</p>
-    <h3>Portfolio Use</h3>
-    <p>We request explicit permission before using any work in our portfolio or marketing materials.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>13. SMS/Text and Communications Policy</h2>
-    <ul>
-      <li>Message frequency varies based on account activity</li>
-      <li>Standard message and data rates may apply</li>
-      <li>Reply STOP to opt-out of SMS</li>
-      <li>Reply HELP for assistance</li>
-      <li>Phone numbers are never shared for third-party marketing</li>
-    </ul>
-    <p>Team member calls may be recorded for quality assurance and training purposes. You will be notified before recording begins.</p>
-  </div>
-
-  <div class="legal-section">
-    <h2>14. Policy Changes</h2>
-    <p>We may update this policy periodically. Changes will be posted on our website with an updated effective date. Significant changes will be communicated via email. Continued use of our services after updates constitutes acceptance.</p>
-  </div>
+</footer>
 
 </div>
-</div></section>
+<script src="https://api.contentbug.io/website/shared/site.js" defer></script>
 
-<section class="section" id="cb-privacy-contact"><div class="section-card">
-<div class="container">
-  <div class="contact-box">
-    <h3>Contact Us</h3>
-    <p>For privacy-related questions or to exercise your rights, contact us:</p>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span>Content Bug Video Editing, LLC &middot; 9016 Carondelet Pl, Brentwood, TN 37027</span>
-    </div>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      <a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a>
-    </div>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      <a href="tel:+1 (385) 200-7582">+1 (385) 200-7582</a>
-    </div>
-    <p class="response-time"><strong>Response Time:</strong> Within 30 days of verified request</p>
-  </div>
-</div>
-</div></section>
-
-<script>
-(function(){
-  var f = document.getElementById('cb-footer');
-  if (!f) return;
-  var p = f.parentElement;
-  while (p && p !== document.documentElement) {
-    if (p !== document.body) {
-      p.style.setProperty('background', 'none', 'important');
-      p.style.setProperty('background-color', 'transparent', 'important');
-      p.style.setProperty('background-image', 'none', 'important');
-      p.style.setProperty('color', 'var(--txt3)', 'important');
-      p.style.setProperty('border', 'none', 'important');
-      p.style.setProperty('box-shadow', 'none', 'important');
-      p.style.setProperty('border-radius', '0', 'important');
-    }
-    p = p.parentElement;
-  }
-})();
-</script>
-</div>

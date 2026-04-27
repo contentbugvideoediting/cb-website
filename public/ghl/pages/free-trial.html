@@ -1,0 +1,222 @@
+<!-- GHL custom code · free-trial.html · CB Design System v3 · paste into GHL page Custom Code (Header) or Footer -->
+<link rel="stylesheet" href="https://api.contentbug.io/website/shared/colors_and_type.css">
+<link rel="stylesheet" href="https://api.contentbug.io/website/shared/site.css">
+<style>
+/* GHL backdrop force — own the body inside GHL's chrome */
+html { background: #02060f !important; }
+body {
+  background:
+    radial-gradient(140% 90% at 50% 115%, rgba(255,165,90,.42) 0%, rgba(255,165,90,.22) 28%, rgba(255,165,90,.10) 52%, rgba(255,165,90,.03) 72%, rgba(255,165,90,0) 90%),
+    radial-gradient(110% 70% at 50% 30%, rgba(60,130,230,.28) 0%, rgba(60,130,230,.14) 35%, rgba(60,130,230,.04) 60%, rgba(60,130,230,0) 75%),
+    linear-gradient(in oklab 180deg, #050b1f 0%, #0c2452 50%, #02060f 100%) !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: 100vw 100vh !important;
+  color: #fff !important;
+  margin: 0 !important;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+body, body * { text-shadow: 0 1px 2px rgba(0,0,0,.55); }
+body input, body textarea, body select, body code, body pre, body .mono { text-shadow: none !important; }
+</style>
+
+
+
+<div class="cb-page">
+
+<header class="cb-nav">
+  <div class="cb-nav__inner">
+    <a class="cb-nav__brand" href="{{custom_values.home}}" aria-label="Content Bug — Home">
+      <span class="cb-nav__bug"><img src="https://api.contentbug.io/website/shared/assets/bug-white.png" alt="" width="18" height="18" decoding="async"></span>
+      <span class="cb-nav__name">Content Bug</span>
+    </a>
+    <nav class="cb-nav__links">
+      <a class="cb-nav__link" href="{{custom_values.home}}">Home</a>
+      <a class="cb-nav__link" href="{{custom_values.pricing}}">Pricing</a>
+      <a class="cb-nav__link" href="{{custom_values.portfolio}}">Portfolio</a>
+      <a class="cb-nav__link" href="{{custom_values.content_portal_login}}">Login</a>
+      <a class="cb-btn cb-btn--blue cb-btn--md cb-nav__cta" href="{{custom_values.free_trial}}">Start Free Trial</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cb-section" style="padding-top:40px">
+  <div class="cb-container">
+    <div class="ft-grid">
+
+      <section class="ft-left">
+        <p class="ft-eyebrow">Free Trial</p>
+        <h1 class="ft-h1">Get your first edit on us</h1>
+        <p class="ft-sub">See what working with Content Bug actually feels like — real editors, real quality, real turnaround. No card, no commitment.</p>
+        <article class="cb-card ft-hiw">
+          <div class="ft-hiw-title">How it works</div>
+          <ol class="ft-hiw-list">
+            <li>Share your contact details<small>So we know where to send your free edit and updates.</small></li>
+            <li>Answer 5 quick qualification questions<small>Tells us your content, volume, goals, and timing.</small></li>
+            <li>Book your intro call to activate the trial<small>15-minute call. We email your free edit link right after.</small></li>
+          </ol>
+        </article>
+        <p class="ft-trust">No card required. No pressure. Just a simple way to see if Content Bug is the right fit.</p>
+      </section>
+
+      <aside>
+        <div class="wz">
+          <div class="wz-hero">
+            <h2 class="wz-title">Free Trial</h2>
+            <p class="wz-percent" id="qPercent">0% complete</p>
+            <div class="wz-progress"><div class="wz-progress-fill" id="qProgressFill" style="width:0%"></div></div>
+          </div>
+
+          <div class="wz-content" id="qBody">
+
+            <div class="qw-step active" data-step="1">
+              <div class="qw-sub-screen active" data-sub="0">
+                <div class="qw-title">Let's get started</div>
+                <div class="qw-sub">Tell us where to send your free trial details.</div>
+                <div style="width:100%;max-width:420px;margin:16px auto 0">
+                  <div class="q-row">
+                    <div class="cb-field q-field"><label class="cb-label" for="qFirstName">First Name *</label><input class="cb-input" id="qFirstName" placeholder="First name" autocomplete="given-name"></div>
+                    <div class="cb-field q-field"><label class="cb-label" for="qLastName">Last Name *</label><input class="cb-input" id="qLastName" placeholder="Last name" autocomplete="family-name"></div>
+                  </div>
+                  <div class="cb-field q-field" id="qEmailField"><label class="cb-label" for="qEmail">Email *</label><input class="cb-input" id="qEmail" type="email" placeholder="you@example.com" autocomplete="email"><div class="q-error">Please enter a valid email address.</div></div>
+                  <div class="cb-field q-field"><label class="cb-label" for="qPhone">Phone <span class="q-optional">(optional)</span></label><input class="cb-input" id="qPhone" type="tel" placeholder="(555) 123-4567" autocomplete="tel"></div>
+                </div>
+              </div>
+
+              <div class="qw-sub-screen" data-sub="q">
+                <div class="qw-sub" style="opacity:.65;margin-bottom:4px">Question <span id="qSubQNum">1</span> of 5</div>
+                <div class="qw-title" id="qSubQTitle">What kind of content do you need edited?</div>
+                <div class="qw-sub" id="qSubQHint">Pick all that apply.</div>
+                <div style="width:100%;max-width:520px;margin:16px auto 0">
+                  <div class="q-subq active" data-subq="0">
+                    <div class="q-chips" id="qContentTypes" data-multi="true">
+                      <div class="q-chip" data-val="Short-form videos">Short-form videos</div>
+                      <div class="q-chip" data-val="Long-form videos">Long-form videos</div>
+                      <div class="q-chip" data-val="Podcast clips">Podcast clips</div>
+                      <div class="q-chip" data-val="YouTube videos">YouTube videos</div>
+                      <div class="q-chip" data-val="Ads / promo videos">Ads / promo videos</div>
+                      <div class="q-chip" data-val="Talking-head content">Talking-head content</div>
+                      <div class="q-chip" data-val="Educational content">Educational content</div>
+                      <div class="q-chip" data-val="Vlogs / lifestyle content">Vlogs / lifestyle content</div>
+                      <div class="q-chip" data-val="Agency client edits">Agency client edits</div>
+                    </div>
+                  </div>
+                  <div class="q-subq" data-subq="1">
+                    <div class="q-chips" id="qVolume">
+                      <div class="q-chip q-chip-lg" data-val="1-2x per week">1–2x per week</div>
+                      <div class="q-chip q-chip-lg" data-val="3-4x per week">3–4x per week</div>
+                      <div class="q-chip q-chip-lg" data-val="5-7x per week">5–7x per week</div>
+                    </div>
+                  </div>
+                  <div class="q-subq" data-subq="2">
+                    <div class="q-chips" id="qGoal">
+                      <div class="q-chip q-chip-lg" data-val="Post consistently">Post consistently</div>
+                      <div class="q-chip q-chip-lg" data-val="Grow audience">Grow audience</div>
+                      <div class="q-chip q-chip-lg" data-val="Save time">Save time</div>
+                      <div class="q-chip q-chip-lg" data-val="Improve quality">Improve quality</div>
+                      <div class="q-chip q-chip-lg" data-val="Increase sales">Increase sales</div>
+                    </div>
+                  </div>
+                  <div class="q-subq" data-subq="3">
+                    <div class="q-chips" id="qTiming">
+                      <div class="q-chip q-chip-lg" data-val="Right away">Right away</div>
+                      <div class="q-chip q-chip-lg" data-val="Within the next 2 weeks">Within the next 2 weeks</div>
+                      <div class="q-chip q-chip-lg" data-val="Within the next month">Within the next month</div>
+                      <div class="q-chip q-chip-lg" data-val="Just looking around">Just looking around</div>
+                    </div>
+                  </div>
+                  <div class="q-subq" data-subq="4">
+                    <div class="q-chips" id="qFootage">
+                      <div class="q-chip q-chip-lg" data-val="Yes I have footage ready">Yes, I have footage ready</div>
+                      <div class="q-chip q-chip-lg" data-val="It is not perfect but it will do">It's not perfect, but it will do</div>
+                      <div class="q-chip q-chip-lg" data-val="No I am still planning">No, I'm still planning</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="qw-sub-screen" data-sub="dq">
+                <div class="q-result-icon not-qualified"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="32" height="32"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+                <div class="qw-title">Not quite the right fit — yet.</div>
+                <div class="qw-sub" id="qDqTip">Keep building and come back when you have footage ready.</div>
+                <div style="font-family:'SF Pro Text';font-size:13px;color:var(--txt4);margin:20px 0 12px;text-align:center">Want us to let you know when you're ready?</div>
+                <div class="q-remind"><input id="qRemindEmail" type="email" placeholder="your@email.com"><button class="cb-btn cb-btn--blue cb-btn--md" onclick="qRemind()">Remind Me</button></div>
+              </div>
+            </div>
+
+            <div class="qw-step" data-step="2">
+              <div class="q-result-icon qualified"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" width="26" height="26"><polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="qw-title">You qualify for a free trial edit</div>
+              <div class="qw-sub">You look like a strong fit for Content Bug. Book a quick intro call to activate your free trial and get your first edit moving.</div>
+              <div style="width:100%;max-width:780px;margin:18px auto 0;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.2);border:1px solid var(--bord-2)">
+                <iframe id="qIntroCallFrame" src="https://links.contentbug.io/widget/booking/jMEjaEOpcdbZDvcQFXGY" style="width:100%;border:none;overflow:hidden;display:block;min-height:720px;background:transparent" scrolling="no" loading="lazy" title="Book Your Intro Call"></iframe>
+              </div>
+              <p style="font-family:'SF Pro Text';font-size:12px;color:var(--txt4);text-align:center;margin:14px auto 0;max-width:480px">No card required. Your first edit is free on us.</p>
+            </div>
+
+          </div>
+
+          <div class="wz-footer" id="qFoot">
+            <button class="cb-btn cb-btn--ghost" id="qBack" onclick="qPrev()" hidden>Back</button>
+            <span class="wz-meta" id="qMeta"></span>
+            <button class="cb-btn cb-btn--blue" id="qNext" data-pos="right" onclick="qNext()">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<footer class="cb-footer">
+  <div class="cb-container">
+    <div class="cb-footer__grid">
+      <div class="cb-footer__col">
+        <a class="cb-nav__brand" href="{{custom_values.home}}" style="margin-bottom:14px">
+          <span class="cb-nav__bug"><img src="https://api.contentbug.io/website/shared/assets/bug-white.png" alt="" width="18" height="18"></span>
+          <span class="cb-nav__name">Content Bug</span>
+        </a>
+        <p class="cb-meta" style="max-width:280px;line-height:1.55">Helping you edit less, create more, and scale faster.</p>
+      </div>
+      <div class="cb-footer__col"><h4>Explore</h4><ul><li><a href="{{custom_values.home}}">Home</a></li><li><a href="{{custom_values.pricing}}">Pricing</a></li><li><a href="{{custom_values.portfolio}}">Portfolio</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Company</h4><ul><li><a href="{{custom_values.faq}}">FAQ</a></li><li><a href="{{custom_values.free_trial}}">Start Free Trial</a></li><li><a href="{{custom_values.content_portal_login}}">Studio Login</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Contact</h4><ul><li><a href="mailto:{{custom_values.business_email}}">contentbug@contentbug.io</a></li><li><a href="tel:{{custom_values.business_phone}}">+1 (385) 200-7582</a></li><li style="color:var(--txt4);font-size:13px;line-height:1.5"><strong style="color:var(--txt3);font-weight:500">Hours:</strong> Mon–Fri 9am–6pm MST</li></ul></div>
+    </div>
+    <div class="cb-footer__bottom">
+      <span>© 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
+      <span style="display:inline-flex;gap:14px;align-items:center"><a href="{{custom_values.privacy_policy}}">Privacy Policy</a><span style="color:var(--txt4)">·</span><a href="{{custom_values.terms_of_service}}">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script src="https://links.contentbug.io/js/form_embed.js"></script>
+<script src="https://api.contentbug.io/website/shared/site.js" defer></script>
+<script>
+(function(){
+  'use strict';
+  var state={step:1,subQ:0,contact:{first:'',last:'',email:'',phone:''},answers:{contentTypes:[],volume:'',goal:'',timing:'',footage:''},score:0,qualified:false,submittedContact:false,introCallBooked:false};
+  var $=function(id){return document.getElementById(id);};
+  var qFoot=$('qFoot'),qBack=$('qBack'),qNext=$('qNext'),qBody=$('qBody');
+
+  function setProgress(){var pct=0;if(state.step===1){if(state.subQ===0)pct=0;else if(state.subQ==='dq')pct=83;else pct=Math.round((state.subQ/6)*100);}else if(state.step===2){pct=100;}var pf=$('qProgressFill'),pe=$('qPercent');if(pf)pf.style.width=pct+'%';if(pe)pe.textContent=pct+'% complete';}
+  function showStep(){document.querySelectorAll('.qw-step').forEach(function(el){el.classList.remove('active');});var cur=document.querySelector('.qw-step[data-step="'+state.step+'"]');if(cur)cur.classList.add('active');setProgress();renderFooter();if(qBody)qBody.scrollTop=0;}
+  function showSub(sub){state.subQ=sub;document.querySelectorAll('.qw-step[data-step="1"] .qw-sub-screen').forEach(function(el){el.classList.remove('active');});if(sub===0){document.querySelector('.qw-sub-screen[data-sub="0"]').classList.add('active');}else if(sub==='dq'){document.querySelector('.qw-sub-screen[data-sub="dq"]').classList.add('active');}else{document.querySelector('.qw-sub-screen[data-sub="q"]').classList.add('active');document.querySelectorAll('.q-subq').forEach(function(el){el.classList.remove('active');});var cur=document.querySelector('.q-subq[data-subq="'+(sub-1)+'"]');if(cur)cur.classList.add('active');$('qSubQNum').textContent=sub;var titles=['What kind of content do you need edited?','How often do you need videos edited?',"What's your main goal with your content right now?",'How soon do you want to hand off your video editing?','If we offered you a free trial edit today, would you have footage ready to send?'];var hints=['Pick all that apply.','Pick the closest match.','Pick what matters most right now.','Pick the closest fit.','Pick what best describes your situation.'];$('qSubQTitle').textContent=titles[sub-1];$('qSubQHint').textContent=hints[sub-1];}setProgress();renderFooter();}
+  function renderFooter(){if(!qFoot)return;qBack.hidden=(state.step===1&&state.subQ===0);if(state.step===2||(state.step===1&&state.subQ==='dq')){qNext.hidden=true;}else{qNext.hidden=false;var label='Continue';if(state.step===1&&state.subQ===5)label='See If I Qualify';qNext.innerHTML=label+' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>';}var qm=$('qMeta');if(qm){if(state.step===1){if(state.subQ===0)qm.textContent='Step 1 / 3 · contact details';else if(state.subQ==='dq')qm.textContent='Step 2 / 3 · not the right fit yet';else qm.textContent='Step 2 / 3 · question '+state.subQ+' of 5';}else if(state.step===2){qm.textContent='Step 3 / 3 · qualified — book your intro call';}else qm.textContent='';}var v=qValid();qNext.disabled=!v;qNext.style.opacity=v?'1':'.5';qNext.style.pointerEvents=v?'':'none';}
+  function qValid(){if(state.step===1){if(state.subQ===0){var f=$('qFirstName').value.trim(),l=$('qLastName').value.trim(),e=$('qEmail').value.trim();return !!(f&&l&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e));}if(state.subQ===1)return state.answers.contentTypes.length>0;if(state.subQ===2)return !!state.answers.volume;if(state.subQ===3)return !!state.answers.goal;if(state.subQ===4)return !!state.answers.timing;if(state.subQ===5)return !!state.answers.footage;if(state.subQ==='dq')return false;}if(state.step===2)return false;return true;}
+  function computeScore(){var s=0;if(state.answers.contentTypes.length)s+=15;if(state.answers.volume)s+=15;if(state.answers.goal)s+=15;if(state.answers.timing==="Right away")s+=30;else if(state.answers.timing==="Within the next 2 weeks")s+=25;else if(state.answers.timing==="Within the next month")s+=15;else if(state.answers.timing==="Just looking around")s+=5;if(state.answers.footage==="Yes I have footage ready")s+=25;else if(state.answers.footage==="It is not perfect but it will do")s+=20;else if(state.answers.footage==="No I am still planning")s+=5;state.score=s;state.qualified=(s>=70)&&state.answers.timing!=="Just looking around"&&state.answers.footage!=="No I am still planning";return state.qualified;}
+  function wireChips(){document.querySelectorAll('.q-chips').forEach(function(group){var multi=group.getAttribute('data-multi')==='true';group.addEventListener('click',function(ev){var chip=ev.target.closest('.q-chip');if(!chip)return;if(multi){chip.classList.toggle('active');}else{group.querySelectorAll('.q-chip').forEach(function(c){c.classList.remove('active');});chip.classList.add('active');}if(group.id==='qContentTypes'){state.answers.contentTypes=Array.from(group.querySelectorAll('.q-chip.active')).map(function(c){return c.getAttribute('data-val');});}else{var active=group.querySelector('.q-chip.active');var val=active?active.getAttribute('data-val'):'';if(group.id==='qVolume')state.answers.volume=val;if(group.id==='qGoal')state.answers.goal=val;if(group.id==='qTiming')state.answers.timing=val;if(group.id==='qFootage')state.answers.footage=val;}renderFooter();});});}
+  function wireContact(){['qFirstName','qLastName','qEmail','qPhone'].forEach(function(id){var el=$(id);if(!el)return;el.addEventListener('input',function(){state.contact.first=$('qFirstName').value.trim();state.contact.last=$('qLastName').value.trim();state.contact.email=$('qEmail').value.trim();state.contact.phone=$('qPhone').value.trim();renderFooter();});});}
+  function submitContact(){if(state.submittedContact)return Promise.resolve(null);state.submittedContact=true;return fetch('/api/trial/submit',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({first_name:state.contact.first,last_name:state.contact.last,email:state.contact.email,phone:state.contact.phone,content_types:state.answers.contentTypes,lead_content_types:(state.answers.contentTypes||[]).join(', '),lead_volume:state.answers.volume,lead_main_goal:state.answers.goal,lead_handoff_timing:state.answers.timing,lead_footage_readiness:state.answers.footage,lead_qualification_score:state.score,post_freq:state.answers.volume,goal:state.answers.goal,footage:state.answers.footage,volume:state.answers.timing,score:state.score,qualified:state.qualified,source:'free-trial-wizard'})}).then(function(r){return r.ok?r.json():null;}).catch(function(){state.submittedContact=false;return null;});}
+  function qDq(){var tip='Keep building and come back when you have footage ready.';var el=$('qDqTip');if(el)el.textContent=tip;submitContact();showSub('dq');}
+  window.qRemind=function(){var email=($('qRemindEmail')||{}).value||'';if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Please enter a valid email.');return;}fetch('/api/trial/remind',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({email:email,contact_email:state.contact.email})}).finally(function(){var btn=document.querySelector('.q-remind .cb-btn');if(btn){btn.textContent="We'll email you.";btn.disabled=true;btn.style.opacity='.6';}});};
+  function prefillCalendar(){var fr=$('qIntroCallFrame');if(!fr)return;if(fr.dataset.prefilled==='1')return;var base=fr.src.split('?')[0];var p=new URLSearchParams({first_name:state.contact.first,last_name:state.contact.last,email:state.contact.email,phone:state.contact.phone});fr.src=base+'?'+p.toString();fr.dataset.prefilled='1';}
+  function bookIntroCall(appointmentDateTime,tz){if(state.introCallBooked)return;state.introCallBooked=true;fetch('/api/trial/book-intro-call',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({email:state.contact.email,appointmentDateTime:appointmentDateTime||'',appointmentTimezone:tz||''})}).finally(function(){var c=state.contact||{};var p=new URLSearchParams();if(c.first)p.set('first_name',c.first);if(c.last)p.set('last_name',c.last);if(c.email)p.set('email',c.email);if(c.phone)p.set('phone',c.phone);var qs=p.toString();window.location.replace('/intro-call-booked'+(qs?'?'+qs:''));});}
+  window.addEventListener('message',function(ev){if(!ev||!ev.data)return;var d=ev.data;var t=(d&&(d.type||d.event))||'';var isBook=(t==='appointment_booked'||t==='appointmentBooked'||t==='introCallBooked'||t==='booking_confirmed'||t==='leadconnector:appointment_booked'||(d&&d.event==='calendly.event_scheduled')||(typeof t==='string'&&t.toLowerCase().indexOf('appointment')>=0&&t.toLowerCase().indexOf('book')>=0));if(isBook){var appt=(d.appointmentDateTime||d.startTime||d.start_time||(d.payload&&(d.payload.startTime||d.payload.start_time))||(d.payload&&d.payload.event&&d.payload.event.start_time)||'');var tz=(d.timezone||d.appointmentTimezone||(d.payload&&(d.payload.timezone||d.payload.tz))||'');bookIntroCall(appt,tz);}});
+  window.qNext=function(){if(!qValid())return;if(state.step===1){if(state.subQ===0){showSub(1);return;}if(state.subQ>=1&&state.subQ<=4){showSub(state.subQ+1);return;}if(state.subQ===5){computeScore();if(!state.qualified){qDq();return;}var btn=$('qNext');if(btn){btn.disabled=true;btn.style.opacity='.6';btn.textContent='Loading your calendar…';}submitContact().finally(function(){state.step=2;showStep();setTimeout(prefillCalendar,60);if(btn){btn.disabled=false;btn.style.opacity='';}});}}};
+  window.qPrev=function(){if(state.step===1){if(state.subQ==='dq'){showSub(5);return;}if(state.subQ>0){showSub(state.subQ-1);return;}}if(state.step===2){state.step=1;showStep();showSub(5);return;}};
+  wireChips();wireContact();showStep();showSub(0);
+})();
+</script>
+

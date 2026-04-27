@@ -1,432 +1,315 @@
-<link rel="stylesheet" href="../../assets/design-system.css">
-<script>
-  if (window.self === window.top) {
-    document.documentElement.classList.add('bg-dark');
-    document.addEventListener('DOMContentLoaded', function () {
-      document.body.classList.add('bg-dark');
-      document.body.classList.add('cb-grid');
-      var s = document.querySelector('.ws-page');
-      if (s) {
-        s.classList.add('shell-body-glass');
-        s.style.margin = '8px 16px';
-        s.style.minHeight = 'calc(100vh - 16px)';
-      }
-    });
-  } else {
-    if (document.body) { document.body.classList.add('bg-dark'); }
-    else { document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('bg-dark'); }); }
-  }
-</script>
-<div class="ws-page">
-<script>
-/* GHL canonical URL → Railway path remap (only runs off-GHL, e.g. api.contentbug.io direct test) */
-(function(){
-  var h=location.hostname;
-  if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com')) return;
-  var map={
-    'https://api.contentbug.io/home':'/home',
-    'https://api.contentbug.io/pricing':'/pricing',
-    'https://api.contentbug.io/portfolio':'/portfolio',
-    'https://api.contentbug.io/free-trial':'/booking',
-    'https://api.contentbug.io/privacy':'/privacy',
-    'https://api.contentbug.io/terms':'/terms'
-  };
-  document.querySelectorAll('a[href]').forEach(function(a){
-    var k=a.getAttribute('href');
-    if(map[k]) a.setAttribute('href', map[k]);
-  });
-})();
-</script>
+<!-- GHL custom code · pricing.html · CB Design System v3 · paste into GHL page Custom Code (Header) or Footer -->
+<link rel="stylesheet" href="https://api.contentbug.io/website/shared/colors_and_type.css">
+<link rel="stylesheet" href="https://api.contentbug.io/website/shared/site.css">
+<style>
+/* GHL backdrop force — own the body inside GHL's chrome */
+html { background: #02060f !important; }
+body {
+  background:
+    radial-gradient(140% 90% at 50% 115%, rgba(255,165,90,.42) 0%, rgba(255,165,90,.22) 28%, rgba(255,165,90,.10) 52%, rgba(255,165,90,.03) 72%, rgba(255,165,90,0) 90%),
+    radial-gradient(110% 70% at 50% 30%, rgba(60,130,230,.28) 0%, rgba(60,130,230,.14) 35%, rgba(60,130,230,.04) 60%, rgba(60,130,230,0) 75%),
+    linear-gradient(in oklab 180deg, #050b1f 0%, #0c2452 50%, #02060f 100%) !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: 100vw 100vh !important;
+  color: #fff !important;
+  margin: 0 !important;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+body, body * { text-shadow: 0 1px 2px rgba(0,0,0,.55); }
+body input, body textarea, body select, body code, body pre, body .mono { text-shadow: none !important; }
+</style>
 
-<div class="cb-header-bar" id="cb-header">
-  <a href="https://api.contentbug.io/home" class="cb-logo">
-    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
-  </a>
-  <nav class="cb-header" id="cbNav">
-    <a href="https://api.contentbug.io/home" class="cb-nav-link active">Home</a>
-    <a href="https://api.contentbug.io/pricing" class="cb-nav-link">Pricing</a>
-    <a href="https://api.contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
-    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
-    <a href="https://api.contentbug.io/free-trial" class="cb-nav-cta">Start Free Trial</a>
-  </nav>
-</div>
-<script>
-document.body.classList.add('ws-page');
-(function(){
-  var nav=document.querySelector('.cb-header-bar .cb-header');
-  if(!nav)return;
-  var bar=nav.closest('.cb-header-bar');
-  if(!bar)return;
-  var sentinel=document.createElement('div');
-  sentinel.style.cssText='height:0;width:0;visibility:hidden';
-  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting){nav.classList.add('nav-fixed');}
-      else{nav.classList.remove('nav-fixed');}
-    });
-  },{threshold:0});
-  io.observe(bar);
-})();
-</script>
-<main id="cb-pricing">
 
-<!-- ═══ PRICING HERO ═══ -->
-<section class="section" style="padding-bottom:0"><div class="section-card">
-<div class="container">
 
-<div class="section-header">
-  <div style="display:flex;justify-content:center;margin-top:-20px;margin-bottom:-200px;position:relative;pointer-events:none;z-index:1">
-    <div style="position:relative;display:inline-flex;align-items:center;justify-content:center">
-      <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(26,100,255,.04) 0%,rgba(26,100,255,.01) 35%,transparent 60%);pointer-events:none"></div>
-      <div style="position:relative;width:400px;height:400px;-webkit-mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%);mask-image:radial-gradient(ellipse 55% 55% at 50% 45%,black 0%,rgba(0,0,0,.5) 40%,rgba(0,0,0,.15) 65%,transparent 80%)">
-        <img loading="lazy" decoding="async" src="https://api.contentbug.io/portal/assets/logo-bug-white.svg" alt="Content Bug" style="width:400px;height:400px;opacity:.06;display:block;object-fit:contain">
+<div class="cb-page">
+
+<header class="cb-nav">
+  <div class="cb-nav__inner">
+    <a class="cb-nav__brand" href="{{custom_values.home}}" aria-label="Content Bug — Home">
+      <span class="cb-nav__bug"><img src="https://api.contentbug.io/website/shared/assets/bug-white.png" alt="" width="18" height="18" decoding="async"></span>
+      <span class="cb-nav__name">Content Bug</span>
+    </a>
+    <nav class="cb-nav__links">
+      <a class="cb-nav__link" href="{{custom_values.home}}">Home</a>
+      <a class="cb-nav__link is-active" href="{{custom_values.pricing}}">Pricing</a>
+      <a class="cb-nav__link" href="{{custom_values.portfolio}}">Portfolio</a>
+      <a class="cb-nav__link" href="{{custom_values.content_portal_login}}">Login</a>
+      <a class="cb-btn cb-btn--blue cb-btn--md cb-nav__cta" href="{{custom_values.free_trial}}">Start Free Trial</a>
+    </nav>
+  </div>
+</header>
+
+<section class="cb-section cb-bug-watermark cb-bug-watermark--center cb-bug-watermark--xxl cb-bug-watermark--ghost" style="--bug-pos:50% 30%">
+  <div class="cb-container">
+    <div class="cb-page-hero">
+      <span class="eyebrow">PRICING</span>
+      <h1 class="cb-h1">One Flat Monthly Rate.<br><em style="font-style:normal;background:linear-gradient(180deg,#5ac8ff,#1a9eff);-webkit-background-clip:text;background-clip:text;color:transparent">Unlimited Editing.</em></h1>
+      <p class="cb-lede">Premium edits, fast delivery, unlimited revisions, and a team you never manage.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cb-section" style="padding-top:24px">
+  <div class="cb-container">
+    <div class="pr-plans" id="prPlans">
+
+      <article class="cb-card pr-plan" data-plan="basic">
+        <span class="cb-pill cb-pill--blue pr-plan__tier"><span class="cb-pill__dot"></span>BASIC</span>
+        <h3 class="cb-h3 pr-plan__name">Basic</h3>
+        <div class="pr-plan__price">$750<small>/mo</small></div>
+        <p class="pr-plan__annual">or $625/mo billed annually · save $1,500</p>
+        <ul class="pr-plan__feat">
+          <li>Unlimited short-form edits</li>
+          <li><strong>5 long-form edits/month</strong></li>
+          <li>Unlimited revisions</li>
+          <li>Dedicated editors</li>
+          <li>Project Manager</li>
+          <li>Creative Director</li>
+          <li>Personal cloud storage</li>
+          <li>FrameLab Review</li>
+        </ul>
+        <button type="button" class="cb-btn cb-btn--primary cb-btn--lg pr-plan__cta" data-plan="basic">Choose Basic</button>
+      </article>
+
+      <article class="cb-card pr-plan pr-plan--featured" data-plan="silver">
+        <span class="pr-plan__tag pr-plan__tag--blue">Most Popular</span>
+        <span class="cb-pill cb-pill--purple pr-plan__tier"><span class="cb-pill__dot"></span>SILVER</span>
+        <h3 class="cb-h3 pr-plan__name">Silver</h3>
+        <div class="pr-plan__price">$1,300<small>/mo</small></div>
+        <p class="pr-plan__annual">or $1,083/mo billed annually · save $2,604</p>
+        <ul class="pr-plan__feat">
+          <li>Unlimited short-form edits</li>
+          <li><strong>10 long-form edits/month</strong></li>
+          <li>Unlimited revisions</li>
+          <li>Dedicated editors</li>
+          <li>Project Manager</li>
+          <li>Creative Director</li>
+          <li>Personal cloud storage</li>
+          <li>FrameLab Review</li>
+        </ul>
+        <button type="button" class="cb-btn cb-btn--blue cb-btn--lg pr-plan__cta" data-plan="silver">Choose Silver</button>
+      </article>
+
+      <article class="cb-card pr-plan pr-plan--gold" data-plan="gold">
+        <span class="pr-plan__tag pr-plan__tag--gold">Best Value</span>
+        <span class="cb-pill cb-pill--gold pr-plan__tier"><span class="cb-pill__dot"></span>GOLD</span>
+        <h3 class="cb-h3 pr-plan__name">Gold Unlimited</h3>
+        <div class="pr-plan__price">$1,950<small>/mo</small></div>
+        <p class="pr-plan__annual">or $1,625/mo billed annually · save $3,900</p>
+        <ul class="pr-plan__feat">
+          <li>Unlimited short-form edits</li>
+          <li><strong>15 long-form edits/month</strong></li>
+          <li>Unlimited revisions</li>
+          <li>Dedicated editors</li>
+          <li>Project Manager</li>
+          <li>Creative Director</li>
+          <li>Personal cloud storage</li>
+          <li>FrameLab Review</li>
+          <li><strong>Priority Turnarounds</strong></li>
+          <li><strong>High CTR Thumbnails</strong></li>
+          <li><strong>Creative strategy sessions</strong></li>
+          <li><strong>Virtual Film Studio</strong></li>
+        </ul>
+        <button type="button" class="cb-btn cb-btn--primary cb-btn--lg pr-plan__cta" data-plan="gold">Choose Gold</button>
+      </article>
+
+    </div>
+
+    <div class="pr-trust">
+      <span><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Encrypted</span>
+      <span><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Stripe Protected</span>
+      <span><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Satisfaction Guaranteed</span>
+    </div>
+  </div>
+</section>
+
+<section class="cb-section">
+  <div class="cb-container">
+    <div class="cb-page-hero" style="padding-bottom:0">
+      <span class="eyebrow">Why Content Bug</span>
+      <h2 class="cb-h2">Why Content Bug Is the Smarter Way to Scale</h2>
+    </div>
+
+    <div class="pr-values">
+      <article class="cb-card pr-value">
+        <span class="pr-value__icon" aria-hidden="true">💰</span>
+        <h3 class="cb-h4 pr-value__title"><em>$300–$1K+</em> Per Video</h3>
+        <p class="pr-value__body">High-quality video editing costs hundreds per video with freelancers or agencies. That's <strong>before rush fees</strong>, before revisions, before delays.</p>
+        <p class="pr-value__src">Source: Fiverr, FreelanceMix</p>
+      </article>
+
+      <article class="cb-card pr-value">
+        <span class="pr-value__icon" aria-hidden="true">🔄</span>
+        <h3 class="cb-h4 pr-value__title">Unlimited Revisions — <em>Included</em></h3>
+        <p class="pr-value__body">Most editors and agencies charge extra for revisions or scope changes. <strong>We don't.</strong> Scaling content shouldn't mean negotiating every tweak.</p>
+        <p class="pr-value__src">Source: EditingBox Pricing</p>
+      </article>
+
+      <article class="cb-card pr-value">
+        <span class="pr-value__icon" aria-hidden="true">📈</span>
+        <h3 class="cb-h4 pr-value__title"><em>3.3×</em> More Content Published</h3>
+        <p class="pr-value__body">Creators working with Content Bug increase output by <strong>3.3×</strong> after removing editing bottlenecks. More output = more data. More data = faster growth.</p>
+        <p class="pr-value__src">Source: Internal Content Bug client data</p>
+      </article>
+
+      <article class="cb-card pr-value">
+        <span class="pr-value__icon" aria-hidden="true">⚡</span>
+        <h3 class="cb-h4 pr-value__title">Faster Turnaround, <em>Built In</em></h3>
+        <p class="pr-value__body">Traditional editors charge rush fees. With Content Bug, <strong>fast delivery is standard</strong> — not an upsell.</p>
+        <p class="pr-value__src">Source: EditingBox</p>
+      </article>
+
+      <article class="cb-card pr-value">
+        <span class="pr-value__icon" aria-hidden="true">🛠️</span>
+        <h3 class="cb-h4 pr-value__title"><em>$350+/mo</em> in Software — Included</h3>
+        <p class="pr-value__body">Adobe Premiere, After Effects, plugins, storage, collaboration tools. Most creators spend <strong>$350–$400+/mo</strong> just to operate. With us, it's all included.</p>
+        <p class="pr-value__src">Source: Adobe Creative Cloud</p>
+      </article>
+
+      <article class="cb-card pr-value">
+        <span class="pr-value__icon" aria-hidden="true">💸</span>
+        <h3 class="cb-h4 pr-value__title">Lower Cost Than <em>DIY or Freelancers</em></h3>
+        <p class="pr-value__body">Freelancers come with hidden costs: software, follow-ups, missed deadlines, scope creep. <strong>DIY costs time. Time costs growth.</strong> Content Bug replaces all of it.</p>
+        <p class="pr-value__src">Source: Fiverr, OffshoreLapping</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cb-section cb-section--lg">
+  <div class="cb-container">
+    <div class="cb-card cb-card--lg pr-cta">
+      <h2 class="cb-h2">The Real Question Isn't "Can You Afford It?"</h2>
+      <p class="cb-lede">It's: How much growth are you losing by not scaling content faster?</p>
+      <a class="cb-btn cb-btn--blue cb-btn--xl" href="{{custom_values.free_trial}}">
+        Start Free Trial
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="cb-footer">
+  <div class="cb-container">
+    <div class="cb-footer__grid">
+      <div class="cb-footer__col">
+        <a class="cb-nav__brand" href="{{custom_values.home}}" style="margin-bottom:14px">
+          <span class="cb-nav__bug"><img src="https://api.contentbug.io/website/shared/assets/bug-white.png" alt="" width="18" height="18"></span>
+          <span class="cb-nav__name">Content Bug</span>
+        </a>
+        <p class="cb-meta" style="max-width:280px;line-height:1.55">Helping you edit less, create more, and scale faster.</p>
+        <div style="display:flex;gap:10px;margin-top:14px">
+          <a href="https://x.com/contentbug" aria-label="X" class="cb-soc"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://instagram.com/contentbug" aria-label="Instagram" class="cb-soc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="https://youtube.com/@contentbug" aria-label="YouTube" class="cb-soc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"/></svg></a>
+          <a href="https://tiktok.com/@contentbug" aria-label="TikTok" class="cb-soc"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
+          <a href="https://facebook.com/contentbug" aria-label="Facebook" class="cb-soc"><svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        </div>
       </div>
+      <div class="cb-footer__col"><h4>Explore</h4><ul><li><a href="{{custom_values.home}}">Home</a></li><li><a href="{{custom_values.pricing}}">Pricing</a></li><li><a href="{{custom_values.portfolio}}">Portfolio</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Company</h4><ul><li><a href="{{custom_values.faq}}">FAQ</a></li><li><a href="mailto:{{custom_values.business_email}}?subject=Careers%20Inquiry">Careers</a></li><li><a href="{{custom_values.free_trial}}">Start Free Trial</a></li><li><a href="{{custom_values.content_portal_login}}">Studio Login</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Contact</h4><ul><li><a href="mailto:{{custom_values.business_email}}">contentbug@contentbug.io</a></li><li><a href="tel:{{custom_values.business_phone}}">+1 (385) 200-7582</a></li><li style="color:var(--txt4);font-size:13px;line-height:1.5"><strong style="color:var(--txt3);font-weight:500">Hours:</strong><br>Mon–Fri 9am–6pm MST</li></ul></div>
+    </div>
+    <div class="cb-footer__bottom">
+      <span>© 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
+      <span style="display:inline-flex;gap:14px;align-items:center"><a href="{{custom_values.privacy_policy}}">Privacy Policy</a><span style="color:var(--txt4)">·</span><a href="{{custom_values.terms_of_service}}">Terms of Service</a></span>
     </div>
   </div>
-  <p class="section-label" style="position:relative;z-index:2;text-align:center">PRICING</p>
-  <h1 class="hero-title" style="position:relative;z-index:2;text-align:center">
-    <em>One Flat Monthly Rate.</em> Unlimited Editing.
-  </h1>
-  <p class="section-sub">Premium edits, fast delivery, unlimited revisions, and a team you never manage.</p>
-</div>
-</div>
-</div></section>
-
-<!-- SECTION 1 — PLANS -->
-<section class="section" style="padding-top:0;border-top:none"><div class="section-card">
-<div class="container">
-
-<div class="section-header">
-  
-  
-  
-</div>
-
-<!-- ═══ PRICING CARDS — 3 tiers, modal-driven checkout ═══ -->
-<div class="cb-plans" id="cbPlans">
-  <div class="cb-plan" data-plan="basic">
-    <div class="cb-plan-tier cb-plan-tier--basic">Basic</div>
-    <div class="cb-plan-name">Basic</div>
-    <div class="cb-plan-price">$750<small>/mo</small></div>
-    <div class="cb-plan-annual">or $625/mo billed annually</div>
-    <div class="cb-plan-line"></div>
-    <ul class="cb-plan-feat">
-      <li>Unlimited short-form edits</li>
-      <li><strong>5 long-form edits/month</strong></li>
-      <li>Unlimited revisions</li>
-      <li>Dedicated editors</li>
-      <li>Project Manager</li>
-      <li>Creative Director</li>
-      <li>Personal cloud storage</li>
-      <li>FrameLab Review</li>
-    </ul>
-    <button type="button" class="cb-plan-cta cb-plan-cta--basic" data-plan="basic">Choose Basic</button>
-  </div>
-
-  <div class="cb-plan cb-plan--featured" data-plan="silver">
-    <div class="cb-plan-tag">Most Popular</div>
-    <div class="cb-plan-tier cb-plan-tier--silver">Silver</div>
-    <div class="cb-plan-name">Silver</div>
-    <div class="cb-plan-price">$1,300<small>/mo</small></div>
-    <div class="cb-plan-annual">or $1,083/mo billed annually</div>
-    <div class="cb-plan-line"></div>
-    <ul class="cb-plan-feat">
-      <li>Unlimited short-form edits</li>
-      <li><strong>10 long-form edits/month</strong></li>
-      <li>Unlimited revisions</li>
-      <li>Dedicated editors</li>
-      <li>Project Manager</li>
-      <li>Creative Director</li>
-      <li>Personal cloud storage</li>
-      <li>FrameLab Review</li>
-    </ul>
-    <button type="button" class="cb-plan-cta cb-plan-cta--silver" data-plan="silver">Choose Silver</button>
-  </div>
-
-  <div class="cb-plan" data-plan="gold">
-    <div class="cb-plan-tag">Best Value</div>
-    <div class="cb-plan-tier cb-plan-tier--gold">Gold</div>
-    <div class="cb-plan-name">Gold Unlimited</div>
-    <div class="cb-plan-price">$1,950<small>/mo</small></div>
-    <div class="cb-plan-annual">or $1,625/mo billed annually</div>
-    <div class="cb-plan-line"></div>
-    <ul class="cb-plan-feat">
-      <li>Unlimited short-form edits</li>
-      <li><strong>15 long-form edits/month</strong></li>
-      <li>Unlimited revisions</li>
-      <li>Dedicated editors</li>
-      <li>Project Manager</li>
-      <li>Creative Director</li>
-      <li>Personal cloud storage</li>
-      <li>FrameLab Review</li>
-      <li><strong>Priority Turnarounds</strong></li>
-      <li><strong>High CTR Thumbnails</strong></li>
-      <li><strong>Creative strategy sessions</strong></li>
-      <li><strong>Virtual Film Studio</strong></li>
-    </ul>
-    <button type="button" class="cb-plan-cta cb-plan-cta--gold" data-plan="gold">Choose Gold</button>
-  </div>
-</div>
-<div class="trust">
-<div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Encrypted</div>
-<div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Stripe Protected</div>
-<div class="trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Satisfaction Guaranteed</div>
-</div>
+</footer>
 
 </div>
-</div></section>
 
-<!-- SECTION 2 — VALUE -->
-<section class="section"><div class="section-card">
-<div class="container">
-<div class="section-header">
-  <span class="section-label">Why Content Bug</span>
-  <h2 class="section-title">Why Content Bug Is the Smarter Way to Scale</h2>
-  
-</div>
+<style>.cb-soc{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;border:1px solid var(--bord-2);background:var(--surf-2);color:var(--txt3);transition:background var(--dur) var(--ease),color var(--dur) var(--ease)}.cb-soc:hover{background:var(--surf-4);color:var(--txt)}</style>
 
-<div class="value-grid">
-<div class="vcard"><div class="vcard-icon">&#128176;</div><h3><span class="accent">$300&ndash;$1K+</span> Per Video</h3><div class="vcard-peek">Hover to see more &rarr;</div><div class="vcard-full"><p>High-quality video editing costs hundreds per video with freelancers or agencies. That&rsquo;s <strong>before rush fees</strong>, before revisions, before delays.</p><div class="src">Source: Fiverr, FreelanceMix</div></div></div>
-<div class="vcard"><div class="vcard-icon">&#128260;</div><h3>Unlimited Revisions &mdash; <span class="accent">Included</span></h3><div class="vcard-peek">Hover to see more &rarr;</div><div class="vcard-full"><p>Most editors and agencies charge extra for revisions or scope changes. <strong>We don&rsquo;t.</strong> Scaling content shouldn&rsquo;t mean negotiating every tweak.</p><div class="src">Source: EditingBox Pricing</div></div></div>
-<div class="vcard"><div class="vcard-icon">&#128200;</div><h3><span class="accent">3.3&times;</span> More Content Published</h3><div class="vcard-peek">Hover to see more &rarr;</div><div class="vcard-full"><p>Creators working with Content Bug increase output by <strong>3.3&times;</strong> after removing editing bottlenecks. More output = more data. More data = faster growth.</p><div class="src">Source: Internal Content Bug client data</div></div></div>
-<div class="vcard"><div class="vcard-icon">&#9889;</div><h3>Faster Turnaround, <span class="accent">Built In</span></h3><div class="vcard-peek">Hover to see more &rarr;</div><div class="vcard-full"><p>Traditional editors charge rush fees. With Content Bug, <strong>fast delivery is standard</strong> &mdash; not an upsell.</p><div class="src">Source: EditingBox</div></div></div>
-<div class="vcard"><div class="vcard-icon">&#128736;</div><h3><span class="accent">$350+/mo</span> in Software &mdash; Included</h3><div class="vcard-peek">Hover to see more &rarr;</div><div class="vcard-full"><p>Adobe Premiere, After Effects, plugins, storage, collaboration tools. Most creators spend <strong>$350&ndash;$400+/mo</strong> just to operate. With us, it&rsquo;s all included.</p><div class="src">Source: Adobe Creative Cloud</div></div></div>
-<div class="vcard"><div class="vcard-icon">&#128184;</div><h3>Lower Cost Than <span class="accent">DIY or Freelancers</span></h3><div class="vcard-peek">Hover to see more &rarr;</div><div class="vcard-full"><p>Freelancers come with hidden costs: software, follow-ups, missed deadlines, scope creep. <strong>DIY costs time. Time costs growth.</strong> Content Bug replaces all of it.</p><div class="src">Source: Fiverr, OffshoreLapping</div></div></div>
-</div>
-
-<div class="cta-block">
-  <h3>The Real Question Isn&rsquo;t &ldquo;Can You Afford It?&rdquo;</h3>
-  <p>It&rsquo;s: How much growth are you losing by not scaling content faster?</p>
-  <a href="https://api.contentbug.io/free-trial" class="cta-pill">Start Free Trial <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-</div>
-
-</div>
-</div></section>
-
-</main>
-
-<!-- ═══ 2-STEP CHECKOUT MODAL ═══ -->
-<div class="cb-modal-overlay" id="cbModalOverlay" role="dialog" aria-modal="true" aria-labelledby="cbModalTitle" hidden>
-  <div class="cb-modal" role="document">
-    <button type="button" class="cb-modal-close" id="cbModalClose" aria-label="Close">&times;</button>
-
-    <div class="cb-modal-progress" id="cbModalProgress">
-      <div class="cb-modal-dot on" data-step="1"><span>1</span></div>
-      <div class="cb-modal-bar"></div>
-      <div class="cb-modal-dot" data-step="2"><span>2</span></div>
+<div class="pr-modal-overlay" id="prModalOverlay" role="dialog" aria-modal="true" aria-labelledby="prModalTitle">
+  <div class="pr-modal" role="document">
+    <button type="button" class="pr-modal__close" id="prModalClose" aria-label="Close">×</button>
+    <div class="pr-modal__progress">
+      <div class="pr-modal__dot on" data-step="1"><span>1</span></div>
+      <div class="pr-modal__bar"></div>
+      <div class="pr-modal__dot" data-step="2"><span>2</span></div>
     </div>
 
-    <!-- STEP 1: contact details -->
-    <div class="cb-modal-step active" data-step="1">
-      <h2 class="cb-modal-title" id="cbModalTitle">Your Details</h2>
-      <p class="cb-modal-sub">Tell us who you are so we can set up your account.</p>
-      <form class="cb-modal-form" id="cbModalForm" novalidate>
-        <div class="cb-modal-row">
-          <div class="cb-modal-field">
-            <label class="cb-modal-label" for="cbFirst">First Name</label>
-            <input class="cb-modal-input" id="cbFirst" name="first" type="text" autocomplete="given-name" required>
-          </div>
-          <div class="cb-modal-field">
-            <label class="cb-modal-label" for="cbLast">Last Name</label>
-            <input class="cb-modal-input" id="cbLast" name="last" type="text" autocomplete="family-name" required>
-          </div>
+    <div class="pr-modal__step active" data-step="1">
+      <h2 class="cb-h3 pr-modal__title" id="prModalTitle">Your Details</h2>
+      <p class="cb-body pr-modal__sub">Tell us who you are so we can set up your account.</p>
+      <form class="pr-modal__form" id="prModalForm" novalidate>
+        <div class="pr-modal__row">
+          <div class="cb-field"><label class="cb-label" for="prFirst">First Name</label><input class="cb-input" id="prFirst" name="first" type="text" autocomplete="given-name" required></div>
+          <div class="cb-field"><label class="cb-label" for="prLast">Last Name</label><input class="cb-input" id="prLast" name="last" type="text" autocomplete="family-name" required></div>
         </div>
-        <div class="cb-modal-field">
-          <label class="cb-modal-label" for="cbEmail">Email</label>
-          <input class="cb-modal-input" id="cbEmail" name="email" type="email" autocomplete="email" required>
-        </div>
-        <div class="cb-modal-field">
-          <label class="cb-modal-label" for="cbPhone">Phone</label>
-          <input class="cb-modal-input" id="cbPhone" name="phone" type="tel" autocomplete="tel">
-        </div>
-        <div class="cb-modal-btns">
-          <button type="button" class="cb-modal-btn cb-modal-btn--primary" id="cbToStep2">Continue</button>
-        </div>
+        <div class="cb-field pr-modal__field"><label class="cb-label" for="prEmail">Email</label><input class="cb-input" id="prEmail" name="email" type="email" autocomplete="email" required></div>
+        <div class="cb-field pr-modal__field"><label class="cb-label" for="prPhone">Phone <span style="text-transform:none;color:var(--txt4);font-weight:400">(optional)</span></label><input class="cb-input" id="prPhone" name="phone" type="tel" autocomplete="tel"></div>
+        <div class="pr-modal__btns" style="margin-top:18px"><button type="button" class="cb-btn cb-btn--blue cb-btn--lg" id="prToStep2">Continue</button></div>
       </form>
     </div>
 
-    <!-- STEP 2: plan & pricing -->
-    <div class="cb-modal-step" data-step="2">
-      <h2 class="cb-modal-title">Plan &amp; Pricing</h2>
-      <p class="cb-modal-sub">Confirm your plan and choose billing.</p>
-
-      <div class="cb-modal-plan-summary" id="cbModalPlanSummary">
-        <div class="cb-modal-plan-summary-name">—</div>
-        <div class="cb-modal-plan-summary-sub">—</div>
+    <div class="pr-modal__step" data-step="2">
+      <h2 class="cb-h3 pr-modal__title">Plan &amp; Pricing</h2>
+      <p class="cb-body pr-modal__sub">Confirm your plan and choose billing.</p>
+      <div class="pr-modal__plan-summary" id="prModalPlanSummary"><div class="pr-modal__plan-summary-name">—</div><div class="pr-modal__plan-summary-sub">—</div></div>
+      <div class="pr-modal__billing">
+        <button type="button" class="pr-modal__opt sel" data-billing="annual"><span class="pr-modal__radio"></span><span class="pr-modal__opt-body"><span class="pr-modal__opt-title">Annual — Save 17%</span><span class="pr-modal__opt-sub">Billed yearly at once</span></span><span class="pr-modal__badge" id="prAnnualSaving">Save</span></button>
+        <button type="button" class="pr-modal__opt" data-billing="monthly"><span class="pr-modal__radio"></span><span class="pr-modal__opt-body"><span class="pr-modal__opt-title">Monthly</span><span class="pr-modal__opt-sub">Billed every month</span></span></button>
       </div>
-
-      <div class="cb-modal-billing">
-        <div class="cb-modal-opt sel" data-billing="annual">
-          <div class="cb-modal-radio"></div>
-          <div class="cb-modal-opt-body">
-            <div class="cb-modal-opt-title">Annual &mdash; Save 17%</div>
-            <div class="cb-modal-opt-sub">Billed yearly at once</div>
-          </div>
-          <div class="cb-modal-badge" id="cbAnnualSaving">Save</div>
-        </div>
-        <div class="cb-modal-opt" data-billing="monthly">
-          <div class="cb-modal-radio"></div>
-          <div class="cb-modal-opt-body">
-            <div class="cb-modal-opt-title">Monthly</div>
-            <div class="cb-modal-opt-sub">Billed every month</div>
-          </div>
-        </div>
+      <div class="pr-modal__sum">
+        <div class="pr-modal__sum-row"><span>Plan</span><span id="prSumPlan">—</span></div>
+        <div class="pr-modal__sum-row"><span>Billing</span><span id="prSumBilling">Annual</span></div>
+        <div class="pr-modal__sum-row pr-modal__sum-row--total"><span>Due today</span><span id="prSumTotal">$0</span></div>
       </div>
-
-      <div class="cb-modal-sum">
-        <div class="cb-modal-sum-row"><span>Plan</span><span id="cbSumPlan">&mdash;</span></div>
-        <div class="cb-modal-sum-row"><span>Billing</span><span id="cbSumBilling">Annual</span></div>
-        <div class="cb-modal-sum-row cb-modal-sum-row--total"><span>Due today</span><span id="cbSumTotal">$0</span></div>
-      </div>
-
-      <div class="cb-modal-btns">
-        <button type="button" class="cb-modal-btn cb-modal-btn--ghost" id="cbToStep1">Back</button>
-        <button type="button" class="cb-modal-btn cb-modal-btn--primary" id="cbCheckout">Continue to Payment</button>
+      <div class="pr-modal__btns">
+        <button type="button" class="cb-btn cb-btn--ghost cb-btn--lg" id="prToStep1">Back</button>
+        <button type="button" class="cb-btn cb-btn--blue cb-btn--lg" id="prCheckout">Continue to Payment</button>
       </div>
     </div>
   </div>
 </div>
 
+<script src="https://api.contentbug.io/website/shared/site.js" defer></script>
 <script>
-/* ── Pricing cards → 2-step modal wire-up ── */
 (function(){
-  var PLANS = {
-    basic:  { name:'Basic',          monthly:750,  annual:625,  annualTotal:7500  },
-    silver: { name:'Silver',         monthly:1300, annual:1083, annualTotal:13000 },
-    gold:   { name:'Gold Unlimited', monthly:1950, annual:1625, annualTotal:19500 }
-  };
-  var CK = { step:1, plan:null, billing:'annual' };
-  var overlay = document.getElementById('cbModalOverlay');
-  if (!overlay) return;
-
-  function fmt(n){ return '$' + n.toLocaleString(); }
-
-  function open(plan){
-    CK.step = 1; CK.plan = plan; CK.billing = 'annual';
-    overlay.removeAttribute('hidden');
-    document.body.classList.add('cb-modal-open');
-    render();
-    setTimeout(function(){
-      var first = document.getElementById('cbFirst');
-      if (first) first.focus();
-    }, 60);
-  }
-  function close(){
-    overlay.setAttribute('hidden', '');
-    document.body.classList.remove('cb-modal-open');
-  }
-  function goto(n){ CK.step = n; render(); if(n===2){ var back=document.getElementById('cbToStep1'); if(back) back.focus(); } }
-
+  var PLANS={basic:{name:'Basic',monthly:750,annual:625,annualTotal:7500},silver:{name:'Silver',monthly:1300,annual:1083,annualTotal:13000},gold:{name:'Gold Unlimited',monthly:1950,annual:1625,annualTotal:19500}};
+  var CK={step:1,plan:null,billing:'annual'};
+  var overlay=document.getElementById('prModalOverlay');if(!overlay)return;
+  function fmt(n){return '$'+n.toLocaleString();}
+  function open(plan){CK.step=1;CK.plan=plan;CK.billing='annual';overlay.classList.add('is-open');document.body.classList.add('pr-modal-open');render();setTimeout(function(){var f=document.getElementById('prFirst');if(f)f.focus();},60);}
+  function close(){overlay.classList.remove('is-open');document.body.classList.remove('pr-modal-open');}
+  function go(n){CK.step=n;render();if(n===2){var b=document.getElementById('prToStep1');if(b)b.focus();}}
   function render(){
-    overlay.querySelectorAll('.cb-modal-dot').forEach(function(d){
-      var s = +d.dataset.step;
-      d.classList.toggle('on', s === CK.step);
-      d.classList.toggle('ok', s < CK.step);
-    });
-    var bar = overlay.querySelector('.cb-modal-bar');
-    if (bar) bar.classList.toggle('ok', CK.step > 1);
-
-    overlay.querySelectorAll('.cb-modal-step').forEach(function(s){
-      s.classList.toggle('active', +s.dataset.step === CK.step);
-    });
-
-    if (CK.step === 2 && CK.plan) {
-      var p = PLANS[CK.plan];
-      var summary = document.getElementById('cbModalPlanSummary');
-      if (summary) {
-        var priceLine = CK.billing === 'annual'
-          ? fmt(p.annual) + '/mo billed annually'
-          : fmt(p.monthly) + '/mo';
-        summary.innerHTML =
-          '<div class="cb-modal-plan-summary-name">' + p.name + '</div>' +
-          '<div class="cb-modal-plan-summary-sub">' + priceLine + '</div>';
-      }
-      var savings = (p.monthly - p.annual) * 12;
-      var badge = document.getElementById('cbAnnualSaving');
-      if (badge) badge.textContent = 'Save ' + fmt(savings);
-
-      document.getElementById('cbSumPlan').textContent = p.name;
-      document.getElementById('cbSumBilling').textContent = CK.billing === 'annual' ? 'Annual' : 'Monthly';
-      document.getElementById('cbSumTotal').textContent = CK.billing === 'annual'
-        ? fmt(p.annualTotal)
-        : fmt(p.monthly);
-
-      overlay.querySelectorAll('.cb-modal-opt').forEach(function(o){
-        o.classList.toggle('sel', o.dataset.billing === CK.billing);
-      });
+    overlay.querySelectorAll('.pr-modal__dot').forEach(function(d){var s=+d.dataset.step;d.classList.toggle('on',s===CK.step);d.classList.toggle('ok',s<CK.step);});
+    var bar=overlay.querySelector('.pr-modal__bar');if(bar)bar.classList.toggle('ok',CK.step>1);
+    overlay.querySelectorAll('.pr-modal__step').forEach(function(s){s.classList.toggle('active',+s.dataset.step===CK.step);});
+    if(CK.step===2&&CK.plan){
+      var p=PLANS[CK.plan];
+      var summary=document.getElementById('prModalPlanSummary');
+      var priceLine=CK.billing==='annual'?fmt(p.annual)+'/mo billed annually':fmt(p.monthly)+'/mo';
+      summary.innerHTML='<div class="pr-modal__plan-summary-name">'+p.name+'</div><div class="pr-modal__plan-summary-sub">'+priceLine+'</div>';
+      var savings=(p.monthly-p.annual)*12;
+      var badge=document.getElementById('prAnnualSaving');if(badge)badge.textContent='Save '+fmt(savings);
+      document.getElementById('prSumPlan').textContent=p.name;
+      document.getElementById('prSumBilling').textContent=CK.billing==='annual'?'Annual':'Monthly';
+      document.getElementById('prSumTotal').textContent=CK.billing==='annual'?fmt(p.annualTotal):fmt(p.monthly);
+      overlay.querySelectorAll('.pr-modal__opt').forEach(function(o){o.classList.toggle('sel',o.dataset.billing===CK.billing);});
     }
   }
-
-  document.querySelectorAll('.cb-plan-cta[data-plan]').forEach(function(b){
-    b.addEventListener('click', function(){ open(b.dataset.plan); });
-  });
-
-  var closeBtn = document.getElementById('cbModalClose');
-  if (closeBtn) closeBtn.addEventListener('click', close);
-  overlay.addEventListener('click', function(e){ if (e.target === overlay) close(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !overlay.hasAttribute('hidden')) close(); });
-
-  var toStep2 = document.getElementById('cbToStep2');
-  if (toStep2) toStep2.addEventListener('click', function(){
-    var form = document.getElementById('cbModalForm');
-    if (form && form.reportValidity()) goto(2);
-  });
-
-  var toStep1 = document.getElementById('cbToStep1');
-  if (toStep1) toStep1.addEventListener('click', function(){ goto(1); });
-
-  overlay.querySelectorAll('.cb-modal-opt').forEach(function(o){
-    o.addEventListener('click', function(){
-      CK.billing = o.dataset.billing;
-      render();
-    });
-  });
-
-  var checkout = document.getElementById('cbCheckout');
-  if (checkout) checkout.addEventListener('click', function(){
-    var form = document.getElementById('cbModalForm');
-    if (!form) return;
-    var data = new FormData(form);
-    var params = new URLSearchParams();
-    params.set('plan', CK.plan || '');
-    params.set('billing', CK.billing);
-    params.set('first', data.get('first') || '');
-    params.set('last', data.get('last') || '');
-    params.set('email', data.get('email') || '');
-    params.set('phone', data.get('phone') || '');
-    window.location.href = '/checkout?' + params.toString();
+  document.querySelectorAll('.pr-plan__cta[data-plan]').forEach(function(b){b.addEventListener('click',function(){open(b.dataset.plan);});});
+  document.getElementById('prModalClose').addEventListener('click',close);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('is-open'))close();});
+  document.getElementById('prToStep2').addEventListener('click',function(){var form=document.getElementById('prModalForm');if(form&&form.reportValidity())go(2);});
+  document.getElementById('prToStep1').addEventListener('click',function(){go(1);});
+  overlay.querySelectorAll('.pr-modal__opt').forEach(function(o){o.addEventListener('click',function(){CK.billing=o.dataset.billing;render();});});
+  document.getElementById('prCheckout').addEventListener('click',function(){
+    var form=document.getElementById('prModalForm');if(!form)return;
+    var data=new FormData(form);
+    var params=new URLSearchParams();
+    params.set('plan',CK.plan||'');params.set('billing',CK.billing);
+    params.set('first',data.get('first')||'');params.set('last',data.get('last')||'');
+    params.set('email',data.get('email')||'');params.set('phone',data.get('phone')||'');
+    fetch('/api/website/checkout-webhook',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:'step2_continue',first_name:data.get('first'),last_name:data.get('last'),email:data.get('email'),phone:data.get('phone'),plan:CK.plan,billing:CK.billing})}).catch(function(){});
+    window.location.href='/website/checkout.html?'+params.toString();
   });
 })();
 </script>
 
-<script>
-/* ── GHL Nuclear Background Kill (Dark: transparent) ── */
-(function(){
-  var f = document.getElementById('cb-footer');
-  if (!f) return;
-  var p = f.parentElement;
-  while (p && p !== document.documentElement) {
-    if (p !== document.body) {
-      p.style.setProperty('background', 'none', 'important');
-      p.style.setProperty('background-color', 'transparent', 'important');
-      p.style.setProperty('background-image', 'none', 'important');
-      p.style.setProperty('color', '#f5f5f7', 'important');
-      p.style.setProperty('border', 'none', 'important');
-      p.style.setProperty('box-shadow', 'none', 'important');
-      p.style.setProperty('border-radius', '0', 'important');
-    }
-    p = p.parentElement;
-  }
-})();
-</script>
-
-<script>
-(function(){
-  function tryPlay(){document.querySelectorAll('video').forEach(function(v){v.muted=true;v.loop=true;v.playsInline=true;v.play().catch(function(){});})}
-  tryPlay();document.addEventListener('DOMContentLoaded',tryPlay);
-  window.addEventListener('load',tryPlay);
-  setTimeout(tryPlay,500);setTimeout(tryPlay,1500);
-})();
-</script>
-</div>
