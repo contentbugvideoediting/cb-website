@@ -1,627 +1,398 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Content Bug — Terms of Service</title>
 <meta name="description" content="The legally binding agreement governing your access to and use of Content Bug subscription services.">
-
+<link rel="stylesheet" href="shared/colors_and_type.css">
+<link rel="stylesheet" href="shared/site.css">
 <style>
-/* ═══ CONTENT BUG — TERMS. Tokens locked to home.html ═══ */
-
-/* FONTS */
-@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:400;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-display_regular.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:500;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-display_medium.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:600;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-display_semibold.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:700;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-display_bold.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Text";font-style:normal;font-weight:400;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-text_regular.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Text";font-style:normal;font-weight:600;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-text_semibold.woff2") format("woff2")}
-
-:root{
-  --cb-bg:linear-gradient(180deg,#032a4b 0%,#032848 10%,#022240 20%,#021c36 30%,#02172e 40%,#011226 50%,#010d1e 60%,#010916 70%,#00050e 80%,#000308 90%,#000001 100%);
-  --cb-glass-1-bg:linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.045) 22%,rgba(255,255,255,.055) 40%,rgba(255,255,255,.07) 60%,rgba(255,255,255,.09) 75%,rgba(255,255,255,.11) 88%,rgba(255,255,255,.14) 100%);
-  --blue:#1a9eff;--blue-brand:#0071e3;--blue-hover:#0077ed;
-  --txt:#fff;--txt2:#d0d0d5;--txt3:#9a9aa0;--txt4:#6a6a70;
-  --glass-b:1px solid rgba(255,255,255,.08);
-  --glass-bt:rgba(255,255,255,.18);
-  --shadow-card:inset 0 1px 0 rgba(255,255,255,.10),0 2px 12px rgba(0,0,0,.25);
-  --s1:8px;--s2:16px;--s3:24px;--s4:32px;--s6:48px;--s8:64px;
-  --r-sm:6px;--r-md:10px;--r-lg:14px;--r-xl:18px;--r-2xl:24px;
-  --ease:cubic-bezier(.22,1,.36,1);
-  --font-display:'SF Pro Display',-apple-system,BlinkMacSystemFont,system-ui,'Helvetica Neue',Arial,sans-serif;
-  --font:'SF Pro Text',-apple-system,BlinkMacSystemFont,system-ui,'Helvetica Neue',Arial,sans-serif;
-}
-
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-img,video,svg{max-width:100%;display:block}
-button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
-a{color:inherit;text-decoration:none}
-
-html{background:#000001 !important}
-body{
-  margin:0 !important;padding:0 !important;color:#fff !important;min-height:100vh !important;
-  font:400 16px/1.6 var(--font);
-  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.045) 22%,rgba(255,255,255,.055) 40%,rgba(255,255,255,.07) 60%,rgba(255,255,255,.09) 75%,rgba(255,255,255,.11) 88%,rgba(255,255,255,.14) 100%),
-    linear-gradient(180deg,#032a4b 0%,#032848 10%,#022240 20%,#021c36 30%,#02172e 40%,#011226 50%,#010d1e 60%,#010916 70%,#00050e 80%,#000308 90%,#000001 100%) !important;
-  background-attachment:fixed,fixed !important;
-  background-repeat:no-repeat,no-repeat !important;
-  background-size:100% 100vh,100% 100vh !important;
-}
-.ws-page{min-height:100vh;color:#fff}
-
-.cb-header-bar{position:relative;z-index:100;padding:24px 40px;display:flex;align-items:center;justify-content:space-between;max-width:1320px;margin:0 auto}
-.cb-header-bar .cb-logo img{height:32px}
-.cb-header{display:flex;align-items:center;gap:6px;padding:8px;border-radius:100px;background:rgba(255,255,255,.03);border:var(--glass-b);backdrop-filter:none}
-.cb-header.nav-fixed{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:200;background:rgba(10,14,22,.72);box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1)}
-.cb-nav-link{padding:10px 18px;border-radius:100px;font:500 14px/1 var(--font);color:var(--txt2);transition:color .2s,background .2s}
-.cb-nav-link:hover{color:#fff;background:rgba(255,255,255,.06)}
-.cb-nav-link.active{color:#fff;background:rgba(255,255,255,.08)}
-.cb-nav-cta{padding:10px 20px;border-radius:100px;font:600 14px/1 var(--font);color:#fff;background:linear-gradient(180deg,#2997ff 0%,#0071e3 100%);box-shadow:0 1px 2px rgba(0,0,0,.3),0 4px 12px rgba(0,113,227,.35),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .2s,box-shadow .2s}
-.cb-nav-cta:hover{transform:translateY(-1px);box-shadow:0 2px 4px rgba(0,0,0,.35),0 8px 20px rgba(0,113,227,.5),inset 0 1px 0 rgba(255,255,255,.25)}
-
-.section{padding:96px 24px;position:relative}
-.section:first-of-type{padding-top:40px}
-.container{max-width:860px;margin:0 auto;position:relative;z-index:1}
-.section-label{display:inline-block;font:700 11px/1 var(--font);text-transform:uppercase;letter-spacing:2.5px;color:var(--txt3);margin-bottom:16px}
-
-.legal-header{text-align:center;margin-bottom:56px}
-.hero-title{font:600 clamp(36px,5vw,72px)/1.05 var(--font-display);letter-spacing:-.04em;margin-bottom:12px}
-.last-updated{font:500 13px/1 var(--font);color:var(--txt3);letter-spacing:.3px}
-
-.legal-section{padding:28px;border-radius:var(--r-xl);background:var(--cb-glass-1-bg);border:var(--glass-b);box-shadow:var(--shadow-card);margin-bottom:20px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
-.legal-section:hover{transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 24px rgba(0,0,0,.4)}
-.legal-section h2{font:600 22px/1.25 var(--font-display);letter-spacing:-.01em;margin-bottom:16px;color:#fff}
-.legal-section h3{font:600 15px/1.3 var(--font-display);letter-spacing:-.005em;margin:18px 0 8px;color:#fff}
-.legal-section h3:first-of-type{margin-top:8px}
-.legal-section p{font:400 14px/1.65 var(--font);color:var(--txt2);margin-bottom:12px}
-.legal-section p:last-child{margin-bottom:0}
-.legal-section ul{list-style:none;padding:0;margin:0 0 14px}
-.legal-section li{position:relative;padding-left:18px;font:400 14px/1.6 var(--font);color:var(--txt2);margin-bottom:8px}
-.legal-section li:before{content:"";position:absolute;left:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
-.legal-section strong{color:#fff;font-weight:600}
-
-.highlight-box{padding:18px 20px;border-radius:var(--r-lg);background:linear-gradient(180deg,rgba(26,158,255,.08) 0%,rgba(26,158,255,.02) 100%);border:1px solid rgba(26,158,255,.2);margin:14px 0}
-.highlight-box p{font:500 14px/1.55 var(--font);color:var(--txt2);margin:0}
-.highlight-box strong{color:#fff}
-
-.warning-box{padding:18px 20px;border-radius:var(--r-lg);background:linear-gradient(180deg,rgba(245,166,35,.08) 0%,rgba(245,166,35,.02) 100%);border:1px solid rgba(245,166,35,.25);margin:14px 0}
-.warning-box p{font:600 14px/1.55 var(--font);color:#f5c77a;margin:0}
-.warning-box strong{color:#fff}
-
-/* PLAN TABLE */
-.plan-table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0 4px;border-radius:var(--r-lg);overflow:hidden;border:var(--glass-b)}
-.plan-table th,.plan-table td{padding:12px 16px;text-align:left;font:400 13px/1.4 var(--font);color:var(--txt2);border-bottom:1px solid rgba(255,255,255,.06)}
-.plan-table thead th{font:700 11px/1 var(--font);text-transform:uppercase;letter-spacing:1.5px;color:var(--txt4);background:rgba(255,255,255,.04)}
-.plan-table tbody tr:last-child td{border-bottom:0}
-.plan-table tbody tr:hover{background:rgba(255,255,255,.02)}
-.plan-name{color:#fff;font-weight:600}
-
-/* CONTACT */
-.contact-box{padding:36px;border-radius:var(--r-xl);background:var(--cb-glass-1-bg);border:var(--glass-b);box-shadow:var(--shadow-card);text-align:center}
-.contact-box h3{font:600 24px/1.25 var(--font-display);letter-spacing:-.02em;margin-bottom:12px;color:#fff}
-.contact-box p{font:400 15px/1.55 var(--font);color:var(--txt2);margin-bottom:20px}
-.contact-item{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:400 14px/1.4 var(--font);color:var(--txt2);margin:8px 16px;transition:color .15s}
-.contact-item:hover{color:#fff}
-.contact-item svg{width:18px;height:18px;stroke:var(--blue);flex-shrink:0}
-.contact-item a{color:var(--txt2);transition:color .15s}
-.contact-item a:hover{color:var(--blue)}
-
-/* BUTTON ROW */
-.btn-row{display:flex;justify-content:center;gap:12px;margin-top:24px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:6px;padding:12px 22px;border-radius:100px;font:600 14px/1 var(--font);transition:transform .15s,box-shadow .15s,background .15s,color .15s}
-.btn-primary{color:#fff;background:linear-gradient(180deg,#2997ff 0%,#0071e3 100%);box-shadow:0 1px 2px rgba(0,0,0,.3),0 4px 12px rgba(0,113,227,.35),inset 0 1px 0 rgba(255,255,255,.2)}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 2px 4px rgba(0,0,0,.35),0 8px 20px rgba(0,113,227,.5),inset 0 1px 0 rgba(255,255,255,.25)}
-.btn-ghost{color:var(--txt2);background:rgba(255,255,255,.05);border:var(--glass-b)}
-.btn-ghost:hover{color:#fff;background:rgba(255,255,255,.08)}
-
-/* FOOTER */
-.cb-footer{position:relative;padding:72px 40px 40px;margin-top:96px;color:var(--txt);background:transparent}
-.cb-ft-glass{position:relative;max-width:1240px;margin:0 auto;padding:40px 40px 28px;border-radius:var(--r-2xl);background:var(--cb-glass-1-bg);border:var(--glass-b);border-top-color:var(--glass-bt);box-shadow:var(--shadow-card)}
-.cb-ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px 48px}
-.cb-ft-brand .cb-ft-tagline{font:400 14px/1.55 var(--font);color:var(--txt2);margin:14px 0 0;max-width:320px}
-.cb-ft-col-title{font:500 11px/1 var(--font);text-transform:uppercase;letter-spacing:2px;color:var(--txt3);margin-bottom:16px}
-.cb-ft-col a{display:block;font:400 14px/1 var(--font);color:var(--txt2);padding:7px 0;transition:color .15s ease}
-.cb-ft-col a:hover{color:var(--txt)}
-.cb-ft-contact-item{margin-bottom:10px}
-.cb-ft-contact-item a{font:400 14px/1.4 var(--font);color:var(--txt2);transition:color .15s ease}
-.cb-ft-contact-item a:hover{color:var(--txt)}
-.cb-ft-addr{font:400 13px/1.5 var(--font);color:var(--txt3);margin:4px 0 10px;max-width:240px}
-.cb-ft-hours{font:400 13px/1.5 var(--font);color:var(--txt3);margin-top:10px}
-.cb-ft-hours strong{color:var(--txt2);font-weight:500}
-.cb-ft-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08) 20%,rgba(255,255,255,.08) 80%,transparent);margin:32px 0 20px}
-.cb-ft-legal{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font:400 12px/1.5 var(--font);color:var(--txt3)}
-.cb-ft-legal-links{display:flex;align-items:center;gap:10px}
-.cb-ft-legal-links a{color:var(--txt3);transition:color .15s ease}
-.cb-ft-legal-links a:hover{color:var(--txt)}
-.cb-ft-legal-sep{color:var(--txt4)}
-@media (max-width:860px){
-  .cb-footer{padding:48px 20px 32px;margin-top:64px}
-  .cb-ft-glass{padding:32px 24px 24px}
-  .cb-ft-grid{grid-template-columns:1fr 1fr;gap:28px}
-  .cb-ft-brand{grid-column:span 2}
-  .cb-ft-legal{flex-direction:column;align-items:flex-start}
-}
-@media (max-width:520px){
-  .cb-ft-grid{grid-template-columns:1fr}
-  .cb-ft-brand{grid-column:span 1}
-}
-
-@media (max-width:820px){
-  .cb-header-bar{padding:16px 20px;flex-wrap:wrap;gap:12px}
-  .cb-header{order:3;width:100%;overflow-x:auto;scrollbar-width:none;justify-content:flex-start}
-  .cb-header::-webkit-scrollbar{display:none}
-  .section{padding:72px 20px}
-  .container{max-width:100%}
-  .legal-section{padding:22px}
-  .legal-section h2{font-size:20px}
-  .contact-box{padding:28px 22px}
-  .contact-item{display:flex;margin:10px 0}
-  .btn-row{flex-direction:column;align-items:stretch}
-  .btn{justify-content:center}
-  .plan-table th,.plan-table td{padding:10px 12px;font-size:12px}
-}
-@media (max-width:480px){
-  .legal-section{padding:18px}
-  .contact-box{padding:22px 18px}
-  .plan-table{display:block;overflow-x:auto;white-space:nowrap}
-}
-
-.fade-up{will-change:opacity,transform}
+.lg-shell{max-width:880px;margin:0 auto}
+.lg-section{margin-bottom:20px}
+.lg-section h2{margin:0 0 14px}
+.lg-section h3{font-family:'SF Pro Display';font-size:16px;font-weight:600;letter-spacing:-.005em;color:var(--txt);margin:18px 0 8px}
+.lg-section h3:first-of-type{margin-top:6px}
+.lg-section p{font-family:'SF Pro Text';font-size:14.5px;line-height:1.7;color:var(--txt3);margin:0 0 12px}
+.lg-section p:last-child{margin-bottom:0}
+.lg-section ul{list-style:none;padding:0;margin:0 0 14px}
+.lg-section li{position:relative;padding-left:20px;font-family:'SF Pro Text';font-size:14.5px;line-height:1.65;color:var(--txt3);margin-bottom:8px}
+.lg-section li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:var(--brand-blue)}
+.lg-section strong{color:var(--txt);font-weight:600}
+.lg-highlight{padding:16px 20px;border-radius:14px;background:linear-gradient(180deg,rgba(41,151,255,.10),rgba(41,151,255,.03));border:1px solid rgba(41,151,255,.30);margin:14px 0}
+.lg-highlight p{font-weight:500;color:var(--txt);margin:0}
+.lg-warn{padding:16px 20px;border-radius:14px;background:linear-gradient(180deg,rgba(255,149,0,.10),rgba(255,149,0,.03));border:1px solid rgba(255,149,0,.35);margin:14px 0}
+.lg-warn p{font-weight:600;color:#ffc77a;margin:0}
+.lg-warn strong{color:var(--txt)}
+.lg-table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0 4px;border-radius:14px;overflow:hidden;border:1px solid var(--bord-2)}
+.lg-table th,.lg-table td{padding:12px 16px;text-align:left;font-family:'SF Pro Text';font-size:13.5px;line-height:1.4;color:var(--txt3);border-bottom:1px solid var(--bord-1)}
+.lg-table thead th{font-family:'SF Pro Text';font-size:11px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--txt4);background:var(--surf-2)}
+.lg-table tbody tr:last-child td{border-bottom:0}
+.lg-table tbody tr:hover{background:var(--surf-1)}
+.lg-plan-name{color:var(--txt);font-weight:600}
+.lg-contact{padding:32px;text-align:center;margin-top:32px}
+.lg-contact h3{font-family:'SF Pro Display';font-size:22px;font-weight:600;letter-spacing:-.020em;color:var(--txt);margin:0 0 10px}
+.lg-contact p{font-family:'SF Pro Text';font-size:14.5px;color:var(--txt3);margin:0 0 18px}
+.lg-contact-item{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'SF Pro Text';font-size:14px;color:var(--txt3);margin:6px 14px}
+.lg-contact-item svg{width:16px;height:16px;stroke:var(--brand-blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.lg-contact-item a{color:var(--txt3);text-decoration:none}
+.lg-contact-item a:hover{color:var(--brand-blue)}
+.lg-btn-row{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:24px}
+@media(max-width:768px){.lg-contact-item{display:flex;margin:10px 0}.lg-btn-row{flex-direction:column}.lg-btn-row .cb-btn{width:100%}}
 </style>
 </head>
 <body>
-<div class="ws-page">
-<script>
-(function(){
-  var map={
-    '{{custom_values.home}}':'/website/home.html',
-    '{{custom_values.pricing}}':'/website/pricing.html',
-    '{{custom_values.portfolio}}':'/website/portfolio.html',
-    '{{custom_values.careers}}':'/website/careers.html',
-    '{{custom_values.faq}}':'/website/faq.html',
-    '{{custom_values.bookfreedemo}}':'/website/booking.html',
-    '{{custom_values.portal_login}}':'https://api.contentbug.io/portal/login.html',
-    '{{custom_values.privacy_policy}}':'/website/privacy-policy.html',
-    '{{custom_values.terms_of_service}}':'/website/terms.html'
-  };
-  document.querySelectorAll('a[href*="custom_values"]').forEach(function(a){
-    var h=a.getAttribute('href');
-    if(map[h])a.setAttribute('href',map[h]);
-  });
-  document.querySelectorAll('body *').forEach(function(el){
-    if(el.children.length===0 && el.textContent && el.textContent.indexOf('{{custom_values.')>-1){
-      var t=el.textContent;
-      t=t.replace(/\{\{custom_values\.business_email\}\}/g,'contentbug@contentbug.io');
-      t=t.replace(/\{\{custom_values\.business_phone\}\}/g,'+1 (385) 200-7582');
-      t=t.replace(/\{\{custom_values\.business_name\}\}/g,'Content Bug Video Editing, LLC');
-      t=t.replace(/\{\{custom_values\.business_address\}\}/g,'9016 Carondelet Pl, Brentwood, TN 37027');
-      t=t.replace(/\{\{custom_values\.business_hours\}\}/g,'Mon-Fri 9am-6pm MST');
-      el.textContent=t;
-    }
-  });
-})();
-</script>
+<script>(function(){var h=location.hostname;if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com'))return;var map={'{{custom_values.home}}':'https://api.contentbug.io/home','{{custom_values.pricing}}':'https://api.contentbug.io/pricing','{{custom_values.portfolio}}':'https://api.contentbug.io/portfolio','{{custom_values.faq}}':'https://api.contentbug.io/faq','{{custom_values.free_trial}}':'https://api.contentbug.io/free-trial','{{custom_values.bookfreedemo}}':'https://api.contentbug.io/free-trial','{{custom_values.privacy_policy}}':'https://api.contentbug.io/privacy','{{custom_values.terms_of_service}}':'https://api.contentbug.io/terms','{{custom_values.content_portal_login}}':'https://api.contentbug.io/portal/login.html','{{custom_values.portal_login}}':'https://api.contentbug.io/portal/login.html','{{custom_values.business_email}}':'mailto:contentbug@contentbug.io','{{custom_values.business_phone}}':'tel:+13852007582'};document.querySelectorAll('a[href*="custom_values"]').forEach(function(a){var k=a.getAttribute('href');if(map[k])a.setAttribute('href',map[k])});})();</script>
 
-<div class="cb-header-bar" id="cb-header">
-  <a href="https://api.contentbug.io/home" class="cb-logo">
-    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
-  </a>
-  <nav class="cb-header" id="cbNav">
-    <a href="https://api.contentbug.io/home" class="cb-nav-link">Home</a>
-    <a href="https://api.contentbug.io/pricing" class="cb-nav-link">Pricing</a>
-    <a href="https://api.contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
-    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
-    <a href="https://api.contentbug.io/free-trial" class="cb-nav-cta">Start Free Trial</a>
-  </nav>
-</div>
-<script>
-(function(){
-  var bar=document.querySelector('.cb-header-bar');
-  if(!bar)return;
-  var sentinel=document.createElement('div');
-  sentinel.style.cssText='height:0;width:0;visibility:hidden';
-  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
-      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
-    });
-  },{threshold:0});
-  io.observe(bar);
-})();
-</script>
+<main class="cb-page">
 
-<section class="section">
-<div class="container">
-  <div class="legal-header fade-up">
-    <span class="section-label">LEGAL</span>
-    <h1 class="hero-title">Terms of Service</h1>
-    <p class="last-updated">Last Updated: February 2026</p>
+<header class="cb-nav">
+  <div class="cb-nav__inner">
+    <a class="cb-nav__brand" href="https://api.contentbug.io/home" aria-label="Content Bug — Home">
+      <span class="cb-nav__bug"><img src="shared/assets/bug-white.png" alt="" width="18" height="18" decoding="async"></span>
+      <span class="cb-nav__name">Content Bug</span>
+    </a>
+    <nav class="cb-nav__links">
+      <a class="cb-nav__link" href="https://api.contentbug.io/home">Home</a>
+      <a class="cb-nav__link" href="https://api.contentbug.io/pricing">Pricing</a>
+      <a class="cb-nav__link" href="https://api.contentbug.io/portfolio">Portfolio</a>
+      <a class="cb-nav__link" href="https://api.contentbug.io/portal/login.html">Login</a>
+      <a class="cb-btn cb-btn--blue cb-btn--md cb-nav__cta" href="https://api.contentbug.io/free-trial">Start Free Trial</a>
+    </nav>
   </div>
+</header>
 
-  <div class="legal-section fade-up">
-    <h2>1. Agreement to Terms</h2>
-    <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("Client," "you," or "your") and <strong>Content Bug Video Editing, LLC</strong>, a Tennessee limited liability company ("Company," "we," "us," or "our"), governing your access to and use of our video editing subscription services, website, client portal, and related services (collectively, the "Services").</p>
-    <div class="warning-box">
-      <p><strong>IMPORTANT:</strong> By accessing or using our Services, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, you must not access or use our Services.</p>
+<section class="cb-section">
+  <div class="cb-container">
+    <div class="cb-page-hero">
+      <span class="eyebrow">LEGAL</span>
+      <h1 class="cb-h1">Terms of Service</h1>
+      <p class="cb-meta" style="margin-top:10px">Last Updated: February 2026</p>
     </div>
-    <p>We reserve the right to modify these Terms at any time with thirty (30) days written notice. We will notify you of material changes by posting the updated Terms on our website and updating the "Last Updated" date. Your continued use of the Services after any modifications constitutes acceptance of the revised Terms.</p>
   </div>
-
-  <div class="legal-section fade-up">
-    <h2>2. Description of Services</h2>
-    <p>Content Bug provides professional video editing subscription services for content creators, businesses, and individuals. Our Services include, but are not limited to:</p>
-    <ul>
-      <li>Short-form video editing (TikTok, YouTube Shorts, Instagram Reels)</li>
-      <li>Long-form video editing (YouTube, podcasts, educational content)</li>
-      <li>Custom motion graphics and visual effects</li>
-      <li>Color grading and audio enhancement</li>
-      <li>Thumbnail design and static graphics</li>
-      <li>Access to our client portal for project management</li>
-      <li>Unlimited revision requests</li>
-    </ul>
-    <h3>2.1 Subscription Plans</h3>
-    <p>We offer three subscription tiers with the following specifications:</p>
-    <table class="plan-table">
-      <thead><tr><th>Plan</th><th>Monthly Price</th><th>Long-Form Videos</th></tr></thead>
-      <tbody>
-        <tr><td class="plan-name">Basic</td><td>$750/month</td><td>5 videos</td></tr>
-        <tr><td class="plan-name">Silver</td><td>$1,300/month</td><td>10 videos</td></tr>
-        <tr><td class="plan-name">Gold</td><td>$1,950/month</td><td>15 videos</td></tr>
-      </tbody>
-    </table>
-    <h3>2.2 Turnaround Times</h3>
-    <p>Turnaround times are <strong>estimates only</strong> and vary based on multiple factors including:</p>
-    <ul>
-      <li>Length of raw footage submitted</li>
-      <li>Complexity and style of edit requested</li>
-      <li>Level of detail and customization required</li>
-      <li>Number of revision rounds needed</li>
-      <li>Current project queue volume</li>
-    </ul>
-    <p><strong>There are no guaranteed turnaround times.</strong> All delivery estimates provided are approximate and subject to change based on project requirements.</p>
-    <p>All plans include <strong>unlimited short-form videos</strong> (under 60 seconds) and <strong>unlimited revisions</strong>. A "long-form video" is defined as any video exceeding 60 seconds in final delivered duration.</p>
-    <h3>2.3 Rollover Policy</h3>
-    <p>Unused long-form video credits do <strong>not</strong> roll over to subsequent billing periods. Each billing cycle resets your long-form allocation.</p>
-    <h3>2.4 Service Limitations</h3>
-    <p>Our Services do <strong>not</strong> include:</p>
-    <ul>
-      <li>Original video production or filming</li>
-      <li>Stock footage licensing (Client provides or approves)</li>
-      <li>Music licensing (Client provides licensed music)</li>
-      <li>Script writing or content strategy</li>
-      <li>Social media management or posting</li>
-      <li>Real-time/live video production</li>
-    </ul>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>3. Account Registration and Security</h2>
-    <p>To access our Services, you must create an account and provide accurate, complete, and current information. You are responsible for:</p>
-    <ul>
-      <li>Maintaining the confidentiality of your account credentials</li>
-      <li>All activities that occur under your account</li>
-      <li>Notifying us immediately of any unauthorized access or security breaches</li>
-      <li>Ensuring your contact information remains current and accurate</li>
-    </ul>
-    <p>We reserve the right to suspend or terminate accounts that contain false information, violate these Terms, or engage in fraudulent activity.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>4. Payment Terms</h2>
-    <h3>4.1 Subscription Billing</h3>
-    <p>All subscription fees are billed in advance on a monthly recurring basis. By subscribing to our Services, you authorize us to charge your designated payment method for all applicable fees.</p>
-    <h3>4.2 Payment Processing</h3>
-    <p>Payments are processed securely through Stripe, Inc. We do not store your complete payment card information on our servers. All payment data is encrypted and handled in accordance with PCI-DSS compliance standards.</p>
-    <h3>4.3 Failed Payments</h3>
-    <p>If a payment fails, we will attempt to process the charge up to three (3) additional times. Continued payment failures may result in service suspension. You remain responsible for all outstanding amounts.</p>
-    <h3>4.4 Price Changes</h3>
-    <p>We reserve the right to modify pricing with thirty (30) days' written notice. Price changes will take effect at your next billing cycle following the notice period.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>5. Cancellation and Refund Policy</h2>
-    <h3>5.1 Cancellation</h3>
-    <p>You may cancel your subscription at any time through your client portal or by contacting us directly. Cancellation will take effect at the end of your current billing period. You will retain access to Services until the end of your paid period.</p>
-    <h3>5.2 Refund Policy</h3>
-    <div class="warning-box">
-      <p><strong>ALL SUBSCRIPTION FEES ARE STRICTLY NON-REFUNDABLE. ZERO REFUNDS UNDER ANY CIRCUMSTANCES.</strong></p>
-    </div>
-    <p>Due to the nature of our services and the immediate allocation of resources upon subscription, we do not offer refunds for any reason whatsoever. This includes but is not limited to:</p>
-    <ul>
-      <li>Dissatisfaction with deliverables</li>
-      <li>Failure to use allocated services or video credits</li>
-      <li>Business closure or change in content strategy</li>
-      <li>Partial months or prepaid annual subscriptions</li>
-      <li>Any other reason not explicitly listed</li>
-    </ul>
-    <p><strong>Annual subscriptions are non-refundable.</strong> If you pay for a full year in advance, you are not entitled to any refund for any portion of the subscription period, even if you choose to cancel early or do not use the services.</p>
-    <h3>5.3 No Pauses or Freezes</h3>
-    <p><strong>Subscriptions cannot be paused or frozen.</strong> Your billing continues regardless of whether you submit content for editing. It is your responsibility to utilize your allocated video credits within each billing period.</p>
-    <h3>5.4 Monthly Credit Reset</h3>
-    <p><strong>Long-form video credits reset at the beginning of each billing period.</strong> Unused credits do not roll over to subsequent months. There are no carryovers, credits, or compensation for unused allocations. It is your sole responsibility to manage and utilize your subscription benefits within each billing cycle.</p>
-    <h3>5.5 Payment Obligations and Collections</h3>
-    <div class="warning-box">
-      <p><strong>FAILURE TO PAY WILL RESULT IN DEBT COLLECTION.</strong></p>
-    </div>
-    <p>By subscribing to our Services, you agree to pay all fees when due. If any payment is missed, late, or declined:</p>
-    <ul>
-      <li>Your account will be immediately suspended</li>
-      <li>Access to all services, deliverables, and portal features will be revoked</li>
-      <li>Outstanding balances will accrue late fees as permitted by law</li>
-      <li><strong>Delinquent accounts will be sent to third-party debt collection agencies</strong></li>
-      <li>You will be responsible for all collection costs, legal fees, and associated expenses</li>
-    </ul>
-    <p>We reserve the right to report delinquent accounts to credit bureaus and pursue all available legal remedies to recover unpaid amounts.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>6. Content and Intellectual Property</h2>
-    <h3>6.1 Your Content</h3>
-    <p>You retain all ownership rights to the raw footage, images, audio, and other materials you provide to us ("Your Content"). By submitting Your Content, you grant Content Bug a limited, non-exclusive, royalty-free license to use, copy, modify, and process Your Content solely for the purpose of providing the Services.</p>
-    <h3>6.2 Deliverables</h3>
-    <p>Upon full payment of all applicable fees, you will own the edited videos and deliverables we create for you ("Deliverables"). Until full payment is received, Content Bug retains all rights to the Deliverables.</p>
-    <h3>6.3 Portfolio Rights</h3>
-    <p>Unless you opt out in writing, you grant Content Bug the right to use Deliverables in our portfolio, marketing materials, social media, and case studies. You may opt out by notifying us in writing at any time.</p>
-    <h3>6.4 Third-Party Content</h3>
-    <p>You represent and warrant that you have all necessary rights, licenses, and permissions for any content you provide, including but not limited to music, images, footage, and graphics. You agree to indemnify us against any claims arising from your use of third-party content.</p>
-    <h3>6.5 Company Intellectual Property</h3>
-    <p>All Content Bug branding, trademarks, logos, software, templates, presets, and proprietary editing techniques remain our exclusive property. No license or rights to our intellectual property are granted except as expressly stated herein.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>7. Acceptable Use Policy</h2>
-    <p>You agree not to use our Services to create, edit, or distribute content that:</p>
-    <ul>
-      <li>Is illegal, harmful, threatening, abusive, harassing, defamatory, or obscene</li>
-      <li>Promotes violence, discrimination, or hatred against individuals or groups</li>
-      <li>Infringes upon intellectual property rights of third parties</li>
-      <li>Contains malware, viruses, or other harmful code</li>
-      <li>Violates any applicable local, state, national, or international law</li>
-      <li>Involves child exploitation or endangerment in any form</li>
-      <li>Constitutes spam, phishing, or fraudulent schemes</li>
-      <li>Misrepresents your identity or affiliation</li>
-    </ul>
-    <p>We reserve the right to refuse service, terminate accounts, or remove content that violates this policy, at our sole discretion and without prior notice or refund.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>8. Disclaimer of Warranties</h2>
-    <div class="warning-box">
-      <p><strong>SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED.</strong></p>
-    </div>
-    <p>To the maximum extent permitted by applicable law, Content Bug disclaims all warranties, including but not limited to:</p>
-    <ul>
-      <li>Implied warranties of merchantability and fitness for a particular purpose</li>
-      <li>Warranties regarding the accuracy, reliability, or completeness of Services</li>
-      <li>Warranties that Services will be uninterrupted, timely, or error-free</li>
-      <li>Warranties regarding results achieved from using our Services</li>
-    </ul>
-    <p>We do not guarantee specific outcomes including but not limited to: video performance metrics, audience growth, revenue generation, or engagement rates. Results vary based on content quality, niche, algorithm changes, and factors outside our control.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>9. Limitation of Liability</h2>
-    <div class="warning-box">
-      <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, CONTENT BUG SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.</strong></p>
-    </div>
-    <p>In no event shall Content Bug's total liability exceed the amount paid by you in the three (3) months preceding the claim. This limitation applies to:</p>
-    <ul>
-      <li>Lost profits, revenue, or business opportunities</li>
-      <li>Loss of data or content</li>
-      <li>Business interruption</li>
-      <li>Reputational damage</li>
-      <li>Cost of substitute services</li>
-      <li>Any other intangible losses</li>
-    </ul>
-    <p>These limitations apply regardless of the legal theory (contract, tort, strict liability, or otherwise) and even if Content Bug has been advised of the possibility of such damages.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>10. Indemnification</h2>
-    <p>You agree to defend, indemnify, and hold harmless Content Bug Video Editing, LLC, its owners, officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any and all claims, damages, obligations, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from or related to:</p>
-    <ul>
-      <li>Your use of the Services</li>
-      <li>Your violation of these Terms</li>
-      <li>Your violation of any third-party rights, including intellectual property rights</li>
-      <li>Your Content or any content you submit through the Services</li>
-      <li>Any misrepresentation made by you</li>
-      <li>Your negligent or wrongful conduct</li>
-      <li>Any claims by third parties arising from your edited content</li>
-    </ul>
-    <p>We reserve the right, at your expense, to assume exclusive defense and control of any matter subject to indemnification. This indemnification obligation survives termination of your subscription and these Terms.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>11. DMCA and Copyright Claims</h2>
-    <p>Content Bug respects intellectual property rights and expects Clients to do the same.</p>
-    <h3>11.1 Copyright Infringement Claims</h3>
-    <p>If you believe content on our platform infringes your copyright, please contact our designated DMCA agent at <strong>contentbug@contentbug.io</strong> with:</p>
-    <ul>
-      <li>A physical or electronic signature of the copyright owner or authorized agent</li>
-      <li>Identification of the copyrighted work claimed to be infringed</li>
-      <li>Identification of the infringing material and its location</li>
-      <li>Your contact information (address, telephone number, email)</li>
-      <li>A statement of good faith belief that use is unauthorized</li>
-      <li>A statement under penalty of perjury that the information is accurate</li>
-    </ul>
-    <h3>11.2 Repeat Infringers</h3>
-    <p>We reserve the right to terminate accounts of repeat copyright infringers without refund.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>12. Dispute Resolution and Arbitration</h2>
-    <div class="highlight-box">
-      <p><strong>PLEASE READ THIS SECTION CAREFULLY. IT AFFECTS YOUR LEGAL RIGHTS, INCLUDING YOUR RIGHT TO FILE A LAWSUIT IN COURT.</strong></p>
-    </div>
-    <h3>12.1 Informal Resolution</h3>
-    <p>Before initiating any formal dispute resolution proceeding, you agree to first contact us at <strong>contentbug@contentbug.io</strong> to attempt informal resolution for at least thirty (30) days. Most disputes can be resolved through good-faith communication.</p>
-    <h3>12.2 Binding Arbitration</h3>
-    <p>If informal resolution fails, any dispute, claim, or controversy arising out of or relating to these Terms or the Services shall be resolved exclusively through <strong>binding arbitration</strong> administered by the American Arbitration Association ("AAA") in accordance with its Consumer Arbitration Rules.</p>
-    <ul>
-      <li>Arbitration will take place in Nashville, Tennessee, or virtually at your election</li>
-      <li>The arbitrator's decision is final and binding</li>
-      <li>Judgment on the award may be entered in any court of competent jurisdiction</li>
-      <li>Each party bears its own costs; filing fees split equally</li>
-    </ul>
-    <h3>12.3 Class Action Waiver</h3>
-    <p><strong>YOU AND CONTENT BUG AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, COLLECTIVE, OR REPRESENTATIVE PROCEEDING.</strong></p>
-    <h3>12.4 Exceptions</h3>
-    <p>Either party may seek injunctive relief in court for intellectual property infringement or unauthorized access to Services. Either party may bring an individual action in small claims court for disputes within the court's jurisdictional limits.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>13. Force Majeure</h2>
-    <p>Content Bug shall not be liable for any failure or delay in performance due to circumstances beyond our reasonable control, including but not limited to:</p>
-    <ul>
-      <li>Acts of God, natural disasters, or severe weather events</li>
-      <li>War, terrorism, civil unrest, or government actions</li>
-      <li>Pandemics, epidemics, or public health emergencies</li>
-      <li>Power outages, internet service disruptions, or telecommunications failures</li>
-      <li>Cyberattacks, hacking, or system security breaches</li>
-      <li>Strikes, labor disputes, or supply chain disruptions</li>
-      <li>Third-party service provider failures</li>
-    </ul>
-    <p>In such events, our obligations will be suspended for the duration of the force majeure event. If the event continues for more than thirty (30) days, either party may terminate the subscription without penalty.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>14. Governing Law and Jurisdiction</h2>
-    <p>These Terms and any disputes arising hereunder shall be governed by and construed in accordance with the laws of the <strong>State of Tennessee</strong>, without regard to its conflict of law principles.</p>
-    <p>Subject to the arbitration provisions above, you consent to the exclusive jurisdiction and venue of the state and federal courts located in <strong>Davidson County, Tennessee</strong> for any legal proceedings not subject to arbitration.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>15. Confidentiality</h2>
-    <p>Each party agrees to maintain the confidentiality of any proprietary or confidential information received from the other party. This includes, but is not limited to:</p>
-    <ul>
-      <li>Business strategies, pricing, and financial information</li>
-      <li>Unreleased content, creative concepts, and project details</li>
-      <li>Technical information, software, and systems</li>
-      <li>Personal information and customer data</li>
-    </ul>
-    <p>Confidential information shall not be disclosed to third parties without prior written consent, except as required by law or to fulfill the Services. This confidentiality obligation survives termination of your subscription.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>16. Communications</h2>
-    <p>By using our Services, you consent to receive communications from us electronically, including:</p>
-    <ul>
-      <li>Email notifications regarding your account and projects</li>
-      <li>SMS/text messages for urgent updates (message and data rates may apply)</li>
-      <li>In-app notifications through the client portal</li>
-      <li>Marketing communications (you may opt out at any time)</li>
-    </ul>
-    <p>Reply STOP to opt-out of SMS. Reply HELP for assistance. Opting out of marketing communications will not affect service-related communications.</p>
-  </div>
-
-  <div class="legal-section fade-up">
-    <h2>17. General Provisions</h2>
-    <h3>17.1 Entire Agreement</h3>
-    <p>These Terms, together with our Privacy Policy and any service-specific agreements, constitute the entire agreement between you and Content Bug regarding the Services and supersede all prior agreements, understandings, and communications.</p>
-    <h3>17.2 Severability</h3>
-    <p>If any provision of these Terms is found to be unenforceable or invalid by a court of competent jurisdiction, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
-    <h3>17.3 Waiver</h3>
-    <p>Our failure to enforce any right or provision of these Terms shall not constitute a waiver of such right or provision. Any waiver must be in writing and signed by an authorized representative of Content Bug.</p>
-    <h3>17.4 Assignment</h3>
-    <p>You may not assign or transfer these Terms or your rights hereunder without our prior written consent. We may assign these Terms without restriction. Any attempted assignment in violation of this section is void.</p>
-    <h3>17.5 Survival</h3>
-    <p>Sections relating to intellectual property, limitation of liability, indemnification, dispute resolution, governing law, and any other provisions that by their nature should survive, shall survive termination of these Terms.</p>
-  </div>
-
-</div>
 </section>
 
-<section class="section" style="padding-top:0">
-<div class="container">
-  <div class="contact-box fade-up">
-    <h3>Questions About These Terms?</h3>
-    <p>If you have any questions about these Terms of Service, please contact us:</p>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span>Content Bug Video Editing, LLC &middot; Brentwood, TN</span>
-    </div>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      <a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a>
-    </div>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      <a href="tel:+13852007582">+1 (385) 200-7582</a>
-    </div>
-    <div class="btn-row">
-      <a href="https://api.contentbug.io/home" class="btn btn-ghost">Back to Home</a>
-      <a href="https://api.contentbug.io/privacy" class="btn btn-ghost">Privacy Policy</a>
-      <a href="https://api.contentbug.io/free-trial" class="btn btn-primary">Start Free Trial</a>
+<section class="cb-section" style="padding-top:0">
+  <div class="cb-container">
+    <div class="lg-shell">
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">1. Agreement to Terms</h2>
+        <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("Client," "you," or "your") and <strong>Content Bug Video Editing, LLC</strong>, a Tennessee limited liability company ("Company," "we," "us," or "our"), governing your access to and use of our video editing subscription services, website, client portal, and related services (collectively, the "Services").</p>
+        <div class="lg-warn"><p><strong>IMPORTANT:</strong> By accessing or using our Services, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree to these Terms, you must not access or use our Services.</p></div>
+        <p>We reserve the right to modify these Terms at any time with thirty (30) days written notice. We will notify you of material changes by posting the updated Terms on our website and updating the "Last Updated" date. Your continued use of the Services after any modifications constitutes acceptance of the revised Terms.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">2. Description of Services</h2>
+        <p>Content Bug provides professional video editing subscription services for content creators, businesses, and individuals. Our Services include, but are not limited to:</p>
+        <ul>
+          <li>Short-form video editing (TikTok, YouTube Shorts, Instagram Reels)</li>
+          <li>Long-form video editing (YouTube, podcasts, educational content)</li>
+          <li>Custom motion graphics and visual effects</li>
+          <li>Color grading and audio enhancement</li>
+          <li>Thumbnail design and static graphics</li>
+          <li>Access to our client portal for project management</li>
+          <li>Unlimited revision requests</li>
+        </ul>
+        <h3>2.1 Subscription Plans</h3>
+        <p>We offer three subscription tiers with the following specifications:</p>
+        <table class="lg-table">
+          <thead><tr><th>Plan</th><th>Monthly Price</th><th>Long-Form Videos</th></tr></thead>
+          <tbody>
+            <tr><td class="lg-plan-name">Basic</td><td>$750/month</td><td>5 videos</td></tr>
+            <tr><td class="lg-plan-name">Silver</td><td>$1,300/month</td><td>10 videos</td></tr>
+            <tr><td class="lg-plan-name">Gold</td><td>$1,950/month</td><td>15 videos</td></tr>
+          </tbody>
+        </table>
+        <h3>2.2 Turnaround Times</h3>
+        <p>Turnaround times are <strong>estimates only</strong> and vary based on multiple factors including:</p>
+        <ul>
+          <li>Length of raw footage submitted</li>
+          <li>Complexity and style of edit requested</li>
+          <li>Level of detail and customization required</li>
+          <li>Number of revision rounds needed</li>
+          <li>Current project queue volume</li>
+        </ul>
+        <p><strong>There are no guaranteed turnaround times.</strong> All delivery estimates provided are approximate and subject to change based on project requirements.</p>
+        <p>All plans include <strong>unlimited short-form videos</strong> (under 60 seconds) and <strong>unlimited revisions</strong>. A "long-form video" is defined as any video exceeding 60 seconds in final delivered duration.</p>
+        <h3>2.3 Rollover Policy</h3>
+        <p>Unused long-form video credits do <strong>not</strong> roll over to subsequent billing periods. Each billing cycle resets your long-form allocation.</p>
+        <h3>2.4 Service Limitations</h3>
+        <p>Our Services do <strong>not</strong> include:</p>
+        <ul>
+          <li>Original video production or filming</li>
+          <li>Stock footage licensing (Client provides or approves)</li>
+          <li>Music licensing (Client provides licensed music)</li>
+          <li>Script writing or content strategy</li>
+          <li>Social media management or posting</li>
+          <li>Real-time/live video production</li>
+        </ul>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">3. Account Registration and Security</h2>
+        <p>To access our Services, you must create an account and provide accurate, complete, and current information. You are responsible for:</p>
+        <ul>
+          <li>Maintaining the confidentiality of your account credentials</li>
+          <li>All activities that occur under your account</li>
+          <li>Notifying us immediately of any unauthorized access or security breaches</li>
+          <li>Ensuring your contact information remains current and accurate</li>
+        </ul>
+        <p>We reserve the right to suspend or terminate accounts that contain false information, violate these Terms, or engage in fraudulent activity.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">4. Payment Terms</h2>
+        <h3>4.1 Subscription Billing</h3>
+        <p>All subscription fees are billed in advance on a monthly recurring basis. By subscribing to our Services, you authorize us to charge your designated payment method for all applicable fees.</p>
+        <h3>4.2 Payment Processing</h3>
+        <p>Payments are processed securely through Stripe, Inc. We do not store your complete payment card information on our servers. All payment data is encrypted and handled in accordance with PCI-DSS compliance standards.</p>
+        <h3>4.3 Failed Payments</h3>
+        <p>If a payment fails, we will attempt to process the charge up to three (3) additional times. Continued payment failures may result in service suspension. You remain responsible for all outstanding amounts.</p>
+        <h3>4.4 Price Changes</h3>
+        <p>We reserve the right to modify pricing with thirty (30) days' written notice. Price changes will take effect at your next billing cycle following the notice period.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">5. Cancellation and Refund Policy</h2>
+        <h3>5.1 Cancellation</h3>
+        <p>You may cancel your subscription at any time through your client portal or by contacting us directly. Cancellation will take effect at the end of your current billing period. You will retain access to Services until the end of your paid period.</p>
+        <h3>5.2 Refund Policy</h3>
+        <div class="lg-warn"><p><strong>ALL SUBSCRIPTION FEES ARE STRICTLY NON-REFUNDABLE. ZERO REFUNDS UNDER ANY CIRCUMSTANCES.</strong></p></div>
+        <p>Due to the nature of our services and the immediate allocation of resources upon subscription, we do not offer refunds for any reason whatsoever. This includes but is not limited to:</p>
+        <ul>
+          <li>Dissatisfaction with deliverables</li>
+          <li>Failure to use allocated services or video credits</li>
+          <li>Business closure or change in content strategy</li>
+          <li>Partial months or prepaid annual subscriptions</li>
+          <li>Any other reason not explicitly listed</li>
+        </ul>
+        <p><strong>Annual subscriptions are non-refundable.</strong> If you pay for a full year in advance, you are not entitled to any refund for any portion of the subscription period, even if you choose to cancel early or do not use the services.</p>
+        <h3>5.3 No Pauses or Freezes</h3>
+        <p><strong>Subscriptions cannot be paused or frozen.</strong> Your billing continues regardless of whether you submit content for editing. It is your responsibility to utilize your allocated video credits within each billing period.</p>
+        <h3>5.4 Monthly Credit Reset</h3>
+        <p><strong>Long-form video credits reset at the beginning of each billing period.</strong> Unused credits do not roll over to subsequent months. There are no carryovers, credits, or compensation for unused allocations. It is your sole responsibility to manage and utilize your subscription benefits within each billing cycle.</p>
+        <h3>5.5 Payment Obligations and Collections</h3>
+        <div class="lg-warn"><p><strong>FAILURE TO PAY WILL RESULT IN DEBT COLLECTION.</strong></p></div>
+        <p>By subscribing to our Services, you agree to pay all fees when due. If any payment is missed, late, or declined:</p>
+        <ul>
+          <li>Your account will be immediately suspended</li>
+          <li>Access to all services, deliverables, and portal features will be revoked</li>
+          <li>Outstanding balances will accrue late fees as permitted by law</li>
+          <li><strong>Delinquent accounts will be sent to third-party debt collection agencies</strong></li>
+          <li>You will be responsible for all collection costs, legal fees, and associated expenses</li>
+        </ul>
+        <p>We reserve the right to report delinquent accounts to credit bureaus and pursue all available legal remedies to recover unpaid amounts.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">6. Content and Intellectual Property</h2>
+        <h3>6.1 Your Content</h3>
+        <p>You retain all ownership rights to the raw footage, images, audio, and other materials you provide to us ("Your Content"). By submitting Your Content, you grant Content Bug a limited, non-exclusive, royalty-free license to use, copy, modify, and process Your Content solely for the purpose of providing the Services.</p>
+        <h3>6.2 Deliverables</h3>
+        <p>Upon full payment of all applicable fees, you will own the edited videos and deliverables we create for you ("Deliverables"). Until full payment is received, Content Bug retains all rights to the Deliverables.</p>
+        <h3>6.3 Portfolio Rights</h3>
+        <p>Unless you opt out in writing, you grant Content Bug the right to use Deliverables in our portfolio, marketing materials, social media, and case studies. You may opt out by notifying us in writing at any time.</p>
+        <h3>6.4 Third-Party Content</h3>
+        <p>You represent and warrant that you have all necessary rights, licenses, and permissions for any content you provide, including but not limited to music, images, footage, and graphics. You agree to indemnify us against any claims arising from your use of third-party content.</p>
+        <h3>6.5 Company Intellectual Property</h3>
+        <p>All Content Bug branding, trademarks, logos, software, templates, presets, and proprietary editing techniques remain our exclusive property. No license or rights to our intellectual property are granted except as expressly stated herein.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">7. Acceptable Use Policy</h2>
+        <p>You agree not to use our Services to create, edit, or distribute content that:</p>
+        <ul>
+          <li>Is illegal, harmful, threatening, abusive, harassing, defamatory, or obscene</li>
+          <li>Promotes violence, discrimination, or hatred against individuals or groups</li>
+          <li>Infringes upon intellectual property rights of third parties</li>
+          <li>Contains malware, viruses, or other harmful code</li>
+          <li>Violates any applicable local, state, national, or international law</li>
+          <li>Involves child exploitation or endangerment in any form</li>
+          <li>Constitutes spam, phishing, or fraudulent schemes</li>
+          <li>Misrepresents your identity or affiliation</li>
+        </ul>
+        <p>We reserve the right to refuse service, terminate accounts, or remove content that violates this policy, at our sole discretion and without prior notice or refund.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">8. Disclaimer of Warranties</h2>
+        <div class="lg-warn"><p><strong>SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED.</strong></p></div>
+        <p>To the maximum extent permitted by applicable law, Content Bug disclaims all warranties, including but not limited to:</p>
+        <ul>
+          <li>Implied warranties of merchantability and fitness for a particular purpose</li>
+          <li>Warranties regarding the accuracy, reliability, or completeness of Services</li>
+          <li>Warranties that Services will be uninterrupted, timely, or error-free</li>
+          <li>Warranties regarding results achieved from using our Services</li>
+        </ul>
+        <p>We do not guarantee specific outcomes including but not limited to: video performance metrics, audience growth, revenue generation, or engagement rates. Results vary based on content quality, niche, algorithm changes, and factors outside our control.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">9. Limitation of Liability</h2>
+        <div class="lg-warn"><p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, CONTENT BUG SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.</strong></p></div>
+        <p>In no event shall Content Bug's total liability exceed the amount paid by you in the three (3) months preceding the claim. This limitation applies to:</p>
+        <ul>
+          <li>Lost profits, revenue, or business opportunities</li>
+          <li>Loss of data or content</li>
+          <li>Business interruption</li>
+          <li>Reputational damage</li>
+          <li>Cost of substitute services</li>
+          <li>Any other intangible losses</li>
+        </ul>
+        <p>These limitations apply regardless of the legal theory (contract, tort, strict liability, or otherwise) and even if Content Bug has been advised of the possibility of such damages.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">10. Indemnification</h2>
+        <p>You agree to defend, indemnify, and hold harmless Content Bug Video Editing, LLC, its owners, officers, directors, employees, contractors, agents, licensors, suppliers, successors, and assigns from and against any and all claims, damages, obligations, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising from or related to:</p>
+        <ul>
+          <li>Your use of the Services</li>
+          <li>Your violation of these Terms</li>
+          <li>Your violation of any third-party rights, including intellectual property rights</li>
+          <li>Your Content or any content you submit through the Services</li>
+          <li>Any misrepresentation made by you</li>
+          <li>Your negligent or wrongful conduct</li>
+          <li>Any claims by third parties arising from your edited content</li>
+        </ul>
+        <p>We reserve the right, at your expense, to assume exclusive defense and control of any matter subject to indemnification. This indemnification obligation survives termination of your subscription and these Terms.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">11. DMCA and Copyright Claims</h2>
+        <p>Content Bug respects intellectual property rights and expects Clients to do the same.</p>
+        <h3>11.1 Copyright Infringement Claims</h3>
+        <p>If you believe content on our platform infringes your copyright, please contact our designated DMCA agent at <strong>contentbug@contentbug.io</strong> with:</p>
+        <ul>
+          <li>A physical or electronic signature of the copyright owner or authorized agent</li>
+          <li>Identification of the copyrighted work claimed to be infringed</li>
+          <li>Identification of the infringing material and its location</li>
+          <li>Your contact information (address, telephone number, email)</li>
+          <li>A statement of good faith belief that use is unauthorized</li>
+          <li>A statement under penalty of perjury that the information is accurate</li>
+        </ul>
+        <h3>11.2 Repeat Infringers</h3>
+        <p>We reserve the right to terminate accounts of repeat copyright infringers without refund.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">12. Dispute Resolution and Arbitration</h2>
+        <div class="lg-highlight"><p><strong>PLEASE READ THIS SECTION CAREFULLY. IT AFFECTS YOUR LEGAL RIGHTS, INCLUDING YOUR RIGHT TO FILE A LAWSUIT IN COURT.</strong></p></div>
+        <h3>12.1 Informal Resolution</h3>
+        <p>Before initiating any formal dispute resolution proceeding, you agree to first contact us at <strong>contentbug@contentbug.io</strong> to attempt informal resolution for at least thirty (30) days. Most disputes can be resolved through good-faith communication.</p>
+        <h3>12.2 Binding Arbitration</h3>
+        <p>If informal resolution fails, any dispute, claim, or controversy arising out of or relating to these Terms or the Services shall be resolved exclusively through <strong>binding arbitration</strong> administered by the American Arbitration Association ("AAA") in accordance with its Consumer Arbitration Rules.</p>
+        <ul>
+          <li>Arbitration will take place in Nashville, Tennessee, or virtually at your election</li>
+          <li>The arbitrator's decision is final and binding</li>
+          <li>Judgment on the award may be entered in any court of competent jurisdiction</li>
+          <li>Each party bears its own costs; filing fees split equally</li>
+        </ul>
+        <h3>12.3 Class Action Waiver</h3>
+        <p><strong>YOU AND CONTENT BUG AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, COLLECTIVE, OR REPRESENTATIVE PROCEEDING.</strong></p>
+        <h3>12.4 Exceptions</h3>
+        <p>Either party may seek injunctive relief in court for intellectual property infringement or unauthorized access to Services. Either party may bring an individual action in small claims court for disputes within the court's jurisdictional limits.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">13. Force Majeure</h2>
+        <p>Content Bug shall not be liable for any failure or delay in performance due to circumstances beyond our reasonable control, including but not limited to:</p>
+        <ul>
+          <li>Acts of God, natural disasters, or severe weather events</li>
+          <li>War, terrorism, civil unrest, or government actions</li>
+          <li>Pandemics, epidemics, or public health emergencies</li>
+          <li>Power outages, internet service disruptions, or telecommunications failures</li>
+          <li>Cyberattacks, hacking, or system security breaches</li>
+          <li>Strikes, labor disputes, or supply chain disruptions</li>
+          <li>Third-party service provider failures</li>
+        </ul>
+        <p>In such events, our obligations will be suspended for the duration of the force majeure event. If the event continues for more than thirty (30) days, either party may terminate the subscription without penalty.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">14. Governing Law and Jurisdiction</h2>
+        <p>These Terms and any disputes arising hereunder shall be governed by and construed in accordance with the laws of the <strong>State of Tennessee</strong>, without regard to its conflict of law principles.</p>
+        <p>Subject to the arbitration provisions above, you consent to the exclusive jurisdiction and venue of the state and federal courts located in <strong>Davidson County, Tennessee</strong> for any legal proceedings not subject to arbitration.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">15. Confidentiality</h2>
+        <p>Each party agrees to maintain the confidentiality of any proprietary or confidential information received from the other party. This includes, but is not limited to:</p>
+        <ul>
+          <li>Business strategies, pricing, and financial information</li>
+          <li>Unreleased content, creative concepts, and project details</li>
+          <li>Technical information, software, and systems</li>
+          <li>Personal information and customer data</li>
+        </ul>
+        <p>Confidential information shall not be disclosed to third parties without prior written consent, except as required by law or to fulfill the Services. This confidentiality obligation survives termination of your subscription.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">16. Communications</h2>
+        <p>By using our Services, you consent to receive communications from us electronically, including:</p>
+        <ul>
+          <li>Email notifications regarding your account and projects</li>
+          <li>SMS/text messages for urgent updates (message and data rates may apply)</li>
+          <li>In-app notifications through the client portal</li>
+          <li>Marketing communications (you may opt out at any time)</li>
+        </ul>
+        <p>Reply STOP to opt-out of SMS. Reply HELP for assistance. Opting out of marketing communications will not affect service-related communications.</p>
+      </article>
+
+      <article class="cb-card lg-section">
+        <h2 class="cb-h3">17. General Provisions</h2>
+        <h3>17.1 Entire Agreement</h3>
+        <p>These Terms, together with our Privacy Policy and any service-specific agreements, constitute the entire agreement between you and Content Bug regarding the Services and supersede all prior agreements, understandings, and communications.</p>
+        <h3>17.2 Severability</h3>
+        <p>If any provision of these Terms is found to be unenforceable or invalid by a court of competent jurisdiction, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
+        <h3>17.3 Waiver</h3>
+        <p>Our failure to enforce any right or provision of these Terms shall not constitute a waiver of such right or provision. Any waiver must be in writing and signed by an authorized representative of Content Bug.</p>
+        <h3>17.4 Assignment</h3>
+        <p>You may not assign or transfer these Terms or your rights hereunder without our prior written consent. We may assign these Terms without restriction. Any attempted assignment in violation of this section is void.</p>
+        <h3>17.5 Survival</h3>
+        <p>Sections relating to intellectual property, limitation of liability, indemnification, dispute resolution, governing law, and any other provisions that by their nature should survive, shall survive termination of these Terms.</p>
+      </article>
+
+      <article class="cb-card cb-card--lg lg-contact">
+        <h3>Questions About These Terms?</h3>
+        <p>If you have any questions about these Terms of Service, please contact us:</p>
+        <div class="lg-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Content Bug Video Editing, LLC · Brentwood, TN</span></div>
+        <div class="lg-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a></div>
+        <div class="lg-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="tel:+13852007582">+1 (385) 200-7582</a></div>
+        <div class="lg-btn-row">
+          <a href="https://api.contentbug.io/home" class="cb-btn">Back to Home</a>
+          <a href="https://api.contentbug.io/privacy" class="cb-btn">Privacy Policy</a>
+          <a href="https://api.contentbug.io/free-trial" class="cb-btn cb-btn--blue">Start Free Trial</a>
+        </div>
+      </article>
+
     </div>
   </div>
-</div>
 </section>
 
-<script>
-(function(){
-  var els=document.querySelectorAll('.fade-up');
-  if(!els.length)return;
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.style.opacity='1';
-        e.target.style.transform='translateY(0)';
-        io.unobserve(e.target);
-      }
-    });
-  },{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
-  els.forEach(function(el){
-    el.style.opacity='0';
-    el.style.transform='translateY(16px)';
-    el.style.transition='opacity .45s var(--ease),transform .45s var(--ease)';
-    io.observe(el);
-  });
-})();
-</script>
-
-<footer class="cb-footer" id="cb-footer">
-  <div class="cb-ft-glass">
-    <div class="cb-ft-grid">
-      <div class="cb-ft-brand">
-        <a href="https://api.contentbug.io/home" class="cb-logo">
-          <img loading="lazy" decoding="async" src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug" style="height:28px;filter:brightness(0) invert(1)">
+<footer class="cb-footer">
+  <div class="cb-container">
+    <div class="cb-footer__grid">
+      <div class="cb-footer__col">
+        <a class="cb-nav__brand" href="https://api.contentbug.io/home" style="margin-bottom:14px">
+          <span class="cb-nav__bug"><img src="shared/assets/bug-white.png" alt="" width="18" height="18"></span>
+          <span class="cb-nav__name">Content Bug</span>
         </a>
-        <div class="cb-ft-tagline">Helping you edit less, create more, and scale faster.</div>
+        <p class="cb-meta" style="max-width:280px;line-height:1.55">Helping you edit less, create more, and scale faster.</p>
       </div>
-      <div class="cb-ft-col">
-        <div class="cb-ft-col-title">Explore</div>
-        <a href="https://api.contentbug.io/home">Home</a>
-        <a href="https://api.contentbug.io/pricing">Pricing</a>
-        <a href="https://api.contentbug.io/portfolio">Portfolio</a>
-      </div>
-      <div class="cb-ft-col">
-        <div class="cb-ft-col-title">Account</div>
-        <a href="https://api.contentbug.io/portal/login.html">Portal Login</a>
-        <a href="https://api.contentbug.io/pricing">Pricing Plans</a>
-      </div>
-      <div class="cb-ft-col">
-        <div class="cb-ft-col-title">Contact</div>
-        <div class="cb-ft-contact-item"><a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a></div>
-        <div class="cb-ft-contact-item"><a href="tel:+13852007582">+1 (385) 200-7582</a></div>
-        <div class="cb-ft-addr">9016 Carondelet Pl<br>Brentwood, TN 37027</div>
-        <div class="cb-ft-hours"><strong>Hours:</strong> Mon&ndash;Fri 9am&ndash;6pm MST</div>
-      </div>
+      <div class="cb-footer__col"><h4>Explore</h4><ul><li><a href="https://api.contentbug.io/home">Home</a></li><li><a href="https://api.contentbug.io/pricing">Pricing</a></li><li><a href="https://api.contentbug.io/portfolio">Portfolio</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Account</h4><ul><li><a href="https://api.contentbug.io/portal/login.html">Portal Login</a></li><li><a href="https://api.contentbug.io/pricing">Pricing Plans</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Contact</h4><ul><li><a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a></li><li><a href="tel:+13852007582">+1 (385) 200-7582</a></li><li style="color:var(--txt4);font-size:13px;line-height:1.5">9016 Carondelet Pl<br>Brentwood, TN 37027</li><li style="color:var(--txt4);font-size:13px;line-height:1.5"><strong style="color:var(--txt3);font-weight:500">Hours:</strong> Mon–Fri 9am–6pm MST</li></ul></div>
     </div>
-    <div class="cb-ft-divider"></div>
-    <div class="cb-ft-legal">
-      <span>&copy; 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
-      <div class="cb-ft-legal-links">
-        <a href="https://api.contentbug.io/privacy">Privacy Policy</a>
-        <span class="cb-ft-legal-sep">&middot;</span>
-        <a href="https://api.contentbug.io/terms">Terms of Service</a>
-      </div>
+    <div class="cb-footer__bottom">
+      <span>© 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
+      <span style="display:inline-flex;gap:14px;align-items:center"><a href="https://api.contentbug.io/privacy">Privacy Policy</a><span style="color:var(--txt4)">·</span><a href="https://api.contentbug.io/terms">Terms of Service</a></span>
     </div>
   </div>
 </footer>
 
-</div>
+</main>
+<script src="shared/site.js" defer></script>
 </body>
 </html>

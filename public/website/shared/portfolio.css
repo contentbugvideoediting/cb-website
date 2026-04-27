@@ -1,0 +1,275 @@
+/* ============================================================
+   PORTFOLIO / SHOWCASE COMPONENTS
+   Strict aspect-ratio frames. NEVER break these proportions.
+
+   Locked frame sizes — width × height in CSS px @ desktop.
+   These use aspect-ratio so they scale, but the proportions are
+   IMMUTABLE. Don't add padding inside .vf-frame.
+   ============================================================ */
+
+/* ---------- VIDEO FRAME PRIMITIVES (aspect-locked) ---------- */
+/* Use .vf-9-16, .vf-16-9, .vf-1-1, .vf-4-5 — pick exactly one. */
+
+.vf-frame {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 12px 40px rgba(0,0,0,.40), inset 0 0 0 1px rgba(255,255,255,.04);
+  isolation: isolate; /* contain stacking context */
+}
+.vf-9-16  { aspect-ratio: 9 / 16; }      /* Reels / Shorts / TikTok */
+.vf-16-9  { aspect-ratio: 16 / 9; }      /* YouTube / web hero */
+.vf-1-1   { aspect-ratio: 1 / 1; }       /* IG feed / LinkedIn */
+.vf-4-5   { aspect-ratio: 4 / 5; }       /* IG portrait */
+
+/* The actual content fills 100% — caller must use absolute or fill-area children. */
+.vf-fill { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Aspect badge — stamped corner of frame, never the wrong number */
+.vf-badge {
+  position: absolute;
+  top: 10px; left: 10px;
+  z-index: 5;
+  font-family: 'SF Mono', monospace;
+  font-size: 10px; font-weight: 600;
+  /* LIGHT GLASS chip — PAGE_RULES.md §2 */
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+
+  border: 1px solid rgba(255,255,255,.20);
+  border-radius: 4px;
+  padding: 3px 7px;
+  color: #fff;
+  letter-spacing: .04em;
+  pointer-events: none;
+}
+
+/* Play overlay — lives over .vf-frame */
+.vf-play {
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(0,0,0,.45) 0%, transparent 35%, transparent 65%, rgba(0,0,0,.30) 100%);
+}
+.vf-play__btn {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+
+  border: 1.5px solid rgba(255,255,255,.45);
+  box-shadow: 0 8px 24px rgba(0,0,0,.40);
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 200ms var(--ease), background 200ms var(--ease);
+}
+.vf-play__btn:hover { transform: scale(1.08); background: rgba(255,255,255,.28); }
+.vf-play__btn svg { width: 22px; height: 22px; color: #fff; margin-left: 2px; }
+
+/* Bottom meta strip on the frame */
+.vf-meta {
+  position: absolute;
+  left: 12px; right: 12px; bottom: 12px;
+  z-index: 3;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+  pointer-events: none;
+}
+.vf-meta__title { font: 600 13px/1.25 'SF Pro Display'; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,.55); max-width: 80%; }
+.vf-meta__time {
+  font: 500 10px/1 'SF Mono', monospace;
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+
+  border: 1px solid rgba(255,255,255,.20);
+  color: #fff;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+/* Captions overlay (vertical formats) */
+.vf-caption {
+  position: absolute;
+  left: 50%; bottom: 22%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-family: 'SF Pro Display';
+  font-weight: 800;
+  font-size: clamp(14px, 6cqw, 28px);
+  line-height: 1.1;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0,0,0,.85), 0 0 2px rgba(0,0,0,.95);
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.vf-caption .hl { background: #ffcc0a; color: #0a0a0a; padding: 0 6px; border-radius: 3px; }
+.vf-caption .hl-blue { background: #2997ff; color: #fff; padding: 0 6px; border-radius: 3px; }
+
+/* Fake video stills using gradients — palette per frame */
+.vf-still {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+.vf-still--portrait-1 { background:
+  radial-gradient(120% 80% at 50% 30%, #f4a572 0%, #c66536 35%, #4a1f10 100%);
+}
+.vf-still--portrait-2 { background:
+  radial-gradient(100% 70% at 50% 40%, #2a3658 0%, #161e36 50%, #0a0d1f 100%);
+}
+.vf-still--portrait-3 { background:
+  radial-gradient(120% 80% at 30% 60%, #e57373 0%, #88323b 50%, #2a0a0e 100%);
+}
+.vf-still--portrait-4 { background:
+  linear-gradient(180deg, #fde68a 0%, #d97706 50%, #4c1d05 100%);
+}
+.vf-still--studio-1 { background:
+  linear-gradient(135deg, #0d1f3c 0%, #1f3a6e 30%, #4a6ba8 70%, #1a2438 100%);
+}
+.vf-still--studio-2 { background:
+  radial-gradient(90% 60% at 70% 30%, #4a90e2 0%, #1a3866 50%, #0a1429 100%);
+}
+.vf-still--studio-3 { background:
+  linear-gradient(180deg, #2c1810 0%, #5a2f17 50%, #181008 100%);
+}
+.vf-still--landscape-1 { background:
+  linear-gradient(180deg, #f97316 0%, #ea580c 30%, #7c2d12 70%, #1c0a05 100%);
+}
+.vf-still--landscape-2 { background:
+  radial-gradient(80% 60% at 50% 40%, #38bdf8 0%, #0369a1 50%, #082f49 100%);
+}
+.vf-still--podcast-1 { background:
+  radial-gradient(80% 60% at 30% 50%, #c084fc 0%, #6d28d9 40%, #1e1b4b 100%);
+}
+.vf-still--mono-1 { background:
+  linear-gradient(180deg, #2a2a2a 0%, #0a0a0a 100%);
+}
+
+/* Subject silhouette (decorative) — adds a darker oval where a person would be */
+.vf-still::after {
+  content: '';
+  position: absolute;
+  left: 50%; bottom: 0;
+  transform: translateX(-50%);
+  width: 60%; height: 65%;
+  background: radial-gradient(50% 50% at 50% 35%, rgba(0,0,0,.30) 0%, rgba(0,0,0,.55) 70%, transparent 100%);
+  pointer-events: none;
+}
+
+/* B-roll tile (smaller — used in collage) */
+.vf-broll-grid {
+  display: grid;
+  gap: 12px;
+}
+.vf-broll-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.vf-broll-grid--4 { grid-template-columns: repeat(4, 1fr); }
+.vf-broll-grid--5 { grid-template-columns: repeat(5, 1fr); }
+.vf-broll-grid--6 { grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 1024px) {
+  .vf-broll-grid--5, .vf-broll-grid--6 { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 768px) {
+  .vf-broll-grid--3, .vf-broll-grid--4, .vf-broll-grid--5, .vf-broll-grid--6 { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ---------- PHONE BEZEL (decorative wrap for 9:16) ---------- */
+/* Use sparingly; adds a phone chrome around a 9:16 frame */
+.vf-phone {
+  position: relative;
+  padding: 12px 12px 12px 12px;
+  border-radius: 38px;
+  background: linear-gradient(180deg, #1a1a1c 0%, #0a0a0c 100%);
+  box-shadow:
+    0 0 0 1.5px rgba(255,255,255,.10),
+    inset 0 0 0 1px rgba(255,255,255,.05),
+    0 30px 80px rgba(0,0,0,.55);
+}
+.vf-phone .vf-frame { border-radius: 28px; }
+.vf-phone::before {
+  /* speaker pill */
+  content: '';
+  position: absolute;
+  top: 24px; left: 50%; transform: translateX(-50%);
+  width: 92px; height: 24px;
+  background: #000;
+  border-radius: 14px;
+  z-index: 10;
+}
+
+/* ---------- BEFORE / AFTER COMPARE SLIDER ---------- */
+.cmp {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: ew-resize;
+  user-select: none;
+  background: #000;
+  border: 1px solid rgba(255,255,255,.10);
+}
+.cmp__layer { position: absolute; inset: 0; }
+.cmp__after  { clip-path: inset(0 0 0 var(--cmp-pos, 50%)); }
+.cmp__handle {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: var(--cmp-pos, 50%);
+  width: 2px;
+  background: #fff;
+  box-shadow: 0 0 16px rgba(0,0,0,.55);
+  z-index: 5;
+  pointer-events: none;
+}
+.cmp__handle::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.45);
+}
+.cmp__handle::after {
+  content: '↔';
+  position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  font: 700 18px/1 'SF Pro Display'; color: #0a0a0a;
+}
+.cmp__tag {
+  position: absolute;
+  top: 12px;
+  z-index: 4;
+  font: 600 11px/1 'SF Pro Display';
+  text-transform: uppercase; letter-spacing: .12em;
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+
+  border: 1px solid rgba(255,255,255,.20);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+}
+.cmp__tag--before { left: 12px; }
+.cmp__tag--after  { right: 12px; background: rgba(41,151,255,.85); border-color: rgba(255,255,255,.30); }
+
+/* ---------- METRICS / KPIs (used on case study + cost savings) ---------- */
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 768px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+.kpi {
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.kpi__label { font: 500 10px/1 'SF Pro Text'; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.55); }
+.kpi__value { font: 700 36px/1 'SF Pro Display'; letter-spacing: -.02em; color: #fff; }
+.kpi__value small { font-size: 16px; font-weight: 500; color: rgba(255,255,255,.55); margin-left: 4px; letter-spacing: 0; }
+.kpi__delta {
+  font: 500 11px/1 'SF Mono', monospace;
+  display: inline-flex; align-items: center; gap: 4px;
+  color: #7ecba1;
+  margin-top: 4px;
+}
+.kpi__delta--down { color: #ff7a72; }

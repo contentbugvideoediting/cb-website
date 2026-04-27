@@ -1,152 +1,97 @@
-<link rel="stylesheet" href="../assets/design-system.css">
-<script>
-  if (window.self === window.top) {
-    document.documentElement.classList.add('bg-dark');
-    document.addEventListener('DOMContentLoaded', function () {
-      document.body.classList.add('bg-dark');
-      document.body.classList.add('cb-grid');
-      var s = document.querySelector('.ws-page');
-      if (s) {
-        s.classList.add('shell-body-glass');
-        s.classList.add('cb-wizard-surface');
-        s.style.margin = '8px 16px';
-        s.style.minHeight = 'calc(100vh - 16px)';
-      }
-    });
-  } else {
-    if (document.body) { document.body.classList.add('bg-dark'); }
-    else { document.addEventListener('DOMContentLoaded', function(){ document.body.classList.add('bg-dark'); }); }
-  }
-</script>
-<div class="ws-page">
-<script>
-/* GHL canonical URL → Railway path remap (only runs off-GHL, e.g. api.contentbug.io direct test) */
-(function(){
-  var h=location.hostname;
-  if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com')) return;
-  var map={
-    'https://api.contentbug.io/home':'/portal/website/home.html',
-    'https://api.contentbug.io/pricing':'/portal/website/pricing.html',
-    'https://api.contentbug.io/portfolio':'/portal/website/portfolio.html',
-    'https://api.contentbug.io/free-trial':'/portal/website/booking.html',
-    'https://api.contentbug.io/privacy':'/portal/website/privacy-policy.html',
-    'https://api.contentbug.io/terms':'/portal/website/terms.html'
-  };
-  document.querySelectorAll('a[href]').forEach(function(a){
-    var k=a.getAttribute('href');
-    if(map[k]) a.setAttribute('href', map[k]);
-  });
-})();
-</script>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Free Trial — Content Bug</title>
+<meta name="description" content="Start your free trial. We'll edit a piece of your content for free so you can see our quality, speed, communication, and process firsthand before committing to anything.">
+<link rel="stylesheet" href="shared/colors_and_type.css">
+<link rel="stylesheet" href="shared/site.css">
+<style>
+.bk-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:start;max-width:1180px;margin:0 auto}
+@media(max-width:1024px){.bk-grid{grid-template-columns:1fr;gap:32px;max-width:760px}}
+.bk-info{padding-top:8px}
+.bk-step{display:inline-flex;align-items:center;gap:6px;font-family:'SF Pro Text';font-size:11px;font-weight:600;letter-spacing:.10em;text-transform:uppercase;color:var(--brand-blue);padding:6px 12px;border-radius:9999px;background:rgba(41,151,255,.10);border:1px solid rgba(41,151,255,.35);margin-bottom:18px}
+.bk-title{font-family:'SF Pro Display';font-size:clamp(40px,5vw,64px);font-weight:700;line-height:1.04;letter-spacing:-.030em;color:var(--txt);margin:0 0 16px;text-wrap:balance}
+.bk-title .l2{display:block;color:rgba(255,255,255,.62)}
+.bk-sub{font-family:'SF Pro Text';font-size:17px;line-height:1.55;color:var(--txt3);margin:0 0 32px;max-width:540px}
+.bk-checks{display:flex;flex-direction:column;gap:14px}
+.bk-check{display:flex;align-items:flex-start;gap:14px}
+.bk-check-icon{width:28px;height:28px;border-radius:50%;background:linear-gradient(180deg,#2997ff,#0071e3);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(41,151,255,.30),inset 0 1px 0 rgba(255,255,255,.20)}
+.bk-check-icon svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.bk-check-text{font-family:'SF Pro Text';font-size:15px;line-height:1.55;color:var(--txt3);padding-top:5px}
+.bk-form{padding:0;overflow:hidden}
+.bk-form iframe{width:100%;border:none;border-radius:18px;background:transparent;display:block;min-height:720px}
+</style>
+</head>
+<body>
+<script>(function(){var h=location.hostname;if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com'))return;var map={'{{custom_values.home}}':'https://api.contentbug.io/home','{{custom_values.pricing}}':'https://api.contentbug.io/pricing','{{custom_values.portfolio}}':'https://api.contentbug.io/portfolio','{{custom_values.faq}}':'https://api.contentbug.io/faq','{{custom_values.free_trial}}':'https://api.contentbug.io/free-trial','{{custom_values.bookfreedemo}}':'https://api.contentbug.io/free-trial','{{custom_values.privacy_policy}}':'https://api.contentbug.io/privacy','{{custom_values.terms_of_service}}':'https://api.contentbug.io/terms','{{custom_values.content_portal_login}}':'https://api.contentbug.io/portal/login.html','{{custom_values.portal_login}}':'https://api.contentbug.io/portal/login.html','{{custom_values.business_email}}':'mailto:contentbug@contentbug.io','{{custom_values.business_phone}}':'tel:+13852007582'};document.querySelectorAll('a[href*="custom_values"]').forEach(function(a){var k=a.getAttribute('href');if(map[k])a.setAttribute('href',map[k])});})();</script>
 
-<div class="cb-header-bar" id="cb-header">
-  <a href="https://api.contentbug.io/home" class="cb-logo">
-    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
-  </a>
-  <nav class="cb-header" id="cbNav">
-    <a href="https://api.contentbug.io/home" class="cb-nav-link active">Home</a>
-    <a href="https://api.contentbug.io/pricing" class="cb-nav-link">Pricing</a>
-    <a href="https://api.contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
-    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
-    <a href="https://api.contentbug.io/free-trial" class="cb-nav-cta">Start Free Trial</a>
-  </nav>
-</div>
-<script>
-document.body.classList.add('ws-page');
-(function(){
-  var bar=document.querySelector('.cb-header-bar');
-  if(!bar)return;
-  var sentinel=document.createElement('div');
-  sentinel.style.cssText='height:0;width:0;visibility:hidden';
-  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
-      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
-    });
-  },{threshold:0});
-  io.observe(bar);
-})();
-</script>
-<section class="section"><div class="section-card">
-<div class="container">
-  <!-- Bug logo background — left half visible, right half masked off, behind all content -->
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:0;-webkit-mask-image:linear-gradient(to right,black 0%,black 44%,transparent 57%);mask-image:linear-gradient(to right,black 0%,black 44%,transparent 57%)">
-    <img src="https://api.contentbug.io/portal/assets/logo-bug-white.svg" alt="" style="width:680px;height:680px;opacity:.055;display:block;object-fit:contain">
+<main class="cb-page">
+
+<header class="cb-nav">
+  <div class="cb-nav__inner">
+    <a class="cb-nav__brand" href="https://api.contentbug.io/home" aria-label="Content Bug — Home">
+      <span class="cb-nav__bug"><img src="shared/assets/bug-white.png" alt="" width="18" height="18" decoding="async"></span>
+      <span class="cb-nav__name">Content Bug</span>
+    </a>
+    <nav class="cb-nav__links">
+      <a class="cb-nav__link" href="https://api.contentbug.io/home">Home</a>
+      <a class="cb-nav__link" href="https://api.contentbug.io/pricing">Pricing</a>
+      <a class="cb-nav__link" href="https://api.contentbug.io/portfolio">Portfolio</a>
+      <a class="cb-nav__link" href="https://api.contentbug.io/portal/login.html">Login</a>
+      <a class="cb-btn cb-btn--blue cb-btn--md cb-nav__cta" href="https://api.contentbug.io/free-trial">Start Free Trial</a>
+    </nav>
   </div>
+</header>
 
-<div class="contact-grid">
+<section class="cb-section cb-bug-watermark cb-bug-watermark--left cb-bug-watermark--xl cb-bug-watermark--ghost">
+  <div class="cb-container">
+    <div class="bk-grid">
 
-  <!-- Left: Info Column -->
-  <div class="contact-info">
-    <span class="step-badge">Step 3 of 4</span>
-    <h1 class="contact-title">You're In!<span class="title-line-2">Book Your Free Demo Call to Activate Your Free Trial</span></h1>
-    <p class="contact-subtitle">This quick call gets your free trial activated and shows you exactly what happens next.</p>
+      <div class="bk-info">
+        <span class="bk-step">Step 1 of 4</span>
+        <h1 class="bk-title">Your Free Trial<span class="l2">Starts Here</span></h1>
+        <p class="bk-sub">We'll edit a piece of your content for free so you can see our quality, speed, communication, and process firsthand before committing to anything.</p>
+        <div class="bk-checks">
+          <div class="bk-check"><span class="bk-check-icon"><svg viewBox="0 0 22 22"><polyline points="6.5 11.5 9.5 14.5 15.5 8.5"/></svg></span><span class="bk-check-text">Get a free edit so you can judge the quality yourself</span></div>
+          <div class="bk-check"><span class="bk-check-icon"><svg viewBox="0 0 22 22"><polyline points="6.5 11.5 9.5 14.5 15.5 8.5"/></svg></span><span class="bk-check-text">See our speed, communication, and process firsthand</span></div>
+          <div class="bk-check"><span class="bk-check-icon"><svg viewBox="0 0 22 22"><polyline points="6.5 11.5 9.5 14.5 15.5 8.5"/></svg></span><span class="bk-check-text">Get a real feel for our team before committing</span></div>
+          <div class="bk-check"><span class="bk-check-icon"><svg viewBox="0 0 22 22"><polyline points="6.5 11.5 9.5 14.5 15.5 8.5"/></svg></span><span class="bk-check-text">No pressure — we'd rather show you than pitch you</span></div>
+        </div>
+      </div>
 
-    <div class="checklist">
-      <div class="checklist-item">
-        <div class="checklist-icon">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
-        </div>
-        <span class="checklist-text">Activate your free trial by booking your quick demo call</span>
+      <div class="cb-card bk-form">
+        <iframe src="https://links.contentbug.io/widget/form/8Nv0Gs5qKIoWLK9ogudu" id="inline-8Nv0Gs5qKIoWLK9ogudu" data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Contact Details" data-height="606" data-layout-iframe-id="inline-8Nv0Gs5qKIoWLK9ogudu" data-form-id="8Nv0Gs5qKIoWLK9ogudu" title="Contact Details"></iframe>
+        <script src="https://links.contentbug.io/js/form_embed.js"></script>
       </div>
-      <div class="checklist-item">
-        <div class="checklist-icon">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
-        </div>
-        <span class="checklist-text">Meet the team and get a feel for how we work</span>
-      </div>
-      <div class="checklist-item">
-        <div class="checklist-icon">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
-        </div>
-        <span class="checklist-text">See our process, communication, and next steps clearly</span>
-      </div>
-      <div class="checklist-item">
-        <div class="checklist-icon">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3.5 8.5 6.5 11.5 12.5 5.5"/></svg>
-        </div>
-        <span class="checklist-text">Ask questions, get clarity, and get your trial moving fast</span>
-      </div>
+
     </div>
-
   </div>
+</section>
 
-  <!-- Right: Calendar Column -->
-  <div class="cal-wrap">
-    <iframe
-      src="https://links.contentbug.io/widget/booking/jMEjaEOpcdbZDvcQFXGY"
-      style="width:100%;border:none;overflow:hidden;"
-      scrolling="no"
-      data-form-name="BOOKING CALENDAR"
-      id="msgsndr-calendar"
-    ></iframe>
+<footer class="cb-footer">
+  <div class="cb-container">
+    <div class="cb-footer__grid">
+      <div class="cb-footer__col">
+        <a class="cb-nav__brand" href="https://api.contentbug.io/home" style="margin-bottom:14px">
+          <span class="cb-nav__bug"><img src="shared/assets/bug-white.png" alt="" width="18" height="18"></span>
+          <span class="cb-nav__name">Content Bug</span>
+        </a>
+        <p class="cb-meta" style="max-width:280px;line-height:1.55">Helping you edit less, create more, and scale faster.</p>
+      </div>
+      <div class="cb-footer__col"><h4>Explore</h4><ul><li><a href="https://api.contentbug.io/home">Home</a></li><li><a href="https://api.contentbug.io/pricing">Pricing</a></li><li><a href="https://api.contentbug.io/portfolio">Portfolio</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Company</h4><ul><li><a href="https://api.contentbug.io/faq">FAQ</a></li><li><a href="https://api.contentbug.io/free-trial">Start Free Trial</a></li><li><a href="https://api.contentbug.io/portal/login.html">Studio Login</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Contact</h4><ul><li><a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a></li><li><a href="tel:+13852007582">+1 (385) 200-7582</a></li><li style="color:var(--txt4);font-size:13px;line-height:1.5"><strong style="color:var(--txt3);font-weight:500">Hours:</strong> Mon–Fri 9am–6pm MST</li></ul></div>
+    </div>
+    <div class="cb-footer__bottom">
+      <span>© 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
+      <span style="display:inline-flex;gap:14px;align-items:center"><a href="https://api.contentbug.io/privacy">Privacy Policy</a><span style="color:var(--txt4)">·</span><a href="https://api.contentbug.io/terms">Terms of Service</a></span>
+    </div>
   </div>
+</footer>
 
-</div>
-</div>
-</div></section>
-
-<script src="https://links.contentbug.io/js/form_embed.js"></script>
-<script>
-(function(){
-<script>
-(function(){
-  var f = document.getElementById('cb-footer');
-  if (!f) return;
-  var p = f.parentElement;
-  while (p && p !== document.documentElement) {
-    if (p !== document.body) {
-      p.style.setProperty('background', 'none', 'important');
-      p.style.setProperty('background-color', 'transparent', 'important');
-      p.style.setProperty('background-image', 'none', 'important');
-      p.style.setProperty('color', '#f5f5f7', 'important');
-      p.style.setProperty('border', 'none', 'important');
-      p.style.setProperty('box-shadow', 'none', 'important');
-      p.style.setProperty('border-radius', '0', 'important');
-    }
-    p = p.parentElement;
-  }
-})();
-</script>
-</div>
+</main>
+<script src="shared/site.js" defer></script>
+</body>
+</html>

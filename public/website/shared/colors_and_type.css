@@ -1,0 +1,220 @@
+/* ============================================================
+   CONTENT BUG DESIGN SYSTEM — TOKENS + GLOBAL STYLES
+   Single source of truth. Every component imports this file.
+   ============================================================ */
+
+/* ============= FONTS ============= */
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('fonts/sf-pro-display_regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('fonts/sf-pro-display_medium.woff2') format('woff2');
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('fonts/sf-pro-display_semibold.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Display';
+  src: url('fonts/sf-pro-display_bold.woff2') format('woff2');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('fonts/sf-pro-text_regular.woff2') format('woff2');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'SF Pro Text';
+  src: url('fonts/sf-pro-text_semibold.woff2') format('woff2');
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* ============= BRAND ============= */
+  --brand-blue:        #2997ff;   /* primary brand */
+  --brand-blue-hover:  #1e7ce0;   /* press / hover */
+  --brand-blue-deep:   #0a4fa8;   /* ambient backdrop */
+
+  /* ============= SEMANTIC ============= */
+  --green:  #34c759;   /* approved / success */
+  --red:    #ff453a;   /* danger / error */
+  --gold:   #ffcc0a;   /* trial / warning */
+  --amber:  #ff9500;   /* revisions */
+  --purple: #af52de;   /* queue / review */
+
+  /* ============= TEXT INK ============= */
+  --txt:   #ffffff;
+  --txt2:  #ffffff;
+  --txt3:  #e8ebf2;
+  --txt4:  #c8ccd6;
+
+  /* ============= SURFACES (light glass on dark) ============= */
+  --surf-1: rgba(255,255,255,0.03);
+  --surf-2: rgba(255,255,255,0.04);
+  --surf-3: rgba(255,255,255,0.06);
+  --surf-4: rgba(255,255,255,0.08);
+  --surf-5: rgba(255,255,255,0.12);
+
+  --bord-1: rgba(255,255,255,0.06);
+  --bord-2: rgba(255,255,255,0.08);
+  --bord-3: rgba(255,255,255,0.10);
+  --bord-top: rgba(255,255,255,0.18);   /* light catches the top edge */
+  --bord-strong: rgba(255,255,255,0.40);
+
+  /* ============= SPACING — rule of 5 ============= */
+  --s-xl: 48px;
+  --s-l:  32px;
+  --s-m:  20px;
+  --s-s:  10px;
+  --s-xs: 6px;
+
+  /* ============= RADII — rule of 5 + pill ============= */
+  --r-xl: 24px;
+  --r-l:  18px;
+  --r-m:  14px;
+  --r-s:  10px;
+  --r-xs: 6px;
+  --r-pill: 9999px;
+
+  /* ============= HEIGHTS (controls) ============= */
+  --h-xl: 48px;
+  --h-lg: 40px;
+  --h-md: 32px;
+  --h-sm: 28px;
+  --h-xs: 24px;
+
+  /* ============= SHADOWS ============= */
+  --sh-2:    0 2px 6px  rgba(0,0,0,0.20);
+  --sh-3:    0 4px 12px rgba(0,0,0,0.25);
+  --sh-5:    0 12px 32px rgba(0,0,0,0.35);
+  --sh-btn:  0 2px 4px  rgba(0,0,0,0.20);
+  --sh-hov:  0 6px 18px rgba(0,0,0,0.30);
+  --sh-glass: 0 8px 24px rgba(0,0,0,0.30);
+
+  /* ============= LIGHT GLASS — the only allowed kind =============
+     See PAGE_RULES.md §2. NEVER use rgba(0,0,0,*) or rgba(8,18,38,*)
+     for floating UI. Always compose with these. */
+  --glass-1: linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,.02) 100%);
+  --glass-2: linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(255,255,255,.04) 100%);
+  --glass-3: linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.06) 14%, rgba(255,255,255,.04) 38%, rgba(255,255,255,.03) 100%);
+  --glass-4: linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.08) 14%, rgba(255,255,255,.05) 38%, rgba(255,255,255,.04) 100%);
+
+  --glass-border:        rgba(255,255,255,0.12);
+  --glass-border-top:    rgba(255,255,255,0.20);
+  --glass-border-strong: rgba(255,255,255,0.18);
+  --glass-rim:           inset 0 1px 0 rgba(255,255,255,.18);
+  --glass-shadow:        0 12px 32px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.18);
+  --glass-shadow-lg:     0 40px 100px rgba(0,0,0,.30), 0 8px 32px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.18);
+
+  --glass-blur-nav:      blur(20px) saturate(150%);
+  --glass-blur-pop:      blur(16px) saturate(140%);
+  --glass-blur-pill:     blur(10px) saturate(140%);
+
+  /* ============= MOTION ============= */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 80ms;
+  --dur:      200ms;
+  --dur-slow: 420ms;
+}
+
+/* ============= GLOBAL RESET ============= */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; min-height: 100%; }
+
+/* Performance + interaction smoothness — see PAGE_RULES.md §3 */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* GLOBAL TEXT SHADOW — improves legibility over the busy backdrop.
+   Form controls and code keep crisp edges. */
+body, body * { text-shadow: 0 1px 2px rgba(0,0,0,0.55); }
+input, textarea, select, code, pre, .mono { text-shadow: none !important; }
+
+/* ============= MASTER BACKDROP =============
+   Sky → navy → black + slowly waving amber glow.
+   The one and only. Used on every page. Never override. */
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  color: var(--txt);
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background:
+    /* Warm amber bloom rising from below — punchier */
+    radial-gradient(140% 90% at 50% 115%,
+      rgba(255,165,90,.42) 0%,
+      rgba(255,165,90,.22) 28%,
+      rgba(255,165,90,.10) 52%,
+      rgba(255,165,90,.03) 72%,
+      rgba(255,165,90,0)   90%),
+    /* Wide blue glow upper-half — richer, more saturated */
+    radial-gradient(110% 70% at 50% 30%,
+      rgba(60,130,230,.28) 0%,
+      rgba(60,130,230,.14) 35%,
+      rgba(60,130,230,.04) 60%,
+      rgba(60,130,230,0)   75%),
+    /* Base — deeper, bluer navy */
+    linear-gradient(in oklab 180deg,
+      #050b1f 0%,
+      #0c2452 50%,
+      #02060f 100%);
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-position: center center;
+  background-attachment: fixed;
+  /* All layers locked to the viewport — the entire background composition
+     stays put when the page scrolls, identical on every page. */
+}
+body::before {
+  content: ""; position: fixed; left: -20%; right: -20%; bottom: -40%; height: 90%;
+  background:
+    radial-gradient(60% 70% at 50% 100%,
+      rgba(255,170,95,.22) 0%, rgba(255,170,95,.06) 50%, rgba(255,170,95,0) 80%),
+    radial-gradient(45% 55% at 25% 95%,
+      rgba(180,210,255,.08) 0%, rgba(180,210,255,0) 75%),
+    radial-gradient(45% 55% at 75% 95%,
+      rgba(255,200,140,.08) 0%, rgba(255,200,140,0) 75%);
+  pointer-events: none; z-index: 0;
+  /* Promote to its own compositor layer so the parallax animation
+     never repaints — only re-composites. transform-only animation. */
+  transform: translateZ(0);
+  will-change: transform;
+  animation: bottomWave 60s ease-in-out infinite alternate;
+}
+@keyframes bottomWave {
+  0%   { transform: translate3d(-3%, 1%, 0) scale(1.00); }
+  50%  { transform: translate3d( 2%,-1%, 0) scale(1.04); }
+  100% { transform: translate3d( 4%, 0%, 0) scale(1.02); }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { animation: none; }
+}
+
+/* ============= TYPE SCALE ============= */
+.t-xl { font-family: 'SF Pro Display'; font-size: 40px; font-weight: 700; line-height: 1.05; letter-spacing: -0.025em; color: var(--txt); }
+.t-l  { font-family: 'SF Pro Display'; font-size: 28px; font-weight: 600; line-height: 1.15; letter-spacing: -0.020em; color: var(--txt); }
+.t-m  { font-family: 'SF Pro Display'; font-size: 18px; font-weight: 500; line-height: 1.40; letter-spacing: -0.010em; color: var(--txt); }
+.t-s  { font-family: 'SF Pro Text';    font-size: 14px; font-weight: 400; line-height: 1.60; color: var(--txt); }
+.t-xs { font-family: 'SF Pro Text';    font-size: 11px; font-weight: 500; line-height: 1.40; letter-spacing: 0.05em; text-transform: uppercase; color: var(--txt3); }
+
+.mono { font-family: 'SF Mono', ui-monospace, Menlo, monospace; }

@@ -1,872 +1,271 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="preload" as="font" type="font/woff2" href="https://api.contentbug.io/portal/website/fonts/sf-pro-text_regular.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="https://api.contentbug.io/portal/website/fonts/sf-pro-text_semibold.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="https://api.contentbug.io/portal/website/fonts/sf-pro-display_regular.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="https://api.contentbug.io/portal/website/fonts/sf-pro-display_medium.woff2" crossorigin>
 <title>Free Trial — Content Bug</title>
 <meta name="description" content="Start your free trial edit with Content Bug Video Editing — free edit, real team, no commitment.">
-<link rel="stylesheet" href="/website/qualification.css">
+<link rel="stylesheet" href="shared/colors_and_type.css">
+<link rel="stylesheet" href="shared/site.css">
 <style>
-/* ═════════════════════════════════════════════════════════════════
-   FREE TRIAL — mirrors public/website/home.html inline styles.
-   Self-contained: no design-system.css dependency.
-   ═════════════════════════════════════════════════════════════════ */
+.ft-grid{display:grid;grid-template-columns:380px 760px;gap:56px;align-items:flex-start;justify-content:center;max-width:1280px;margin:0 auto}
+@media(max-width:1240px){.ft-grid{grid-template-columns:1fr;max-width:760px;gap:36px}}
+.ft-left{padding-top:8px}
+.ft-eyebrow{font-family:'SF Pro Text';font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--brand-blue);margin:0 0 16px}
+.ft-h1{font-family:'SF Pro Display';font-size:clamp(36px,4.5vw,52px);font-weight:700;line-height:1.04;letter-spacing:-.025em;color:var(--txt);margin:0 0 18px;text-wrap:balance}
+.ft-sub{font-family:'SF Pro Text';font-size:16px;line-height:1.55;color:var(--txt3);margin:0 0 28px;max-width:440px}
+.ft-hiw{padding:22px 24px;margin-bottom:18px}
+.ft-hiw-title{font-family:'SF Pro Text';font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--txt4);margin:0 0 14px}
+.ft-hiw-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;counter-reset:hiw}
+.ft-hiw-list li{counter-increment:hiw;padding-left:38px;position:relative;font-family:'SF Pro Text';font-size:14px;font-weight:500;line-height:1.4;color:var(--txt);min-height:26px}
+.ft-hiw-list li::before{content:counter(hiw);position:absolute;left:0;top:-1px;width:26px;height:26px;border-radius:50%;background:rgba(41,151,255,.14);border:1px solid rgba(41,151,255,.35);color:#84c4ff;font-family:'SF Pro Display';font-size:12px;font-weight:600;line-height:24px;text-align:center}
+.ft-hiw-list li small{display:block;font-family:'SF Pro Text';font-size:12.5px;font-weight:400;color:var(--txt4);margin-top:3px;line-height:1.5}
+.ft-trust{font-family:'SF Pro Text';font-size:13px;line-height:1.5;color:var(--txt4);margin:0;max-width:420px}
 
-/* FONTS */
-@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:400;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-display_regular.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:500;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-display_medium.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:600;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-display_semibold.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Display";font-style:normal;font-weight:700;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-display_bold.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Text";font-style:normal;font-weight:400;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-text_regular.woff2") format("woff2")}
-@font-face{font-family:"SF Pro Text";font-style:normal;font-weight:600;font-display:swap;src:url("https://api.contentbug.io/portal/website/fonts/sf-pro-text_semibold.woff2") format("woff2")}
-
-/* RESET */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-img,video,svg{max-width:100%;display:block}
-button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
-a{color:inherit;text-decoration:none}
-
-/* TOKENS */
-.ws-page{
-  --blue:#1a9eff;--blue-brand:#0071e3;--blue-hover:#0077ed;
-  --txt:#fff;--txt2:#d0d0d5;--txt3:#9a9aa0;--txt4:#6a6a70;
-  --glass-b:1px solid rgba(255,255,255,.08);
-  --glass-bt:rgba(255,255,255,.18);
-  --ease:cubic-bezier(.22,1,.36,1);
-  --font-display:'SF Pro Display',-apple-system,BlinkMacSystemFont,system-ui,'Helvetica Neue',Arial,sans-serif;
-  --font:'SF Pro Text',-apple-system,BlinkMacSystemFont,system-ui,'Helvetica Neue',Arial,sans-serif;
-}
-
-/* PORTAL BACKGROUND — exact 2-layer stack from home.html / pricing.html /
-   the rest of the marketing site. Restored 2026-04-27 — do NOT change again,
-   this is the canonical site bg. */
-html{background:#000001 !important}
-body{
-  margin:0 !important;padding:0 !important;color:#fff !important;min-height:100vh !important;
-  font:400 16px/1.6 var(--font) !important;
-  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.045) 22%,rgba(255,255,255,.055) 40%,rgba(255,255,255,.07) 60%,rgba(255,255,255,.09) 75%,rgba(255,255,255,.11) 88%,rgba(255,255,255,.14) 100%),
-    linear-gradient(180deg,#032a4b 0%,#032848 10%,#022240 20%,#021c36 30%,#02172e 40%,#011226 50%,#010d1e 60%,#010916 70%,#00050e 80%,#000308 90%,#000001 100%) !important;
-  background-attachment:fixed,fixed !important;
-  background-repeat:no-repeat,no-repeat !important;
-  background-size:100% 100vh,100% 100vh !important;
-}
-.ws-page{min-height:100vh;color:#fff}
-
-/* CB-WIZARD-SURFACE — inlined from design-system.css (cb-website is a
-   separate deploy from cb-portal-shell). Keep in sync with master copy. */
-.cb-wizard-surface{
-  position:relative;
-  border-radius:24px;
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 40px 120px rgba(0,0,0,.55),0 8px 40px rgba(0,0,0,.35);
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.11) 0%,rgba(255,255,255,.07) 35%,rgba(255,255,255,.035) 70%,rgba(255,255,255,.015) 100%),
-    linear-gradient(180deg,#032a4b 0%,#022240 25%,#01172e 55%,#010916 80%,#00050e 100%);
-}
-.cb-wizard-surface .cb-wiz-card,
-.cb-wizard-surface .cb-wiz-card-opt,
-.cb-wizard-surface .cb-wiz-input,
-.cb-wizard-surface .cb-wiz-select,
-.cb-wizard-surface .cb-wiz-textarea,
-.cb-wizard-surface .cb-wiz-toggle{background:transparent;border:1px solid rgba(255,255,255,.12)}
-
-/* ════════════════════════════════════════════════════════════════════════
-   .wz WIZARD V2 — inlined from cb-portal-shell design-system.css so the
-   marketing-site free-trial card matches the portal wizards exactly.
-   Keep in sync with public/assets/design-system.css .wz block.
-   ════════════════════════════════════════════════════════════════════════ */
-.wz{
-  position:relative; color:#fff; margin:0 auto; max-height:none; width:min(760px,92vw);
-  background:linear-gradient(180deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.06) 12%,rgba(255,255,255,.04) 30%,rgba(255,255,255,.03) 55%,rgba(255,255,255,.02) 100%);
-  border:1px solid rgba(255,255,255,.12); border-top-color:rgba(255,255,255,.18);
-  border-radius:24px;
-  box-shadow:0 40px 100px rgba(0,0,0,.30),0 8px 32px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.18);
-  overflow:hidden; display:flex; flex-direction:column;
-}
-.wz::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;z-index:2;background:linear-gradient(90deg,transparent,rgba(255,255,255,.20) 25%,rgba(255,255,255,.35) 50%,rgba(255,255,255,.20) 75%,transparent);pointer-events:none}
-.wz > *{position:relative;z-index:1}
-.wz--md .wiz-hero{padding:36px 36px 14px;text-align:center;flex-shrink:0;position:relative}
-.wz--md .wiz-content{padding:28px 36px 12px;flex:1 1 auto;overflow-y:auto;display:flex;flex-direction:column}
-/* Spec values per project/18-wizards.html — md: hero 50px top / content 32px / footer 22px·28px */
-.wz--md .wiz-hero{padding:50px 40px 8px;text-align:center;flex-shrink:0;position:relative}
-.wz--md .wiz-content{padding:32px 40px 8px;flex:1 1 auto;overflow-y:auto;display:flex;flex-direction:column}
-.wz--md .wiz-footer{padding:22px 40px 28px;flex-shrink:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;border-top:1px solid rgba(255,255,255,.05)}
-.wz .wiz-footer > .btn-ghost{grid-column:1;justify-self:start}
-.wz .wiz-footer-meta{grid-column:2;justify-self:center;white-space:nowrap;font:400 11px/1 'SF Mono',ui-monospace,Menlo,monospace;color:rgba(255,255,255,.40)}
-.wz .wiz-footer > .btn-g5{grid-column:3;justify-self:end}
-
-/* FORCE the wizard footer Continue button to spec white-glass — override
-   cb-website's bright-blue .btn-g5 which is the marketing-page CTA style */
-.wz .wiz-footer .btn{
-  min-width:120px!important;height:44px!important;padding:0 20px!important;
-  font:600 14px/1 'SF Pro Display',-apple-system,system-ui,sans-serif!important;
-  border-radius:12px!important;display:inline-flex!important;align-items:center!important;
-  justify-content:center!important;gap:8px!important;cursor:pointer!important
-}
-.wz .wiz-footer .btn-g5{
-  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04))!important;
-  color:#fff!important;border:0!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 4px 14px rgba(0,0,0,.20)!important;
-  position:relative;overflow:hidden;
-  text-shadow:none!important;
-  transform:none!important
-}
-.wz .wiz-footer .btn-g5::before{
-  content:"";position:absolute;top:0;left:22%;right:22%;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55) 50%,transparent);
-  pointer-events:none
-}
-.wz .wiz-footer .btn-g5:hover{
-  background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.06))!important;
-  transform:none!important
-}
-.wz .wiz-footer .btn-ghost{
-  background:rgba(255,255,255,.04)!important;
-  border:1px solid rgba(255,255,255,.10)!important;
-  color:rgba(255,255,255,.78)!important
-}
-.wz .wiz-footer .btn-ghost:hover{
-  background:rgba(255,255,255,.08)!important;
-  border-color:rgba(255,255,255,.18)!important;
-  color:#fff!important
-}
-.wz .wiz-title{font:600 60px/1.0 var(--font-display);letter-spacing:-.025em;color:#fff;margin:0;text-align:center}
-.wz .wiz-percent{font:500 13px/1.3 var(--font);color:rgba(255,255,255,.55);margin:20px 0 0;letter-spacing:0;text-align:center}
-.wz .qw-title{font:700 22px/1.2 var(--font-display);letter-spacing:-.012em;color:#fff;margin:0 auto 8px;text-align:center;max-width:600px}
-.wz .qw-sub{font:400 13.5px/1.5 var(--font);color:rgba(255,255,255,.55);margin:0 auto 22px;text-align:center;max-width:600px}
-.wz .wiz-footer-meta{flex:1 1 auto;text-align:center;font:400 11px/1 'SF Mono',ui-monospace,Menlo,monospace;color:rgba(255,255,255,.40)}
-@media (max-width:640px){.wz--md .wiz-hero{padding:32px 20px 14px}.wz--md .wiz-content{padding:36px 20px 12px}.wz--md .wiz-footer{padding:16px 20px 22px}.wz .wiz-title{font-size:42px;letter-spacing:-.02em}.wz .qw-sub{margin-bottom:30px}}
-.wz .wiz-progress{margin:10px auto 0;width:76%;height:7px;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 1px 0 rgba(0,0,0,.25);overflow:hidden;position:relative}
-.wz .wiz-progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#2997ff 0%,#5fb3ff 60%,#84c4ff 100%);box-shadow:0 0 12px rgba(41,151,255,.55),0 0 24px rgba(41,151,255,.25),inset 0 1px 0 rgba(255,255,255,.35);position:relative;overflow:hidden;transition:width 320ms ease}
-.wz .wiz-progress-fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 100%);transform:translateX(-100%);animation:wz-shimmer 2.2s ease-in-out infinite}
-@keyframes wz-shimmer{0%{transform:translateX(-100%)}60%{transform:translateX(100%)}100%{transform:translateX(100%)}}
-@media (prefers-reduced-motion:reduce){.wz .wiz-progress-fill::after{animation:none}}
-.wz .wiz-footer .btn{min-width:120px;height:44px;padding:0 20px;font-size:14px;border-radius:12px}
-.wz .wiz-footer .btn-g5{border-color:transparent;position:relative;overflow:hidden}
-.wz .wiz-footer .btn-g5::before{content:"";position:absolute;top:0;left:22%;right:22%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55) 50%,transparent);pointer-events:none}
-.wz .wiz-footer .btn-g5:hover{border-color:transparent}
-.wz .wiz-footer .btn-ghost{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.10);color:rgba(255,255,255,.78)}
-.wz .wiz-footer .btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#fff}
-@media (max-width:640px){
-  .wz--md .wiz-hero{padding:32px 20px 8px}
-  .wz--md .wiz-content{padding:24px 20px 8px}
-  .wz--md .wiz-footer{padding:16px 20px 22px}
-  .wz .wiz-title{font-size:42px;letter-spacing:-.02em}
-}
-
-/* HEADER NAV — overrides design-system .ws-page .cb-header-bar !important with same specificity; inline source order wins */
-.ws-page .cb-header-bar{position:relative!important;z-index:100!important;padding:24px 40px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;max-width:1320px!important;margin:0 auto!important;top:auto!important;background:transparent!important;border:none!important}
-.ws-page .cb-header-bar .cb-logo{display:flex!important;position:static!important;left:auto!important;top:auto!important;transform:none!important;align-items:center!important}
-.ws-page .cb-header-bar .cb-logo img{height:32px!important;width:auto!important;display:block!important}
-.ws-page .cb-header{display:flex!important;align-items:center!important;gap:6px!important;padding:8px!important;border-radius:100px!important;background:rgba(255,255,255,.03)!important;border:var(--glass-b)!important;position:static!important;top:auto!important;left:auto!important;transform:none!important;box-shadow:none!important;width:auto!important;height:auto!important}
-.ws-page .cb-header.nav-fixed{position:fixed!important;top:16px!important;left:50%!important;transform:translateX(-50%)!important;z-index:200!important;background:rgba(10,14,22,.72)!important;box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.1)!important}
-.ws-page .cb-nav-link{padding:10px 18px!important;border-radius:100px!important;font:500 14px/1 var(--font)!important;color:var(--txt2)!important;transition:color .2s,background .2s!important;background:transparent!important}
-.ws-page .cb-nav-link:hover{color:#fff!important;background:rgba(255,255,255,.06)!important}
-.ws-page .cb-nav-link.active{color:#fff!important;background:rgba(255,255,255,.08)!important}
-.ws-page .cb-nav-cta{padding:10px 20px!important;border-radius:100px!important;font:600 14px/1 var(--font)!important;color:#fff!important;background:linear-gradient(180deg,#2997ff 0%,#0071e3 100%)!important;box-shadow:0 1px 2px rgba(0,0,0,.3),0 4px 12px rgba(0,113,227,.35),inset 0 1px 0 rgba(255,255,255,.2)!important;transition:transform .2s,box-shadow .2s!important;border:none!important}
-.ws-page .cb-nav-cta:hover{transform:translateY(-1px)!important;box-shadow:0 2px 4px rgba(0,0,0,.35),0 8px 20px rgba(0,113,227,.5),inset 0 1px 0 rgba(255,255,255,.25)!important}
-
-/* SECTIONS + CONTAINERS */
-.ws-page .section{padding:96px 24px;position:relative}
-.ws-page .section:first-of-type{padding-top:40px}
-.ws-page .container{max-width:860px;margin:0 auto}
-
-/* FOOTER — full-width outer, inner glass card capped at 1200px */
-.ws-page .cb-footer{position:relative!important;padding:72px 40px 40px!important;margin-top:96px!important;color:#fff!important;background:transparent!important;width:100%!important;max-width:100%!important;border:none!important;border-top:none!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
-.ws-page .cb-ft-glass{position:relative;max-width:1240px;margin:0 auto;padding:40px 40px 28px;border-radius:var(--r-2xl,24px);background:linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.045) 22%,rgba(255,255,255,.055) 40%,rgba(255,255,255,.07) 60%,rgba(255,255,255,.09) 75%,rgba(255,255,255,.11) 88%,rgba(255,255,255,.14) 100%);border:var(--glass-b);border-top-color:var(--glass-bt);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 2px 12px rgba(0,0,0,.25)}
-.ws-page .cb-ft-grid{display:grid!important;grid-template-columns:1.6fr 1fr 1fr 1.2fr!important;gap:40px 48px!important;max-width:none!important;margin:0!important;align-items:start!important}
-.ws-page .cb-ft-brand{display:flex!important;flex-direction:column!important;gap:12px!important}
-.ws-page .cb-ft-brand .cb-logo{position:static!important;left:auto!important;top:auto!important;transform:none!important;display:inline-flex!important;align-items:center!important}
-.ws-page .cb-ft-brand .cb-logo img{height:28px!important;width:auto!important;display:block!important}
-.ws-page .cb-ft-tagline{font:400 14px/1.55 var(--font)!important;color:rgba(255,255,255,.75)!important;margin:4px 0 0!important;max-width:320px!important}
-.ws-page .cb-ft-social{display:flex!important;gap:10px!important;margin-top:10px!important}
-.ws-page .cb-ft-social a{width:36px!important;height:36px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;border-radius:10px!important;border:1px solid rgba(255,255,255,.15)!important;background:rgba(255,255,255,.05)!important;color:#fff!important;transition:background .15s,color .15s,transform .15s!important;transform:none!important}
-.ws-page .cb-ft-social a:hover{background:rgba(255,255,255,.1)!important;transform:translateY(-1px)!important}
-.ws-page .cb-ft-social svg{width:15px!important;height:15px!important;display:block!important}
-.ws-page .cb-ft-col{display:flex!important;flex-direction:column!important;gap:0!important}
-.ws-page .cb-ft-col-title{font:500 11px/1 var(--font)!important;text-transform:uppercase!important;letter-spacing:2px!important;color:var(--txt3)!important;margin-bottom:16px!important}
-.ws-page .cb-ft-col a{display:block!important;font:400 14px/1 var(--font)!important;color:var(--txt2)!important;padding:7px 0!important;text-decoration:none!important;transition:color .15s ease!important;line-height:1!important}
-.ws-page .cb-ft-col a:hover{color:#fff!important}
-.ws-page .cb-ft-contact-item{margin-bottom:10px!important}
-.ws-page .cb-ft-contact-item a{font:400 14px/1.4 var(--font)!important;color:rgba(255,255,255,.75)!important;text-decoration:none!important;transition:color .15s ease!important}
-.ws-page .cb-ft-contact-item a:hover{color:#fff!important}
-.ws-page .cb-ft-hours{font:400 13px/1.5 var(--font)!important;color:rgba(255,255,255,.6)!important;margin-top:10px!important;padding-top:0!important;border-top:none!important}
-.ws-page .cb-ft-hours strong{color:rgba(255,255,255,.85)!important;font-weight:500!important}
-.ws-page .cb-ft-divider{height:1px!important;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12) 20%,rgba(255,255,255,.12) 80%,transparent)!important;margin:32px 0 20px!important;max-width:none!important}
-.ws-page .cb-ft-legal{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important;flex-wrap:wrap!important;font:400 12px/1.5 var(--font)!important;color:rgba(255,255,255,.6)!important;max-width:none!important}
-.ws-page .cb-ft-legal span{color:rgba(255,255,255,.6)!important;font-size:12px!important}
-.ws-page .cb-ft-legal a{color:rgba(255,255,255,.6)!important;text-decoration:none!important;transition:color .15s ease!important;font-size:12px!important}
-.ws-page .cb-ft-legal a:hover{color:#fff!important}
-.ws-page .cb-ft-legal-links{display:flex!important;align-items:center!important;gap:10px!important}
-.ws-page .cb-ft-legal-sep{color:rgba(255,255,255,.3)!important}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   KILL THE FOOTER PAGE BREAK — tight gap so the body-bg fade-to-black
-   between wizard end + footer doesn't create a visible "band."
-   Footer card stays transparent so it blends straight into the page bg.
-   ═══════════════════════════════════════════════════════════════════════ */
-.ws-page .cb-footer{margin-top:0!important;padding:32px 40px 32px!important;background:transparent!important}
-.ws-page .cb-ft-glass{
-  background:transparent!important;
-  border:none!important;
-  border-top:none!important;
-  box-shadow:none!important;
-  padding:8px 40px 8px!important;
-}
-.ws-page .cb-ft-divider{
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.06) 20%,rgba(255,255,255,.06) 80%,transparent)!important;
-  margin:20px 0 12px!important;
-}
-/* Tighten the bottom of the wizard page itself so the wizard sits closer to the footer */
-.ftpage{padding-bottom:24px!important}
-
-/* ═══════════════════════════════════════════════════════════════════════
-   FREE TRIAL — clean split page (hero+bullets left · wizard right)
-   Standard website padding/spacing. No clutter.
-   ═══════════════════════════════════════════════════════════════════════ */
-.ftpage { margin:0 auto; padding:40px 24px 64px }
-.ftpage-grid { display:flex; justify-content:center; align-items:flex-start; gap:56px; max-width:1280px; margin:0 auto }
-.ftpage-left { padding-top:8px; width:380px; flex-shrink:0 }
-/* Stack hero blocks naturally with consistent spacing — no flex-stretch, no auto-margin gap */
-.ftpage-left-top { margin-bottom:28px }
-.ftpage-left-mid { margin-bottom:28px }
-.ftpage-left-bottom { /* sits right under, no big push */ }
-/* Right column = exactly the .wz--md spec width (760px) so the wizard doesn't overflow */
-.ftpage-right { width:760px; flex-shrink:0; position:sticky; top:24px }
-@media (max-width:1240px){
-  .ftpage-grid { flex-direction:column; align-items:center; gap:32px }
-  .ftpage-left, .ftpage-right { width:100%; max-width:760px }
-  .ftpage-right { position:relative; top:auto }
-}
-.ftpage-eyebrow { font:700 12px/1 var(--font-display); color:#2997ff; letter-spacing:.18em; text-transform:uppercase; margin:0 0 16px }
-.ftpage-h1 { font:700 44px/1.1 var(--font-display); letter-spacing:-.02em; color:#fff; margin:0 0 18px }
-.ftpage-sub { font:400 16px/1.55 var(--font); color:rgba(255,255,255,.72); margin:0 0 28px; max-width:440px }
-.ftpage-bullets { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px }
-.ftpage-bullets li { font:500 15px/1.4 var(--font); color:rgba(255,255,255,.88); padding-left:22px; position:relative }
-.ftpage-bullets li::before { content:""; position:absolute; left:0; top:8px; width:6px; height:6px; border-radius:50%; background:#2997ff; box-shadow:0 0 0 3px rgba(41,151,255,.18) }
-
-/* "How it works" mini block — fills the middle vertical space + reinforces wizard steps */
-.ftpage-hiw { margin:0; padding:20px 22px; border-radius:14px; background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.06) }
-.ftpage-hiw-title { font:600 11px/1 var(--font); color:rgba(255,255,255,.55); text-transform:uppercase; letter-spacing:.16em; margin:0 0 14px }
-.ftpage-hiw-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:14px; counter-reset:hiwstep }
-.ftpage-hiw-list li { counter-increment:hiwstep; padding-left:36px; position:relative; font:500 14px/1.4 var(--font); color:rgba(255,255,255,.88) }
-.ftpage-hiw-list li::before { content:counter(hiwstep); position:absolute; left:0; top:-1px; width:24px; height:24px; border-radius:50%; background:rgba(41,151,255,.12); border:1px solid rgba(41,151,255,.32); color:#2997ff; font:600 12px/24px var(--font-display); text-align:center }
-.ftpage-hiw-list li small { display:block; font:400 12.5px/1.5 var(--font); color:rgba(255,255,255,.55); margin-top:2px; font-weight:400 }
-
-.ftpage-trust { font:400 13px/1.5 var(--font); color:rgba(255,255,255,.5); margin:14px 0 0; max-width:420px }
-/* .ftpage-right re-declared above with sticky + right-justify — leaving this orphan rule out */
-@media (max-width:980px){
-  .ftpage { padding:32px 20px 56px }
-  .ftpage-grid { grid-template-columns:1fr; gap:36px }
-  .ftpage-left { padding-top:0 }
-  .ftpage-h1 { font-size:36px }
-  .ftpage-right { position:relative; top:auto }
-}
-
-/* RESPONSIVE */
-@media (max-width:860px){
-  .ws-page .cb-footer{padding:48px 20px 32px!important;margin-top:64px!important}
-  .ws-page .cb-ft-glass{padding:32px 24px 24px}
-  .ws-page .cb-ft-grid{grid-template-columns:1fr 1fr!important;gap:28px!important}
-  .ws-page .cb-ft-brand{grid-column:span 2!important}
-  .ws-page .cb-ft-legal{flex-direction:column!important;align-items:flex-start!important}
-}
-@media (max-width:820px){
-  .ws-page .cb-header-bar{padding:16px 20px!important;flex-wrap:wrap!important;gap:12px!important}
-  .ws-page .cb-header{order:3!important;width:100%!important;overflow-x:auto!important;scrollbar-width:none!important;justify-content:flex-start!important}
-  .ws-page .cb-header::-webkit-scrollbar{display:none}
-  .ws-page .section{padding:72px 20px}
-}
-@media (max-width:520px){
-  .ws-page .cb-ft-grid{grid-template-columns:1fr!important}
-  .ws-page .cb-ft-brand{grid-column:span 1!important}
-}
+.wz{position:relative;color:var(--txt);margin:0 auto;width:min(760px,92vw);background:var(--glass-3);border:1px solid var(--glass-border);border-top-color:var(--glass-border-top);border-radius:24px;box-shadow:var(--glass-shadow-lg);overflow:hidden;display:flex;flex-direction:column}
+.wz::before{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;z-index:2;background:linear-gradient(90deg,transparent,rgba(255,255,255,.30) 50%,transparent);pointer-events:none}
+.wz>*{position:relative;z-index:1}
+.wz-hero{padding:50px 40px 8px;text-align:center;flex-shrink:0}
+.wz-content{padding:32px 40px 8px;flex:1 1 auto;display:flex;flex-direction:column}
+.wz-footer{padding:22px 40px 28px;flex-shrink:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;border-top:1px solid var(--bord-1)}
+.wz-footer .cb-btn{justify-self:start;min-width:120px}
+.wz-footer .cb-btn[data-pos=right]{justify-self:end}
+.wz-meta{grid-column:2;justify-self:center;white-space:nowrap;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:11px;color:rgba(255,255,255,.40)}
+.wz-title{font-family:'SF Pro Display';font-size:clamp(42px,5vw,60px);font-weight:600;line-height:1.0;letter-spacing:-.025em;color:var(--txt);margin:0;text-align:center}
+.wz-percent{font-family:'SF Pro Text';font-size:13px;font-weight:500;color:rgba(255,255,255,.55);margin:20px 0 0;text-align:center}
+.wz-progress{margin:10px auto 0;width:76%;height:7px;border-radius:9999px;background:var(--surf-2);box-shadow:inset 0 1px 0 rgba(0,0,0,.25);overflow:hidden;position:relative}
+.wz-progress-fill{height:100%;border-radius:9999px;background:linear-gradient(90deg,#2997ff 0%,#5fb3ff 60%,#84c4ff 100%);box-shadow:0 0 12px rgba(41,151,255,.55),0 0 24px rgba(41,151,255,.25),inset 0 1px 0 rgba(255,255,255,.35);position:relative;overflow:hidden;transition:width 320ms var(--ease)}
+.wz-progress-fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 100%);transform:translateX(-100%);animation:wzShimmer 2.2s ease-in-out infinite}
+@keyframes wzShimmer{0%{transform:translateX(-100%)}60%{transform:translateX(100%)}100%{transform:translateX(100%)}}
+@media(prefers-reduced-motion:reduce){.wz-progress-fill::after{animation:none}}
+.qw-title{font-family:'SF Pro Display';font-size:22px;font-weight:700;line-height:1.2;letter-spacing:-.012em;color:var(--txt);margin:0 auto 8px;text-align:center;max-width:600px}
+.qw-sub{font-family:'SF Pro Text';font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.55);margin:0 auto 22px;text-align:center;max-width:600px}
+.q-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:520px){.q-row{grid-template-columns:1fr}}
+.q-field{margin-bottom:14px;display:flex;flex-direction:column;gap:6px}
+.q-optional{font-family:'SF Pro Text';font-size:12px;font-weight:400;color:var(--txt4);text-transform:none;letter-spacing:0;margin-left:4px}
+.q-error{font-family:'SF Pro Text';font-size:12px;color:#ff7a72;margin-top:6px;display:none}
+.q-field.invalid .q-error{display:block}
+.q-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.q-chip{padding:11px 18px;border-radius:9999px;font-family:'SF Pro Text';font-size:13.5px;font-weight:500;color:var(--txt3);background:var(--surf-2);border:1px solid var(--bord-2);cursor:pointer;transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),color var(--dur) var(--ease)}
+.q-chip:hover{background:var(--surf-3);border-color:var(--bord-3);color:var(--txt)}
+.q-chip.active{background:linear-gradient(180deg,rgba(41,151,255,.18),rgba(41,151,255,.06));border-color:rgba(41,151,255,.55);color:var(--txt)}
+.q-chip-lg{padding:14px 22px;font-size:14px}
+.q-result-icon{margin:0 auto 12px;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.q-result-icon.qualified{background:rgba(52,199,89,.14);border:1px solid rgba(52,199,89,.45)}
+.q-result-icon.qualified svg{stroke:#7ed99a}
+.q-result-icon.not-qualified{background:rgba(255,204,10,.14);border:1px solid rgba(255,204,10,.45)}
+.q-result-icon.not-qualified svg{stroke:#ffd863}
+.q-remind{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.q-remind input{padding:10px 14px;border-radius:12px;font-family:'SF Pro Text';font-size:13px;color:var(--txt);background:var(--surf-2);border:1px solid var(--bord-2);outline:none}
+.q-remind input:focus{border-color:rgba(41,151,255,.55);background:var(--surf-3)}
+.qw-step{display:none}
+.qw-step.active{display:block}
+.qw-sub-screen{display:none}
+.qw-sub-screen.active{display:block}
+.q-subq{display:none}
+.q-subq.active{display:block}
 </style>
 </head>
 <body>
-<div class="ws-page">
+<script>(function(){var h=location.hostname;if(h==='contentbug.io'||h==='www.contentbug.io'||h.endsWith('.msgsndr.com')||h.endsWith('.leadconnectorhq.com'))return;var map={'{{custom_values.home}}':'https://api.contentbug.io/home','{{custom_values.pricing}}':'https://api.contentbug.io/pricing','{{custom_values.portfolio}}':'https://api.contentbug.io/portfolio','{{custom_values.faq}}':'https://api.contentbug.io/faq','{{custom_values.free_trial}}':'https://api.contentbug.io/free-trial','{{custom_values.bookfreedemo}}':'https://api.contentbug.io/free-trial','{{custom_values.privacy_policy}}':'https://api.contentbug.io/privacy','{{custom_values.terms_of_service}}':'https://api.contentbug.io/terms','{{custom_values.content_portal_login}}':'https://api.contentbug.io/portal/login.html','{{custom_values.portal_login}}':'https://api.contentbug.io/portal/login.html','{{custom_values.business_email}}':'mailto:contentbug@contentbug.io','{{custom_values.business_phone}}':'tel:+13852007582'};document.querySelectorAll('a[href*="custom_values"]').forEach(function(a){var k=a.getAttribute('href');if(map[k])a.setAttribute('href',map[k])});})();</script>
 
-<!-- ═══ HEADER BAR (matches home.html exactly) ═══ -->
-<div class="cb-header-bar" id="cb-header">
-  <a href="https://contentbug.io/home" class="cb-logo">
-    <img src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug">
-  </a>
-  <nav class="cb-header" id="cbNav">
-    <a href="https://contentbug.io/home" class="cb-nav-link">Home</a>
-    <a href="https://contentbug.io/pricing" class="cb-nav-link">Pricing</a>
-    <a href="https://contentbug.io/portfolio" class="cb-nav-link">Portfolio</a>
-    <a href="https://api.contentbug.io/portal/login.html" class="cb-nav-link">Login</a>
-    <a href="https://api.contentbug.io/free-trial" class="cb-nav-cta active">Start Free Trial</a>
-  </nav>
-</div>
+<main class="cb-page">
 
-<!-- ═══ FREE TRIAL — clean split page (hero left · wizard right) ═══ -->
-<main class="ftpage" id="qShell">
-  <div class="ftpage-grid">
-    <!-- ═══ LEFT: hero + bullets + how-it-works + trust (flex column, distributed) ═══ -->
-    <section class="ftpage-left">
-      <div class="ftpage-left-top">
-        <p class="ftpage-eyebrow">Free Trial</p>
-        <h1 class="ftpage-h1">Get your first edit on us</h1>
-        <p class="ftpage-sub">See what working with Content Bug actually feels like — real editors, real quality, real turnaround. No card, no commitment.</p>
-      </div>
+<header class="cb-nav">
+  <div class="cb-nav__inner">
+    <a class="cb-nav__brand" href="https://api.contentbug.io/home" aria-label="Content Bug — Home">
+      <span class="cb-nav__bug"><img src="shared/assets/bug-white.png" alt="" width="18" height="18" decoding="async"></span>
+      <span class="cb-nav__name">Content Bug</span>
+    </a>
+    <nav class="cb-nav__links">
+      <a class="cb-nav__link" href="https://api.contentbug.io/home">Home</a>
+      <a class="cb-nav__link" href="https://api.contentbug.io/pricing">Pricing</a>
+      <a class="cb-nav__link" href="https://api.contentbug.io/portfolio">Portfolio</a>
+      <a class="cb-nav__link" href="https://api.contentbug.io/portal/login.html">Login</a>
+      <a class="cb-btn cb-btn--blue cb-btn--md cb-nav__cta" href="https://api.contentbug.io/free-trial">Start Free Trial</a>
+    </nav>
+  </div>
+</header>
 
-      <div class="ftpage-left-bottom">
-        <div class="ftpage-hiw">
-          <div class="ftpage-hiw-title">How it works</div>
-          <ol class="ftpage-hiw-list">
+<section class="cb-section" style="padding-top:40px">
+  <div class="cb-container">
+    <div class="ft-grid">
+
+      <section class="ft-left">
+        <p class="ft-eyebrow">Free Trial</p>
+        <h1 class="ft-h1">Get your first edit on us</h1>
+        <p class="ft-sub">See what working with Content Bug actually feels like — real editors, real quality, real turnaround. No card, no commitment.</p>
+        <article class="cb-card ft-hiw">
+          <div class="ft-hiw-title">How it works</div>
+          <ol class="ft-hiw-list">
             <li>Share your contact details<small>So we know where to send your free edit and updates.</small></li>
             <li>Answer 5 quick qualification questions<small>Tells us your content, volume, goals, and timing.</small></li>
             <li>Book your intro call to activate the trial<small>15-minute call. We email your free edit link right after.</small></li>
           </ol>
-        </div>
-        <p class="ftpage-trust">No card required. No pressure. Just a simple way to see if Content Bug is the right fit.</p>
-      </div>
-    </section>
+        </article>
+        <p class="ft-trust">No card required. No pressure. Just a simple way to see if Content Bug is the right fit.</p>
+      </section>
 
-    <!-- ═══ RIGHT: wizard ═══ -->
-    <aside class="ftpage-right">
-<div class="wz wz--md" style="margin:0;width:760px;max-width:100%">
-
-  <!-- Hero — big title + percent + heavy shimmer progress (matches portal/18-wizards.html spec) -->
-  <div class="wiz-hero">
-    <h2 class="wiz-title">Free Trial</h2>
-    <p class="wiz-percent" id="qPercent">0% complete</p>
-    <div class="wiz-progress"><div class="wiz-progress-fill" id="qProgressFill" style="width:0%"></div></div>
-  </div>
-
-  <!-- Dot rail hidden — the heavy shimmer bar in the hero is the canonical progress indicator now -->
-  <div class="wiz-step-rail" id="qRail" style="display:none"></div>
-
-  <!-- Scrollable Content -->
-
-  <!-- Scrollable Content -->
-  <div class="wiz-content" id="qBody" style="padding:24px">
-
-    <!-- ═══ STEP 1: Qualify (contact + 5 questions inline) ═══ -->
-    <div class="qw-step active" data-step="1">
-
-      <!-- Sub-screen 0: Contact details -->
-      <div class="qw-sub-screen" data-sub="0">
-        <div class="qw-title">Let's get started</div>
-        <div class="qw-sub">Tell us where to send your free trial details.</div>
-        <div style="width:100%;max-width:420px;text-align:left;margin:16px auto 0">
-          <div class="q-row">
-            <div class="q-field"><label>First Name *</label><input id="qFirstName" placeholder="First name" autocomplete="given-name"></div>
-            <div class="q-field"><label>Last Name *</label><input id="qLastName" placeholder="Last name" autocomplete="family-name"></div>
+      <aside>
+        <div class="wz">
+          <div class="wz-hero">
+            <h2 class="wz-title">Free Trial</h2>
+            <p class="wz-percent" id="qPercent">0% complete</p>
+            <div class="wz-progress"><div class="wz-progress-fill" id="qProgressFill" style="width:0%"></div></div>
           </div>
-          <div class="q-field"><label>Email *</label><input id="qEmail" type="email" placeholder="you@example.com" autocomplete="email"><div class="q-error" id="qEmailErr">Please enter a valid email address.</div></div>
-          <div class="q-field"><label>Phone <span class="q-optional">(optional)</span></label><input id="qPhone" type="tel" placeholder="(555) 123-4567" autocomplete="tel"></div>
-        </div>
-      </div>
 
-      <!-- Sub-screens 1-5: qualification questions (new spec — 5 q's: content/volume/goal/timing/footage) -->
-      <div class="qw-sub-screen" data-sub="q" style="display:none">
-        <div class="qw-sub" style="opacity:.6;margin-bottom:4px">Question <span id="qSubQNum">1</span> of 5</div>
-        <div class="qw-title" id="qSubQTitle">What kind of content do you need edited?</div>
-        <div class="qw-sub" id="qSubQHint">Pick all that apply.</div>
-        <div style="width:100%;max-width:480px;text-align:left;margin:16px auto 0">
+          <div class="wz-content" id="qBody">
 
-          <!-- Q1: Content type (multi) -->
-          <div class="q-subq" data-subq="0">
-            <div class="q-chips" id="qContentTypes" data-multi="true">
-              <div class="q-chip" data-val="Short-form videos">Short-form videos</div>
-              <div class="q-chip" data-val="Long-form videos">Long-form videos</div>
-              <div class="q-chip" data-val="Podcast clips">Podcast clips</div>
-              <div class="q-chip" data-val="YouTube videos">YouTube videos</div>
-              <div class="q-chip" data-val="Ads / promo videos">Ads / promo videos</div>
-              <div class="q-chip" data-val="Talking-head content">Talking-head content</div>
-              <div class="q-chip" data-val="Educational content">Educational content</div>
-              <div class="q-chip" data-val="Vlogs / lifestyle content">Vlogs / lifestyle content</div>
-              <div class="q-chip" data-val="Agency client edits">Agency client edits</div>
+            <div class="qw-step active" data-step="1">
+              <div class="qw-sub-screen active" data-sub="0">
+                <div class="qw-title">Let's get started</div>
+                <div class="qw-sub">Tell us where to send your free trial details.</div>
+                <div style="width:100%;max-width:420px;margin:16px auto 0">
+                  <div class="q-row">
+                    <div class="cb-field q-field"><label class="cb-label" for="qFirstName">First Name *</label><input class="cb-input" id="qFirstName" placeholder="First name" autocomplete="given-name"></div>
+                    <div class="cb-field q-field"><label class="cb-label" for="qLastName">Last Name *</label><input class="cb-input" id="qLastName" placeholder="Last name" autocomplete="family-name"></div>
+                  </div>
+                  <div class="cb-field q-field" id="qEmailField"><label class="cb-label" for="qEmail">Email *</label><input class="cb-input" id="qEmail" type="email" placeholder="you@example.com" autocomplete="email"><div class="q-error">Please enter a valid email address.</div></div>
+                  <div class="cb-field q-field"><label class="cb-label" for="qPhone">Phone <span class="q-optional">(optional)</span></label><input class="cb-input" id="qPhone" type="tel" placeholder="(555) 123-4567" autocomplete="tel"></div>
+                </div>
+              </div>
+
+              <div class="qw-sub-screen" data-sub="q">
+                <div class="qw-sub" style="opacity:.65;margin-bottom:4px">Question <span id="qSubQNum">1</span> of 5</div>
+                <div class="qw-title" id="qSubQTitle">What kind of content do you need edited?</div>
+                <div class="qw-sub" id="qSubQHint">Pick all that apply.</div>
+                <div style="width:100%;max-width:520px;margin:16px auto 0">
+                  <div class="q-subq active" data-subq="0">
+                    <div class="q-chips" id="qContentTypes" data-multi="true">
+                      <div class="q-chip" data-val="Short-form videos">Short-form videos</div>
+                      <div class="q-chip" data-val="Long-form videos">Long-form videos</div>
+                      <div class="q-chip" data-val="Podcast clips">Podcast clips</div>
+                      <div class="q-chip" data-val="YouTube videos">YouTube videos</div>
+                      <div class="q-chip" data-val="Ads / promo videos">Ads / promo videos</div>
+                      <div class="q-chip" data-val="Talking-head content">Talking-head content</div>
+                      <div class="q-chip" data-val="Educational content">Educational content</div>
+                      <div class="q-chip" data-val="Vlogs / lifestyle content">Vlogs / lifestyle content</div>
+                      <div class="q-chip" data-val="Agency client edits">Agency client edits</div>
+                    </div>
+                  </div>
+                  <div class="q-subq" data-subq="1">
+                    <div class="q-chips" id="qVolume">
+                      <div class="q-chip q-chip-lg" data-val="1-2x per week">1–2x per week</div>
+                      <div class="q-chip q-chip-lg" data-val="3-4x per week">3–4x per week</div>
+                      <div class="q-chip q-chip-lg" data-val="5-7x per week">5–7x per week</div>
+                    </div>
+                  </div>
+                  <div class="q-subq" data-subq="2">
+                    <div class="q-chips" id="qGoal">
+                      <div class="q-chip q-chip-lg" data-val="Post consistently">Post consistently</div>
+                      <div class="q-chip q-chip-lg" data-val="Grow audience">Grow audience</div>
+                      <div class="q-chip q-chip-lg" data-val="Save time">Save time</div>
+                      <div class="q-chip q-chip-lg" data-val="Improve quality">Improve quality</div>
+                      <div class="q-chip q-chip-lg" data-val="Increase sales">Increase sales</div>
+                    </div>
+                  </div>
+                  <div class="q-subq" data-subq="3">
+                    <div class="q-chips" id="qTiming">
+                      <div class="q-chip q-chip-lg" data-val="Right away">Right away</div>
+                      <div class="q-chip q-chip-lg" data-val="Within the next 2 weeks">Within the next 2 weeks</div>
+                      <div class="q-chip q-chip-lg" data-val="Within the next month">Within the next month</div>
+                      <div class="q-chip q-chip-lg" data-val="Just looking around">Just looking around</div>
+                    </div>
+                  </div>
+                  <div class="q-subq" data-subq="4">
+                    <div class="q-chips" id="qFootage">
+                      <div class="q-chip q-chip-lg" data-val="Yes I have footage ready">Yes, I have footage ready</div>
+                      <div class="q-chip q-chip-lg" data-val="It is not perfect but it will do">It's not perfect, but it will do</div>
+                      <div class="q-chip q-chip-lg" data-val="No I am still planning">No, I'm still planning</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="qw-sub-screen" data-sub="dq">
+                <div class="q-result-icon not-qualified"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" width="32" height="32"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+                <div class="qw-title">Not quite the right fit — yet.</div>
+                <div class="qw-sub" id="qDqTip">Keep building and come back when you have footage ready.</div>
+                <div style="font-family:'SF Pro Text';font-size:13px;color:var(--txt4);margin:20px 0 12px;text-align:center">Want us to let you know when you're ready?</div>
+                <div class="q-remind"><input id="qRemindEmail" type="email" placeholder="your@email.com"><button class="cb-btn cb-btn--blue cb-btn--md" onclick="qRemind()">Remind Me</button></div>
+              </div>
             </div>
+
+            <div class="qw-step" data-step="2">
+              <div class="q-result-icon qualified"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" width="26" height="26"><polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="qw-title">You qualify for a free trial edit</div>
+              <div class="qw-sub">You look like a strong fit for Content Bug. Book a quick intro call to activate your free trial and get your first edit moving.</div>
+              <div style="width:100%;max-width:780px;margin:18px auto 0;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.2);border:1px solid var(--bord-2)">
+                <iframe id="qIntroCallFrame" src="https://links.contentbug.io/widget/booking/jMEjaEOpcdbZDvcQFXGY" style="width:100%;border:none;overflow:hidden;display:block;min-height:720px;background:transparent" scrolling="no" loading="lazy" title="Book Your Intro Call"></iframe>
+              </div>
+              <p style="font-family:'SF Pro Text';font-size:12px;color:var(--txt4);text-align:center;margin:14px auto 0;max-width:480px">No card required. Your first edit is free on us.</p>
+            </div>
+
           </div>
 
-          <!-- Q2: Volume (single) -->
-          <div class="q-subq" data-subq="1" style="display:none">
-            <div class="q-chips" id="qVolume">
-              <div class="q-chip" data-val="1-2x per week">1–2x per week</div>
-              <div class="q-chip" data-val="3-4x per week">3–4x per week</div>
-              <div class="q-chip" data-val="5-7x per week">5–7x per week</div>
-            </div>
-          </div>
-
-          <!-- Q3: Main goal (single) -->
-          <div class="q-subq" data-subq="2" style="display:none">
-            <div class="q-chips" id="qGoal">
-              <div class="q-chip" data-val="Post consistently">Post consistently</div>
-              <div class="q-chip" data-val="Grow audience">Grow audience</div>
-              <div class="q-chip" data-val="Save time">Save time</div>
-              <div class="q-chip" data-val="Improve quality">Improve quality</div>
-              <div class="q-chip" data-val="Increase sales">Increase sales</div>
-            </div>
-          </div>
-
-          <!-- Q4: Timing (single) -->
-          <div class="q-subq" data-subq="3" style="display:none">
-            <div class="q-chips" id="qTiming">
-              <div class="q-chip q-chip-lg" data-val="Right away">Right away</div>
-              <div class="q-chip q-chip-lg" data-val="Within the next 2 weeks">Within the next 2 weeks</div>
-              <div class="q-chip q-chip-lg" data-val="Within the next month">Within the next month</div>
-              <div class="q-chip q-chip-lg" data-val="Just looking around">Just looking around</div>
-            </div>
-          </div>
-
-          <!-- Q5: Footage readiness (single) -->
-          <div class="q-subq" data-subq="4" style="display:none">
-            <div class="q-chips" id="qFootage">
-              <div class="q-chip q-chip-lg" data-val="Yes I have footage ready">Yes, I have footage ready</div>
-              <div class="q-chip q-chip-lg" data-val="It is not perfect but it will do">It's not perfect, but it will do</div>
-              <div class="q-chip q-chip-lg" data-val="No I am still planning">No, I'm still planning</div>
-            </div>
+          <div class="wz-footer" id="qFoot">
+            <button class="cb-btn cb-btn--ghost" id="qBack" onclick="qPrev()" hidden>Back</button>
+            <span class="wz-meta" id="qMeta"></span>
+            <button class="cb-btn cb-btn--blue" id="qNext" data-pos="right" onclick="qNext()">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg></button>
           </div>
 
         </div>
-      </div>
-
-      <!-- Sub-screen 6: Disqualified dead-end -->
-      <div class="qw-sub-screen" data-sub="dq" style="display:none">
-        <div class="q-result-icon not-qualified">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#f5d060" stroke-width="2" width="32" height="32"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        </div>
-        <div class="qw-title">Not quite the right fit &mdash; yet.</div>
-        <div class="qw-sub" id="qDqTip">Keep building and come back when you have footage ready.</div>
-        <div style="font:400 13px/1.5 var(--font);color:rgba(255,255,255,.5);margin:20px 0 12px">Want us to let you know when you're ready?</div>
-        <div class="q-remind" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-          <input class="q-field" id="qRemindEmail" type="email" placeholder="your@email.com" style="padding:10px 12px;border-radius:var(--r-lg);font:400 13px/1 var(--font);color:var(--txt);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);outline:none">
-          <button class="btn btn-g5 btn-sm" onclick="qRemind()">Remind Me</button>
-        </div>
-      </div>
+      </aside>
 
     </div>
-
-    <!-- STEP 2 REMOVED — submit-edit moved into /portal as trial-submit-modal.js.
-         On qualified, /api/trial/submit issues a session cookie and returns a
-         redirect URL; we location.replace() straight into the portal. The modal
-         there handles footage upload + blueprint pick/build. See docs/trial-portal-states.md. -->
-
-    <!-- ═══ STEP 2: Qualified — book your free trial intro call (GHL calendar embed) ═══ -->
-    <div class="qw-step" data-step="2">
-      <div class="q-result-icon qualified" style="margin:0 auto 12px;width:54px;height:54px;border-radius:50%;background:rgba(126,203,161,.12);border:1px solid rgba(126,203,161,.45);display:flex;align-items:center;justify-content:center">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#7ecba1" stroke-width="2.5" width="26" height="26"><polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="qw-title">You qualify for a free trial edit</div>
-      <div class="qw-sub">You look like a strong fit for Content Bug. Book a quick intro call to activate your free trial and get your first edit moving.</div>
-      <div style="width:100%;max-width:780px;margin:18px auto 0;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08)">
-        <iframe id="qIntroCallFrame"
-          src="https://links.contentbug.io/widget/booking/jMEjaEOpcdbZDvcQFXGY"
-          style="width:100%;border:none;overflow:hidden;display:block;min-height:720px;background:transparent"
-          scrolling="no"
-          loading="lazy"
-          title="Book Your Intro Call"></iframe>
-      </div>
-      <p style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.5);text-align:center;margin:14px auto 0;max-width:480px">No card required. Your first edit is free on us.</p>
-    </div>
-
-    <!-- STEP 3 removed: bookIntroCall() now hard-redirects to /intro-call-booked.
-         The standalone confirmation page is the single source of truth. -->
-
-
   </div>
+</section>
 
-  <!-- Footer: Back (left ghost) · meta (center mono) · Continue (right g5 + chevron) — matches 18-wizards.html exactly -->
-  <div class="wiz-footer" id="qFoot">
-    <button class="btn btn-ghost" id="qBack" onclick="qPrev()" hidden>Back</button>
-    <span class="wiz-footer-meta" id="qMeta"></span>
-    <button class="btn btn-g5" id="qNext" onclick="qNext()">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg></button>
-  </div>
-
-</div>
-    </aside>
-  </div>
-</main>
-
-<!-- ═══ FOOTER (Desktop home.html) ═══ -->
-<footer class="cb-footer" id="cb-footer">
-  <div class="cb-ft-glass">
-    <div class="cb-ft-grid">
-      <div class="cb-ft-brand">
-        <a href="https://api.contentbug.io/home" class="cb-logo">
-          <img loading="lazy" decoding="async" src="https://api.contentbug.io/website/assets/logo-wordmark-nav.png" alt="Content Bug" style="height:28px;filter:brightness(0) invert(1)">
+<footer class="cb-footer">
+  <div class="cb-container">
+    <div class="cb-footer__grid">
+      <div class="cb-footer__col">
+        <a class="cb-nav__brand" href="https://api.contentbug.io/home" style="margin-bottom:14px">
+          <span class="cb-nav__bug"><img src="shared/assets/bug-white.png" alt="" width="18" height="18"></span>
+          <span class="cb-nav__name">Content Bug</span>
         </a>
-        <div class="cb-ft-tagline">Helping you edit less, create more, and scale faster.</div>
-        <div class="cb-ft-social">
-          <a href="https://x.com/contentbug" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-          <a href="https://instagram.com/contentbug" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-          <a href="https://youtube.com/@contentbug" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1C5.12 19.56 12 19.56 12 19.56s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor" stroke="none"/></svg></a>
-          <a href="https://tiktok.com/@contentbug" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
-          <a href="https://facebook.com/contentbug" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
-        </div>
+        <p class="cb-meta" style="max-width:280px;line-height:1.55">Helping you edit less, create more, and scale faster.</p>
       </div>
-      <div class="cb-ft-col">
-        <div class="cb-ft-col-title">Explore</div>
-        <a href="https://api.contentbug.io/home">Home</a>
-        <a href="https://api.contentbug.io/pricing">Pricing</a>
-        <a href="https://api.contentbug.io/portfolio">Portfolio</a>
-      </div>
-      <div class="cb-ft-col">
-        <div class="cb-ft-col-title">Company</div>
-        <a href="https://api.contentbug.io/faq">FAQ</a>
-        <a href="mailto:contentbug@contentbug.io?subject=Careers%20Inquiry">Careers</a>
-        <a href="https://api.contentbug.io/free-trial">Start Free Trial</a>
-        <a href="https://api.contentbug.io/portal/login.html">Studio Login</a>
-      </div>
-      <div class="cb-ft-col">
-        <div class="cb-ft-col-title">Contact</div>
-        <div class="cb-ft-contact-item"><a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a></div>
-        <div class="cb-ft-contact-item"><a href="tel:+13852007582">+1 (385) 200-7582</a></div>
-        <div class="cb-ft-hours"><strong>Hours:</strong> Mon&ndash;Fri 9am&ndash;6pm MST</div>
-      </div>
+      <div class="cb-footer__col"><h4>Explore</h4><ul><li><a href="https://api.contentbug.io/home">Home</a></li><li><a href="https://api.contentbug.io/pricing">Pricing</a></li><li><a href="https://api.contentbug.io/portfolio">Portfolio</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Company</h4><ul><li><a href="https://api.contentbug.io/faq">FAQ</a></li><li><a href="https://api.contentbug.io/free-trial">Start Free Trial</a></li><li><a href="https://api.contentbug.io/portal/login.html">Studio Login</a></li></ul></div>
+      <div class="cb-footer__col"><h4>Contact</h4><ul><li><a href="mailto:contentbug@contentbug.io">contentbug@contentbug.io</a></li><li><a href="tel:+13852007582">+1 (385) 200-7582</a></li><li style="color:var(--txt4);font-size:13px;line-height:1.5"><strong style="color:var(--txt3);font-weight:500">Hours:</strong> Mon–Fri 9am–6pm MST</li></ul></div>
     </div>
-    <div class="cb-ft-divider"></div>
-    <div class="cb-ft-legal">
-      <span>&copy; 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
-      <div class="cb-ft-legal-links">
-        <a href="https://api.contentbug.io/privacy">Privacy Policy</a>
-        <span class="cb-ft-legal-sep">&middot;</span>
-        <a href="https://api.contentbug.io/terms">Terms of Service</a>
-      </div>
+    <div class="cb-footer__bottom">
+      <span>© 2026 Content Bug Video Editing, LLC. All rights reserved.</span>
+      <span style="display:inline-flex;gap:14px;align-items:center"><a href="https://api.contentbug.io/privacy">Privacy Policy</a><span style="color:var(--txt4)">·</span><a href="https://api.contentbug.io/terms">Terms of Service</a></span>
     </div>
   </div>
 </footer>
 
-</div><!-- /.ws-page -->
-
-<!-- Sticky nav — pill floats after scroll past header -->
-<script>
-(function(){
-  var bar=document.querySelector('.cb-header-bar');
-  if(!bar)return;
-  var sentinel=document.createElement('div');
-  sentinel.style.cssText='height:0;width:0;visibility:hidden';
-  bar.parentNode.insertBefore(sentinel,bar.nextSibling);
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!e.isIntersecting){bar.querySelector('.cb-header').classList.add('nav-fixed');}
-      else{bar.querySelector('.cb-header').classList.remove('nav-fixed');}
-    });
-  },{threshold:0});
-  io.observe(bar);
-})();
-</script>
-
-<!-- GHL booking widget embed (auto-resize + postMessage on book) -->
-<script src="https://links.contentbug.io/js/form_embed.js" type="text/javascript"></script>
-
-<!-- ═══ WIZARD JS — 3-step state machine (Qualify → Calendar → Confirmation) ═══ -->
+</main>
+<script src="https://links.contentbug.io/js/form_embed.js"></script>
+<script src="shared/site.js" defer></script>
 <script>
 (function(){
   'use strict';
+  var state={step:1,subQ:0,contact:{first:'',last:'',email:'',phone:''},answers:{contentTypes:[],volume:'',goal:'',timing:'',footage:''},score:0,qualified:false,submittedContact:false,introCallBooked:false};
+  var $=function(id){return document.getElementById(id);};
+  var qFoot=$('qFoot'),qBack=$('qBack'),qNext=$('qNext'),qBody=$('qBody');
 
-  var state = {
-    step: 1,          // 1 = Qualify | 2 = Calendar | 3 = Booking confirmed
-    subQ: 0,          // within step 1: 0 = contact | 1-5 = questions | 'dq' = disqualified
-    contact: { first:'', last:'', email:'', phone:'' },
-    answers: { contentTypes:[], volume:'', goal:'', timing:'', footage:'' },
-    score: 0, qualified:false,
-    submittedContact:false, introCallBooked:false,
-    bookedSlot:''     // human-readable booked datetime once GHL posts back
-  };
-  var $ = function(id){ return document.getElementById(id); };
-  var qRail = $('qRail'), qFoot = $('qFoot'), qBack = $('qBack'), qNext = $('qNext'), qBody = $('qBody');
-
-  function renderRail(){
-    if(!qRail) return;
-    var html = '';
-    for(var i=1;i<=3;i++){
-      var cls = 'wiz-step-dot';
-      if(state.step > i) cls += ' complete';
-      else if(state.step === i) cls += ' active';
-      html += '<div class="'+cls+'"></div>';
-      if(i < 3) html += '<div class="wiz-step-line'+(state.step > i ? ' complete' : '')+'"></div>';
-    }
-    qRail.innerHTML = html;
-
-    /* Spec: contact (0%) → questions (17/33/50/67/83%) → qualified (100%) → booked (100%) */
-    var pct = 0;
-    if(state.step === 1){
-      if(state.subQ === 0) pct = 0;                                       /* contact */
-      else if(state.subQ === 'dq') pct = 83;                              /* disqualified at end of qs */
-      else pct = Math.round((state.subQ / 6) * 100);                      /* qs 1-5 → 17/33/50/67/83 */
-    } else if(state.step === 2){ pct = 100; }                              /* qualified, book intro call */
-    /* step 3 removed — bookIntroCall() redirects to /intro-call-booked */
-    var pf = document.getElementById('qProgressFill');
-    var pe = document.getElementById('qPercent');
-    if(pf) pf.style.width = pct + '%';
-    if(pe) pe.textContent = pct + '% complete';
-  }
-  function showStep(){
-    document.querySelectorAll('.qw-step').forEach(function(el){ el.classList.remove('active'); el.style.display='none'; });
-    var cur = document.querySelector('.qw-step[data-step="'+String(state.step)+'"]');
-    if(cur){ cur.classList.add('active'); cur.style.display=''; }
-    renderRail(); renderFooter();
-    if(qBody) qBody.scrollTop = 0;
-  }
-  function showSub(sub){
-    state.subQ = sub;
-    document.querySelectorAll('.qw-step[data-step="1"] .qw-sub-screen').forEach(function(el){ el.style.display='none'; });
-    if(sub === 0){ document.querySelector('.qw-sub-screen[data-sub="0"]').style.display = ''; }
-    else if(sub === 'dq'){ document.querySelector('.qw-sub-screen[data-sub="dq"]').style.display = ''; }
-    else {
-      document.querySelector('.qw-sub-screen[data-sub="q"]').style.display = '';
-      document.querySelectorAll('.q-subq').forEach(function(el){ el.style.display='none'; });
-      var cur = document.querySelector('.q-subq[data-subq="'+(sub-1)+'"]');
-      if(cur) cur.style.display = '';
-      $('qSubQNum').textContent = sub;
-      var titles = ['What kind of content do you need edited?','How often do you need videos edited?',"What's your main goal with your content right now?",'How soon do you want to hand off your video editing?','If we offered you a free trial edit today, would you have footage ready to send?'];
-      var hints  = ['Pick all that apply.','Pick the closest match.','Pick what matters most right now.','Pick the closest fit.','Pick what best describes your situation.'];
-      $('qSubQTitle').textContent = titles[sub-1];
-      $('qSubQHint').textContent  = hints[sub-1];
-    }
-    renderFooter();
-  }
-  function renderFooter(){
-    if(!qFoot) return;
-    qFoot.style.display = '';
-    /* Back button visible on questions, calendar, and disqualified — hidden only on first contact step */
-    qBack.hidden = (state.step === 1 && state.subQ === 0);
-    /* Hide Next on step 2 (calendar — user books inside iframe) and on disqualified */
-    if(state.step === 2 || (state.step === 1 && state.subQ === 'dq')){ qNext.hidden = true; }
-    else {
-      qNext.hidden = false;
-      var CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>';
-      var label = 'Continue';
-      /* Spec: button label morphs per step */
-      if(state.step === 1 && state.subQ === 5) label = 'See If I Qualify';
-      qNext.innerHTML = label + ' ' + CHEVRON;
-    }
-    /* Footer meta — matches the new spec: contact = step 1, qualification = step 2, qualified = step 3 */
-    var qm = document.getElementById('qMeta');
-    if(qm){
-      if(state.step === 1){
-        if(state.subQ === 0)        qm.textContent = 'Step 1 / 3 · contact details';
-        else if(state.subQ === 'dq') qm.textContent = 'Step 2 / 3 · not the right fit yet';
-        else                         qm.textContent = 'Step 2 / 3 · question ' + state.subQ + ' of 5';
-      } else if(state.step === 2){ qm.textContent = 'Step 3 / 3 · qualified — book your intro call'; }
-      else qm.textContent = '';
-    }
-    var v = qValid();
-    qNext.disabled = !v;
-    qNext.style.opacity = v ? '1' : '.5';
-    qNext.style.pointerEvents = v ? '' : 'none';
-  }
-  function qValid(){
-    if(state.step === 1){
-      if(state.subQ === 0){
-        var first=$('qFirstName').value.trim(), last=$('qLastName').value.trim(), email=$('qEmail').value.trim();
-        return !!(first && last && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
-      }
-      if(state.subQ === 1) return state.answers.contentTypes.length > 0;
-      if(state.subQ === 2) return !!state.answers.volume;
-      if(state.subQ === 3) return !!state.answers.goal;
-      if(state.subQ === 4) return !!state.answers.timing;
-      if(state.subQ === 5) return !!state.answers.footage;
-      if(state.subQ === 'dq') return false;
-    }
-    if(state.step === 2) return false;   // user books inside the GHL iframe
-    return true;
-  }
-  function computeScore(){
-    /* Scoring per new spec — content/volume/goal are baseline points, timing
-       and footage are weighted because they predict free-trial conversion. */
-    var s = 0;
-    if(state.answers.contentTypes.length) s += 15;
-    if(state.answers.volume)              s += 15;
-    if(state.answers.goal)                s += 15;
-    /* Timing weight */
-    if      (state.answers.timing === "Right away")               s += 30;
-    else if (state.answers.timing === "Within the next 2 weeks")  s += 25;
-    else if (state.answers.timing === "Within the next month")    s += 15;
-    else if (state.answers.timing === "Just looking around")      s += 5;
-    /* Footage weight */
-    if      (state.answers.footage === "Yes I have footage ready")             s += 25;
-    else if (state.answers.footage === "It is not perfect but it will do")     s += 20;
-    else if (state.answers.footage === "No I am still planning")               s += 5;
-    state.score = s;
-    /* Qualified gates: must hit 70+ AND not be window-shopping AND have some footage */
-    state.qualified = (s >= 70)
-                   && state.answers.timing !== "Just looking around"
-                   && state.answers.footage !== "No I am still planning";
-    return state.qualified;
-  }
-  function wireChips(){
-    document.querySelectorAll('.q-chips').forEach(function(group){
-      var multi = group.getAttribute('data-multi') === 'true';
-      group.addEventListener('click', function(ev){
-        var chip = ev.target.closest('.q-chip'); if(!chip) return;
-        if(multi){ chip.classList.toggle('active'); }
-        else { group.querySelectorAll('.q-chip').forEach(function(c){ c.classList.remove('active'); }); chip.classList.add('active'); }
-        if(group.id === 'qContentTypes'){
-          state.answers.contentTypes = Array.from(group.querySelectorAll('.q-chip.active')).map(function(c){ return c.getAttribute('data-val'); });
-        } else {
-          var active = group.querySelector('.q-chip.active');
-          var val = active ? active.getAttribute('data-val') : '';
-          if(group.id === 'qVolume')  state.answers.volume = val;
-          if(group.id === 'qGoal')    state.answers.goal   = val;
-          if(group.id === 'qTiming')  state.answers.timing = val;
-          if(group.id === 'qFootage') state.answers.footage= val;
-        }
-        renderFooter();
-      });
-    });
-  }
-  function wireContact(){
-    ['qFirstName','qLastName','qEmail','qPhone'].forEach(function(id){
-      var el = $(id); if(!el) return;
-      el.addEventListener('input', function(){
-        state.contact.first = $('qFirstName').value.trim();
-        state.contact.last  = $('qLastName').value.trim();
-        state.contact.email = $('qEmail').value.trim();
-        state.contact.phone = $('qPhone').value.trim();
-        renderFooter();
-      });
-    });
-  }
-  function submitContact(){
-    if(state.submittedContact) return Promise.resolve(null);
-    state.submittedContact = true;
-    return fetch('/api/trial/submit', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      credentials:'include',
-      body: JSON.stringify({
-        first_name: state.contact.first, last_name: state.contact.last,
-        email: state.contact.email, phone: state.contact.phone,
-        content_types: state.answers.contentTypes,
-        lead_content_types: (state.answers.contentTypes || []).join(', '),
-        lead_volume: state.answers.volume,
-        lead_main_goal: state.answers.goal,
-        lead_handoff_timing: state.answers.timing,
-        lead_footage_readiness: state.answers.footage,
-        lead_qualification_score: state.score,
-        /* legacy keys kept for back-compat with existing GHL workflows */
-        post_freq: state.answers.volume, goal: state.answers.goal,
-        footage: state.answers.footage, volume: state.answers.timing,
-        score: state.score, qualified: state.qualified, source: 'free-trial-wizard'
-      })
-    }).then(function(r){ return r.ok ? r.json() : null; })
-      .catch(function(){ state.submittedContact = false; return null; });
-  }
-  function qDq(){
-    var tip = 'Keep building and come back when you have footage ready.';
-    if(state.answers.footage === 'Not yet' || state.answers.footage === "I'm still filming") tip = "We'll be here when your footage is ready. Come back and pick up right where you left off.";
-    var el = $('qDqTip'); if(el) el.textContent = tip;
-    submitContact();
-    showSub('dq');
-  }
-  window.qRemind = function(){
-    var email = ($('qRemindEmail')||{}).value || '';
-    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert('Please enter a valid email.'); return; }
-    fetch('/api/trial/remind', { method:'POST', headers:{'Content-Type':'application/json'}, credentials:'include', body: JSON.stringify({ email: email, contact_email: state.contact.email }) })
-      .finally(function(){ var btn = document.querySelector('.q-remind .btn'); if(btn){ btn.textContent = "We'll email you."; btn.disabled = true; btn.style.opacity='.6'; } });
-  };
-  /* GHL calendar iframe is hardcoded in HTML (jMEjaEOpcdbZDvcQFXGY = Free Trial Intro Call).
-     Pre-fill name/email by appending query params on first show — the GHL widget
-     auto-populates matching fields if the param keys match. */
-  function prefillCalendar(){
-    var fr = $('qIntroCallFrame'); if(!fr) return;
-    /* Don't reset src if user already started filling out the iframe */
-    if(fr.dataset.prefilled === '1') return;
-    var base = fr.src.split('?')[0];
-    var p = new URLSearchParams({
-      first_name: state.contact.first, last_name: state.contact.last,
-      email: state.contact.email, phone: state.contact.phone
-    });
-    fr.src = base + '?' + p.toString();
-    fr.dataset.prefilled = '1';
-  }
-  function bookIntroCall(appointmentDateTime, tz){
-    if(state.introCallBooked) return;
-    state.introCallBooked = true;
-    /* Fire the server hook (Airtable + GHL trial_intro_call_booked webhook),
-       then hard-redirect to the standalone /intro-call-booked confirmation
-       page. Single source of truth — no in-wizard step 3 fallback. The GHL
-       calendar's formSubmitRedirectURL also points at /intro-call-booked,
-       so even if this postMessage handler doesn't fire, the user still
-       lands on the same page. */
-    fetch('/api/trial/book-intro-call', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      credentials:'include',
-      body: JSON.stringify({ email: state.contact.email, appointmentDateTime: appointmentDateTime || '', appointmentTimezone: tz || '' })
-    }).finally(function(){
-      // Pass contact context to the confirmation page so it personalizes
-      // the headline + threads contactId/email into the CTA links.
-      var c = state.contact || {};
-      var p = new URLSearchParams();
-      if(c.first) p.set('first_name', c.first);
-      if(c.last)  p.set('last_name',  c.last);
-      if(c.email) p.set('email',      c.email);
-      if(c.phone) p.set('phone',      c.phone);
-      var qs = p.toString();
-      window.location.replace('/intro-call-booked' + (qs ? '?' + qs : ''));
-    });
-  }
-  /* GHL booking widgets postMessage on appointment confirmation. Handle the
-     known shapes: form_embed.js fires { type, payload } or { event, ... }.
-     We listen broadly to cover GHL's varying conventions. */
-  window.addEventListener('message', function(ev){
-    if(!ev || !ev.data) return;
-    var d = ev.data;
-    var t = (d && (d.type || d.event)) || '';
-    var isBook = (
-      t === 'appointment_booked' ||
-      t === 'appointmentBooked' ||
-      t === 'introCallBooked' ||
-      t === 'booking_confirmed' ||
-      t === 'leadconnector:appointment_booked' ||
-      (d && d.event === 'calendly.event_scheduled') ||
-      (typeof t === 'string' && t.toLowerCase().indexOf('appointment') >= 0 && t.toLowerCase().indexOf('book') >= 0)
-    );
-    if(isBook){
-      var appt = (d.appointmentDateTime || d.startTime || d.start_time
-                  || (d.payload && (d.payload.startTime || d.payload.start_time))
-                  || (d.payload && d.payload.event && d.payload.event.start_time)
-                  || '');
-      var tz   = (d.timezone || d.appointmentTimezone || (d.payload && (d.payload.timezone || d.payload.tz)) || '');
-      bookIntroCall(appt, tz);
-    }
-  });
-  window.qNext = function(){
-    if(!qValid()) return;
-    if(state.step === 1){
-      if(state.subQ === 0){ showSub(1); return; }
-      if(state.subQ >= 1 && state.subQ <= 4){ showSub(state.subQ + 1); return; }
-      if(state.subQ === 5){
-        computeScore();
-        if(!state.qualified){ qDq(); return; }
-        /* Qualified → submit contact (creates Airtable + GHL records, fires
-           lead-qualified webhook), then advance to Step 2: GHL calendar.
-           After they book, postMessage handler fires bookIntroCall() → hard
-           redirect to /intro-call-booked (standalone confirmation page). */
-        var btn = $('qNext');
-        if(btn){ btn.disabled = true; btn.style.opacity='.6'; btn.textContent = 'Loading your calendar…'; }
-        submitContact().finally(function(){
-          state.step = 2; showStep();
-          /* Pre-fill name/email into the GHL widget */
-          setTimeout(prefillCalendar, 60);
-          if(btn){ btn.disabled=false; btn.style.opacity=''; btn.innerHTML='Continue &rarr;'; }
-        });
-      }
-    }
-  };
-  window.qPrev = function(){
-    if(state.step === 1){
-      if(state.subQ === 'dq'){ showSub(5); return; }
-      if(state.subQ > 0){ showSub(state.subQ - 1); return; }
-    }
-    if(state.step === 2){ state.step = 1; showStep(); showSub(5); return; }
-    /* Step 3 (booking confirmed) — no back; user clicks Go to Portal */
-  };
-  wireChips(); wireContact(); showStep(); showSub(0);
+  function setProgress(){var pct=0;if(state.step===1){if(state.subQ===0)pct=0;else if(state.subQ==='dq')pct=83;else pct=Math.round((state.subQ/6)*100);}else if(state.step===2){pct=100;}var pf=$('qProgressFill'),pe=$('qPercent');if(pf)pf.style.width=pct+'%';if(pe)pe.textContent=pct+'% complete';}
+  function showStep(){document.querySelectorAll('.qw-step').forEach(function(el){el.classList.remove('active');});var cur=document.querySelector('.qw-step[data-step="'+state.step+'"]');if(cur)cur.classList.add('active');setProgress();renderFooter();if(qBody)qBody.scrollTop=0;}
+  function showSub(sub){state.subQ=sub;document.querySelectorAll('.qw-step[data-step="1"] .qw-sub-screen').forEach(function(el){el.classList.remove('active');});if(sub===0){document.querySelector('.qw-sub-screen[data-sub="0"]').classList.add('active');}else if(sub==='dq'){document.querySelector('.qw-sub-screen[data-sub="dq"]').classList.add('active');}else{document.querySelector('.qw-sub-screen[data-sub="q"]').classList.add('active');document.querySelectorAll('.q-subq').forEach(function(el){el.classList.remove('active');});var cur=document.querySelector('.q-subq[data-subq="'+(sub-1)+'"]');if(cur)cur.classList.add('active');$('qSubQNum').textContent=sub;var titles=['What kind of content do you need edited?','How often do you need videos edited?',"What's your main goal with your content right now?",'How soon do you want to hand off your video editing?','If we offered you a free trial edit today, would you have footage ready to send?'];var hints=['Pick all that apply.','Pick the closest match.','Pick what matters most right now.','Pick the closest fit.','Pick what best describes your situation.'];$('qSubQTitle').textContent=titles[sub-1];$('qSubQHint').textContent=hints[sub-1];}setProgress();renderFooter();}
+  function renderFooter(){if(!qFoot)return;qBack.hidden=(state.step===1&&state.subQ===0);if(state.step===2||(state.step===1&&state.subQ==='dq')){qNext.hidden=true;}else{qNext.hidden=false;var label='Continue';if(state.step===1&&state.subQ===5)label='See If I Qualify';qNext.innerHTML=label+' <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>';}var qm=$('qMeta');if(qm){if(state.step===1){if(state.subQ===0)qm.textContent='Step 1 / 3 · contact details';else if(state.subQ==='dq')qm.textContent='Step 2 / 3 · not the right fit yet';else qm.textContent='Step 2 / 3 · question '+state.subQ+' of 5';}else if(state.step===2){qm.textContent='Step 3 / 3 · qualified — book your intro call';}else qm.textContent='';}var v=qValid();qNext.disabled=!v;qNext.style.opacity=v?'1':'.5';qNext.style.pointerEvents=v?'':'none';}
+  function qValid(){if(state.step===1){if(state.subQ===0){var f=$('qFirstName').value.trim(),l=$('qLastName').value.trim(),e=$('qEmail').value.trim();return !!(f&&l&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e));}if(state.subQ===1)return state.answers.contentTypes.length>0;if(state.subQ===2)return !!state.answers.volume;if(state.subQ===3)return !!state.answers.goal;if(state.subQ===4)return !!state.answers.timing;if(state.subQ===5)return !!state.answers.footage;if(state.subQ==='dq')return false;}if(state.step===2)return false;return true;}
+  function computeScore(){var s=0;if(state.answers.contentTypes.length)s+=15;if(state.answers.volume)s+=15;if(state.answers.goal)s+=15;if(state.answers.timing==="Right away")s+=30;else if(state.answers.timing==="Within the next 2 weeks")s+=25;else if(state.answers.timing==="Within the next month")s+=15;else if(state.answers.timing==="Just looking around")s+=5;if(state.answers.footage==="Yes I have footage ready")s+=25;else if(state.answers.footage==="It is not perfect but it will do")s+=20;else if(state.answers.footage==="No I am still planning")s+=5;state.score=s;state.qualified=(s>=70)&&state.answers.timing!=="Just looking around"&&state.answers.footage!=="No I am still planning";return state.qualified;}
+  function wireChips(){document.querySelectorAll('.q-chips').forEach(function(group){var multi=group.getAttribute('data-multi')==='true';group.addEventListener('click',function(ev){var chip=ev.target.closest('.q-chip');if(!chip)return;if(multi){chip.classList.toggle('active');}else{group.querySelectorAll('.q-chip').forEach(function(c){c.classList.remove('active');});chip.classList.add('active');}if(group.id==='qContentTypes'){state.answers.contentTypes=Array.from(group.querySelectorAll('.q-chip.active')).map(function(c){return c.getAttribute('data-val');});}else{var active=group.querySelector('.q-chip.active');var val=active?active.getAttribute('data-val'):'';if(group.id==='qVolume')state.answers.volume=val;if(group.id==='qGoal')state.answers.goal=val;if(group.id==='qTiming')state.answers.timing=val;if(group.id==='qFootage')state.answers.footage=val;}renderFooter();});});}
+  function wireContact(){['qFirstName','qLastName','qEmail','qPhone'].forEach(function(id){var el=$(id);if(!el)return;el.addEventListener('input',function(){state.contact.first=$('qFirstName').value.trim();state.contact.last=$('qLastName').value.trim();state.contact.email=$('qEmail').value.trim();state.contact.phone=$('qPhone').value.trim();renderFooter();});});}
+  function submitContact(){if(state.submittedContact)return Promise.resolve(null);state.submittedContact=true;return fetch('/api/trial/submit',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({first_name:state.contact.first,last_name:state.contact.last,email:state.contact.email,phone:state.contact.phone,content_types:state.answers.contentTypes,lead_content_types:(state.answers.contentTypes||[]).join(', '),lead_volume:state.answers.volume,lead_main_goal:state.answers.goal,lead_handoff_timing:state.answers.timing,lead_footage_readiness:state.answers.footage,lead_qualification_score:state.score,post_freq:state.answers.volume,goal:state.answers.goal,footage:state.answers.footage,volume:state.answers.timing,score:state.score,qualified:state.qualified,source:'free-trial-wizard'})}).then(function(r){return r.ok?r.json():null;}).catch(function(){state.submittedContact=false;return null;});}
+  function qDq(){var tip='Keep building and come back when you have footage ready.';var el=$('qDqTip');if(el)el.textContent=tip;submitContact();showSub('dq');}
+  window.qRemind=function(){var email=($('qRemindEmail')||{}).value||'';if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Please enter a valid email.');return;}fetch('/api/trial/remind',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({email:email,contact_email:state.contact.email})}).finally(function(){var btn=document.querySelector('.q-remind .cb-btn');if(btn){btn.textContent="We'll email you.";btn.disabled=true;btn.style.opacity='.6';}});};
+  function prefillCalendar(){var fr=$('qIntroCallFrame');if(!fr)return;if(fr.dataset.prefilled==='1')return;var base=fr.src.split('?')[0];var p=new URLSearchParams({first_name:state.contact.first,last_name:state.contact.last,email:state.contact.email,phone:state.contact.phone});fr.src=base+'?'+p.toString();fr.dataset.prefilled='1';}
+  function bookIntroCall(appointmentDateTime,tz){if(state.introCallBooked)return;state.introCallBooked=true;fetch('/api/trial/book-intro-call',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({email:state.contact.email,appointmentDateTime:appointmentDateTime||'',appointmentTimezone:tz||''})}).finally(function(){var c=state.contact||{};var p=new URLSearchParams();if(c.first)p.set('first_name',c.first);if(c.last)p.set('last_name',c.last);if(c.email)p.set('email',c.email);if(c.phone)p.set('phone',c.phone);var qs=p.toString();window.location.replace('/intro-call-booked'+(qs?'?'+qs:''));});}
+  window.addEventListener('message',function(ev){if(!ev||!ev.data)return;var d=ev.data;var t=(d&&(d.type||d.event))||'';var isBook=(t==='appointment_booked'||t==='appointmentBooked'||t==='introCallBooked'||t==='booking_confirmed'||t==='leadconnector:appointment_booked'||(d&&d.event==='calendly.event_scheduled')||(typeof t==='string'&&t.toLowerCase().indexOf('appointment')>=0&&t.toLowerCase().indexOf('book')>=0));if(isBook){var appt=(d.appointmentDateTime||d.startTime||d.start_time||(d.payload&&(d.payload.startTime||d.payload.start_time))||(d.payload&&d.payload.event&&d.payload.event.start_time)||'');var tz=(d.timezone||d.appointmentTimezone||(d.payload&&(d.payload.timezone||d.payload.tz))||'');bookIntroCall(appt,tz);}});
+  window.qNext=function(){if(!qValid())return;if(state.step===1){if(state.subQ===0){showSub(1);return;}if(state.subQ>=1&&state.subQ<=4){showSub(state.subQ+1);return;}if(state.subQ===5){computeScore();if(!state.qualified){qDq();return;}var btn=$('qNext');if(btn){btn.disabled=true;btn.style.opacity='.6';btn.textContent='Loading your calendar…';}submitContact().finally(function(){state.step=2;showStep();setTimeout(prefillCalendar,60);if(btn){btn.disabled=false;btn.style.opacity='';}});}}};
+  window.qPrev=function(){if(state.step===1){if(state.subQ==='dq'){showSub(5);return;}if(state.subQ>0){showSub(state.subQ-1);return;}}if(state.step===2){state.step=1;showStep();showSub(5);return;}};
+  wireChips();wireContact();showStep();showSub(0);
 })();
 </script>
-
 </body>
 </html>

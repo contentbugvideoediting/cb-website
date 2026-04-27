@@ -1,0 +1,845 @@
+/* ============================================================
+   CONTENT BUG WEBSITE TEMPLATES — SHARED SYSTEM
+   Composes on top of colors_and_type.css.
+   Provides: page shell, nav, buttons, cards, forms,
+             section primitives, responsive breakpoints,
+             and a spec-annotation overlay (toggle via .specs-on).
+   ============================================================ */
+
+/* ============================================================
+   SECTION 1 — PAGE GRID + CONTAINERS
+   Design width: 1440. Container max 1280. Side gutters 80.
+   Breakpoints: 1440 / 1024 / 768 / 375.
+   ============================================================ */
+
+:root {
+  --container:      1280px;
+  --container-prose: 760px;   /* docs / article body */
+  --gutter:           80px;   /* desktop side padding */
+  --nav-h:            72px;   /* sticky top nav */
+}
+
+.cb-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.cb-container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+@media (max-width: 1024px) {
+  :root { --gutter: 48px; }
+}
+@media (max-width: 768px) {
+  :root { --gutter: 32px; --nav-h: 64px; }
+}
+@media (max-width: 480px) {
+  :root { --gutter: 20px; }
+}
+
+/* ============================================================
+   SECTION 2 — TOP NAV
+   Height 72 desktop / 64 mobile. Glass bar, sticky.
+   ============================================================ */
+
+.cb-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  /* Floating layout — no bar, no border. Brand left, pill right. */
+  background: transparent;
+  border-bottom: 0;
+}
+.cb-nav__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.cb-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+.cb-nav__bug {
+  width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.cb-nav__bug img { width: 100%; height: auto; display: block; }
+.cb-nav__name { font-family: 'SF Pro Display'; font-size: 15px; font-weight: 600; letter-spacing: -.01em; color: #fff; }
+
+/* ============================================================
+   APPLE-STYLE LIQUID GLASS — universal pill / container
+   Layered specular highlights, real backdrop blur+saturation,
+   thin hairline border, dual inset highlight (top white + bottom shadow),
+   subtle drop shadow for separation. Use .liquid-glass anywhere.
+   ============================================================ */
+.liquid-glass {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.06) 50%, rgba(255,255,255,.10) 100%);
+  border: 1px solid rgba(255,255,255,.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.45),
+    inset 0 -1px 0 rgba(255,255,255,.08),
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 6px 24px rgba(0,0,0,.18),
+    0 1px 2px rgba(0,0,0,.20);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+          backdrop-filter: blur(28px) saturate(180%);
+}
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,.22), transparent 60%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: .9;
+}
+
+/* Top-right links — plain text, divider, and a single solid CTA */
+.cb-nav__links {
+  display: flex; align-items: center; gap: 4px;
+  margin-left: auto;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.cb-nav__link {
+  font-family: 'SF Pro Text';
+  font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,.78);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: color 160ms var(--ease);
+}
+.cb-nav__link:hover { color: #fff; }
+.cb-nav__link.is-active { color: #fff; font-weight: 600; }
+
+/* CTA — sits in nav, sizing only. Color comes from .cb-btn--blue */
+.cb-nav__cta {
+  margin-left: 8px;
+  position: relative;
+}
+/* Vertical divider sits to the LEFT of the CTA, only when CTA is the nav button */
+.cb-nav__cta::before {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px; height: 16px;
+  background: rgba(255,255,255,.18);
+}
+@media (max-width: 768px) {
+  .cb-nav__links { gap: 0; }
+  .cb-nav__link { padding: 8px 8px; font-size: 12px; }
+  .cb-nav__cta { margin-left: 6px; }
+  .cb-nav__cta::before { left: -6px; }
+}
+@media (max-width: 480px) {
+  /* On the smallest screens: tighten the row, drop login (lowest priority), keep brand + 2-3 priority links + CTA */
+  .cb-nav__links { gap: 0; flex-wrap: nowrap; min-width: 0; overflow: hidden; }
+  .cb-nav__link { padding: 6px 6px; font-size: 11px; letter-spacing: 0; }
+  /* Hide the last (login) link on very narrow viewports — primary nav stays */
+  .cb-nav__links .cb-nav__link:last-of-type { display: none; }
+  .cb-nav__cta::before { display: none; }
+  .cb-nav__cta { padding-left: 10px; padding-right: 10px; font-size: 12px; }
+}
+@media (max-width: 380px) {
+  /* Sub-380: hide all secondary links, keep brand + CTA */
+  .cb-nav__links .cb-nav__link { display: none; }
+}
+
+/* ============================================================
+   SECTION 3 — BUTTONS (page-level)
+   xl 56 · lg 48 · md 40 · sm 32 (rule-of-5)
+   ============================================================ */
+
+.cb-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px;
+  height: 48px; padding: 0 22px;
+  border-radius: 14px;
+  font-family: 'SF Pro Display';
+  font-size: 15px; font-weight: 600;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 140ms var(--ease), border-color 140ms var(--ease), transform 140ms var(--ease);
+  white-space: nowrap;
+}
+.cb-btn:hover { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.28); }
+.cb-btn:active { transform: translateY(1px); }
+.cb-btn svg { width: 16px; height: 16px; }
+
+/* primary glass */
+.cb-btn--primary {
+  background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.05));
+  border-color: rgba(255,255,255,.20);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 4px 14px rgba(0,0,0,.20);
+  position: relative;
+}
+.cb-btn--primary::before {
+  content: ""; position: absolute; top: 0; left: 22%; right: 22%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.55) 50%, transparent);
+  pointer-events: none;
+}
+.cb-btn--primary:hover { background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.07)); }
+
+/* brand-blue accent */
+.cb-btn--blue {
+  background: linear-gradient(180deg, #2997ff, #1e7ce0);
+  border-color: rgba(41,151,255,.45);
+  color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.30), 0 6px 18px rgba(41,151,255,.30);
+}
+.cb-btn--blue:hover { background: linear-gradient(180deg, #36a3ff, #2486ec); border-color: rgba(41,151,255,.65); }
+
+.cb-btn--ghost { background: transparent; border-color: transparent; color: rgba(255,255,255,.78); }
+.cb-btn--ghost:hover { background: rgba(255,255,255,.06); color: #fff; border-color: transparent; }
+
+.cb-btn--xl { height: 56px; padding: 0 28px; font-size: 17px; border-radius: 16px; }
+.cb-btn--md { height: 40px; padding: 0 18px; font-size: 14px; border-radius: 12px; }
+.cb-btn--sm { height: 32px; padding: 0 14px; font-size: 13px; border-radius: 10px; }
+
+/* ============================================================
+   SECTION 4 — GLASS CARD (page-level)
+   ============================================================ */
+
+.cb-card {
+  position: relative;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,.06) 0%,
+    rgba(255,255,255,.04) 40%,
+    rgba(255,255,255,.03) 100%);
+  border: 1px solid rgba(255,255,255,.08);
+  border-top-color: rgba(255,255,255,.18);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,.10);
+  overflow: hidden;
+}
+.cb-card::before {
+  content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22) 50%, transparent);
+  pointer-events: none;
+}
+
+.cb-card--lg { border-radius: 24px; padding: 40px; }
+.cb-card--sm { border-radius: 14px; padding: 20px; }
+
+/* ============================================================
+   SECTION 5 — SECTION HEADERS (in-page)
+   ============================================================ */
+
+.cb-section { padding: 96px 0; }
+.cb-section--sm { padding: 64px 0; }
+.cb-section--lg { padding: 128px 0; }
+
+/* PAGE HERO — top-of-page intro block. ONE canonical rhythm for every page.
+   Use this on every hero so all pages start at the same Y and end at the same Y.
+   Sits inside .cb-container for horizontal alignment. */
+.cb-page-hero {
+  padding: 96px 0;
+  max-width: 880px;
+  margin: 0 auto;
+  text-align: center;
+}
+.cb-page-hero--wide  { max-width: var(--container-prose); }   /* 760 — narrow prose */
+.cb-page-hero--full  { max-width: none; text-align: left; }    /* full-bleed grid heroes */
+.cb-page-hero > .eyebrow,
+.cb-page-hero > .cb-eyebrow { margin: 0 auto 16px; }
+.cb-page-hero > h1,
+.cb-page-hero > .cb-h1 { margin: 0 0 18px; text-wrap: balance; }
+.cb-page-hero > .lede,
+.cb-page-hero > .cb-lede { margin: 0 auto 28px; max-width: 60ch; }
+
+@media (max-width: 768px) {
+  .cb-page-hero { padding: 72px 0 40px; }
+}
+
+/* EYEBROW — small uppercase tagline that sits ABOVE every page title.
+   Inherits text-align from its parent. When the parent is centered
+   (e.g. .wzt-head, .pf-hero, .idx-hero), the eyebrow is automatically
+   centered too. Use .eyebrow OR .cb-eyebrow — same rule. */
+.cb-eyebrow,
+.eyebrow {
+  display: block;
+  font-family: 'SF Pro Text';
+  font-size: 11px; font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #2997ff;
+  /* margin-inline: auto so a max-width'd eyebrow still centers under a centered title */
+  margin: 0 auto 14px;
+  text-align: inherit;
+}
+/* Force-center variant when parent isn't already centered */
+.cb-eyebrow--center,
+.eyebrow--center { text-align: center; }
+
+.cb-h1 { font-family: 'SF Pro Display'; font-size: 72px; font-weight: 700; line-height: 1.02; letter-spacing: -0.030em; color: #fff; margin: 0; text-wrap: balance; }
+.cb-h2 { font-family: 'SF Pro Display'; font-size: 48px; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #fff; margin: 0; text-wrap: balance; }
+.cb-h3 { font-family: 'SF Pro Display'; font-size: 28px; font-weight: 600; line-height: 1.18; letter-spacing: -0.020em; color: #fff; margin: 0; }
+.cb-h4 { font-family: 'SF Pro Display'; font-size: 20px; font-weight: 600; line-height: 1.30; letter-spacing: -0.012em; color: #fff; margin: 0; }
+.cb-lede { font-family: 'SF Pro Text'; font-size: 18px; line-height: 1.55; color: rgba(255,255,255,.78); margin: 0; max-width: 60ch; text-wrap: pretty; }
+.cb-body { font-family: 'SF Pro Text'; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.78); margin: 0; max-width: 64ch; }
+.cb-meta { font-family: 'SF Pro Text'; font-size: 12px; line-height: 1.5; color: rgba(255,255,255,.55); margin: 0; }
+.cb-mono { font-family: 'SF Mono', ui-monospace, Menlo, monospace; font-size: 11px; color: rgba(255,255,255,.55); }
+
+@media (max-width: 1024px) {
+  .cb-h1 { font-size: 56px; }
+  .cb-h2 { font-size: 40px; }
+  .cb-h3 { font-size: 24px; }
+}
+@media (max-width: 768px) {
+  .cb-section { padding: 72px 0; }
+  .cb-h1 { font-size: 44px; letter-spacing: -.022em; }
+  .cb-h2 { font-size: 32px; }
+  .cb-h3 { font-size: 22px; }
+  .cb-lede { font-size: 16px; }
+}
+@media (max-width: 480px) {
+  .cb-h1 { font-size: 36px; }
+  .cb-h2 { font-size: 28px; }
+}
+
+/* ============================================================
+   SECTION 6 — PILLS / TAGS
+   ============================================================ */
+
+.cb-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 28px; padding: 0 12px;
+  border-radius: 9999px;
+  font-family: 'SF Pro Text';
+  font-size: 12px; font-weight: 500;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+  color: #fff;
+  white-space: nowrap;
+}
+.cb-pill--blue   { background: rgba(41,151,255,.10);  border-color: rgba(41,151,255,.45); color: #84c4ff; }
+.cb-pill--green  { background: rgba(52,199,89,.10);   border-color: rgba(52,199,89,.45);  color: #7ed99a; }
+.cb-pill--gold   { background: rgba(255,204,10,.10);  border-color: rgba(255,204,10,.45); color: #ffe06a; }
+.cb-pill--amber  { background: rgba(255,149,0,.10);   border-color: rgba(255,149,0,.45);  color: #ffb84d; }
+.cb-pill--purple { background: rgba(175,82,222,.10);  border-color: rgba(175,82,222,.45); color: #d29bf0; }
+.cb-pill__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+/* ============================================================
+   SECTION 7 — FORMS
+   ============================================================ */
+
+.cb-input {
+  width: 100%;
+  height: 48px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+  border-top-color: rgba(255,255,255,.16);
+  color: #fff;
+  font-family: 'SF Pro Text';
+  font-size: 15px;
+  padding: 0 16px;
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 140ms var(--ease), background 140ms var(--ease), box-shadow 140ms var(--ease);
+}
+.cb-input::placeholder { color: rgba(255,255,255,.40); }
+.cb-input:hover { border-color: rgba(255,255,255,.18); }
+.cb-input:focus { background: rgba(255,255,255,.07); border-color: rgba(41,151,255,.55); box-shadow: 0 0 0 3px rgba(41,151,255,.18); }
+.cb-input--error { border-color: rgba(255,69,58,.55); box-shadow: 0 0 0 3px rgba(255,69,58,.16); }
+.cb-input--lg { height: 56px; font-size: 16px; border-radius: 14px; padding: 0 20px; }
+.cb-input--sm { height: 40px; font-size: 14px; border-radius: 10px; padding: 0 14px; }
+
+.cb-textarea {
+  height: auto;
+  min-height: 96px;
+  padding: 14px 16px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.cb-label {
+  font-family: 'SF Pro Text';
+  font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: rgba(255,255,255,.55);
+  margin: 0 0 8px;
+  display: block;
+}
+
+.cb-field { display: flex; flex-direction: column; gap: 8px; }
+.cb-field__hint { font-family: 'SF Pro Text'; font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.45); margin: 0; }
+.cb-field__error { font-family: 'SF Pro Text'; font-size: 12px; line-height: 1.4; color: #ff7a72; margin: 0; }
+
+/* ============================================================
+   SECTION 8 — DIVIDER
+   ============================================================ */
+
+.cb-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18) 25%, rgba(255,255,255,.18) 75%, transparent);
+  border: 0;
+  margin: 0;
+}
+
+/* ============================================================
+   SECTION 9 — FOOTER
+   ============================================================ */
+
+.cb-footer {
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 64px 0 48px;
+  margin-top: 96px;
+}
+.cb-footer__grid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 48px;
+}
+@media (max-width: 768px) {
+  .cb-footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+.cb-footer__col h4 {
+  font-family: 'SF Pro Text'; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: rgba(255,255,255,.55);
+  margin: 0 0 16px;
+}
+.cb-footer__col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.cb-footer__col a { font-family: 'SF Pro Text'; font-size: 14px; color: rgba(255,255,255,.78); text-decoration: none; }
+.cb-footer__col a:hover { color: #fff; }
+.cb-footer__bottom {
+  margin-top: 48px; padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: 'SF Pro Text'; font-size: 12px; color: rgba(255,255,255,.45);
+}
+
+/* ============================================================
+   SECTION 10 — SPEC ANNOTATION OVERLAY
+   Toggleable via body.specs-on. Shows paddings, gaps, max-widths,
+   font tokens, etc. as inline labels stamped onto regions.
+
+   Usage:
+     <div data-spec="hero · 1280max · pad 0/80 · pt 128 pb 96">…</div>
+     <span data-spec-token="t-72 · w700 · -.030em">…</span>
+     <div data-spec-corner="bl">…</div>  (to position label)
+   ============================================================ */
+
+[data-spec] { position: relative; }
+[data-spec]::after {
+  content: attr(data-spec);
+  position: absolute;
+  top: 8px; left: 8px;
+  z-index: 30;
+  font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #ffcc0a;
+  background: rgba(20,12,0,.90);
+  border: 1px solid rgba(255,204,10,.45);
+  border-radius: 4px;
+  padding: 3px 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  text-shadow: none !important;
+  opacity: 0;
+  transition: opacity 200ms var(--ease);
+  max-width: calc(100% - 16px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body.specs-on [data-spec]::after { opacity: 1; }
+
+body.specs-on [data-spec] {
+  outline: 1px dashed rgba(255,204,10,0.30);
+  outline-offset: -1px;
+}
+
+/* corner positions */
+[data-spec-corner="tr"]::after { left: auto; right: 8px; }
+[data-spec-corner="bl"]::after { top: auto; bottom: 8px; }
+[data-spec-corner="br"]::after { top: auto; right: 8px; bottom: 8px; left: auto; }
+[data-spec-corner="tc"]::after { left: 50%; transform: translateX(-50%); }
+
+/* inline token chip — for stamping a token onto a piece of type or button */
+[data-spec-token] { position: relative; }
+[data-spec-token]::after {
+  content: attr(data-spec-token);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  z-index: 30;
+  font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 11px;
+  line-height: 1.4;
+  letter-spacing: .01em;
+  color: #84c4ff;
+  background: rgba(0,12,28,.90);
+  border: 1px solid rgba(41,151,255,.55);
+  border-radius: 5px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  text-shadow: none !important;
+  opacity: 0;
+  transition: opacity 200ms var(--ease);
+}
+body.specs-on [data-spec-token]::after { opacity: 1; }
+
+/* visible padding markers — shown only when specs-on, drawn as inset dashed */
+body.specs-on [data-spec-pad] {
+  box-shadow: inset 0 0 0 1px rgba(132,196,255,.30);
+  position: relative;
+}
+
+/* ruler — horizontal gap visualizer; place inside flex/grid containers when needed */
+.cb-ruler-h {
+  display: none;
+  position: absolute;
+  left: 0; right: 0; bottom: -22px;
+  height: 16px;
+  align-items: center; justify-content: center;
+  font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+  font-size: 10px;
+  color: #ffcc0a;
+  pointer-events: none;
+}
+.cb-ruler-h::before, .cb-ruler-h::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,204,10,.55), transparent);
+}
+.cb-ruler-h > span {
+  padding: 0 8px;
+  background: rgba(20,12,0,.90);
+  border: 1px solid rgba(255,204,10,.45);
+  border-radius: 3px;
+  text-shadow: none !important;
+}
+body.specs-on .cb-ruler-h { display: flex; }
+
+/* ============================================================
+   SECTION 11 — TWEAKS PANEL (single shared toggle)
+   ============================================================ */
+
+.cb-tweaks {
+  position: fixed;
+  right: 20px; bottom: 20px;
+  z-index: 200;
+  display: none;
+  width: 260px;
+  /* LIGHT GLASS — PAGE_RULES.md §2 */
+  background: var(--glass-4);
+
+  border: 1px solid var(--glass-border);
+  border-top-color: var(--glass-border-top);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: var(--glass-shadow-lg);
+}
+body.tweaks-on .cb-tweaks { display: block; }
+
+.cb-tweaks__title {
+  font-family: 'SF Pro Text'; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: rgba(255,255,255,.55);
+  margin: 0 0 14px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cb-tweaks__close {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: none; background: rgba(255,255,255,.06); color: #fff;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'SF Mono', monospace; font-size: 11px;
+}
+.cb-tweaks__row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.cb-tweaks__row:first-of-type { border-top: 0; }
+.cb-tweaks__row label { font-family: 'SF Pro Text'; font-size: 13px; color: #fff; }
+
+.cb-toggle {
+  position: relative;
+  width: 38px; height: 22px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background 200ms var(--ease), border-color 200ms var(--ease);
+  flex-shrink: 0;
+}
+.cb-toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,.3);
+  transition: transform 200ms var(--ease);
+}
+.cb-toggle.is-on { background: rgba(41,151,255,.30); border-color: rgba(41,151,255,.55); }
+.cb-toggle.is-on::after { transform: translateX(16px); background: #2997ff; box-shadow: 0 0 8px rgba(41,151,255,.55); }
+
+/* ============================================================
+   SECTION 12 — TEMPLATE INDEX HEADER
+   Used on index.html only.
+   ============================================================ */
+
+.cb-tpl-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+@media (max-width: 768px) {
+  .cb-tpl-grid { grid-template-columns: 1fr; }
+}
+.cb-tpl-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.cb-tpl-card__thumb {
+  height: 240px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-top-color: rgba(255,255,255,.18);
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  position: relative;
+  overflow: hidden;
+  transition: border-color 200ms var(--ease), transform 200ms var(--ease);
+}
+.cb-tpl-card:hover .cb-tpl-card__thumb {
+  border-color: rgba(41,151,255,.45);
+  transform: translateY(-2px);
+}
+.cb-tpl-card__title {
+  font-family: 'SF Pro Display'; font-size: 18px; font-weight: 600;
+  letter-spacing: -.012em;
+  margin: 16px 0 4px;
+  color: #fff;
+}
+.cb-tpl-card__meta { font-family: 'SF Mono', monospace; font-size: 11px; color: rgba(255,255,255,.55); }
+
+/* ============================================================
+   SECTION 13 — STATES STRIP
+   Shows component states inline at the bottom of each template.
+   ============================================================ */
+
+.cb-states {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+  padding: 32px;
+  margin-top: 64px;
+}
+.cb-states__title {
+  font-family: 'SF Pro Text'; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: rgba(255,255,255,.55);
+  margin: 0 0 24px;
+}
+.cb-states__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+}
+.cb-states__cell {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 16px;
+  background: rgba(255,255,255,.02);
+  border: 1px dashed rgba(255,255,255,.10);
+  border-radius: 12px;
+  min-height: 120px;
+  align-items: center; justify-content: center;
+}
+.cb-states__caption { font-family: 'SF Mono', monospace; font-size: 10px; color: rgba(255,255,255,.55); text-align: center; }
+
+/* ============================================================
+   SECTION 14 — BRAND BUG DECORATION
+   The ladybug mark woven through every surface as watermark,
+   bullet, and corner stamp. Uses CSS mask so a single PNG can
+   be tinted any color via background-color.
+   ============================================================ */
+
+:root {
+  --bug-asset: url("assets/bug.png");
+}
+
+/* --- BIG WATERMARK -----------------------------------------
+   Drops a faint bug into a section's background. Pair with a
+   "position: relative" parent. Children automatically lift
+   above the watermark via z-index.
+   ----------------------------------------------------------- */
+.cb-bug-watermark {
+  position: relative;
+  isolation: isolate;
+}
+.cb-bug-watermark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bug-asset);
+  background-repeat: no-repeat;
+  background-position: var(--bug-pos, calc(100% + 80px) 50%);
+  background-size: var(--bug-size, 720px);
+  opacity: var(--bug-opacity, 0.045);
+  pointer-events: none;
+  z-index: 0;
+}
+.cb-bug-watermark > * { position: relative; z-index: 1; }
+
+/* Position variants */
+.cb-bug-watermark--right::before  { background-position: calc(100% + 80px) 50%; }
+.cb-bug-watermark--left::before   { background-position: -180px 50%; }
+.cb-bug-watermark--tr::before     { background-position: calc(100% + 60px) -120px; }
+.cb-bug-watermark--br::before     { background-position: calc(100% + 60px) calc(100% + 120px); }
+.cb-bug-watermark--bl::before     { background-position: -120px calc(100% + 80px); }
+.cb-bug-watermark--center::before { background-position: 50% 50%; }
+
+/* Size variants */
+.cb-bug-watermark--xs::before { --bug-size: 220px; }
+.cb-bug-watermark--sm::before { --bug-size: 360px; }
+.cb-bug-watermark--md::before { --bug-size: 520px; }
+.cb-bug-watermark--lg::before { --bug-size: 760px; }
+.cb-bug-watermark--xl::before { --bug-size: 1080px; }
+.cb-bug-watermark--xxl::before{ --bug-size: 1480px; }
+
+/* Opacity variants */
+.cb-bug-watermark--ghost::before  { --bug-opacity: 0.022; }
+.cb-bug-watermark--soft::before   { --bug-opacity: 0.04;  }
+.cb-bug-watermark--strong::before { --bug-opacity: 0.075; }
+
+/* --- REPEATING TILE PATTERN --------------------------------
+   For footers and full-bleed strips. Tiny bugs at low alpha,
+   tiled like a security paper.
+   ----------------------------------------------------------- */
+.cb-bug-tile { position: relative; isolation: isolate; }
+.cb-bug-tile::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: var(--bug-asset);
+  background-size: var(--bug-tile-size, 64px);
+  background-repeat: repeat;
+  background-position: 0 0;
+  opacity: var(--bug-tile-opacity, 0.022);
+  pointer-events: none;
+  z-index: 0;
+  /* fade out at the edges so it doesn't fight the page */
+  mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+.cb-bug-tile > * { position: relative; z-index: 1; }
+.cb-bug-tile--tight::before { --bug-tile-size: 44px; }
+.cb-bug-tile--loose::before { --bug-tile-size: 96px; }
+
+/* --- INLINE BULLET -----------------------------------------
+   A 1em bug glyph that takes its color from currentColor —
+   drop into eyebrows, list items, pills, in place of a dot.
+   ----------------------------------------------------------- */
+.cb-bug-bullet {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-color: currentColor;
+  -webkit-mask: var(--bug-asset) center / contain no-repeat;
+          mask: var(--bug-asset) center / contain no-repeat;
+  vertical-align: -0.18em;
+  flex-shrink: 0;
+}
+.cb-bug-bullet--xs { width: 0.72em; height: 0.72em; vertical-align: -0.08em; }
+.cb-bug-bullet--lg { width: 1.4em;  height: 1.4em;  vertical-align: -0.32em; }
+
+/* --- CORNER STAMP ------------------------------------------
+   For cards, widgets, and panels. Embossed silhouette in a
+   corner — currentColor-tintable via background-color.
+   ----------------------------------------------------------- */
+.cb-bug-stamp {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  background-color: rgba(255,255,255,.05);
+  -webkit-mask: var(--bug-asset) center / contain no-repeat;
+          mask: var(--bug-asset) center / contain no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+.cb-bug-stamp--tr { top: 14px;    right: 14px; }
+.cb-bug-stamp--br { bottom: 14px; right: 14px; }
+.cb-bug-stamp--tl { top: 14px;    left: 14px;  }
+.cb-bug-stamp--bl { bottom: 14px; left: 14px;  }
+
+.cb-bug-stamp--xs { width: 36px;  height: 36px;  }
+.cb-bug-stamp--sm { width: 56px;  height: 56px;  }
+.cb-bug-stamp--md { width: 96px;  height: 96px;  }
+.cb-bug-stamp--lg { width: 160px; height: 160px; }
+.cb-bug-stamp--xl { width: 240px; height: 240px; }
+
+.cb-bug-stamp--ghost { background-color: rgba(255,255,255,.035); }
+.cb-bug-stamp--soft  { background-color: rgba(255,255,255,.06);  }
+.cb-bug-stamp--blue  { background-color: rgba(41,151,255,.20);   }
+.cb-bug-stamp--gold  { background-color: rgba(255,204,10,.20);   }
+.cb-bug-stamp--green { background-color: rgba(52,199,89,.18);    }
+
+/* Bleed-out variants — clip the bug at the card edge */
+.cb-bug-stamp--bleed-tr { top: -28%; right: -16%; }
+.cb-bug-stamp--bleed-br { bottom: -28%; right: -16%; }
+.cb-bug-stamp--bleed-bl { bottom: -28%; left: -16%; }
+
+/* --- SOLID BUG GLYPH (for buttons, avatars, badges) --------
+   A block-level sized version of the bullet. Use width/height
+   on the element itself to size it.
+   ----------------------------------------------------------- */
+.cb-bug-glyph {
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask: var(--bug-asset) center / contain no-repeat;
+          mask: var(--bug-asset) center / contain no-repeat;
+  flex-shrink: 0;
+}
+
+/* --- AVATAR / BADGE: bug on a colored chip ----------------- */
+.cb-bug-chip {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: rgba(41,151,255,.14);
+  border: 1px solid rgba(41,151,255,.35);
+  color: #84c4ff;
+  flex-shrink: 0;
+}
+.cb-bug-chip > .cb-bug-glyph { width: 18px; height: 18px; }
+.cb-bug-chip--lg { width: 44px; height: 44px; border-radius: 10px; }
+.cb-bug-chip--lg > .cb-bug-glyph { width: 26px; height: 26px; }
+.cb-bug-chip--gold  { background: rgba(255,204,10,.14); border-color: rgba(255,204,10,.40); color: #ffe06a; }
+.cb-bug-chip--green { background: rgba(52,199,89,.14);  border-color: rgba(52,199,89,.40);  color: #7ed99a; }
+.cb-bug-chip--ghost { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.12); color: rgba(255,255,255,.78); }
