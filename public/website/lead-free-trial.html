@@ -167,6 +167,34 @@ body{
 .ws-page .cb-ft-legal-links{display:flex!important;align-items:center!important;gap:10px!important}
 .ws-page .cb-ft-legal-sep{color:rgba(255,255,255,.3)!important}
 
+/* ═══════════════════════════════════════════════════════════════════════
+   FREE TRIAL SPLIT LAYOUT — copy on left, wizard on right.
+   Stacks on mobile (left above right).
+   ═══════════════════════════════════════════════════════════════════════ */
+.ft-split { display:grid; grid-template-columns:1fr 1fr; gap:64px; max-width:1320px; margin:0 auto; padding:64px 40px 96px; align-items:start }
+.ft-left { padding-top:32px; color:#fff }
+.ft-eyebrow { font:700 13px/1 var(--font-display); color:#2997ff; letter-spacing:.18em; text-transform:uppercase; margin:0 0 18px }
+.ft-headline { font:700 56px/1.05 var(--font-display); letter-spacing:-.025em; color:#fff; margin:0 0 22px }
+.ft-body p { font:400 16px/1.6 var(--font); color:rgba(255,255,255,.78); margin:0 0 16px; max-width:560px }
+.ft-section-title { font:600 11px/1 var(--font); text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,.55); margin:36px 0 14px }
+.ft-list { list-style:none; padding:0; margin:0 0 28px; display:flex; flex-direction:column; gap:10px }
+.ft-list li { font:400 15px/1.5 var(--font); color:rgba(255,255,255,.85); padding-left:26px; position:relative }
+.ft-list li::before { content:''; position:absolute; left:0; top:8px; width:14px; height:14px; border-radius:50%; background:rgba(41,151,255,.15); border:1px solid rgba(41,151,255,.45); display:flex; align-items:center; justify-content:center }
+.ft-list li::after { content:''; position:absolute; left:4px; top:11px; width:6px; height:3px; border-left:1.5px solid #2997ff; border-bottom:1.5px solid #2997ff; transform:rotate(-45deg) }
+.ft-steps { list-style:none; padding:0; margin:0 0 28px; counter-reset:ftstep; display:flex; flex-direction:column; gap:18px }
+.ft-steps li { counter-increment:ftstep; padding-left:42px; position:relative }
+.ft-steps li::before { content:counter(ftstep); position:absolute; left:0; top:0; width:28px; height:28px; border-radius:50%; background:rgba(41,151,255,.12); border:1px solid rgba(41,151,255,.35); color:#2997ff; font:600 13px/28px var(--font-display); text-align:center }
+.ft-step-title { font:600 15px/1.3 var(--font-display); color:#fff; margin:0 0 4px }
+.ft-step-body { font:400 13.5px/1.55 var(--font); color:rgba(255,255,255,.68); max-width:480px }
+.ft-reassurance { font:400 13px/1.5 var(--font); color:rgba(255,255,255,.55); margin:24px 0 0; max-width:520px; padding:14px 16px; border-radius:12px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08) }
+.ft-right { position:sticky; top:32px }
+@media (max-width:980px){
+  .ft-split { grid-template-columns:1fr; gap:40px; padding:32px 20px 64px }
+  .ft-left { padding-top:0; text-align:left }
+  .ft-headline { font-size:42px; letter-spacing:-.02em }
+  .ft-right { position:relative; top:auto }
+}
+
 /* RESPONSIVE */
 @media (max-width:860px){
   .ws-page .cb-footer{padding:48px 20px 32px!important;margin-top:64px!important}
@@ -204,10 +232,46 @@ body{
   </nav>
 </div>
 
-<!-- ═══ WIZARD ═══ -->
-<main>
-<section class="section" id="qShell">
-<div class="container">
+<!-- ═══ FREE TRIAL — SPLIT LAYOUT (copy left, wizard right) ═══ -->
+<main class="ft-split" id="qShell">
+  <!-- ═════════ LEFT: marketing copy ═════════ -->
+  <section class="ft-left">
+    <p class="ft-eyebrow">Free Trial</p>
+    <h1 class="ft-headline">Get your first edit on us</h1>
+    <div class="ft-body">
+      <p>This is the easiest way to see what working with Content Bug actually feels like.</p>
+      <p>You'll get a real look at our editing quality, how fast we move, and how smooth the process becomes when your content is handled by a team that knows how to make it look good and perform.</p>
+      <p>If you qualify, we'll activate your free trial after a quick intro call, send over your free edit link, and give you the option to build your editing Blueprint so your first edit matches your style, your content, and your vision from the start.</p>
+    </div>
+    <h3 class="ft-section-title">What you'll get</h3>
+    <ul class="ft-list">
+      <li>Your first edit free on us</li>
+      <li>A real look at our editing quality</li>
+      <li>A feel for our turnaround speed</li>
+      <li>A clear intro to how Content Bug works</li>
+      <li>The option to build your editing Blueprint</li>
+      <li>Usually around a 12-hour turnaround on your trial edit</li>
+    </ul>
+    <h3 class="ft-section-title">How it works</h3>
+    <ol class="ft-steps">
+      <li>
+        <div class="ft-step-title">Share your details</div>
+        <div class="ft-step-body">Start with your contact info so we know where to send everything.</div>
+      </li>
+      <li>
+        <div class="ft-step-title">Answer a few quick questions</div>
+        <div class="ft-step-body">Tell us what kind of content you need help with, your volume, your goals, and how soon you want to hand off editing.</div>
+      </li>
+      <li>
+        <div class="ft-step-title">Book your intro call to activate your trial</div>
+        <div class="ft-step-body">If you qualify, you'll unlock your free trial by booking a quick intro call. After that, we'll email your free edit link and next steps.</div>
+      </li>
+    </ol>
+    <p class="ft-reassurance">No card required. No pressure. Just a simple way to see if Content Bug is the right fit.</p>
+  </section>
+
+  <!-- ═════════ RIGHT: wizard ═════════ -->
+  <aside class="ft-right">
 <div class="wz wz--md" style="margin:0 auto">
 
   <!-- Hero — big title + percent + heavy shimmer progress (matches portal/18-wizards.html spec) -->
@@ -230,8 +294,8 @@ body{
 
       <!-- Sub-screen 0: Contact details -->
       <div class="qw-sub-screen" data-sub="0">
-        <div class="qw-title">Let's get started.</div>
-        <div class="qw-sub">Tell us a bit about yourself so we know who to send your free edit to.</div>
+        <div class="qw-title">Let's get started</div>
+        <div class="qw-sub">Tell us where to send your free trial details.</div>
         <div style="width:100%;max-width:420px;text-align:left;margin:16px auto 0">
           <div class="q-row">
             <div class="q-field"><label>First Name *</label><input id="qFirstName" placeholder="First name" autocomplete="given-name"></div>
@@ -242,61 +306,64 @@ body{
         </div>
       </div>
 
-      <!-- Sub-screens 1-5: qualification questions -->
+      <!-- Sub-screens 1-5: qualification questions (new spec — 5 q's: content/volume/goal/timing/footage) -->
       <div class="qw-sub-screen" data-sub="q" style="display:none">
         <div class="qw-sub" style="opacity:.6;margin-bottom:4px">Question <span id="qSubQNum">1</span> of 5</div>
-        <div class="qw-title" id="qSubQTitle">What type of content do you create?</div>
+        <div class="qw-title" id="qSubQTitle">What kind of content do you need edited?</div>
         <div class="qw-sub" id="qSubQHint">Pick all that apply.</div>
         <div style="width:100%;max-width:480px;text-align:left;margin:16px auto 0">
 
+          <!-- Q1: Content type (multi) -->
           <div class="q-subq" data-subq="0">
             <div class="q-chips" id="qContentTypes" data-multi="true">
-              <div class="q-chip" data-val="YouTube Long-form">YouTube Long-form</div>
-              <div class="q-chip" data-val="YouTube Shorts">YouTube Shorts</div>
-              <div class="q-chip" data-val="TikTok">TikTok</div>
-              <div class="q-chip" data-val="Instagram Reels">Instagram Reels</div>
-              <div class="q-chip" data-val="Podcast">Podcast</div>
-              <div class="q-chip" data-val="Course Content">Course Content</div>
-              <div class="q-chip" data-val="Other">Other</div>
+              <div class="q-chip" data-val="Short-form videos">Short-form videos</div>
+              <div class="q-chip" data-val="Long-form videos">Long-form videos</div>
+              <div class="q-chip" data-val="Podcast clips">Podcast clips</div>
+              <div class="q-chip" data-val="YouTube videos">YouTube videos</div>
+              <div class="q-chip" data-val="Ads / promo videos">Ads / promo videos</div>
+              <div class="q-chip" data-val="Talking-head content">Talking-head content</div>
+              <div class="q-chip" data-val="Educational content">Educational content</div>
+              <div class="q-chip" data-val="Vlogs / lifestyle content">Vlogs / lifestyle content</div>
+              <div class="q-chip" data-val="Agency client edits">Agency client edits</div>
             </div>
           </div>
 
+          <!-- Q2: Volume (single) -->
           <div class="q-subq" data-subq="1" style="display:none">
-            <div class="q-chips" id="qPostFreq">
-              <div class="q-chip" data-val="Daily">Daily</div>
-              <div class="q-chip" data-val="3-5x per week">3-5x per week</div>
-              <div class="q-chip" data-val="1-2x per week">1-2x per week</div>
-              <div class="q-chip" data-val="A few times a month">A few times a month</div>
-              <div class="q-chip" data-val="Just starting out">Just starting out</div>
+            <div class="q-chips" id="qVolume">
+              <div class="q-chip" data-val="1-2x per week">1–2x per week</div>
+              <div class="q-chip" data-val="3-4x per week">3–4x per week</div>
+              <div class="q-chip" data-val="5-7x per week">5–7x per week</div>
             </div>
           </div>
 
+          <!-- Q3: Main goal (single) -->
           <div class="q-subq" data-subq="2" style="display:none">
             <div class="q-chips" id="qGoal">
-              <div class="q-chip" data-val="Grow my audience">Grow my audience</div>
+              <div class="q-chip" data-val="Post consistently">Post consistently</div>
+              <div class="q-chip" data-val="Grow audience">Grow audience</div>
               <div class="q-chip" data-val="Save time">Save time</div>
-              <div class="q-chip" data-val="Look more professional">Look more professional</div>
-              <div class="q-chip" data-val="Increase revenue">Increase revenue</div>
-              <div class="q-chip" data-val="All of the above">All of the above</div>
+              <div class="q-chip" data-val="Improve quality">Improve quality</div>
+              <div class="q-chip" data-val="Increase sales">Increase sales</div>
             </div>
           </div>
 
+          <!-- Q4: Timing (single) -->
           <div class="q-subq" data-subq="3" style="display:none">
-            <div class="q-chips" id="qFootage">
-              <div class="q-chip q-chip-lg" data-val="Yes I'm ready to go">Yes I'm ready to go</div>
-              <div class="q-chip q-chip-lg" data-val="I have footage but not edited yet">I have footage but not edited yet</div>
-              <div class="q-chip q-chip-lg" data-val="I'm still filming">I'm still filming</div>
-              <div class="q-chip q-chip-lg" data-val="Not yet">Not yet</div>
+            <div class="q-chips" id="qTiming">
+              <div class="q-chip q-chip-lg" data-val="Right away">Right away</div>
+              <div class="q-chip q-chip-lg" data-val="Within the next 2 weeks">Within the next 2 weeks</div>
+              <div class="q-chip q-chip-lg" data-val="Within the next month">Within the next month</div>
+              <div class="q-chip q-chip-lg" data-val="Just looking around">Just looking around</div>
             </div>
           </div>
 
+          <!-- Q5: Footage readiness (single) -->
           <div class="q-subq" data-subq="4" style="display:none">
-            <div class="q-chips" id="qVolume">
-              <div class="q-chip" data-val="1-4 videos / month">1-4 videos / month</div>
-              <div class="q-chip" data-val="5-10 videos / month">5-10 videos / month</div>
-              <div class="q-chip" data-val="11-20 videos / month">11-20 videos / month</div>
-              <div class="q-chip" data-val="20+ videos / month">20+ videos / month</div>
-              <div class="q-chip" data-val="Unsure — figuring it out">Unsure &mdash; figuring it out</div>
+            <div class="q-chips" id="qFootage">
+              <div class="q-chip q-chip-lg" data-val="Yes I have footage ready">Yes, I have footage ready</div>
+              <div class="q-chip q-chip-lg" data-val="It is not perfect but it will do">It's not perfect, but it will do</div>
+              <div class="q-chip q-chip-lg" data-val="No I am still planning">No, I'm still planning</div>
             </div>
           </div>
 
@@ -324,18 +391,22 @@ body{
          redirect URL; we location.replace() straight into the portal. The modal
          there handles footage upload + blueprint pick/build. See docs/trial-portal-states.md. -->
 
-    <!-- ═══ STEP 2: Book your demo call (GHL Free Demo calendar) ═══ -->
+    <!-- ═══ STEP 2: Qualified — book your intro call (GHL Free Demo calendar) ═══ -->
     <div class="qw-step" data-step="2">
-      <div class="qw-title">Pick a time for your demo call.</div>
-      <div class="qw-sub">15 minutes with our team. We'll walk you through your free edit and unlock your portal.</div>
-      <div style="width:100%;max-width:780px;margin:24px auto 0;border-radius:var(--r-xl);overflow:hidden;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.06)">
+      <div class="q-result-icon qualified" style="margin:0 auto 12px;width:54px;height:54px;border-radius:50%;background:rgba(126,203,161,.12);border:1px solid rgba(126,203,161,.45);display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#7ecba1" stroke-width="2.5" width="26" height="26"><polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="qw-title">You qualify for a free trial edit</div>
+      <div class="qw-sub">You look like a strong fit for Content Bug. Book a quick intro call to activate your free trial and get your first edit moving.</div>
+      <div style="width:100%;max-width:780px;margin:18px auto 0;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08)">
         <iframe id="qDemoFrame"
           src="https://links.contentbug.io/widget/booking/jMEjaEOpcdbZDvcQFXGY"
-          style="width:100%;border:none;overflow:hidden;display:block;min-height:760px;background:transparent"
+          style="width:100%;border:none;overflow:hidden;display:block;min-height:720px;background:transparent"
           scrolling="no"
           loading="lazy"
-          title="Book Your Free Demo"></iframe>
+          title="Book Your Intro Call"></iframe>
       </div>
+      <p style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.5);text-align:center;margin:14px auto 0;max-width:480px">No card required. Your first edit is free on us.</p>
     </div>
 
     <!-- ═══ STEP 3: Booking confirmation — auto-shown when GHL postMessage fires ═══ -->
@@ -352,7 +423,7 @@ body{
               <svg viewBox="0 0 24 24" fill="none" stroke="#2997ff" stroke-width="2" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             </div>
             <div style="min-width:0">
-              <div style="font:600 14px/1.3 var(--font);color:var(--txt)" id="qBookWhen">Demo call confirmed</div>
+              <div style="font:600 14px/1.3 var(--font);color:var(--txt)" id="qBookWhen">Intro call confirmed</div>
               <div style="font:400 12px/1.5 var(--font);color:rgba(255,255,255,.6)">Check your inbox for the calendar invite + Zoom link.</div>
             </div>
           </div>
@@ -398,9 +469,7 @@ body{
   </div>
 
 </div>
-</div>
-</section>
-</main>
+  </aside>
 </main>
 
 <!-- ═══ FOOTER (Desktop home.html) ═══ -->
@@ -484,7 +553,7 @@ body{
     step: 1,          // 1 = Qualify | 2 = Calendar | 3 = Booking confirmed
     subQ: 0,          // within step 1: 0 = contact | 1-5 = questions | 'dq' = disqualified
     contact: { first:'', last:'', email:'', phone:'' },
-    answers: { contentTypes:[], postFreq:'', goal:'', footage:'', volume:'' },
+    answers: { contentTypes:[], volume:'', goal:'', timing:'', footage:'' },
     score: 0, qualified:false,
     submittedContact:false, demoBooked:false,
     bookedSlot:''     // human-readable booked datetime once GHL posts back
@@ -504,13 +573,14 @@ body{
     }
     qRail.innerHTML = html;
 
-    /* Hero percent + progress bar (matches portal/18-wizards.html spec — no "Step X of Y" noise) */
+    /* Spec: contact (0%) → questions (17/33/50/67/83%) → qualified (100%) → booked (100%) */
     var pct = 0;
     if(state.step === 1){
-      var subSlot = (state.subQ === 0) ? 0 : (state.subQ === 'dq') ? 5 : state.subQ;
-      pct = Math.round((subSlot / 6) * 33);
-    } else if(state.step === 2){ pct = 66; }
-    else if(state.step === 3){ pct = 100; }
+      if(state.subQ === 0) pct = 0;                                       /* contact */
+      else if(state.subQ === 'dq') pct = 83;                              /* disqualified at end of qs */
+      else pct = Math.round((state.subQ / 6) * 100);                      /* qs 1-5 → 17/33/50/67/83 */
+    } else if(state.step === 2){ pct = 100; }                              /* qualified, book intro call */
+    else if(state.step === 3){ pct = 100; }                                /* intro call booked */
     var pf = document.getElementById('qProgressFill');
     var pe = document.getElementById('qPercent');
     if(pf) pf.style.width = pct + '%';
@@ -534,8 +604,8 @@ body{
       var cur = document.querySelector('.q-subq[data-subq="'+(sub-1)+'"]');
       if(cur) cur.style.display = '';
       $('qSubQNum').textContent = sub;
-      var titles = ['What type of content do you create?','How often do you post?',"What's your main goal with video?",'Do you have footage ready to edit?','How many videos per month?'];
-      var hints  = ['Pick all that apply.','Pick the one closest to your pace.','Pick what matters most right now.','Pick what describes you best.','Pick your target volume.'];
+      var titles = ['What kind of content do you need edited?','How often do you need videos edited?',"What's your main goal with your content right now?",'How soon do you want to hand off your video editing?','If we offered you a free trial edit today, would you have footage ready to send?'];
+      var hints  = ['Pick all that apply.','Pick the closest match.','Pick what matters most right now.','Pick the closest fit.','Pick what best describes your situation.'];
       $('qSubQTitle').textContent = titles[sub-1];
       $('qSubQHint').textContent  = hints[sub-1];
     }
@@ -550,18 +620,23 @@ body{
     qBack.hidden = (state.step === 1 && state.subQ === 0);
     /* Hide Next on step 2 (calendar — user books inside iframe) and on disqualified */
     if(state.step === 2 || (state.step === 1 && state.subQ === 'dq')){ qNext.hidden = true; }
-    else { qNext.hidden = false; qNext.innerHTML = 'Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>'; }
-    /* Footer meta — lowercase mono "Step N / 3 · label" matches 18-wizards.html */
+    else {
+      qNext.hidden = false;
+      var CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>';
+      var label = 'Continue';
+      /* Spec: button label morphs per step */
+      if(state.step === 1 && state.subQ === 5) label = 'See If I Qualify';
+      qNext.innerHTML = label + ' ' + CHEVRON;
+    }
+    /* Footer meta — matches the new spec: contact = step 1, qualification = step 2, qualified = step 3 */
     var qm = document.getElementById('qMeta');
     if(qm){
-      var label = '';
       if(state.step === 1){
-        if(state.subQ === 0) label = 'contact';
-        else if(state.subQ === 'dq') label = 'not qualified';
-        else label = 'question ' + state.subQ + ' of 5';
-        qm.textContent = 'Step 1 / 3 · ' + label;
-      } else if(state.step === 2){ qm.textContent = 'Step 2 / 3 · pick a time'; }
-      else if(state.step === 3){ qm.textContent = 'Step 3 / 3 · booked'; }
+        if(state.subQ === 0)        qm.textContent = 'Step 1 / 3 · contact details';
+        else if(state.subQ === 'dq') qm.textContent = 'Step 2 / 3 · not the right fit yet';
+        else                         qm.textContent = 'Step 2 / 3 · question ' + state.subQ + ' of 5';
+      } else if(state.step === 2){ qm.textContent = 'Step 3 / 3 · qualified — book your intro call'; }
+      else if(state.step === 3){   qm.textContent = 'Step 3 / 3 · intro call booked'; }
       else qm.textContent = '';
     }
     var v = qValid();
@@ -576,10 +651,10 @@ body{
         return !!(first && last && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
       }
       if(state.subQ === 1) return state.answers.contentTypes.length > 0;
-      if(state.subQ === 2) return !!state.answers.postFreq;
+      if(state.subQ === 2) return !!state.answers.volume;
       if(state.subQ === 3) return !!state.answers.goal;
-      if(state.subQ === 4) return !!state.answers.footage;
-      if(state.subQ === 5) return !!state.answers.volume;
+      if(state.subQ === 4) return !!state.answers.timing;
+      if(state.subQ === 5) return !!state.answers.footage;
       if(state.subQ === 'dq') return false;
     }
     if(state.step === 2) return false;   // user books inside the GHL iframe
@@ -587,16 +662,26 @@ body{
     return true;
   }
   function computeScore(){
-    var s=0;
-    if(state.answers.contentTypes.length) s+=20;
-    if(state.answers.postFreq) s+=15;
-    if(state.answers.goal) s+=15;
-    if(state.answers.footage === "Yes I'm ready to go") s+=30;
-    else if(state.answers.footage === "I have footage but not edited yet") s+=25;
-    else if(state.answers.footage === "I'm still filming") s+=5;
-    if(state.answers.volume) s+=20;
+    /* Scoring per new spec — content/volume/goal are baseline points, timing
+       and footage are weighted because they predict free-trial conversion. */
+    var s = 0;
+    if(state.answers.contentTypes.length) s += 15;
+    if(state.answers.volume)              s += 15;
+    if(state.answers.goal)                s += 15;
+    /* Timing weight */
+    if      (state.answers.timing === "Right away")               s += 30;
+    else if (state.answers.timing === "Within the next 2 weeks")  s += 25;
+    else if (state.answers.timing === "Within the next month")    s += 15;
+    else if (state.answers.timing === "Just looking around")      s += 5;
+    /* Footage weight */
+    if      (state.answers.footage === "Yes I have footage ready")             s += 25;
+    else if (state.answers.footage === "It is not perfect but it will do")     s += 20;
+    else if (state.answers.footage === "No I am still planning")               s += 5;
     state.score = s;
-    state.qualified = s >= 70 && (state.answers.footage === "Yes I'm ready to go" || state.answers.footage === "I have footage but not edited yet");
+    /* Qualified gates: must hit 70+ AND not be window-shopping AND have some footage */
+    state.qualified = (s >= 70)
+                   && state.answers.timing !== "Just looking around"
+                   && state.answers.footage !== "No I am still planning";
     return state.qualified;
   }
   function wireChips(){
@@ -611,10 +696,10 @@ body{
         } else {
           var active = group.querySelector('.q-chip.active');
           var val = active ? active.getAttribute('data-val') : '';
-          if(group.id === 'qPostFreq') state.answers.postFreq = val;
-          if(group.id === 'qGoal')     state.answers.goal     = val;
-          if(group.id === 'qFootage')  state.answers.footage  = val;
-          if(group.id === 'qVolume')   state.answers.volume   = val;
+          if(group.id === 'qVolume')  state.answers.volume = val;
+          if(group.id === 'qGoal')    state.answers.goal   = val;
+          if(group.id === 'qTiming')  state.answers.timing = val;
+          if(group.id === 'qFootage') state.answers.footage= val;
         }
         renderFooter();
       });
@@ -642,8 +727,16 @@ body{
       body: JSON.stringify({
         first_name: state.contact.first, last_name: state.contact.last,
         email: state.contact.email, phone: state.contact.phone,
-        content_types: state.answers.contentTypes, post_freq: state.answers.postFreq,
-        goal: state.answers.goal, footage: state.answers.footage, volume: state.answers.volume,
+        content_types: state.answers.contentTypes,
+        lead_content_types: (state.answers.contentTypes || []).join(', '),
+        lead_volume: state.answers.volume,
+        lead_main_goal: state.answers.goal,
+        lead_handoff_timing: state.answers.timing,
+        lead_footage_readiness: state.answers.footage,
+        lead_qualification_score: state.score,
+        /* legacy keys kept for back-compat with existing GHL workflows */
+        post_freq: state.answers.volume, goal: state.answers.goal,
+        footage: state.answers.footage, volume: state.answers.timing,
         score: state.score, qualified: state.qualified, source: 'free-trial-wizard'
       })
     }).then(function(r){ return r.ok ? r.json() : null; })
