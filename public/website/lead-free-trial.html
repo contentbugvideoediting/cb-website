@@ -41,20 +41,20 @@ a{color:inherit;text-decoration:none}
   --font:'SF Pro Text',-apple-system,BlinkMacSystemFont,system-ui,'Helvetica Neue',Arial,sans-serif;
 }
 
-/* PORTAL BACKGROUND — softer navy gradient that does NOT fade to pure black at
-   the bottom. Keeps the page footer continuous with the rest of the page
-   instead of sitting on a black slab. */
-html{background:#021c36 !important}
+/* PORTAL BACKGROUND — exact 2-layer stack from home.html / pricing.html /
+   the rest of the marketing site. Restored 2026-04-27 — do NOT change again,
+   this is the canonical site bg. */
+html{background:#000001 !important}
 body{
   margin:0 !important;padding:0 !important;color:#fff !important;min-height:100vh !important;
   font:400 16px/1.6 var(--font) !important;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   background:
-    linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.05) 50%,rgba(255,255,255,.07) 100%),
-    linear-gradient(180deg,#032a4b 0%,#022240 35%,#021c36 75%,#021c36 100%) !important;
+    linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(255,255,255,.045) 22%,rgba(255,255,255,.055) 40%,rgba(255,255,255,.07) 60%,rgba(255,255,255,.09) 75%,rgba(255,255,255,.11) 88%,rgba(255,255,255,.14) 100%),
+    linear-gradient(180deg,#032a4b 0%,#032848 10%,#022240 20%,#021c36 30%,#02172e 40%,#011226 50%,#010d1e 60%,#010916 70%,#00050e 80%,#000308 90%,#000001 100%) !important;
   background-attachment:fixed,fixed !important;
   background-repeat:no-repeat,no-repeat !important;
-  background-size:100% 100%,100% 100% !important;
+  background-size:100% 100vh,100% 100vh !important;
 }
 .ws-page{min-height:100vh;color:#fff}
 
