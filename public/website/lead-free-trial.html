@@ -231,13 +231,14 @@ body{
    Standard website padding/spacing. No clutter.
    ═══════════════════════════════════════════════════════════════════════ */
 .ftpage { margin:0 auto; padding:40px 24px 64px }
-.ftpage-grid { display:flex; justify-content:center; align-items:stretch; gap:56px; max-width:1280px; margin:0 auto }
-.ftpage-left { padding-top:8px; width:380px; flex-shrink:0; display:flex; flex-direction:column }
-.ftpage-left-top { /* eyebrow + h1 + sub */ }
-.ftpage-left-mid { margin-top:8px /* bullets sit close to sub */ }
-.ftpage-left-bottom { margin-top:auto; padding-top:32px /* pushes how-it-works + trust to the bottom edge */ }
+.ftpage-grid { display:flex; justify-content:center; align-items:flex-start; gap:56px; max-width:1280px; margin:0 auto }
+.ftpage-left { padding-top:8px; width:380px; flex-shrink:0 }
+/* Stack hero blocks naturally with consistent spacing — no flex-stretch, no auto-margin gap */
+.ftpage-left-top { margin-bottom:28px }
+.ftpage-left-mid { margin-bottom:28px }
+.ftpage-left-bottom { /* sits right under, no big push */ }
 /* Right column = exactly the .wz--md spec width (760px) so the wizard doesn't overflow */
-.ftpage-right { width:760px; flex-shrink:0; align-self:flex-start; position:sticky; top:24px }
+.ftpage-right { width:760px; flex-shrink:0; position:sticky; top:24px }
 @media (max-width:1240px){
   .ftpage-grid { flex-direction:column; align-items:center; gap:32px }
   .ftpage-left, .ftpage-right { width:100%; max-width:760px }
