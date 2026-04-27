@@ -89,11 +89,15 @@ body{
 }
 .wz::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;z-index:2;background:linear-gradient(90deg,transparent,rgba(255,255,255,.20) 25%,rgba(255,255,255,.35) 50%,rgba(255,255,255,.20) 75%,transparent);pointer-events:none}
 .wz > *{position:relative;z-index:1}
-.wz--md .wiz-hero{padding:50px 40px 8px;text-align:center;flex-shrink:0;position:relative}
-.wz--md .wiz-content{padding:32px 40px 8px;flex:1 1 auto;overflow-y:auto;display:flex;flex-direction:column}
+.wz--md .wiz-hero{padding:56px 40px 20px;text-align:center;flex-shrink:0;position:relative}
+.wz--md .wiz-content{padding:56px 40px 12px;flex:1 1 auto;overflow-y:auto;display:flex;flex-direction:column}
 .wz--md .wiz-footer{padding:22px 40px 28px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:1px solid rgba(255,255,255,.05)}
 .wz .wiz-title{font:600 60px/1.0 var(--font-display);letter-spacing:-.025em;color:#fff;margin:0;text-align:center}
-.wz .wiz-percent{font:500 13px/1.3 var(--font);color:rgba(255,255,255,.55);margin:18px 0 0;letter-spacing:0;text-align:center}
+.wz .wiz-percent{font:500 13px/1.3 var(--font);color:rgba(255,255,255,.55);margin:20px 0 0;letter-spacing:0;text-align:center}
+.wz .qw-title{font:700 22px/1.2 var(--font-display);letter-spacing:-.012em;color:#fff;margin:0 auto 10px;text-align:center;max-width:600px}
+.wz .qw-sub{font:400 13.5px/1.5 var(--font);color:rgba(255,255,255,.55);margin:0 auto 44px;text-align:center;max-width:600px}
+.wz .wiz-footer-meta{flex:1 1 auto;text-align:center;font:400 11px/1 'SF Mono',ui-monospace,Menlo,monospace;color:rgba(255,255,255,.40)}
+@media (max-width:640px){.wz--md .wiz-hero{padding:32px 20px 14px}.wz--md .wiz-content{padding:36px 20px 12px}.wz--md .wiz-footer{padding:16px 20px 22px}.wz .wiz-title{font-size:42px;letter-spacing:-.02em}.wz .qw-sub{margin-bottom:30px}}
 .wz .wiz-progress{margin:10px auto 0;width:76%;height:7px;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 1px 0 rgba(0,0,0,.25);overflow:hidden;position:relative}
 .wz .wiz-progress-fill{height:100%;border-radius:999px;background:linear-gradient(90deg,#2997ff 0%,#5fb3ff 60%,#84c4ff 100%);box-shadow:0 0 12px rgba(41,151,255,.55),0 0 24px rgba(41,151,255,.25),inset 0 1px 0 rgba(255,255,255,.35);position:relative;overflow:hidden;transition:width 320ms ease}
 .wz .wiz-progress-fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.35) 50%,rgba(255,255,255,0) 100%);transform:translateX(-100%);animation:wz-shimmer 2.2s ease-in-out infinite}
@@ -204,7 +208,7 @@ body{
   <!-- Hero — big title + percent + heavy shimmer progress (matches portal/18-wizards.html spec) -->
   <div class="wiz-hero">
     <h2 class="wiz-title">Free Trial</h2>
-    <p class="wiz-percent" id="qPercent">Step 1 of 3 · 0% complete</p>
+    <p class="wiz-percent" id="qPercent">0% complete</p>
     <div class="wiz-progress"><div class="wiz-progress-fill" id="qProgressFill" style="width:0%"></div></div>
   </div>
 
@@ -381,10 +385,11 @@ body{
 
   </div>
 
-  <!-- Footer (Back + Next) -->
+  <!-- Footer: Back (left ghost) · meta (center mono) · Continue (right g5 + chevron) — matches 18-wizards.html exactly -->
   <div class="wiz-footer" id="qFoot">
     <button class="btn btn-ghost" id="qBack" onclick="qPrev()" hidden>Back</button>
-    <button class="btn btn-g5" id="qNext" onclick="qNext()">Continue &rarr;</button>
+    <span class="wiz-footer-meta" id="qMeta"></span>
+    <button class="btn btn-g5" id="qNext" onclick="qNext()">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
 
 </div>
@@ -494,23 +499,17 @@ body{
     }
     qRail.innerHTML = html;
 
-    /* Hero percent + progress bar (matches portal/18-wizards.html spec) */
-    var pct = 0, label = '';
+    /* Hero percent + progress bar (matches portal/18-wizards.html spec — no "Step X of Y" noise) */
+    var pct = 0;
     if(state.step === 1){
       var subSlot = (state.subQ === 0) ? 0 : (state.subQ === 'dq') ? 5 : state.subQ;
       pct = Math.round((subSlot / 6) * 33);
-      label = (state.subQ === 0) ? 'Step 1 of 3 · Quick contact' :
-              (state.subQ === 'dq') ? 'Step 1 of 3 · Not the right fit' :
-              'Step 1 of 3 · Question ' + state.subQ + ' of 5';
-    } else if(state.step === 2){
-      pct = 66; label = 'Step 2 of 3 · Pick a time';
-    } else if(state.step === 3){
-      pct = 100; label = 'Step 3 of 3 · Booked';
-    }
+    } else if(state.step === 2){ pct = 66; }
+    else if(state.step === 3){ pct = 100; }
     var pf = document.getElementById('qProgressFill');
     var pe = document.getElementById('qPercent');
     if(pf) pf.style.width = pct + '%';
-    if(pe) pe.textContent = label + ' · ' + pct + '%';
+    if(pe) pe.textContent = pct + '% complete';
   }
   function showStep(){
     document.querySelectorAll('.qw-step').forEach(function(el){ el.classList.remove('active'); el.style.display='none'; });
@@ -546,7 +545,20 @@ body{
     qBack.hidden = (state.step === 1 && state.subQ === 0);
     /* Hide Next on step 2 (calendar — user books inside iframe) and on disqualified */
     if(state.step === 2 || (state.step === 1 && state.subQ === 'dq')){ qNext.hidden = true; }
-    else { qNext.hidden = false; qNext.innerHTML = 'Continue &rarr;'; }
+    else { qNext.hidden = false; qNext.innerHTML = 'Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>'; }
+    /* Footer meta — lowercase mono "Step N / 3 · label" matches 18-wizards.html */
+    var qm = document.getElementById('qMeta');
+    if(qm){
+      var label = '';
+      if(state.step === 1){
+        if(state.subQ === 0) label = 'contact';
+        else if(state.subQ === 'dq') label = 'not qualified';
+        else label = 'question ' + state.subQ + ' of 5';
+        qm.textContent = 'Step 1 / 3 · ' + label;
+      } else if(state.step === 2){ qm.textContent = 'Step 2 / 3 · pick a time'; }
+      else if(state.step === 3){ qm.textContent = 'Step 3 / 3 · booked'; }
+      else qm.textContent = '';
+    }
     var v = qValid();
     qNext.disabled = !v;
     qNext.style.opacity = v ? '1' : '.5';
