@@ -12,7 +12,6 @@
 1. [GitHub repos (32)](#1-github-repos-32)
 2. [Railway services (27)](#2-railway-services-27)
 3. [API endpoints (by service)](#3-api-endpoints-by-service)
-4. [Airtable schemas](#4-airtable-schemas)
 5. [Environment variables](#5-environment-variables)
 6. [AI models](#6-ai-models)
 7. [Tools we built recently](#7-tools-we-built-recently)
@@ -38,7 +37,6 @@
 - Auth header: `Project-Access-Token: {token}`
 - Token-scope limit: CAN create services, set env vars, generate domains, read deployments. CANNOT use `githubRepoDeploy` (account-level auth required). Workaround for refreshing a service from latest commit: destroy + recreate the service (service ID changes — update this doc after).
 
-### 0.3 Airtable
 - Portal base: `app3feWOvRGhRF3lN` (CB Studio)
 - Operator base: `app5QC9TKqfXvQL7E`
 - MCP server: prefix `mcp__883cdfee-9514-4008-8e21-0622338f8eb1__`
@@ -152,7 +150,6 @@ Project `zippy-connection` · `00734216-9f4f-4a75-86f9-5a9ac87baa4e`
 **AI assist:** `POST /api/ai/ghl-chat|hooks-suggest|project-name-suggest`
 **Storage:** `GET /api/storage/files/:folderId|folders|tree/:folderId|gcs/media/*|drive/media/:fileId` · `PATCH /api/storage/folders/:driveId/move|rename` · `DELETE /api/storage/folders/:driveId|gcs`
 **Queue tails (pending work for workers):** `GET /api/cut/pending|thumbgen/pending|transcribe-clean/pending|transcribe/pending|transcribe/queue|vision/pending|notifications/pending` · `POST /api/cut/:projectId/callback`
-**Cron + webhooks:** `POST /api/cron/scrape-creators` · `POST /api/hooks/airtable/contact-created|contact-updated`
 **Misc:** `GET /api/billboard|booking-landing|calendar/slots|contacts|contacts/:id/detail|stripe/config|website-timestamps|wiki/content|wizard/footage-intel|zoom/meetings|zoom/meetings/all|social/youtube-search|meta/ip|deploy-info|trial/status` · `GET /api/health` · `GET /dev-mode.js` · `GET /ghl-operator|portal/email-template-library.html|portal/ghl-operator|website-library.html`
 
 ### 3.2 cb-audio-library-api (FastAPI, 12 routes)
@@ -195,8 +192,6 @@ Endpoints to be harvested during next `gh repo clone` pass (source repos TBD).
 
 ---
 
-## 4. AIRTABLE SCHEMAS
-
 ### 4.1 Portal base — `app3feWOvRGhRF3lN` (CB Studio)
 
 | Table | Table ID | Fields | Role |
@@ -233,13 +228,6 @@ Endpoints to be harvested during next `gh repo clone` pass (source repos TBD).
 ## 5. ENVIRONMENT VARIABLES
 
 **Values** live in `/Users/contentbug/cb/workspace/.env.master` (chmod 600, gitignored). Names + consumers:
-
-### 5.1 Airtable
-`AIRTABLE_API_KEY` (portal-shell, blueprint-builder, project-assistant)
-`AIRTABLE_PERSONAL_ACCESS_TOKEN` (audio-library-api, creator-scraper)
-`AIRTABLE_BASE_ID` portal (portal-shell, project-assistant) · `AIRTABLE_OPERATOR_BASE_ID` (portal-shell)
-`AIRTABLE_PROJECTS_TABLE` (project-assistant)
-`AIRTABLE_WEBHOOK_ID_CONTACTS`, `AIRTABLE_WEBHOOK_SECRET_CONTACTS` (portal-shell)
 
 ### 5.2 GCS
 `GCS_BUCKET` (portal-shell) · `GCS_BUCKET_FRAMELAB` (audio-library-worker, remotion-worker)
@@ -329,16 +317,11 @@ Endpoints to be harvested during next `gh repo clone` pass (source repos TBD).
 
 | Tool | Repo | Railway service | Produces |
 |---|---|---|---|
-| Blueprint Builder v3 | cb-blueprint-builder (main) | cb-blueprints | `blueprint.json`, Airtable `blueprints` row |
 | Blueprint v3 ingestion CEP plugin | cb-project-assistant (branch `blueprint-v3-ingestion`) | Premiere Pro panel | `delivery_report.json`, cuts on timeline |
 | Video gen engine | cb-video-gen-engine | cb-video-gen-engine | MP4 clip URL (GCS) |
-| Creator scraper | cb-creator-scraper | cb-creator-scraper | Airtable `Scraped Videos` rows |
-| Audio library (API+worker) | cb-audio-library-api, cb-audio-library-worker | cb-audio-library-api + cb-audio-library-worker | Airtable audio + GCS files |
 | Remotion worker | cb-remotion-worker | cb-remotion-worker | MP4 render in GCS |
 | Blenderbug | cb-blenderbug | cb-blenderbug + worker | 3D frame / MP4 in GCS |
 | Thumbnail engine | thumbnail-engine | cb-thumbnail-engine | 3 thumbnail URLs |
-| FrameLab engine | cb-framelab-engine | cb-framelab-engine (framelab.contentbug.io) | Revisions → Airtable thread JSON |
-| ID verify | cb-id-verify | cb-id-verify | Webhook + Airtable status |
 | Portal Discord | cb-discord | cb-discord | In-portal chat |
 | Ingest engine | (source repo TBD) | cb-ingest-engine | Transcripts + framelab_assets_json |
 | Review engine | (source repo TBD) | cb-review-engine | Revision clusters + open_count |
@@ -405,7 +388,6 @@ Always open at session start:
 1. GitHub: `https://github.com/contentbugvideoediting/cb-studio`
 2. Railway: `https://railway.com/project/00734216-9f4f-4a75-86f9-5a9ac87baa4e`
 3. Portal: `https://api.contentbug.io/portal/`
-4. Airtable: `https://airtable.com/app3feWOvRGhRF3lN`
 
 ### 10.2 Deploy discipline
 - Every push to `cb-studio/main` auto-triggers Railway deploy.
@@ -426,10 +408,8 @@ Always open at session start:
 - Never use AppleScript or System Events on Chrome (browser tier `"read"` enforces this).
 - Screenshots via `mcp__computer-use__screenshot`.
 
-### 10.5 Airtable ops
 - Schema first: `list_tables_for_base` → `get_table_schema` before any write.
 - For `singleSelect` writes: use the option NAME (string), not the object form returned by reads.
-- Never bypass Airtable auth; no direct API key embedding in code.
 
 ### 10.6 Railway ops
 - Project token grants service-level ops (create service, env vars, domain, env writes, redeploy).
@@ -443,7 +423,6 @@ Always open at session start:
 ### 10.8 What NOT to do
 - Don't introduce new external CSS / CDN / design-token files to the portal.
 - Don't create new Railway services without explicit approval.
-- Don't delete Airtable records or Railway services without explicit approval.
 - Don't force-push to `main` on any repo.
 - Don't embed tokens/secrets in code or commits.
 
