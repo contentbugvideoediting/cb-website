@@ -1,7 +1,7 @@
 # CONTENT BUG — STACK BIBLE
 **Single source of truth. Identical at the root of every CB repo.**
 **Last sync:** 2026-04-24
-**If this file disagrees with `cb-portal-shell/CB_CONTEXT.md`, CB_CONTEXT.md wins.**
+**If this file disagrees with `cb-studio/CB_CONTEXT.md`, CB_CONTEXT.md wins.**
 
 > AI assistants: read this file first, then the repo's own `SPEC.md` / `README.md` before touching anything.
 
@@ -57,7 +57,7 @@
 ### 0.6 GHL (GoHighLevel)
 - API key: `GHL_API_KEY`
 - Location: `GHL_LOCATION_ID`
-- Webhook IDs: 25 separate `GHL_WEBHOOK_*` vars wired into cb-portal-shell for each lifecycle event (checkout, onboarding-{client,editor,admin,owner,staff}, project-{created,activated,approved,review,revisions,status,approved}, trial-{booking,demo-booked,demo-showed,edit-approved,edit-submitted,offer-activated,qualified,unqualified}, report-email, payment, login-email).
+- Webhook IDs: 25 separate `GHL_WEBHOOK_*` vars wired into cb-studio for each lifecycle event (checkout, onboarding-{client,editor,admin,owner,staff}, project-{created,activated,approved,review,revisions,status,approved}, trial-{booking,demo-booked,demo-showed,edit-approved,edit-submitted,offer-activated,qualified,unqualified}, report-email, payment, login-email).
 
 ---
 
@@ -65,9 +65,9 @@
 
 | Repo | Visibility | Role | Live URL |
 |---|---|---|---|
-| cb-portal-shell | PRIVATE | Main portal API + shell UI | `api.contentbug.io` |
+| cb-studio | PRIVATE | Main portal API + shell UI | `api.contentbug.io` |
 | cb-blueprint-builder | PUBLIC | Blueprint Builder v3 (React + Remotion preview) | — |
-| cb-blueprint-studio | PRIVATE | Legacy v2 builder | `cb-blueprint-studio-production.up.railway.app` |
+| cb-blueprints | PRIVATE | Legacy v2 builder | `cb-blueprints-production.up.railway.app` |
 | cb-project-assistant | PUBLIC | AI assist + Premiere CEP plugin (branch `blueprint-v3-ingestion`) | — |
 | cb-framelab-engine | PRIVATE | Video review + revision system | `framelab.contentbug.io` |
 | cb-video-gen-engine | PRIVATE | Gold-tier b-roll (Wan/Hunyuan/CogVideoX, ComfyUI) | `cb-video-gen-engine-production.up.railway.app` |
@@ -78,7 +78,7 @@
 | cb-blenderbug | PRIVATE | 3D render engine | `cb-blenderbug-production.up.railway.app` |
 | thumbnail-engine | PRIVATE | FLUX + InstantID on Vast.ai | `cb-thumbnail-engine-production.up.railway.app` |
 | cb-ollama | PRIVATE | Local LLM (Llama 3) | internal |
-| cb-portal-discord | PRIVATE | Discord embed for portal | `content-bot-production-a5fe.up.railway.app` |
+| cb-discord | PRIVATE | Discord embed for portal | `content-bot-production-a5fe.up.railway.app` |
 | cb-id-verify | PRIVATE | Gov-ID + ArcFace verify | `cb-id-verify-production.up.railway.app` |
 | cb-command | PRIVATE | Owner finance + ops center | `cb-command-production.up.railway.app` |
 | cb-finances | PRIVATE | Payouts, transactions, reports | `cb-finances-production.up.railway.app` |
@@ -97,12 +97,12 @@ Project `zippy-connection` · `00734216-9f4f-4a75-86f9-5a9ac87baa4e`
 | Service | Service ID | Public URL | Source repo |
 |---|---|---|---|
 | Redis | `a6cf7209-d4e4-4fbd-af17-6e60525e8bfe` | — | shared cache |
-| cb-assistant-engine | `20bbc921-d87b-4656-b8f3-4d6d78b9ec6f` | — | (TBD) |
+| ai-assistant | `20bbc921-d87b-4656-b8f3-4d6d78b9ec6f` | — | (TBD) |
 | cb-audio-library-api | `37132a32-b730-4185-bbb1-a2b7f9897337` | cb-audio-library-api-production.up.railway.app | cb-audio-library-api |
 | cb-audio-library-worker | `bc7a1eca-5f44-4ae8-a5b0-6917528c2479` | — | cb-audio-library-worker |
 | cb-blenderbug | `12699f40-7e52-4453-8d94-c93bf9b89002` | cb-blenderbug-production.up.railway.app | cb-blenderbug |
 | cb-blenderbug-worker | `e8afc84c-009a-4ae4-b1db-ca066da3e265` | — | cb-blenderbug |
-| cb-blueprint-studio | `031f8f43-e9f3-4082-b45f-c41116ce6417` | cb-blueprint-studio-production.up.railway.app | cb-blueprint-studio |
+| cb-blueprints | `031f8f43-e9f3-4082-b45f-c41116ce6417` | cb-blueprints-production.up.railway.app | cb-blueprints |
 | cb-brand-engine | `37c4d83b-aee9-43b1-bb64-8e0638eccf3e` | — | (TBD) |
 | cb-command | `6741feb3-c684-4b44-bc53-bfa1c5d4aebc` | cb-command-production.up.railway.app | cb-command |
 | cb-creator-scraper | `23af28be-510d-45f4-a7ed-27155d120b87` | cb-creator-scraper-production.up.railway.app | cb-creator-scraper |
@@ -112,8 +112,8 @@ Project `zippy-connection` · `00734216-9f4f-4a75-86f9-5a9ac87baa4e`
 | cb-ingest-engine | `de8825c4-8a89-45ad-97dd-5cefc5434680` | — | (TBD) |
 | cb-learning-engine | `36325222-05ae-432e-be71-bf55121ce003` | — | (TBD) |
 | cb-ollama | `c193ed82-ffab-415c-afa9-2f82743fcc00` | — | cb-ollama |
-| cb-portal-discord | `8c210c87-0348-4271-9b17-dc4b41ab888d` | content-bot-production-a5fe.up.railway.app | cb-portal-discord |
-| cb-portal-shell | `70077cff-31ac-42c3-aa9d-b9b9ff66fef2` | api.contentbug.io | cb-portal-shell |
+| cb-discord | `8c210c87-0348-4271-9b17-dc4b41ab888d` | content-bot-production-a5fe.up.railway.app | cb-discord |
+| cb-studio | `70077cff-31ac-42c3-aa9d-b9b9ff66fef2` | api.contentbug.io | cb-studio |
 | cb-prproj-engine | `6511bada-589a-4496-a989-71d6ab734c69` | — | cb-project-assistant |
 | cb-remotion-worker | `f4f01802-a5ce-4b17-bb37-cef0bda661ec` | cb-remotion-worker-production.up.railway.app | cb-remotion-worker |
 | cb-render-engine | `f6b6b0b1-9903-4258-afa6-7cc51f619c68` | — | (TBD) |
@@ -132,7 +132,7 @@ Project `zippy-connection` · `00734216-9f4f-4a75-86f9-5a9ac87baa4e`
 
 ## 3. API ENDPOINTS (BY SERVICE)
 
-### 3.1 cb-portal-shell (Node/Express, 200+ routes) — source `server.js`
+### 3.1 cb-studio (Node/Express, 200+ routes) — source `server.js`
 
 **Auth:** `POST /api/auth/login` · `POST /api/auth/verify` · `GET /api/auth/session` · `POST /api/auth/logout` · `POST /api/auth/trial-login` · `POST /api/auth/booking-autologin` · `POST /api/auth/trial-token`
 **Discord OAuth:** `GET /auth/discord/callback` · `GET /auth/discord/connect` · `POST /api/discord/disconnect` · `GET /api/discord/embed-token|oauth/start|token`
@@ -185,7 +185,7 @@ Project `zippy-connection` · `00734216-9f4f-4a75-86f9-5a9ac87baa4e`
 `GET /api/v1/health` · `POST /api/v1/render` · queue-backed (`cb-blenderbug-worker`)
 
 ### 3.8 cb-id-verify
-`GET /api/v1/health` · `POST /api/verify` · webhook → cb-portal-shell `/api/id-verify/webhook`
+`GET /api/v1/health` · `POST /api/verify` · webhook → cb-studio `/api/id-verify/webhook`
 
 ### 3.9 cb-ollama
 Standard Ollama: `POST /api/generate` · `POST /api/chat` · `GET /api/tags`
@@ -329,7 +329,7 @@ Endpoints to be harvested during next `gh repo clone` pass (source repos TBD).
 
 | Tool | Repo | Railway service | Produces |
 |---|---|---|---|
-| Blueprint Builder v3 | cb-blueprint-builder (main) | cb-blueprint-studio | `blueprint.json`, Airtable `blueprints` row |
+| Blueprint Builder v3 | cb-blueprint-builder (main) | cb-blueprints | `blueprint.json`, Airtable `blueprints` row |
 | Blueprint v3 ingestion CEP plugin | cb-project-assistant (branch `blueprint-v3-ingestion`) | Premiere Pro panel | `delivery_report.json`, cuts on timeline |
 | Video gen engine | cb-video-gen-engine | cb-video-gen-engine | MP4 clip URL (GCS) |
 | Creator scraper | cb-creator-scraper | cb-creator-scraper | Airtable `Scraped Videos` rows |
@@ -339,7 +339,7 @@ Endpoints to be harvested during next `gh repo clone` pass (source repos TBD).
 | Thumbnail engine | thumbnail-engine | cb-thumbnail-engine | 3 thumbnail URLs |
 | FrameLab engine | cb-framelab-engine | cb-framelab-engine (framelab.contentbug.io) | Revisions → Airtable thread JSON |
 | ID verify | cb-id-verify | cb-id-verify | Webhook + Airtable status |
-| Portal Discord | cb-portal-discord | cb-portal-discord | In-portal chat |
+| Portal Discord | cb-discord | cb-discord | In-portal chat |
 | Ingest engine | (source repo TBD) | cb-ingest-engine | Transcripts + framelab_assets_json |
 | Review engine | (source repo TBD) | cb-review-engine | Revision clusters + open_count |
 | WS gateway | (source repo TBD) | cb-ws | WebSocket channels |
@@ -349,7 +349,7 @@ Endpoints to be harvested during next `gh repo clone` pass (source repos TBD).
 
 ## 8. PORTAL HTML INVENTORY
 
-29 pages at `cb-portal-shell/public/*.html` (Step 2 scope):
+29 pages at `cb-studio/public/*.html` (Step 2 scope):
 
 | File | Mode |
 |---|---|
@@ -402,13 +402,13 @@ Local to operator machine, in `~/.claude/skills/`:
 
 ### 10.1 Boot tabs (mandatory core four)
 Always open at session start:
-1. GitHub: `https://github.com/contentbugvideoediting/cb-portal-shell`
+1. GitHub: `https://github.com/contentbugvideoediting/cb-studio`
 2. Railway: `https://railway.com/project/00734216-9f4f-4a75-86f9-5a9ac87baa4e`
 3. Portal: `https://api.contentbug.io/portal/`
 4. Airtable: `https://airtable.com/app3feWOvRGhRF3lN`
 
 ### 10.2 Deploy discipline
-- Every push to `cb-portal-shell/main` auto-triggers Railway deploy.
+- Every push to `cb-studio/main` auto-triggers Railway deploy.
 - Wait for GraphQL deploy status `SUCCESS` before reporting shipped.
 - Curl live URL with cache-bust: `curl -sS "$URL?cb=$(date +%s)"`.
 - Screenshot live via Chrome MCP before signing off.
@@ -449,4 +449,4 @@ Always open at session start:
 
 ---
 
-**END OF STACK BIBLE.** Cross-reference cb-portal-shell/CB_CONTEXT.md for any divergence; update this file as the stack evolves.
+**END OF STACK BIBLE.** Cross-reference cb-studio/CB_CONTEXT.md for any divergence; update this file as the stack evolves.

@@ -8,7 +8,7 @@ All ContentBug public-facing marketing website pages — one repo, one source of
 - `public/ghl/website-library.html` — Library index page
 
 ## Live preview
-All files are served live by `cb-portal-shell` at **https://api.contentbug.io**:
+All files are served live by `cb-studio` at **https://api.contentbug.io**:
 - `/website/qualification.html` · `/website/booking.html` · `/website/checkout.html` · `/website/confirmation.html`
 - `/home.html` · `/pricing.html` · `/portfolio.html` · `/privacy-policy.html` · `/terms.html` · `/contact-details.html`
 - `/website-library.html`
@@ -16,4 +16,4 @@ All files are served live by `cb-portal-shell` at **https://api.contentbug.io**:
 Design system (CSS + fonts) is loaded from `api.contentbug.io/assets/design-system.css` — shared with the portal.
 
 ## How it's wired
-`cb-portal-shell`'s Dockerfile clones this repo at build time into `public/` so all pages ship with the shell container. Edit here → push → shell redeploys → pages update live.
+`cb-studio`'s Dockerfile clones this repo at build time into `public/` so all pages ship with the shell container. Edit here → push → shell redeploys → pages update live.
